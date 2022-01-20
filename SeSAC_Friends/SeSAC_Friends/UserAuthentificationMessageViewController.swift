@@ -119,7 +119,7 @@ class UserAuthentificationMessageViewController: UIViewController {
         
         let number = phoneNumberTextField.text ?? ""
         
-        //Auth.auth().languageCode = "kr";
+        Auth.auth().languageCode = "KR";
         //인증번호를 보내줘야함!
         PhoneAuthProvider.provider()
             .verifyPhoneNumber(number, uiDelegate: nil) { verificationID, error in

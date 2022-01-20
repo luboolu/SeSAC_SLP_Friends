@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		DCDE36632799A0010077847C /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = DCDE36622799A0010077847C /* Toast */; };
 		DCDE36652799A0300077847C /* Toast+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE36642799A0300077847C /* Toast+Extension.swift */; };
+		DCDE36672799B1440077847C /* PhoneNumberAuthInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE36662799B1440077847C /* PhoneNumberAuthInputViewController.swift */; };
 		DCE2D1BC279694720018895F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1BB279694720018895F /* AppDelegate.swift */; };
 		DCE2D1BE279694720018895F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1BD279694720018895F /* SceneDelegate.swift */; };
 		DCE2D1C0279694720018895F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1BF279694720018895F /* ViewController.swift */; };
@@ -37,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		DCDE36642799A0300077847C /* Toast+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Toast+Extension.swift"; sourceTree = "<group>"; };
+		DCDE36662799B1440077847C /* PhoneNumberAuthInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberAuthInputViewController.swift; sourceTree = "<group>"; };
 		DCE2D1B8279694720018895F /* SeSAC_Friends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSAC_Friends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCE2D1BB279694720018895F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DCE2D1BD279694720018895F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				DCE2D1EF27970E000018895F /* PhoneNumberAuthViewController.swift */,
+				DCDE36662799B1440077847C /* PhoneNumberAuthInputViewController.swift */,
 			);
 			path = PhoneNumberAuth;
 			sourceTree = "<group>";
@@ -256,6 +259,7 @@
 				DCE2D1DE2796C9D50018895F /* MainButtonStatus.swift in Sources */,
 				DCE2D1EB2796DB8C0018895F /* UIColor+Extension.swift in Sources */,
 				DCE2D1FA279809D40018895F /* MainButtonTestViewController.swift in Sources */,
+				DCDE36672799B1440077847C /* PhoneNumberAuthInputViewController.swift in Sources */,
 				DCE2D1BC279694720018895F /* AppDelegate.swift in Sources */,
 				DCE2D1F72797F3320018895F /* MainTextFieldTestViewController.swift in Sources */,
 				DCE2D1F027970E000018895F /* PhoneNumberAuthViewController.swift in Sources */,

@@ -7,11 +7,12 @@
 
 import UIKit
 
+import FirebaseAuth
 import SnapKit
 import RxSwift
 import RxCocoa
-import SwiftUI
 import Toast
+
 
 class PhoneNumberAuthViewController: UIViewController {
     
@@ -103,6 +104,21 @@ class PhoneNumberAuthViewController: UIViewController {
                 if self.isValid {
                     //토스트 알림 띄우기
                     self.view.makeToast("전화번호 인증 시작" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    
+                    let number = "+82 \(self.textfieldView.textfield.text!)"
+                    print(number)
+                    //firebase auth 시작
+                    PhoneAuthProvider.provider()
+                        .verifyPhoneNumber(number, uiDelegate: nil) { verificationID, error in
+                            if error == nil {
+                                //self.view.showMessagePrompt(error.localizedDescription)
+                                //self.authCode = verificationID
+                                print("authCode: \(verificationID)")
+                            } else {
+                                print("Phone Verification Error")
+                            }
+                            
+                      }
                 } else {
                     //토스트 알림 띄우기
                     self.view.makeToast("잘못된 전화번호 형식입니다" ,duration: 2.0, position: .bottom, style: self.toastStyle)
@@ -119,6 +135,7 @@ class PhoneNumberAuthViewController: UIViewController {
         textfieldView.textfield.rx.text
             .subscribe(onNext: { newValue in
                 self.trimNumber(newValue ?? "")
+                print(newValue)
             }).disposed(by: disposeBag)
         
         //textfield가 활성화되는 시점을 감지
@@ -178,7 +195,13 @@ class PhoneNumberAuthViewController: UIViewController {
             if Int(lastInput) != nil {
                 self.textfieldView.textfield.text = number
             } else {
-                self.textfieldView.textfield.text = trimNum
+                if lastInput == "-" {
+                    print("얍")
+                    self.textfieldView.textfield.text = number
+
+                } else {
+                    self.textfieldView.textfield.text = trimNum
+                }
             }
          }
         
