@@ -9,7 +9,9 @@
 /* Begin PBXBuildFile section */
 		DCDE36632799A0010077847C /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = DCDE36622799A0010077847C /* Toast */; };
 		DCDE36652799A0300077847C /* Toast+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE36642799A0300077847C /* Toast+Extension.swift */; };
-		DCDE36672799B1440077847C /* PhoneNumberAuthInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE36662799B1440077847C /* PhoneNumberAuthInputViewController.swift */; };
+		DCDE36672799B1440077847C /* LoginConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE36662799B1440077847C /* LoginConfirmViewController.swift */; };
+		DCDE36692799BE190077847C /* NicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE36682799BE190077847C /* NicknameViewController.swift */; };
+		DCDE366B2799C0BD0077847C /* BirthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE366A2799C0BD0077847C /* BirthViewController.swift */; };
 		DCE2D1BC279694720018895F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1BB279694720018895F /* AppDelegate.swift */; };
 		DCE2D1BE279694720018895F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1BD279694720018895F /* SceneDelegate.swift */; };
 		DCE2D1C0279694720018895F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1BF279694720018895F /* ViewController.swift */; };
@@ -28,7 +30,7 @@
 		DCE2D1E82796D6EC0018895F /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = DCE2D1E72796D6EC0018895F /* NotoSansKR-Regular.otf */; };
 		DCE2D1EB2796DB8C0018895F /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1EA2796DB8C0018895F /* UIColor+Extension.swift */; };
 		DCE2D1ED2796FF950018895F /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1EC2796FF950018895F /* UIFont+Extension.swift */; };
-		DCE2D1F027970E000018895F /* PhoneNumberAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1EF27970E000018895F /* PhoneNumberAuthViewController.swift */; };
+		DCE2D1F027970E000018895F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1EF27970E000018895F /* LoginViewController.swift */; };
 		DCE2D1F427979C020018895F /* MainTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1F327979C010018895F /* MainTextFieldView.swift */; };
 		DCE2D1F72797F3320018895F /* MainTextFieldTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1F52797CD680018895F /* MainTextFieldTestViewController.swift */; };
 		DCE2D1FA279809D40018895F /* MainButtonTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1F9279809D40018895F /* MainButtonTestViewController.swift */; };
@@ -38,7 +40,9 @@
 
 /* Begin PBXFileReference section */
 		DCDE36642799A0300077847C /* Toast+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Toast+Extension.swift"; sourceTree = "<group>"; };
-		DCDE36662799B1440077847C /* PhoneNumberAuthInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberAuthInputViewController.swift; sourceTree = "<group>"; };
+		DCDE36662799B1440077847C /* LoginConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginConfirmViewController.swift; sourceTree = "<group>"; };
+		DCDE36682799BE190077847C /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
+		DCDE366A2799C0BD0077847C /* BirthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthViewController.swift; sourceTree = "<group>"; };
 		DCE2D1B8279694720018895F /* SeSAC_Friends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSAC_Friends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCE2D1BB279694720018895F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DCE2D1BD279694720018895F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,7 +61,7 @@
 		DCE2D1E72796D6EC0018895F /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NotoSansKR-Regular.otf"; path = "../../../../Downloads/Noto_Sans_KR/NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
 		DCE2D1EA2796DB8C0018895F /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		DCE2D1EC2796FF950018895F /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
-		DCE2D1EF27970E000018895F /* PhoneNumberAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberAuthViewController.swift; sourceTree = "<group>"; };
+		DCE2D1EF27970E000018895F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DCE2D1F327979C010018895F /* MainTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTextFieldView.swift; sourceTree = "<group>"; };
 		DCE2D1F52797CD680018895F /* MainTextFieldTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTextFieldTestViewController.swift; sourceTree = "<group>"; };
 		DCE2D1F9279809D40018895F /* MainButtonTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainButtonTestViewController.swift; sourceTree = "<group>"; };
@@ -159,8 +163,10 @@
 		DCE2D1EE27970DEC0018895F /* PhoneNumberAuth */ = {
 			isa = PBXGroup;
 			children = (
-				DCE2D1EF27970E000018895F /* PhoneNumberAuthViewController.swift */,
-				DCDE36662799B1440077847C /* PhoneNumberAuthInputViewController.swift */,
+				DCE2D1EF27970E000018895F /* LoginViewController.swift */,
+				DCDE36662799B1440077847C /* LoginConfirmViewController.swift */,
+				DCDE36682799BE190077847C /* NicknameViewController.swift */,
+				DCDE366A2799C0BD0077847C /* BirthViewController.swift */,
 			);
 			path = PhoneNumberAuth;
 			sourceTree = "<group>";
@@ -254,15 +260,17 @@
 			files = (
 				DCE2D1F427979C020018895F /* MainTextFieldView.swift in Sources */,
 				DCE2D1D527969AB60018895F /* UserAuthentificationMessageViewController.swift in Sources */,
+				DCDE366B2799C0BD0077847C /* BirthViewController.swift in Sources */,
 				DCDE36652799A0300077847C /* Toast+Extension.swift in Sources */,
 				DCE2D1C0279694720018895F /* ViewController.swift in Sources */,
+				DCDE36692799BE190077847C /* NicknameViewController.swift in Sources */,
 				DCE2D1DE2796C9D50018895F /* MainButtonStatus.swift in Sources */,
 				DCE2D1EB2796DB8C0018895F /* UIColor+Extension.swift in Sources */,
 				DCE2D1FA279809D40018895F /* MainButtonTestViewController.swift in Sources */,
-				DCDE36672799B1440077847C /* PhoneNumberAuthInputViewController.swift in Sources */,
+				DCDE36672799B1440077847C /* LoginConfirmViewController.swift in Sources */,
 				DCE2D1BC279694720018895F /* AppDelegate.swift in Sources */,
 				DCE2D1F72797F3320018895F /* MainTextFieldTestViewController.swift in Sources */,
-				DCE2D1F027970E000018895F /* PhoneNumberAuthViewController.swift in Sources */,
+				DCE2D1F027970E000018895F /* LoginViewController.swift in Sources */,
 				DCE2D1DC2796A9080018895F /* MainButton.swift in Sources */,
 				DCE2D1BE279694720018895F /* SceneDelegate.swift in Sources */,
 				DCE2D1E12796CCD30018895F /* MainTextFieldStatus.swift in Sources */,

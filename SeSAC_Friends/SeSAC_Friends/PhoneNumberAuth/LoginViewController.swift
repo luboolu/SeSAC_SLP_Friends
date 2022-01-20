@@ -14,7 +14,7 @@ import RxCocoa
 import Toast
 
 
-class PhoneNumberAuthViewController: UIViewController {
+class LoginViewController: UIViewController {
     
     let disposeBag = DisposeBag()
     
@@ -63,6 +63,7 @@ class PhoneNumberAuthViewController: UIViewController {
         
         textfieldView.status = .inactive
         textfieldView.textfield.placeholder = "휴대폰 번호(- 없이 숫자만 입력)"
+        textfieldView.textfield.keyboardType = .numberPad
         view.addSubview(textfieldView)
         
         authMessageButton.setTitle("인증 문자 받기", for: .normal)
@@ -128,7 +129,6 @@ class PhoneNumberAuthViewController: UIViewController {
     }
     
     func setTextFieldRx() {
-        textfieldView.textfield.keyboardType = .numberPad
         //textfield rxswift 사용하기
         
         //textfield의 입력값이 바뀔때 마다 감지 -> 유효성 검사
@@ -219,7 +219,7 @@ class PhoneNumberAuthViewController: UIViewController {
     }
 }
 
-extension PhoneNumberAuthViewController: UIGestureRecognizerDelegate {
+extension LoginViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         self.view.endEditing(true)
         return true

@@ -10,7 +10,7 @@ import UIKit
 import FirebaseAuth
 import SnapKit
 
-class PhoneNumberAuthInputViewController: UIViewController {
+class LoginConfirmViewController: UIViewController {
     
     let guideLabel1: UILabel = {
         let label = UILabel()
@@ -34,9 +34,11 @@ class PhoneNumberAuthInputViewController: UIViewController {
         return label
     }()
     
-    let authCodeTextField = MainTextFieldView(status: .inactive)
+    let authCodeTextField = MainTextFieldView()
     
     let resendAuthButton = MainButton(status: .fill)
+    
+    let authButton = MainButton(status: .disable)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,10 +55,14 @@ class PhoneNumberAuthInputViewController: UIViewController {
         
         authCodeTextField.status = .inactive
         authCodeTextField.textfield.placeholder = "인증번호 입력"
+        authCodeTextField.textfield.keyboardType = .numberPad
         view.addSubview(authCodeTextField)
         
         resendAuthButton.setTitle("재전송", for: .normal)
         view.addSubview(resendAuthButton)
+        
+        authButton.setTitle("인증하고 시작하기", for: .normal)
+        view.addSubview(authButton)
     }
     
     func setConstraints() {
@@ -82,6 +88,13 @@ class PhoneNumberAuthInputViewController: UIViewController {
             make.trailing.equalToSuperview().offset(-8)
             make.width.equalTo(72)
             make.height.equalTo(40)
+        }
+        
+        authButton.snp.makeConstraints { make in
+            make.top.equalTo(authCodeTextField.snp.bottom).offset(70)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.height.equalTo(48)
         }
     }
     
