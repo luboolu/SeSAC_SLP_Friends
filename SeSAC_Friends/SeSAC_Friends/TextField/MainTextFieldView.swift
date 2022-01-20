@@ -32,18 +32,21 @@ class MainTextFieldView: UIView {
             case .inactive:
                 commentLabel.isHidden = true
                 
-                borderLabel.backgroundColor = UIColor().gray7
+                borderLabel.backgroundColor = UIColor().gray3
                 textfield.attributedPlaceholder = NSAttributedString(string: "내용을 입력해주세요", attributes: [NSAttributedString.Key.foregroundColor : UIColor().gray7])
+                
             case .focus:
                 commentLabel.isHidden = true
                 borderLabel.backgroundColor = UIColor().black
                 textfield.attributedPlaceholder = NSAttributedString(string: "내용을 입력해주세요", attributes: [NSAttributedString.Key.foregroundColor : UIColor().black])
                 textfield.textColor = UIColor().black
+                
             case .active:
                 commentLabel.isHidden = true
                 borderLabel.backgroundColor = UIColor().gray3
                 textfield.attributedPlaceholder = NSAttributedString(string: "내용을 입력해주세요", attributes: [NSAttributedString.Key.foregroundColor : UIColor().black])
                 textfield.textColor = UIColor().black
+                
             case .disable:
                 commentLabel.isHidden = true
                 borderLabel.isHidden = true
@@ -59,6 +62,7 @@ class MainTextFieldView: UIView {
                 textfield.attributedPlaceholder = NSAttributedString(string: "내용을 입력해주세요", attributes: [NSAttributedString.Key.foregroundColor : UIColor().black])
                 textfield.textColor = UIColor().black
                 commentLabel.text = "에러"
+                
             case .success:
                 commentLabel.isHidden = false
                 borderLabel.backgroundColor = UIColor().success

@@ -33,6 +33,10 @@ extension UIFont {
         return UIFont(name: "NotoSansKR-Medium", size: 12)!
     }
     
+    var Title6_R12: UIFont {
+        return UIFont(name: "NotoSansKR-Medium", size: 12)!
+    }
+    
     var Body1_M16: UIFont {
         return UIFont(name: "NotoSansKR-Medium", size: 16)!
     }

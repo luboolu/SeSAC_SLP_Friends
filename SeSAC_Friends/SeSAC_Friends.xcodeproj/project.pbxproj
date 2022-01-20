@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DCDE36632799A0010077847C /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = DCDE36622799A0010077847C /* Toast */; };
+		DCDE36652799A0300077847C /* Toast+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE36642799A0300077847C /* Toast+Extension.swift */; };
 		DCE2D1BC279694720018895F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1BB279694720018895F /* AppDelegate.swift */; };
 		DCE2D1BE279694720018895F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1BD279694720018895F /* SceneDelegate.swift */; };
 		DCE2D1C0279694720018895F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1BF279694720018895F /* ViewController.swift */; };
@@ -29,9 +31,12 @@
 		DCE2D1F427979C020018895F /* MainTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1F327979C010018895F /* MainTextFieldView.swift */; };
 		DCE2D1F72797F3320018895F /* MainTextFieldTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1F52797CD680018895F /* MainTextFieldTestViewController.swift */; };
 		DCE2D1FA279809D40018895F /* MainButtonTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1F9279809D40018895F /* MainButtonTestViewController.swift */; };
+		DCE2D20027985D5F0018895F /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = DCE2D1FF27985D5F0018895F /* RxCocoa */; };
+		DCE2D20227985D5F0018895F /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DCE2D20127985D5F0018895F /* RxSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DCDE36642799A0300077847C /* Toast+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Toast+Extension.swift"; sourceTree = "<group>"; };
 		DCE2D1B8279694720018895F /* SeSAC_Friends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSAC_Friends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCE2D1BB279694720018895F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DCE2D1BD279694720018895F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,7 +66,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCE2D20027985D5F0018895F /* RxCocoa in Frameworks */,
 				DCE2D1D3279694D90018895F /* FirebaseAuth in Frameworks */,
+				DCE2D20227985D5F0018895F /* RxSwift in Frameworks */,
+				DCDE36632799A0010077847C /* Toast in Frameworks */,
 				DCE2D1D827969AE10018895F /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -141,6 +149,7 @@
 			children = (
 				DCE2D1EA2796DB8C0018895F /* UIColor+Extension.swift */,
 				DCE2D1EC2796FF950018895F /* UIFont+Extension.swift */,
+				DCDE36642799A0300077847C /* Toast+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -172,6 +181,9 @@
 			packageProductDependencies = (
 				DCE2D1D2279694D90018895F /* FirebaseAuth */,
 				DCE2D1D727969AE10018895F /* SnapKit */,
+				DCE2D1FF27985D5F0018895F /* RxCocoa */,
+				DCE2D20127985D5F0018895F /* RxSwift */,
+				DCDE36622799A0010077847C /* Toast */,
 			);
 			productName = SeSAC_Friends;
 			productReference = DCE2D1B8279694720018895F /* SeSAC_Friends.app */;
@@ -204,6 +216,8 @@
 			packageReferences = (
 				DCE2D1D1279694D90018895F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				DCE2D1D627969AE00018895F /* XCRemoteSwiftPackageReference "SnapKit" */,
+				DCE2D1FE27985D5F0018895F /* XCRemoteSwiftPackageReference "RxSwift" */,
+				DCDE36612799A0010077847C /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 			);
 			productRefGroup = DCE2D1B9279694720018895F /* Products */;
 			projectDirPath = "";
@@ -237,6 +251,7 @@
 			files = (
 				DCE2D1F427979C020018895F /* MainTextFieldView.swift in Sources */,
 				DCE2D1D527969AB60018895F /* UserAuthentificationMessageViewController.swift in Sources */,
+				DCDE36652799A0300077847C /* Toast+Extension.swift in Sources */,
 				DCE2D1C0279694720018895F /* ViewController.swift in Sources */,
 				DCE2D1DE2796C9D50018895F /* MainButtonStatus.swift in Sources */,
 				DCE2D1EB2796DB8C0018895F /* UIColor+Extension.swift in Sources */,
@@ -468,6 +483,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		DCDE36612799A0010077847C /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		DCE2D1D1279694D90018895F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -484,9 +507,22 @@
 				kind = branch;
 			};
 		};
+		DCE2D1FE27985D5F0018895F /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		DCDE36622799A0010077847C /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCDE36612799A0010077847C /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
+		};
 		DCE2D1D2279694D90018895F /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DCE2D1D1279694D90018895F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
@@ -496,6 +532,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DCE2D1D627969AE00018895F /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		DCE2D1FF27985D5F0018895F /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCE2D1FE27985D5F0018895F /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		DCE2D20127985D5F0018895F /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCE2D1FE27985D5F0018895F /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
