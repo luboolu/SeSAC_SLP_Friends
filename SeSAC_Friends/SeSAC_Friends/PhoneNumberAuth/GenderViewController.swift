@@ -8,6 +8,8 @@
 import UIKit
 
 import SnapKit
+import RxCocoa
+import RxSwift
 
 class GenderViewController: UIViewController {
     
@@ -33,6 +35,44 @@ class GenderViewController: UIViewController {
         return label
     }()
     
+    let manButtonView = UIView()
+    
+    let manButton: UIButton = {
+        let button = UIButton()
+        
+        button.setImage(UIImage(named: "man"), for: .normal)
+        
+        return button
+    }()
+    
+    let manLabel: UILabel = {
+        let label = UILabel()
+        
+        label.text = "남자"
+        label.textAlignment = .center
+        
+        return label
+    }()
+    
+    let womanButtonView = UIView()
+    
+    let womanButton: UIButton = {
+        let button = UIButton()
+        
+        button.setImage(UIImage(named: "woman"), for: .normal)
+        
+        return button
+    }()
+    
+    let womanLabel: UILabel = {
+        let label = UILabel()
+        
+        label.text = "여자"
+        label.textAlignment = .center
+        
+        return label
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,16 +80,40 @@ class GenderViewController: UIViewController {
         setUp()
         setConstaints()
         
+        manButton.rx.tap
+            .bind {
+                self.manButtonView.backgroundColor = UIColor().whitegreen
+            }
+        
     }
     
     func setUp() {
+        
         view.backgroundColor = UIColor().white
         
         view.addSubview(guideLabel1)
         view.addSubview(guideLabel2)
+        
+        manButtonView.clipsToBounds = true
+        manButtonView.layer.cornerRadius = 10
+        manButtonView.layer.borderWidth = 1
+        manButtonView.layer.borderColor = UIColor().gray3.cgColor
+        manButtonView.addSubview(manButton)
+        manButtonView.addSubview(manLabel)
+        view.addSubview(manButtonView)
+        
+        womanButtonView.clipsToBounds = true
+        womanButtonView.layer.cornerRadius = 10
+        womanButtonView.layer.borderWidth = 1
+        womanButtonView.layer.borderColor = UIColor().gray3.cgColor
+        womanButtonView.addSubview(womanButton)
+        womanButtonView.addSubview(womanLabel)
+        view.addSubview(womanButtonView)
+        
     }
     
     func setConstaints() {
+        
         guideLabel1.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(80)
             make.centerX.equalToSuperview()
@@ -58,6 +122,47 @@ class GenderViewController: UIViewController {
         guideLabel2.snp.makeConstraints { make in
             make.top.equalTo(guideLabel1.snp.bottom).offset(8)
             make.centerX.equalToSuperview()
+        }
+        
+        manButtonView.snp.makeConstraints { make in
+            make.top.equalTo(guideLabel2.snp.bottom).offset(32)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalTo(womanButtonView.snp.leading).offset(-8)
+            make.height.equalTo(120)
+        }
+        
+        womanButtonView.snp.makeConstraints { make in
+            make.top.equalTo(guideLabel2.snp.bottom).offset(32)
+            make.leading.equalTo(manButtonView.snp.trailing).offset(8)
+            make.trailing.equalToSuperview().offset(-16)
+            make.width.equalTo(manButtonView.snp.width).multipliedBy(1)
+            make.height.equalTo(120)
+        }
+        
+        manButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(14)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+        }
+        
+        manLabel.snp.makeConstraints { make in
+            make.top.equalTo(manButton.snp.bottom).offset(4)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-14)
+        }
+        
+        womanButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(14)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+        }
+        
+        womanLabel.snp.makeConstraints { make in
+            make.top.equalTo(womanButton.snp.bottom).offset(4)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-14)
         }
     }
 }
