@@ -12,6 +12,8 @@
 		DCDE36672799B1440077847C /* LoginConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE36662799B1440077847C /* LoginConfirmViewController.swift */; };
 		DCDE36692799BE190077847C /* NicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE36682799BE190077847C /* NicknameViewController.swift */; };
 		DCDE366B2799C0BD0077847C /* BirthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE366A2799C0BD0077847C /* BirthViewController.swift */; };
+		DCDE366D279A9A4D0077847C /* EmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE366C279A9A4C0077847C /* EmailViewController.swift */; };
+		DCDE366F279AB8920077847C /* GenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE366E279AB8920077847C /* GenderViewController.swift */; };
 		DCE2D1BC279694720018895F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1BB279694720018895F /* AppDelegate.swift */; };
 		DCE2D1BE279694720018895F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1BD279694720018895F /* SceneDelegate.swift */; };
 		DCE2D1C0279694720018895F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1BF279694720018895F /* ViewController.swift */; };
@@ -43,6 +45,8 @@
 		DCDE36662799B1440077847C /* LoginConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginConfirmViewController.swift; sourceTree = "<group>"; };
 		DCDE36682799BE190077847C /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
 		DCDE366A2799C0BD0077847C /* BirthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthViewController.swift; sourceTree = "<group>"; };
+		DCDE366C279A9A4C0077847C /* EmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewController.swift; sourceTree = "<group>"; };
+		DCDE366E279AB8920077847C /* GenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderViewController.swift; sourceTree = "<group>"; };
 		DCE2D1B8279694720018895F /* SeSAC_Friends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSAC_Friends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCE2D1BB279694720018895F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DCE2D1BD279694720018895F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -167,6 +171,8 @@
 				DCDE36662799B1440077847C /* LoginConfirmViewController.swift */,
 				DCDE36682799BE190077847C /* NicknameViewController.swift */,
 				DCDE366A2799C0BD0077847C /* BirthViewController.swift */,
+				DCDE366C279A9A4C0077847C /* EmailViewController.swift */,
+				DCDE366E279AB8920077847C /* GenderViewController.swift */,
 			);
 			path = PhoneNumberAuth;
 			sourceTree = "<group>";
@@ -259,8 +265,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCE2D1F427979C020018895F /* MainTextFieldView.swift in Sources */,
+				DCDE366F279AB8920077847C /* GenderViewController.swift in Sources */,
 				DCE2D1D527969AB60018895F /* UserAuthentificationMessageViewController.swift in Sources */,
 				DCDE366B2799C0BD0077847C /* BirthViewController.swift in Sources */,
+				DCDE366D279A9A4D0077847C /* EmailViewController.swift in Sources */,
 				DCDE36652799A0300077847C /* Toast+Extension.swift in Sources */,
 				DCE2D1C0279694720018895F /* ViewController.swift in Sources */,
 				DCDE36692799BE190077847C /* NicknameViewController.swift in Sources */,

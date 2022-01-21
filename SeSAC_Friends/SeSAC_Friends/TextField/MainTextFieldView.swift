@@ -112,8 +112,9 @@ class MainTextFieldView: UIView {
         }
 
         textfield.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
+            //make.leading.equalToSuperview().offset(16)
+            //make.trailing.equalToSuperview().offset(-16)
+            make.width.equalTo(borderLabel.snp.width).multipliedBy(0.9)
         }
 
         borderLabel.snp.makeConstraints { make in
