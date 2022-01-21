@@ -36,6 +36,19 @@ class LoginConfirmViewController: UIViewController {
     
     let authCodeTextField = MainTextFieldView()
     
+    let authValidTime: UILabel = {
+        let label = UILabel()
+        
+        label.text = "05:00"
+        label.textColor = UIColor().green
+        label.font = UIFont().Title3_M14
+        
+        return label
+    }()
+    
+    var timer: Timer?
+    var timerNum: Int = 299
+    
     let resendAuthButton = MainButton(status: .fill)
     
     let authButton = MainButton(status: .disable)
@@ -45,6 +58,7 @@ class LoginConfirmViewController: UIViewController {
         
         setUp()
         setConstraints()
+        startTimer()
     }
     
     func setUp() {
@@ -60,6 +74,8 @@ class LoginConfirmViewController: UIViewController {
         
         resendAuthButton.setTitle("재전송", for: .normal)
         view.addSubview(resendAuthButton)
+        
+        view.addSubview(authValidTime)
         
         authButton.setTitle("인증하고 시작하기", for: .normal)
         view.addSubview(authButton)
@@ -90,12 +106,55 @@ class LoginConfirmViewController: UIViewController {
             make.height.equalTo(40)
         }
         
+        authValidTime.snp.makeConstraints { make in
+            make.centerY.equalTo(resendAuthButton)
+            make.trailing.equalTo(resendAuthButton.snp.leading).offset(-20)
+        }
+        
         authButton.snp.makeConstraints { make in
             make.top.equalTo(authCodeTextField.snp.bottom).offset(70)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.height.equalTo(48)
         }
+    }
+    
+    func startTimer() {
+        //기존에 타이머 동작중이면 중지 처리
+        if timer != nil && timer!.isValid {
+            timer!.invalidate()
+        }
+     
+        //타이머 사용값 초기화
+        timerNum = 300
+        //1초 간격 타이머 시작
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerCallback), userInfo: nil, repeats: true)
+
+    }
+    
+    //타이머 동작 func
+    @objc func timerCallback() {
+        
+        let minute = Int(timerNum / 60)
+        let seconds = Int(timerNum % 60)
+        
+        if seconds < 10 {
+            self.authValidTime.text = "0\(minute):0\(seconds)"
+        } else {
+            self.authValidTime.text = "0\(minute):\(seconds)"
+        }
+        
+     
+        //timerNum이 0이면(60초 경과) 타이머 종료
+        if(timerNum == 0) {
+            timer?.invalidate()
+            timer = nil
+            
+            //타이머 종료 후 처리...
+        }
+     
+        //timerNum -1 감소시키기
+        timerNum -= 1
     }
     
 }

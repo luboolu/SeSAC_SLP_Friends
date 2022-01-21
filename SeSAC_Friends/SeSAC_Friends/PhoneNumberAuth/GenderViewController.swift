@@ -73,6 +73,11 @@ class GenderViewController: UIViewController {
         return label
     }()
     
+    let nextButton = MainButton(status: .disable)
+    
+    var isMan = false
+    var isWoman = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,7 +87,39 @@ class GenderViewController: UIViewController {
         
         manButton.rx.tap
             .bind {
-                self.manButtonView.backgroundColor = UIColor().whitegreen
+                
+                self.isMan = !self.isMan
+
+                if self.isMan {
+                    self.isWoman = false
+                    
+                    self.womanButtonView.backgroundColor = UIColor().white
+                    self.manButtonView.backgroundColor = UIColor().whitegreen
+                } else {
+                    self.isWoman = false
+                    
+                    self.manButtonView.backgroundColor = UIColor().white
+                }
+                print("man: \(self.isMan) woman: \(self.isWoman)")
+                
+                
+            }
+        
+        womanButton.rx.tap
+            .bind {
+                self.isWoman = !self.isWoman
+
+                if self.isWoman {
+                    self.isMan = false
+                    
+                    self.womanButtonView.backgroundColor = UIColor().whitegreen
+                    self.manButtonView.backgroundColor = UIColor().white
+                } else {
+                    self.isMan = false
+                    
+                    self.womanButtonView.backgroundColor = UIColor().white
+                }
+                print("man: \(self.isMan) woman: \(self.isWoman)")
             }
         
     }
@@ -109,6 +146,9 @@ class GenderViewController: UIViewController {
         womanButtonView.addSubview(womanButton)
         womanButtonView.addSubview(womanLabel)
         view.addSubview(womanButtonView)
+        
+        nextButton.setTitle("다음", for: .normal)
+        view.addSubview(nextButton)
         
     }
     
@@ -163,6 +203,13 @@ class GenderViewController: UIViewController {
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
             make.bottom.equalToSuperview().offset(-14)
+        }
+        
+        nextButton.snp.makeConstraints { make in
+            make.top.equalTo(manButtonView.snp.bottom).offset(46)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.height.equalTo(48)
         }
     }
 }
