@@ -9,8 +9,12 @@ import UIKit
 
 import FirebaseAuth
 import SnapKit
+import RxSwift
+import RxCocoa
 
 class LoginConfirmViewController: UIViewController {
+    
+    var authCode: String?
     
     let guideLabel1: UILabel = {
         let label = UILabel()
@@ -53,12 +57,16 @@ class LoginConfirmViewController: UIViewController {
     
     let authButton = MainButton(status: .disable)
     
+    let disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUp()
         setConstraints()
         startTimer()
+        setTextFieldRx()
+        setButton()
     }
     
     func setUp() {
@@ -130,6 +138,55 @@ class LoginConfirmViewController: UIViewController {
         //1초 간격 타이머 시작
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerCallback), userInfo: nil, repeats: true)
 
+    }
+    
+    func setTextFieldRx() {
+        
+        authCodeTextField.textfield.rx.text
+            .subscribe(onNext: { newValue in
+                self.trimNumber(newValue ?? "")
+            }).disposed(by: disposeBag)
+        
+    }
+    
+    func setButton() {
+        
+        authButton.rx.tap
+            .bind {
+                print("auth button clicked!")
+            }.disposed(by: disposeBag)
+        
+        resendAuthButton.rx.tap
+            .bind {
+                print("resentAuthButton clicked!")
+                
+                //timer 초기화
+                self.startTimer()
+                //firebase 인증 문자 재전송
+                
+            }.disposed(by: disposeBag)
+        
+    }
+    
+    func trimNumber(_ number: String) {
+
+        if number.count > 0 {
+            var trimNum = number
+            let lastInput = String(trimNum.removeLast())
+            //print("number: \(number) trimNum: \(trimNum) last: \(lastInput)")
+
+            if Int(lastInput) != nil {
+                self.authCodeTextField.textfield.text = number
+            } else {
+                self.authCodeTextField.textfield.text = trimNum
+            }
+         }
+
+        //6자리 넘게 입력되지 않도록 함
+        if number.count > 6 {
+            let index = number.index(number.startIndex, offsetBy: 6)
+            self.authCodeTextField.textfield.text = String(number[..<index])
+        }
     }
     
     //타이머 동작 func

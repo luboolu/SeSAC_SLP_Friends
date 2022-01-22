@@ -112,9 +112,13 @@ class LoginViewController: UIViewController {
                     PhoneAuthProvider.provider()
                         .verifyPhoneNumber(number, uiDelegate: nil) { verificationID, error in
                             if error == nil {
-                                //self.view.showMessagePrompt(error.localizedDescription)
-                                //self.authCode = verificationID
                                 print("authCode: \(verificationID)")
+                                //전화번호 인증 문자 전송 성공 -> 인증번호 입력 화면으로 화면전환
+                                let vc = LoginConfirmViewController()
+                                
+                                vc.authCode = verificationID ?? ""
+                                
+                                self.navigationController?.pushViewController(vc, animated: true)
                             } else {
                                 print("Phone Verification Error")
                             }

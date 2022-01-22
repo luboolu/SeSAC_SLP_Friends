@@ -14,6 +14,7 @@
 		DCDE366B2799C0BD0077847C /* BirthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE366A2799C0BD0077847C /* BirthViewController.swift */; };
 		DCDE366D279A9A4D0077847C /* EmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE366C279A9A4C0077847C /* EmailViewController.swift */; };
 		DCDE366F279AB8920077847C /* GenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE366E279AB8920077847C /* GenderViewController.swift */; };
+		DCDE3672279C3A950077847C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE3671279C3A940077847C /* MainViewController.swift */; };
 		DCE2D1BC279694720018895F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1BB279694720018895F /* AppDelegate.swift */; };
 		DCE2D1BE279694720018895F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1BD279694720018895F /* SceneDelegate.swift */; };
 		DCE2D1C0279694720018895F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1BF279694720018895F /* ViewController.swift */; };
@@ -47,6 +48,7 @@
 		DCDE366A2799C0BD0077847C /* BirthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthViewController.swift; sourceTree = "<group>"; };
 		DCDE366C279A9A4C0077847C /* EmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewController.swift; sourceTree = "<group>"; };
 		DCDE366E279AB8920077847C /* GenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderViewController.swift; sourceTree = "<group>"; };
+		DCDE3671279C3A940077847C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		DCE2D1B8279694720018895F /* SeSAC_Friends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSAC_Friends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCE2D1BB279694720018895F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DCE2D1BD279694720018895F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -87,6 +89,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DCDE3670279C3A790077847C /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				DCDE3671279C3A940077847C /* MainViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 		DCE2D1AF279694720018895F = {
 			isa = PBXGroup;
 			children = (
@@ -106,7 +116,8 @@
 		DCE2D1BA279694720018895F /* SeSAC_Friends */ = {
 			isa = PBXGroup;
 			children = (
-				DCE2D1EE27970DEC0018895F /* PhoneNumberAuth */,
+				DCDE3670279C3A790077847C /* Main */,
+				DCE2D1EE27970DEC0018895F /* Authorization */,
 				DCE2D1E92796DB820018895F /* Extension */,
 				DCE2D1E42796D6D00018895F /* Font */,
 				DCE2D1DF2796CCC30018895F /* TextField */,
@@ -164,7 +175,7 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		DCE2D1EE27970DEC0018895F /* PhoneNumberAuth */ = {
+		DCE2D1EE27970DEC0018895F /* Authorization */ = {
 			isa = PBXGroup;
 			children = (
 				DCE2D1EF27970E000018895F /* LoginViewController.swift */,
@@ -174,7 +185,7 @@
 				DCDE366C279A9A4C0077847C /* EmailViewController.swift */,
 				DCDE366E279AB8920077847C /* GenderViewController.swift */,
 			);
-			path = PhoneNumberAuth;
+			path = Authorization;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,6 +275,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCDE3672279C3A950077847C /* MainViewController.swift in Sources */,
 				DCE2D1F427979C020018895F /* MainTextFieldView.swift in Sources */,
 				DCDE366F279AB8920077847C /* GenderViewController.swift in Sources */,
 				DCE2D1D527969AB60018895F /* UserAuthentificationMessageViewController.swift in Sources */,
