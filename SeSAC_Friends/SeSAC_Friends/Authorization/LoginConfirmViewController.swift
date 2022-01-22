@@ -180,7 +180,7 @@ class LoginConfirmViewController: UIViewController {
     func setButton() {
         
         authButton.rx.tap
-            .bind {
+            .bind { [self] in
                 print("auth button clicked!")
                 
                 //인증번호 6자리가 모두 입력되었는지 확인
@@ -188,7 +188,24 @@ class LoginConfirmViewController: UIViewController {
                     self.view.makeToast("전화 번호 인증 실패" ,duration: 2.0, position: .bottom, style: self.toastStyle)
                 } else {
                     //인증번호 6자리가 모두 입력되었다면
-                    //self.authcoded와 입력된 인증번호가 일치하는지 확인
+                    //self.authcode와 입력된 인증번호가 일치하는지 확인
+                    
+                    let inputCode = self.authCodeTextField.textfield.text ?? ""
+                    let verificationID = UserDefaults.standard.string(forKey: "authVerificationID") ?? ""
+                    let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: inputCode)
+
+                    Auth.auth().signIn(with: credential) { success, error in
+                        if error == nil {
+                            print(success ?? "")
+                            print("인증 성공!!")
+
+                            //firebase id token 요청
+                            let idToken = Auth.auth().currentUser?.getIDToken(completion: nil)
+
+                        } else {
+                            self.view.makeToast("전화 번호 인증 실패" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                        }
+                    }
                     
                     
                 }

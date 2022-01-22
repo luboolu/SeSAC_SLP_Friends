@@ -111,16 +111,26 @@ class LoginViewController: UIViewController {
                     //firebase auth 시작
                     PhoneAuthProvider.provider()
                         .verifyPhoneNumber(number, uiDelegate: nil) { verificationID, error in
-                            if error == nil {
+                            if let error = error {
+                                print("에러 발생!")
+                                print(error.localizedDescription)
+                                print(error)
+                                
+                                if error.localizedDescription == "We have blocked all requests from this device due to unusual activity. Try again later." {
+                                    self.view.makeToast("과도한 인증 시도가 있었습니다. 나중에 다시 시도해 주세요." ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                                } else {
+                                    self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                                }
+
+                            } else {
                                 print("authCode: \(verificationID)")
+                                UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
                                 //전화번호 인증 문자 전송 성공 -> 인증번호 입력 화면으로 화면전환
                                 let vc = LoginConfirmViewController()
                                 
-                                vc.authCode = verificationID ?? ""
+                                //vc.authCode = verificationID ?? ""
                                 
                                 self.navigationController?.pushViewController(vc, animated: true)
-                            } else {
-                                print("Phone Verification Error")
                             }
                             
                       }
