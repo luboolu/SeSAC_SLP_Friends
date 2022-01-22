@@ -11,10 +11,9 @@ import FirebaseAuth
 import SnapKit
 import RxSwift
 import RxCocoa
+import Toast
 
 class LoginConfirmViewController: UIViewController {
-    
-    var authCode: String?
     
     let guideLabel1: UILabel = {
         let label = UILabel()
@@ -50,17 +49,21 @@ class LoginConfirmViewController: UIViewController {
         return label
     }()
     
+    let resendAuthButton = MainButton(status: .fill)
+    let authButton = MainButton(status: .disable)
+    
+    
+    var authCode: String?
     var timer: Timer?
     var timerNum: Int = 299
     
-    let resendAuthButton = MainButton(status: .fill)
-    
-    let authButton = MainButton(status: .disable)
-    
     let disposeBag = DisposeBag()
+    let toastStyle = ToastStyle()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.makeToast("인증번호를 보냈습니다" ,duration: 2.0, position: .bottom, style: self.toastStyle)
         
         setUp()
         setConstraints()
@@ -142,9 +145,34 @@ class LoginConfirmViewController: UIViewController {
     
     func setTextFieldRx() {
         
+        //textfield의 입력값이 바뀔때 마다 감지 -> 유효성 검사
         authCodeTextField.textfield.rx.text
             .subscribe(onNext: { newValue in
-                self.trimNumber(newValue ?? "")
+                let result = self.trimNumber(newValue ?? "")
+                self.authCodeTextField.textfield.text = result
+                
+                if result.count == 6 {
+                    self.authButton.status = .fill
+                } else {
+                    self.authButton.status = .disable
+                }
+                
+            }).disposed(by: disposeBag)
+        
+        //textfield가 활성화되는 시점을 감지
+        authCodeTextField.textfield.rx.controlEvent([.editingDidBegin])
+            .asObservable()
+            .subscribe(onNext: { _ in
+                self.authCodeTextField.status = .active
+                self.authCodeTextField.textfield.placeholder = "인증번호 입력"
+            }).disposed(by: disposeBag)
+        
+        //textfield가 비활성화 되는 시점을 감지
+        authCodeTextField.textfield.rx.controlEvent([.editingDidEnd])
+            .asObservable()
+            .subscribe(onNext: { _ in
+                self.authCodeTextField.status = .inactive
+                self.authCodeTextField.textfield.placeholder = "인증번호 입력"
             }).disposed(by: disposeBag)
         
     }
@@ -154,6 +182,20 @@ class LoginConfirmViewController: UIViewController {
         authButton.rx.tap
             .bind {
                 print("auth button clicked!")
+                
+                //인증번호 6자리가 모두 입력되었는지 확인
+                if self.authCodeTextField.textfield.text?.count != 6 {
+                    self.view.makeToast("전화 번호 인증 실패" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                } else {
+                    //인증번호 6자리가 모두 입력되었다면
+                    //self.authcoded와 입력된 인증번호가 일치하는지 확인
+                    
+                    
+                }
+                
+                
+                
+                
             }.disposed(by: disposeBag)
         
         resendAuthButton.rx.tap
@@ -168,7 +210,9 @@ class LoginConfirmViewController: UIViewController {
         
     }
     
-    func trimNumber(_ number: String) {
+    func trimNumber(_ number: String) -> String {
+        
+        var result = ""
 
         if number.count > 0 {
             var trimNum = number
@@ -176,17 +220,22 @@ class LoginConfirmViewController: UIViewController {
             //print("number: \(number) trimNum: \(trimNum) last: \(lastInput)")
 
             if Int(lastInput) != nil {
-                self.authCodeTextField.textfield.text = number
+                //self.authCodeTextField.textfield.text = number
+                result = number
             } else {
-                self.authCodeTextField.textfield.text = trimNum
+                //self.authCodeTextField.textfield.text = trimNum
+                result = trimNum
             }
          }
 
         //6자리 넘게 입력되지 않도록 함
         if number.count > 6 {
             let index = number.index(number.startIndex, offsetBy: 6)
-            self.authCodeTextField.textfield.text = String(number[..<index])
+            //self.authCodeTextField.textfield.text = String(number[..<index])
+            result = String(number[..<index])
         }
+        
+        return result
     }
     
     //타이머 동작 func

@@ -15,6 +15,7 @@
 		DCDE366D279A9A4D0077847C /* EmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE366C279A9A4C0077847C /* EmailViewController.swift */; };
 		DCDE366F279AB8920077847C /* GenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE366E279AB8920077847C /* GenderViewController.swift */; };
 		DCDE3672279C3A950077847C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE3671279C3A940077847C /* MainViewController.swift */; };
+		DCDE3675279C44860077847C /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DCDE3674279C44860077847C /* IQKeyboardManagerSwift */; };
 		DCE2D1BC279694720018895F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1BB279694720018895F /* AppDelegate.swift */; };
 		DCE2D1BE279694720018895F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1BD279694720018895F /* SceneDelegate.swift */; };
 		DCE2D1C0279694720018895F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1BF279694720018895F /* ViewController.swift */; };
@@ -83,6 +84,7 @@
 				DCE2D20227985D5F0018895F /* RxSwift in Frameworks */,
 				DCDE36632799A0010077847C /* Toast in Frameworks */,
 				DCE2D1D827969AE10018895F /* SnapKit in Frameworks */,
+				DCDE3675279C44860077847C /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +212,7 @@
 				DCE2D1FF27985D5F0018895F /* RxCocoa */,
 				DCE2D20127985D5F0018895F /* RxSwift */,
 				DCDE36622799A0010077847C /* Toast */,
+				DCDE3674279C44860077847C /* IQKeyboardManagerSwift */,
 			);
 			productName = SeSAC_Friends;
 			productReference = DCE2D1B8279694720018895F /* SeSAC_Friends.app */;
@@ -244,6 +247,7 @@
 				DCE2D1D627969AE00018895F /* XCRemoteSwiftPackageReference "SnapKit" */,
 				DCE2D1FE27985D5F0018895F /* XCRemoteSwiftPackageReference "RxSwift" */,
 				DCDE36612799A0010077847C /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+				DCDE3673279C44860077847C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = DCE2D1B9279694720018895F /* Products */;
 			projectDirPath = "";
@@ -523,6 +527,14 @@
 				kind = branch;
 			};
 		};
+		DCDE3673279C44860077847C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		DCE2D1D1279694D90018895F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -554,6 +566,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DCDE36612799A0010077847C /* XCRemoteSwiftPackageReference "Toast-Swift" */;
 			productName = Toast;
+		};
+		DCDE3674279C44860077847C /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCDE3673279C44860077847C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
 		};
 		DCE2D1D2279694D90018895F /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
