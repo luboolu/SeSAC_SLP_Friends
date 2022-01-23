@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		DCA1AAB9279D7B4F002194B4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = DCA1AAB8279D7B4F002194B4 /* FirebaseAuth */; };
 		DCA1AABB279D7B4F002194B4 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = DCA1AABA279D7B4F002194B4 /* FirebaseMessaging */; };
+		DCA1AABE279DA7CA002194B4 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA1AABD279DA7CA002194B4 /* Endpoint.swift */; };
 		DCDE36632799A0010077847C /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = DCDE36622799A0010077847C /* Toast */; };
 		DCDE36652799A0300077847C /* Toast+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE36642799A0300077847C /* Toast+Extension.swift */; };
 		DCDE36672799B1440077847C /* LoginConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE36662799B1440077847C /* LoginConfirmViewController.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DCA1AABD279DA7CA002194B4 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		DCDE36642799A0300077847C /* Toast+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Toast+Extension.swift"; sourceTree = "<group>"; };
 		DCDE36662799B1440077847C /* LoginConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginConfirmViewController.swift; sourceTree = "<group>"; };
 		DCDE36682799BE190077847C /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
@@ -93,6 +95,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DCA1AABC279DA7BA002194B4 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				DCA1AABD279DA7CA002194B4 /* Endpoint.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		DCDE3670279C3A790077847C /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +130,7 @@
 		DCE2D1BA279694720018895F /* SeSAC_Friends */ = {
 			isa = PBXGroup;
 			children = (
+				DCA1AABC279DA7BA002194B4 /* API */,
 				DCDE3670279C3A790077847C /* Main */,
 				DCE2D1EE27970DEC0018895F /* Authorization */,
 				DCE2D1E92796DB820018895F /* Extension */,
@@ -302,6 +313,7 @@
 				DCE2D1BE279694720018895F /* SceneDelegate.swift in Sources */,
 				DCE2D1E12796CCD30018895F /* MainTextFieldStatus.swift in Sources */,
 				DCE2D1ED2796FF950018895F /* UIFont+Extension.swift in Sources */,
+				DCA1AABE279DA7CA002194B4 /* Endpoint.swift in Sources */,
 				DCE2D1E32796D5310018895F /* ChatTextFieldStatus.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
