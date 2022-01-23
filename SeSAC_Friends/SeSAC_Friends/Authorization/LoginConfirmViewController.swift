@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Firebase
 import FirebaseAuth
 import SnapKit
 import RxSwift
@@ -197,10 +198,30 @@ class LoginConfirmViewController: UIViewController {
                     Auth.auth().signIn(with: credential) { success, error in
                         if error == nil {
                             print(success ?? "")
-                            print("인증 성공!!")
+                            print("인증 성공!!Id token 요청하기")
 
                             //firebase id token 요청
-                            let idToken = Auth.auth().currentUser?.getIDToken(completion: nil)
+                            let currentUser = Auth.auth().currentUser
+                            currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
+                                
+                                if let error = error {
+                                    print("에러 발생")
+                                    return
+                                }
+                                
+                                if let idToken = idToken {
+                                    print(idToken)
+                                    
+                                    UserDefaults.standard.set(idToken, forKey: "idToken")
+                                }
+                                
+                                
+                                
+
+                            }
+                            
+ 
+
 
                         } else {
                             self.view.makeToast("전화 번호 인증 실패" ,duration: 2.0, position: .bottom, style: self.toastStyle)

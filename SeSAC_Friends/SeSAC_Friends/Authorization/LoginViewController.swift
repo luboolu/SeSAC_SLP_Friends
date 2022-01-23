@@ -49,6 +49,13 @@ class LoginViewController: UIViewController {
         tagGesture.delegate = self
         self.view.addGestureRecognizer(tagGesture)
         
+        print("authVerificationID")
+        print(UserDefaults.standard.string(forKey: "authVerificationID") ?? "")
+        
+        print("idToken")
+        print(UserDefaults.standard.string(forKey: "idToken") ?? "")
+
+        
         setUp()
         setConstraints()
         setButton()

@@ -31,6 +31,9 @@ class NicknameViewController: UIViewController {
         
         setUp()
         setConstraints()
+        
+        //화면 진입 시 키보드가 활성화되도록 textfield를 firstresponder로 설정
+        nicknameTextField.textfield.becomeFirstResponder()
     }
     
     func setUp() {

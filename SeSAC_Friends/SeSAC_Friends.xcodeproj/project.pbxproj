@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DCA1AAB9279D7B4F002194B4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = DCA1AAB8279D7B4F002194B4 /* FirebaseAuth */; };
+		DCA1AABB279D7B4F002194B4 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = DCA1AABA279D7B4F002194B4 /* FirebaseMessaging */; };
 		DCDE36632799A0010077847C /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = DCDE36622799A0010077847C /* Toast */; };
 		DCDE36652799A0300077847C /* Toast+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE36642799A0300077847C /* Toast+Extension.swift */; };
 		DCDE36672799B1440077847C /* LoginConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE36662799B1440077847C /* LoginConfirmViewController.swift */; };
@@ -23,7 +25,6 @@
 		DCE2D1C5279694750018895F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCE2D1C4279694750018895F /* Assets.xcassets */; };
 		DCE2D1C8279694750018895F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCE2D1C6279694750018895F /* LaunchScreen.storyboard */; };
 		DCE2D1D0279694BE0018895F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DCE2D1CF279694BE0018895F /* GoogleService-Info.plist */; };
-		DCE2D1D3279694D90018895F /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = DCE2D1D2279694D90018895F /* FirebaseAuth */; };
 		DCE2D1D527969AB60018895F /* UserAuthentificationMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1D427969AB60018895F /* UserAuthentificationMessageViewController.swift */; };
 		DCE2D1D827969AE10018895F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DCE2D1D727969AE10018895F /* SnapKit */; };
 		DCE2D1DC2796A9080018895F /* MainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1DB2796A9080018895F /* MainButton.swift */; };
@@ -80,7 +81,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCE2D20027985D5F0018895F /* RxCocoa in Frameworks */,
-				DCE2D1D3279694D90018895F /* FirebaseAuth in Frameworks */,
+				DCA1AAB9279D7B4F002194B4 /* FirebaseAuth in Frameworks */,
+				DCA1AABB279D7B4F002194B4 /* FirebaseMessaging in Frameworks */,
 				DCE2D20227985D5F0018895F /* RxSwift in Frameworks */,
 				DCDE36632799A0010077847C /* Toast in Frameworks */,
 				DCE2D1D827969AE10018895F /* SnapKit in Frameworks */,
@@ -207,12 +209,13 @@
 			);
 			name = SeSAC_Friends;
 			packageProductDependencies = (
-				DCE2D1D2279694D90018895F /* FirebaseAuth */,
 				DCE2D1D727969AE10018895F /* SnapKit */,
 				DCE2D1FF27985D5F0018895F /* RxCocoa */,
 				DCE2D20127985D5F0018895F /* RxSwift */,
 				DCDE36622799A0010077847C /* Toast */,
 				DCDE3674279C44860077847C /* IQKeyboardManagerSwift */,
+				DCA1AAB8279D7B4F002194B4 /* FirebaseAuth */,
+				DCA1AABA279D7B4F002194B4 /* FirebaseMessaging */,
 			);
 			productName = SeSAC_Friends;
 			productReference = DCE2D1B8279694720018895F /* SeSAC_Friends.app */;
@@ -243,11 +246,11 @@
 			);
 			mainGroup = DCE2D1AF279694720018895F;
 			packageReferences = (
-				DCE2D1D1279694D90018895F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				DCE2D1D627969AE00018895F /* XCRemoteSwiftPackageReference "SnapKit" */,
 				DCE2D1FE27985D5F0018895F /* XCRemoteSwiftPackageReference "RxSwift" */,
 				DCDE36612799A0010077847C /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				DCDE3673279C44860077847C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				DCA1AAB7279D7B4F002194B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = DCE2D1B9279694720018895F /* Products */;
 			projectDirPath = "";
@@ -519,6 +522,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		DCA1AAB7279D7B4F002194B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		DCDE36612799A0010077847C /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/scalessec/Toast-Swift.git";
@@ -530,14 +541,6 @@
 		DCDE3673279C44860077847C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-		DCE2D1D1279694D90018895F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
 				branch = master;
 				kind = branch;
@@ -562,6 +565,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		DCA1AAB8279D7B4F002194B4 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCA1AAB7279D7B4F002194B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		DCA1AABA279D7B4F002194B4 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCA1AAB7279D7B4F002194B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
 		DCDE36622799A0010077847C /* Toast */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DCDE36612799A0010077847C /* XCRemoteSwiftPackageReference "Toast-Swift" */;
@@ -571,11 +584,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DCDE3673279C44860077847C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
-		};
-		DCE2D1D2279694D90018895F /* FirebaseAuth */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DCE2D1D1279694D90018895F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAuth;
 		};
 		DCE2D1D727969AE10018895F /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
