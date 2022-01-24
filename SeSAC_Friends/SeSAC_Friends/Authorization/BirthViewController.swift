@@ -9,6 +9,7 @@ import UIKit
 
 import SnapKit
 import RxSwift
+import Toast
 
 class BirthViewController: UIViewController {
     
@@ -84,6 +85,9 @@ class BirthViewController: UIViewController {
     }()
     
     let disposeBag = DisposeBag()
+    let toastStyle = ToastStyle()
+    
+    var birthDay: Date?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,6 +95,7 @@ class BirthViewController: UIViewController {
         setUp()
         setConstraints()
         setTextField()
+        setButton()
         createPickerView()
     }
     
@@ -145,7 +150,7 @@ class BirthViewController: UIViewController {
     
     func setTextField() {
         
-
+        
         
     }
     
@@ -190,6 +195,9 @@ class BirthViewController: UIViewController {
                 self.monthTextField.textfield.text = "\(month)"
                 self.dayTextField.textfield.text = "\(day)"
                 
+                self.birthDay = newValue
+                
+                
             })
             .disposed(by: disposeBag)
         
@@ -226,6 +234,29 @@ class BirthViewController: UIViewController {
     }
     
     func nextButtonTapped() {
+        self.view.endEditing(true)
+        //만 17세 이상인지 확인
+        let today = Date.now
+
+        guard let distance = Calendar.current.dateComponents([.day], from: self.birthDay ?? today, to: today).day else {
+            return
+        }
+        
+        print(distance)
+        
+        if distance < 365 * 17 {
+            self.view.makeToast("새싹친구는 만 17세 이상만 사용할 수 있습니다" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+        } else {
+            //조건에 부합하므로 생년월일 정보를 userdefault에 저장
+            guard let formatted = self.birthDay?.ISO8601Format() else {
+                return
+            }
+            UserDefaults.standard.set(formatted, forKey: UserdefaultKey.birthDay.string)
+            
+            let vc = EmailViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
         
     }
 

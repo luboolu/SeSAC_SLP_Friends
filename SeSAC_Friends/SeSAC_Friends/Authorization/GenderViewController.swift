@@ -75,6 +75,8 @@ class GenderViewController: UIViewController {
     
     let nextButton = MainButton(status: .disable)
     
+    let viewModel = AuthorizationViewModel()
+    
     var isMan = false
     var isWoman = false
     
@@ -196,9 +198,14 @@ class GenderViewController: UIViewController {
                     
                     self.manButtonView.backgroundColor = UIColor().white
                 }
+                
+                if self.isMan == true || self.isWoman == true {
+                    self.nextButton.status = .fill
+                } else {
+                    self.nextButton.status = .disable
+                }
+                
                 print("man: \(self.isMan) woman: \(self.isWoman)")
-                
-                
             }
         
         womanButton.rx.tap
@@ -239,9 +246,10 @@ class GenderViewController: UIViewController {
                     UserDefaults.standard.set(-1, forKey: UserdefaultKey.gender.string)
                 }
                 
-                let vc = BirthViewController()
-                
-                self.navigationController?.pushViewController(vc, animated: true)
+                //회원가입 api 통신 시작!
+                self.viewModel.signIn { _ in
+                    print("회원가입 완료")
+                }
                 
             }
         

@@ -8,8 +8,11 @@
 import UIKit
 
 import SnapKit
+import RxSwift
+import RxCocoa
+import Toast
 
-class emailViewController: UIViewController {
+class EmailViewController: UIViewController {
     
     let guideLabel1: UILabel = {
         let label = UILabel()
@@ -37,11 +40,16 @@ class emailViewController: UIViewController {
     
     let nextButton = MainButton(status: .disable)
     
+    let toastStyle = ToastStyle()
+    let disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUp()
         setConstraints()
+        setTextField()
+        setButton()
         
     }
     
@@ -84,6 +92,54 @@ class emailViewController: UIViewController {
             make.height.equalTo(48)
         }
         
+    }
+    
+    func setTextField() {
+        
+        emailTextField.textfield.rx.text
+            .subscribe(onNext: { newValue in
+                
+                if newValue?.count ?? 0 > 0 {
+                    self.nextButton.status = .fill
+                } else {
+                    self.nextButton.status = .disable
+                }
+                
+            }).disposed(by: disposeBag)
+        
+    }
+    
+    func setButton() {
+        
+        nextButton.rx.tap
+            .bind {
+                self.nextButtonTapped()
+            }
+        
+    }
+    
+    func nextButtonTapped() {
+
+        let input = emailTextField.textfield.text ?? ""
+        
+        if isValidEmail(email: input) {
+            UserDefaults.standard.set(input, forKey: UserdefaultKey.email.string)
+            
+            let vc = GenderViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            self.view.makeToast("이메일 형식이 올바르지 않습니다" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+        }
+        
+    }
+    
+    func isValidEmail(email: String?) -> Bool {
+        guard email != nil else { return false}
+        
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let pred = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
+        
+        return pred.evaluate(with: email)
     }
     
     

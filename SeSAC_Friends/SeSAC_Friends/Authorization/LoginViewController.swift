@@ -120,6 +120,8 @@ class LoginViewController: UIViewController {
                     
                     let number = "+82 \(self.textfieldView.textfield.text!)"
                     print(number)
+                    
+                    UserDefaults.standard.set(number, forKey: UserdefaultKey.phoneNumber.string)
                     //firebase auth 시작
                     
                     self.viewModel.authRequest(phoneNumber: number) { error in
