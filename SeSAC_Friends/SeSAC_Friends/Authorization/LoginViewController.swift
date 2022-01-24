@@ -34,13 +34,15 @@ class LoginViewController: UIViewController {
     }()
     
     let textfieldView = MainTextFieldView()
-    
+
     let authMessageButton = MainButton(status: .disable)
     
     var isNumberValid: Observable<Bool> = Observable<Bool>.just(false)
     var isValid = false
     
     let toastStyle = ToastStyle()
+    
+    let viewModel = AuthorizationViewModel()
 
     
     override func viewDidLoad() {
@@ -50,10 +52,13 @@ class LoginViewController: UIViewController {
         self.view.addGestureRecognizer(tagGesture)
         
         print("authVerificationID")
-        print(UserDefaults.standard.string(forKey: "authVerificationID") ?? "")
+        print(UserDefaults.standard.string(forKey: UserdefaultKey.authVerificationID.string) ?? "")
         
-        print("idToken")
-        print(UserDefaults.standard.string(forKey: "idToken") ?? "")
+        print("idtoken")
+        print(UserDefaults.standard.string(forKey: UserdefaultKey.idToken.string) ?? "")
+        
+        print("fcmToken")
+        print(UserDefaults.standard.string(forKey: UserdefaultKey.fcmToken.string) ?? "")
 
         
         setUp()
@@ -116,31 +121,23 @@ class LoginViewController: UIViewController {
                     let number = "+82 \(self.textfieldView.textfield.text!)"
                     print(number)
                     //firebase auth 시작
-                    PhoneAuthProvider.provider()
-                        .verifyPhoneNumber(number, uiDelegate: nil) { verificationID, error in
-                            if let error = error {
-                                print("에러 발생!")
-                                print(error.localizedDescription)
-                                print(error)
-                                
-                                if error.localizedDescription == "We have blocked all requests from this device due to unusual activity. Try again later." {
-                                    self.view.makeToast("과도한 인증 시도가 있었습니다. 나중에 다시 시도해 주세요." ,duration: 2.0, position: .bottom, style: self.toastStyle)
-                                } else {
-                                    self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
-                                }
-
+                    
+                    self.viewModel.authRequest(phoneNumber: number) { error in
+                        if let error = error {
+                            if error.localizedDescription == "We have blocked all requests from this device due to unusual activity. Try again later." {
+                                self.view.makeToast("과도한 인증 시도가 있었습니다. 나중에 다시 시도해 주세요." ,duration: 2.0, position: .bottom, style: self.toastStyle)
                             } else {
-                                print("authCode: \(verificationID)")
-                                UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
-                                //전화번호 인증 문자 전송 성공 -> 인증번호 입력 화면으로 화면전환
-                                let vc = LoginConfirmViewController()
-                                
-                                //vc.authCode = verificationID ?? ""
-                                
-                                self.navigationController?.pushViewController(vc, animated: true)
+                                self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
                             }
-                            
-                      }
+                        } else {
+                            //전화번호 인증 문자 전송 성공 -> 인증번호 입력 화면으로 화면전환
+                            let vc = LoginConfirmViewController()
+        
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        }
+                        
+                    }
+
                 } else {
                     //토스트 알림 띄우기
                     self.view.makeToast("잘못된 전화번호 형식입니다" ,duration: 2.0, position: .bottom, style: self.toastStyle)
@@ -201,8 +198,6 @@ class LoginViewController: UIViewController {
     
     @objc func authMessageButtonClicked() {
         print(#function)
-        
-        
     }
     
     func trimNumber(_ number: String) {

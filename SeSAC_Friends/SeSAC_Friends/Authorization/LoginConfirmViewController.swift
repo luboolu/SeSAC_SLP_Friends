@@ -60,6 +60,7 @@ class LoginConfirmViewController: UIViewController {
     
     let disposeBag = DisposeBag()
     let toastStyle = ToastStyle()
+    let viewModel = AuthorizationViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,6 +72,23 @@ class LoginConfirmViewController: UIViewController {
         startTimer()
         setTextFieldRx()
         setButton()
+        
+        print("authVerificationID")
+        print(UserDefaults.standard.string(forKey: UserdefaultKey.authVerificationID.string) ?? "")
+        
+        print("idtoken")
+        print(UserDefaults.standard.string(forKey: UserdefaultKey.idToken.string) ?? "")
+        
+        print("fcmToken")
+        print(UserDefaults.standard.string(forKey: UserdefaultKey.fcmToken.string) ?? "")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if timer != nil && timer!.isValid {
+            timer!.invalidate()
+        }
     }
     
     func setUp() {
@@ -183,66 +201,14 @@ class LoginConfirmViewController: UIViewController {
         authButton.rx.tap
             .bind { [self] in
                 print("auth button clicked!")
-                
-                //인증번호 6자리가 모두 입력되었는지 확인
-                if self.authCodeTextField.textfield.text?.count != 6 {
-                    self.view.makeToast("전화 번호 인증 실패" ,duration: 2.0, position: .bottom, style: self.toastStyle)
-                } else {
-                    //인증번호 6자리가 모두 입력되었다면
-                    //self.authcode와 입력된 인증번호가 일치하는지 확인
-                    
-                    let inputCode = self.authCodeTextField.textfield.text ?? ""
-                    let verificationID = UserDefaults.standard.string(forKey: "authVerificationID") ?? ""
-                    let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: inputCode)
-
-                    Auth.auth().signIn(with: credential) { success, error in
-                        if error == nil {
-                            print(success ?? "")
-                            print("인증 성공!!Id token 요청하기")
-
-                            //firebase id token 요청
-                            let currentUser = Auth.auth().currentUser
-                            currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
-                                
-                                if let error = error {
-                                    print("에러 발생")
-                                    return
-                                }
-                                
-                                if let idToken = idToken {
-                                    print(idToken)
-                                    
-                                    UserDefaults.standard.set(idToken, forKey: "idToken")
-                                }
-                                
-                                
-                                
-
-                            }
-                            
- 
-
-
-                        } else {
-                            self.view.makeToast("전화 번호 인증 실패" ,duration: 2.0, position: .bottom, style: self.toastStyle)
-                        }
-                    }
-                    
-                    
-                }
-                
-                
-                
-                
+                self.authButtonTapped()
             }.disposed(by: disposeBag)
         
         resendAuthButton.rx.tap
             .bind {
                 print("resentAuthButton clicked!")
-                
-                //timer 초기화
-                self.startTimer()
-                //firebase 인증 문자 재전송
+                self.resendButtonTapped()
+
                 
             }.disposed(by: disposeBag)
         
@@ -274,6 +240,65 @@ class LoginConfirmViewController: UIViewController {
         }
         
         return result
+    }
+    
+    func authButtonTapped() {
+        self.viewModel.idTokenRequest { error in
+            if error != nil {
+                self.view.makeToast("에러가 발생했습니다" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+            } else {
+                print("유저!!")
+                //id token을 제대로 가져왔으면, get user로 가입된 회원인지 확인
+                self.viewModel.getUser() { statusCode in
+                    print("statusCode: \(statusCode)")
+                    
+                    DispatchQueue.main.async {
+                        //미가입 유저인 경우
+                        if statusCode == 201 {
+                            //닉네임 입력 화면으로 화면 전환!
+                            let vc = NicknameViewController()
+                            
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        }
+                    }
+
+                    
+                }
+                
+            }
+        }
+//        //인증번호 6자리가 모두 입력되었는지 확인
+//        if self.authCodeTextField.textfield.text?.count != 6 {
+//            self.view.makeToast("전화 번호 인증 실패" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+//        } else {
+//            //인증번호 6자리가 모두 입력되었다면
+//            //인증번호가 일치하는지 확인
+//            let inputCode = self.authCodeTextField.textfield.text ?? ""
+//
+//            self.viewModel.authSignIn(inputCode: inputCode) { error in
+//                if error != nil {
+//                    self.view.makeToast("전화 번호 인증 실패" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+//                } else {
+//                    //인증 성공했으므로, firebase id token을 요청
+//                    self.viewModel.idTokenRequest { error in
+//                        if error != nil {
+//                            self.view.makeToast("에러가 발생했습니다" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+//                        } else {
+//
+//                            //id token을 제대로 가져왔으면, get user로 가입된 회원인지 확인
+//                            self.viewModel.getUser()
+//
+//                        }
+//                    }
+//                }
+//            }
+//        }
+    }
+    
+    func resendButtonTapped() {
+        //timer 초기화
+        self.startTimer()
+        //firebase 인증 문자 재전송
     }
     
     //타이머 동작 func

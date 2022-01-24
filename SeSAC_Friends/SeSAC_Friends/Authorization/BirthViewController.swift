@@ -8,6 +8,7 @@
 import UIKit
 
 import SnapKit
+import RxSwift
 
 class BirthViewController: UIViewController {
     
@@ -71,11 +72,26 @@ class BirthViewController: UIViewController {
     
     let nextButton = MainButton(status: .disable)
     
+    let pickerView: UIDatePicker = {
+        let picker = UIDatePicker()
+        
+        //UIDatePicker(frame: CGRect(x: 200, y: 0, width: UIScreen.main.bounds.width, height: 200))
+        picker.locale = Locale(identifier: "ko")
+        picker.datePickerMode = .date
+        picker.preferredDatePickerStyle = .wheels
+        
+        return picker
+    }()
+    
+    let disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUp()
         setConstraints()
+        setTextField()
+        createPickerView()
     }
     
     func setUp() {
@@ -85,16 +101,19 @@ class BirthViewController: UIViewController {
         
         yearTextField.status = .inactive
         yearTextField.textfield.placeholder = ""
+        yearTextField.textfield.textAlignment = .center
         stackview.addArrangedSubview(yearTextField)
         stackview.addArrangedSubview(yearLabel)
         
         monthTextField.status = .inactive
         monthTextField.textfield.placeholder = ""
+        monthTextField.textfield.textAlignment = .center
         stackview.addArrangedSubview(monthTextField)
         stackview.addArrangedSubview(monthLabel)
         
         dayTextField.status = .inactive
         dayTextField.textfield.placeholder = ""
+        dayTextField.textfield.textAlignment = .center
         stackview.addArrangedSubview(dayTextField)
         stackview.addArrangedSubview(dayLabel)
        
@@ -123,4 +142,96 @@ class BirthViewController: UIViewController {
             make.height.equalTo(48)
         }
     }
+    
+    func setTextField() {
+        
+
+        
+    }
+    
+    func setButton() {
+        
+        nextButton.rx.tap
+            .bind {
+                self.nextButtonTapped()
+            }
+        
+    }
+    
+    func createPickerView() {
+
+        yearTextField.textfield.inputView = pickerView
+        monthTextField.textfield.inputView = pickerView
+        dayTextField.textfield.inputView = pickerView
+        
+        pickerView.rx.date
+            .subscribe(onNext: { newValue in
+                print(newValue)
+                
+                let yearFormat = DateFormatter()
+                yearFormat.locale = Locale(identifier: "ko")
+                yearFormat.dateFormat = "yyyy"
+                
+                let monthFormat = DateFormatter()
+                monthFormat.locale = Locale(identifier: "ko")
+                monthFormat.dateFormat = "MM"
+                
+                let dayFormat = DateFormatter()
+                dayFormat.locale = Locale(identifier: "ko")
+                dayFormat.dateFormat = "dd"
+                
+                let year = yearFormat.string(from: newValue)
+                let month = monthFormat.string(from: newValue)
+                let day = dayFormat.string(from: newValue)
+                
+                print("formatted: \(year) \(month) \(day)")
+                
+                self.yearTextField.textfield.text = "\(year)"
+                self.monthTextField.textfield.text = "\(month)"
+                self.dayTextField.textfield.text = "\(day)"
+                
+            })
+            .disposed(by: disposeBag)
+        
+        
+        yearTextField.textfield.becomeFirstResponder()
+    }
+    
+    func trimTextField(_ number: String) -> String {
+        
+        var result = ""
+
+        if number.count > 0 {
+            var trimNum = number
+            let lastInput = String(trimNum.removeLast())
+            //print("number: \(number) trimNum: \(trimNum) last: \(lastInput)")
+
+            if Int(lastInput) != nil {
+                //self.authCodeTextField.textfield.text = number
+                result = number
+            } else {
+                //self.authCodeTextField.textfield.text = trimNum
+                result = trimNum
+            }
+         }
+
+        //6자리 넘게 입력되지 않도록 함
+        if number.count > 6 {
+            let index = number.index(number.startIndex, offsetBy: 6)
+            //self.authCodeTextField.textfield.text = String(number[..<index])
+            result = String(number[..<index])
+        }
+        
+        return result
+    }
+    
+    func nextButtonTapped() {
+        
+    }
+
 }
+
+
+
+
+

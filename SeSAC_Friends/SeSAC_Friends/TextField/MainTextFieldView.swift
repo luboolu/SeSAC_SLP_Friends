@@ -11,7 +11,7 @@ import SnapKit
 
 class MainTextFieldView: UIView {
     
-    let textfield = UITextField()
+    let textfield = CustomTextField()
     let borderLabel = UILabel()
     let commentLabel = UILabel()
     
@@ -132,3 +132,20 @@ class MainTextFieldView: UIView {
     
 }
 
+class CustomTextField: UITextField {
+
+    var enableLongPressActions = false
+
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+    }
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+
+    //copy, paste 불가능하게 함
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        return enableLongPressActions
+    }
+}

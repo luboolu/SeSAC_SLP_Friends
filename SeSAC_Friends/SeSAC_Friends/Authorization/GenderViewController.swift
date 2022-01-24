@@ -84,43 +84,9 @@ class GenderViewController: UIViewController {
         
         setUp()
         setConstaints()
+        setButton()
         
-        manButton.rx.tap
-            .bind {
-                
-                self.isMan = !self.isMan
 
-                if self.isMan {
-                    self.isWoman = false
-                    
-                    self.womanButtonView.backgroundColor = UIColor().white
-                    self.manButtonView.backgroundColor = UIColor().whitegreen
-                } else {
-                    self.isWoman = false
-                    
-                    self.manButtonView.backgroundColor = UIColor().white
-                }
-                print("man: \(self.isMan) woman: \(self.isWoman)")
-                
-                
-            }
-        
-        womanButton.rx.tap
-            .bind {
-                self.isWoman = !self.isWoman
-
-                if self.isWoman {
-                    self.isMan = false
-                    
-                    self.womanButtonView.backgroundColor = UIColor().whitegreen
-                    self.manButtonView.backgroundColor = UIColor().white
-                } else {
-                    self.isMan = false
-                    
-                    self.womanButtonView.backgroundColor = UIColor().white
-                }
-                print("man: \(self.isMan) woman: \(self.isWoman)")
-            }
         
     }
     
@@ -212,4 +178,73 @@ class GenderViewController: UIViewController {
             make.height.equalTo(48)
         }
     }
+    
+    func setButton() {
+        
+        manButton.rx.tap
+            .bind {
+                
+                self.isMan = !self.isMan
+
+                if self.isMan {
+                    self.isWoman = false
+                    
+                    self.womanButtonView.backgroundColor = UIColor().white
+                    self.manButtonView.backgroundColor = UIColor().whitegreen
+                } else {
+                    self.isWoman = false
+                    
+                    self.manButtonView.backgroundColor = UIColor().white
+                }
+                print("man: \(self.isMan) woman: \(self.isWoman)")
+                
+                
+            }
+        
+        womanButton.rx.tap
+            .bind {
+                self.isWoman = !self.isWoman
+
+                if self.isWoman {
+                    self.isMan = false
+                    
+                    self.womanButtonView.backgroundColor = UIColor().whitegreen
+                    self.manButtonView.backgroundColor = UIColor().white
+                } else {
+                    self.isMan = false
+                    
+                    self.womanButtonView.backgroundColor = UIColor().white
+                }
+                
+                if self.isMan == true || self.isWoman == true {
+                    self.nextButton.status = .fill
+                } else {
+                    self.nextButton.status = .disable
+                }
+                
+                print("man: \(self.isMan) woman: \(self.isWoman)")
+            }
+        
+        nextButton.rx.tap
+            .bind {
+                //여자:0, 남자:1, 미선택: -1
+                if self.isWoman == true {
+                    //여자
+                    UserDefaults.standard.set(0, forKey: UserdefaultKey.gender.string)
+                } else if self.isMan == true {
+                    //남자
+                    UserDefaults.standard.set(1, forKey: UserdefaultKey.gender.string)
+                } else {
+                    //미선택
+                    UserDefaults.standard.set(-1, forKey: UserdefaultKey.gender.string)
+                }
+                
+                let vc = BirthViewController()
+                
+                self.navigationController?.pushViewController(vc, animated: true)
+                
+            }
+        
+    }
+    
 }
