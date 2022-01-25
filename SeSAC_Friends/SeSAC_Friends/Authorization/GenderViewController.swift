@@ -247,8 +247,32 @@ class GenderViewController: UIViewController {
                 }
                 
                 //회원가입 api 통신 시작!
-                self.viewModel.signIn { _ in
+                self.viewModel.signIn { statusCode in
                     print("회원가입 완료")
+                    
+                    if statusCode == 200 {
+                        
+                        DispatchQueue.main.async {
+                            
+                            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                            windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: MainViewController())
+                            windowScene.windows.first?.makeKeyAndVisible()
+                        }
+                        
+                    } else if statusCode == 201 {
+                        
+                    } else if statusCode == 202 {
+                        
+                    } else if statusCode == 401 {
+                        
+                    } else if statusCode == 500 {
+                        
+                    } else if statusCode == 501 {
+                        
+                    } else {
+                        
+                    }
+                    
                 }
                 
             }

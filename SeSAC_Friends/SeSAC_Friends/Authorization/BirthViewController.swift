@@ -169,6 +169,8 @@ class BirthViewController: UIViewController {
         monthTextField.textfield.inputView = pickerView
         dayTextField.textfield.inputView = pickerView
         
+        
+        
         pickerView.rx.date
             .subscribe(onNext: { newValue in
                 print(newValue)

@@ -253,11 +253,17 @@ class LoginConfirmViewController: UIViewController {
                     print("statusCode: \(statusCode)")
                     
                     DispatchQueue.main.async {
-                        //미가입 유저인 경우
-                        if statusCode == 201 {
+                        //기존 유저인 경우
+                        if statusCode == 200 {
+                            //루트 뷰 자체를 바꿔줌
+                            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                            windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: MainViewController())
+                            windowScene.windows.first?.makeKeyAndVisible()
+                            
+                        } else if statusCode == 201 {
+                            //미가입 유저인 경우
                             //닉네임 입력 화면으로 화면 전환!
                             let vc = NicknameViewController()
-                            
                             self.navigationController?.pushViewController(vc, animated: true)
                         }
                     }

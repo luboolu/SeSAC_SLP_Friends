@@ -12,6 +12,8 @@
 		DCA1AABE279DA7CA002194B4 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA1AABD279DA7CA002194B4 /* Endpoint.swift */; };
 		DCA1AAC0279E4531002194B4 /* AuthorizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA1AABF279E4531002194B4 /* AuthorizationViewModel.swift */; };
 		DCA1AAC3279E94D2002194B4 /* UserdefualtKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA1AAC2279E94D1002194B4 /* UserdefualtKey.swift */; };
+		DCDCC2DF279FD29500FB142B /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCC2DE279FD29500FB142B /* OnBoardingViewController.swift */; };
+		DCDCC2E1279FF27500FB142B /* OnBoardingTitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCC2E0279FF27500FB142B /* OnBoardingTitleCollectionViewCell.swift */; };
 		DCDE36632799A0010077847C /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = DCDE36622799A0010077847C /* Toast */; };
 		DCDE36652799A0300077847C /* Toast+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE36642799A0300077847C /* Toast+Extension.swift */; };
 		DCDE36672799B1440077847C /* LoginConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE36662799B1440077847C /* LoginConfirmViewController.swift */; };
@@ -50,6 +52,8 @@
 		DCA1AABD279DA7CA002194B4 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		DCA1AABF279E4531002194B4 /* AuthorizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewModel.swift; sourceTree = "<group>"; };
 		DCA1AAC2279E94D1002194B4 /* UserdefualtKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserdefualtKey.swift; sourceTree = "<group>"; };
+		DCDCC2DE279FD29500FB142B /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
+		DCDCC2E0279FF27500FB142B /* OnBoardingTitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingTitleCollectionViewCell.swift; sourceTree = "<group>"; };
 		DCDE36642799A0300077847C /* Toast+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Toast+Extension.swift"; sourceTree = "<group>"; };
 		DCDE36662799B1440077847C /* LoginConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginConfirmViewController.swift; sourceTree = "<group>"; };
 		DCDE36682799BE190077847C /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
@@ -107,6 +111,15 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		DCDCC2DD279FD27B00FB142B /* OnBoarding */ = {
+			isa = PBXGroup;
+			children = (
+				DCDCC2DE279FD29500FB142B /* OnBoardingViewController.swift */,
+				DCDCC2E0279FF27500FB142B /* OnBoardingTitleCollectionViewCell.swift */,
+			);
+			path = OnBoarding;
+			sourceTree = "<group>";
+		};
 		DCDE3670279C3A790077847C /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +147,7 @@
 		DCE2D1BA279694720018895F /* SeSAC_Friends */ = {
 			isa = PBXGroup;
 			children = (
+				DCDCC2DD279FD27B00FB142B /* OnBoarding */,
 				DCA1AABC279DA7BA002194B4 /* API */,
 				DCDE3670279C3A790077847C /* Main */,
 				DCE2D1EE27970DEC0018895F /* Authorization */,
@@ -303,6 +317,8 @@
 				DCE2D1F427979C020018895F /* MainTextFieldView.swift in Sources */,
 				DCDE366F279AB8920077847C /* GenderViewController.swift in Sources */,
 				DCE2D1D527969AB60018895F /* UserAuthentificationMessageViewController.swift in Sources */,
+				DCDCC2E1279FF27500FB142B /* OnBoardingTitleCollectionViewCell.swift in Sources */,
+				DCDCC2DF279FD29500FB142B /* OnBoardingViewController.swift in Sources */,
 				DCA1AAC3279E94D2002194B4 /* UserdefualtKey.swift in Sources */,
 				DCDE366B2799C0BD0077847C /* BirthViewController.swift in Sources */,
 				DCDE366D279A9A4D0077847C /* EmailViewController.swift in Sources */,

@@ -167,9 +167,7 @@ class AuthorizationViewModel {
                 //not defined error
             }
             
-            
-            
-            completion(-1)
+            completion(response.statusCode)
         }.resume()
         
     }
