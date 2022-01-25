@@ -8,6 +8,8 @@
 import UIKit
 
 import SnapKit
+import RxSwift
+import RxCocoa
 
 class OnBoardingViewController: UIViewController {
     
@@ -47,6 +49,7 @@ class OnBoardingViewController: UIViewController {
         
         setUp()
         setConstaints()
+        setButton()
     }
     
     func setUp() {
@@ -104,6 +107,22 @@ class OnBoardingViewController: UIViewController {
             make.height.equalTo(48)
         }
         
+    }
+    
+    func setButton() {
+        
+        startButton.rx.tap
+            .bind {
+                self.startButtonTapped()
+            }
+        
+    }
+    
+    func startButtonTapped() {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+        
+        windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: LoginViewController())
+        windowScene.windows.first?.makeKeyAndVisible()
     }
     
     
