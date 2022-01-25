@@ -14,6 +14,7 @@
 		DCA1AAC3279E94D2002194B4 /* UserdefualtKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA1AAC2279E94D1002194B4 /* UserdefualtKey.swift */; };
 		DCDCC2DF279FD29500FB142B /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCC2DE279FD29500FB142B /* OnBoardingViewController.swift */; };
 		DCDCC2E1279FF27500FB142B /* OnBoardingTitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCC2E0279FF27500FB142B /* OnBoardingTitleCollectionViewCell.swift */; };
+		DCDCC2E327A0332B00FB142B /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCC2E227A0332B00FB142B /* OnboardingView.swift */; };
 		DCDE36632799A0010077847C /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = DCDE36622799A0010077847C /* Toast */; };
 		DCDE36652799A0300077847C /* Toast+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE36642799A0300077847C /* Toast+Extension.swift */; };
 		DCDE36672799B1440077847C /* LoginConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE36662799B1440077847C /* LoginConfirmViewController.swift */; };
@@ -54,6 +55,7 @@
 		DCA1AAC2279E94D1002194B4 /* UserdefualtKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserdefualtKey.swift; sourceTree = "<group>"; };
 		DCDCC2DE279FD29500FB142B /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		DCDCC2E0279FF27500FB142B /* OnBoardingTitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingTitleCollectionViewCell.swift; sourceTree = "<group>"; };
+		DCDCC2E227A0332B00FB142B /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		DCDE36642799A0300077847C /* Toast+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Toast+Extension.swift"; sourceTree = "<group>"; };
 		DCDE36662799B1440077847C /* LoginConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginConfirmViewController.swift; sourceTree = "<group>"; };
 		DCDE36682799BE190077847C /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 			children = (
 				DCDCC2DE279FD29500FB142B /* OnBoardingViewController.swift */,
 				DCDCC2E0279FF27500FB142B /* OnBoardingTitleCollectionViewCell.swift */,
+				DCDCC2E227A0332B00FB142B /* OnboardingView.swift */,
 			);
 			path = OnBoarding;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 				DCDE36652799A0300077847C /* Toast+Extension.swift in Sources */,
 				DCA1AAC0279E4531002194B4 /* AuthorizationViewModel.swift in Sources */,
 				DCE2D1C0279694720018895F /* ViewController.swift in Sources */,
+				DCDCC2E327A0332B00FB142B /* OnboardingView.swift in Sources */,
 				DCDE36692799BE190077847C /* NicknameViewController.swift in Sources */,
 				DCE2D1DE2796C9D50018895F /* MainButtonStatus.swift in Sources */,
 				DCE2D1EB2796DB8C0018895F /* UIColor+Extension.swift in Sources */,

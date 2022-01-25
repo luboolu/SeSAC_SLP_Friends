@@ -56,5 +56,9 @@ extension UIFont {
     var caption_R10: UIFont {
         return UIFont(name: "NotoSansKR-Regular", size: 10)!
     }
+    
+    var Display2_R24: UIFont {
+        return UIFont(name: "NotoSansKR-Regular", size: 24)!
+    }
 
 }
