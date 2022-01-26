@@ -14,6 +14,7 @@
 		DC1873EE27A151E200DE4FBD /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1873ED27A151E200DE4FBD /* ProfileTableViewCell.swift */; };
 		DC1873F127A1930D00DE4FBD /* IconTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1873F027A1930D00DE4FBD /* IconTableViewCell.swift */; };
 		DC1873F327A1971900DE4FBD /* MyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1873F227A1971900DE4FBD /* MyInfoViewController.swift */; };
+		DC1873F527A19D2600DE4FBD /* CharactorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1873F427A19D2600DE4FBD /* CharactorView.swift */; };
 		DCA1AAB9279D7B4F002194B4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = DCA1AAB8279D7B4F002194B4 /* FirebaseAuth */; };
 		DCA1AABB279D7B4F002194B4 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = DCA1AABA279D7B4F002194B4 /* FirebaseMessaging */; };
 		DCA1AABE279DA7CA002194B4 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA1AABD279DA7CA002194B4 /* Endpoint.swift */; };
@@ -64,6 +65,7 @@
 		DC1873ED27A151E200DE4FBD /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		DC1873F027A1930D00DE4FBD /* IconTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconTableViewCell.swift; sourceTree = "<group>"; };
 		DC1873F227A1971900DE4FBD /* MyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewController.swift; sourceTree = "<group>"; };
+		DC1873F427A19D2600DE4FBD /* CharactorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactorView.swift; sourceTree = "<group>"; };
 		DCA1AABD279DA7CA002194B4 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		DCA1AABF279E4531002194B4 /* AuthorizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewModel.swift; sourceTree = "<group>"; };
 		DCA1AAC2279E94D1002194B4 /* UserdefualtKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserdefualtKey.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 			children = (
 				DC1873E827A1117A00DE4FBD /* MyPageViewController.swift */,
 				DC1873F227A1971900DE4FBD /* MyInfoViewController.swift */,
+				DC1873F427A19D2600DE4FBD /* CharactorView.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 				DCE2D1BC279694720018895F /* AppDelegate.swift in Sources */,
 				DCE2D1F72797F3320018895F /* MainTextFieldTestViewController.swift in Sources */,
 				DCE2D1F027970E000018895F /* LoginViewController.swift in Sources */,
+				DC1873F527A19D2600DE4FBD /* CharactorView.swift in Sources */,
 				DCE2D1DC2796A9080018895F /* MainButton.swift in Sources */,
 				DC1873F127A1930D00DE4FBD /* IconTableViewCell.swift in Sources */,
 				DCE2D1BE279694720018895F /* SceneDelegate.swift in Sources */,

@@ -11,6 +11,14 @@ import SnapKit
 
 class MyInfoViewController: UIViewController {
     
+    let tableView: UITableView = {
+        let tableView = UITableView()
+        
+        tableView.separatorStyle = .none
+        
+        return tableView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,14 +37,44 @@ class MyInfoViewController: UIViewController {
     
     func setUp() {
         view.backgroundColor = UIColor().white
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        view.addSubview(tableView)
     }
     
     func setConstraints() {
-        
+        tableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
         
     @objc func saveButtonClicked() {
         print(#function)
     }
         
+}
+
+extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else { return UITableViewCell()}
+        
+        let charactorView = CharactorView()
+        
+        charactorView.backgroundImage.image = UIImage(named: "sesac_background_1")
+        charactorView.charactorImage.image = UIImage(named: "sesac_face_1")
+        
+        
+        cell.addSubview(charactorView)
+        charactorView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        return cell
+    }
 }
