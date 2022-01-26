@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DC1873E527A1113200DE4FBD /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1873E427A1113200DE4FBD /* ShopViewController.swift */; };
+		DC1873E727A1115C00DE4FBD /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1873E627A1115C00DE4FBD /* FriendsViewController.swift */; };
+		DC1873E927A1117A00DE4FBD /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1873E827A1117A00DE4FBD /* MyPageViewController.swift */; };
+		DC1873EB27A1140E00DE4FBD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1873EA27A1140E00DE4FBD /* MainViewController.swift */; };
+		DC1873EE27A151E200DE4FBD /* ProfileMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1873ED27A151E200DE4FBD /* ProfileMenuView.swift */; };
 		DCA1AAB9279D7B4F002194B4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = DCA1AAB8279D7B4F002194B4 /* FirebaseAuth */; };
 		DCA1AABB279D7B4F002194B4 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = DCA1AABA279D7B4F002194B4 /* FirebaseMessaging */; };
 		DCA1AABE279DA7CA002194B4 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA1AABD279DA7CA002194B4 /* Endpoint.swift */; };
@@ -22,7 +27,7 @@
 		DCDE366B2799C0BD0077847C /* BirthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE366A2799C0BD0077847C /* BirthViewController.swift */; };
 		DCDE366D279A9A4D0077847C /* EmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE366C279A9A4C0077847C /* EmailViewController.swift */; };
 		DCDE366F279AB8920077847C /* GenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE366E279AB8920077847C /* GenderViewController.swift */; };
-		DCDE3672279C3A950077847C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE3671279C3A940077847C /* MainViewController.swift */; };
+		DCDE3672279C3A950077847C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE3671279C3A940077847C /* HomeViewController.swift */; };
 		DCDE3675279C44860077847C /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DCDE3674279C44860077847C /* IQKeyboardManagerSwift */; };
 		DCE2D1BC279694720018895F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1BB279694720018895F /* AppDelegate.swift */; };
 		DCE2D1BE279694720018895F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1BD279694720018895F /* SceneDelegate.swift */; };
@@ -50,6 +55,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DC1873E427A1113200DE4FBD /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
+		DC1873E627A1115C00DE4FBD /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
+		DC1873E827A1117A00DE4FBD /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		DC1873EA27A1140E00DE4FBD /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		DC1873ED27A151E200DE4FBD /* ProfileMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMenuView.swift; sourceTree = "<group>"; };
 		DCA1AABD279DA7CA002194B4 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		DCA1AABF279E4531002194B4 /* AuthorizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewModel.swift; sourceTree = "<group>"; };
 		DCA1AAC2279E94D1002194B4 /* UserdefualtKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserdefualtKey.swift; sourceTree = "<group>"; };
@@ -62,7 +72,7 @@
 		DCDE366A2799C0BD0077847C /* BirthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthViewController.swift; sourceTree = "<group>"; };
 		DCDE366C279A9A4C0077847C /* EmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewController.swift; sourceTree = "<group>"; };
 		DCDE366E279AB8920077847C /* GenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderViewController.swift; sourceTree = "<group>"; };
-		DCDE3671279C3A940077847C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		DCDE3671279C3A940077847C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		DCE2D1B8279694720018895F /* SeSAC_Friends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSAC_Friends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCE2D1BB279694720018895F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DCE2D1BD279694720018895F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -105,6 +115,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DC1873EC27A151CB00DE4FBD /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				DC1873E827A1117A00DE4FBD /* MyPageViewController.swift */,
+				DC1873ED27A151E200DE4FBD /* ProfileMenuView.swift */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
 		DCA1AABC279DA7BA002194B4 /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,7 +145,11 @@
 		DCDE3670279C3A790077847C /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				DCDE3671279C3A940077847C /* MainViewController.swift */,
+				DC1873EC27A151CB00DE4FBD /* MyPage */,
+				DC1873EA27A1140E00DE4FBD /* MainViewController.swift */,
+				DCDE3671279C3A940077847C /* HomeViewController.swift */,
+				DC1873E427A1113200DE4FBD /* ShopViewController.swift */,
+				DC1873E627A1115C00DE4FBD /* FriendsViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -316,7 +339,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DCDE3672279C3A950077847C /* MainViewController.swift in Sources */,
+				DCDE3672279C3A950077847C /* HomeViewController.swift in Sources */,
 				DCE2D1F427979C020018895F /* MainTextFieldView.swift in Sources */,
 				DCDE366F279AB8920077847C /* GenderViewController.swift in Sources */,
 				DCE2D1D527969AB60018895F /* UserAuthentificationMessageViewController.swift in Sources */,
@@ -328,10 +351,14 @@
 				DCDE36652799A0300077847C /* Toast+Extension.swift in Sources */,
 				DCA1AAC0279E4531002194B4 /* AuthorizationViewModel.swift in Sources */,
 				DCE2D1C0279694720018895F /* ViewController.swift in Sources */,
+				DC1873E527A1113200DE4FBD /* ShopViewController.swift in Sources */,
 				DCDCC2E327A0332B00FB142B /* OnboardingView.swift in Sources */,
 				DCDE36692799BE190077847C /* NicknameViewController.swift in Sources */,
 				DCE2D1DE2796C9D50018895F /* MainButtonStatus.swift in Sources */,
 				DCE2D1EB2796DB8C0018895F /* UIColor+Extension.swift in Sources */,
+				DC1873EE27A151E200DE4FBD /* ProfileMenuView.swift in Sources */,
+				DC1873EB27A1140E00DE4FBD /* MainViewController.swift in Sources */,
+				DC1873E727A1115C00DE4FBD /* FriendsViewController.swift in Sources */,
 				DCE2D1FA279809D40018895F /* MainButtonTestViewController.swift in Sources */,
 				DCDE36672799B1440077847C /* LoginConfirmViewController.swift in Sources */,
 				DCE2D1BC279694720018895F /* AppDelegate.swift in Sources */,
@@ -339,6 +366,7 @@
 				DCE2D1F027970E000018895F /* LoginViewController.swift in Sources */,
 				DCE2D1DC2796A9080018895F /* MainButton.swift in Sources */,
 				DCE2D1BE279694720018895F /* SceneDelegate.swift in Sources */,
+				DC1873E927A1117A00DE4FBD /* MyPageViewController.swift in Sources */,
 				DCE2D1E12796CCD30018895F /* MainTextFieldStatus.swift in Sources */,
 				DCE2D1ED2796FF950018895F /* UIFont+Extension.swift in Sources */,
 				DCA1AABE279DA7CA002194B4 /* Endpoint.swift in Sources */,

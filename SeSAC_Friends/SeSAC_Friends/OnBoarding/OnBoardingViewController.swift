@@ -43,10 +43,6 @@ class OnBoardingViewController: UIViewController {
         
         self.navigationController?.navigationBar.isHidden = true
         
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.register(OnBoardingTitleCollectionViewCell.self, forCellWithReuseIdentifier: "titleCell")
-        
         setUp()
         setConstaints()
         setButton()
@@ -54,6 +50,10 @@ class OnBoardingViewController: UIViewController {
     
     func setUp() {
         view.backgroundColor = UIColor().white
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(OnBoardingTitleCollectionViewCell.self, forCellWithReuseIdentifier: "titleCell")
 
         //collection view flow layout 설정
         let layout = UICollectionViewFlowLayout()
@@ -68,14 +68,13 @@ class OnBoardingViewController: UIViewController {
 
         collectionView.collectionViewLayout = layout
         collectionView.isPagingEnabled = true
-        collectionView.backgroundColor = UIColor().error
+        collectionView.backgroundColor = UIColor().white
         view.addSubview(collectionView)
         
         view.addSubview(pageControl)
         
         startButton.setTitle("시작하기", for: .normal)
         view.addSubview(startButton)
-        
         
     }
 
@@ -94,10 +93,7 @@ class OnBoardingViewController: UIViewController {
             make.top.equalTo(collectionView.snp.bottom).offset(50)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
-            //make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-16)
-            //make.height.equalTo(48)
         }
-        
         
         startButton.snp.makeConstraints { make in
             make.top.equalTo(pageControl.snp.bottom).offset(50)
@@ -125,7 +121,6 @@ class OnBoardingViewController: UIViewController {
         windowScene.windows.first?.makeKeyAndVisible()
     }
     
-    
 }
 
 extension OnBoardingViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -137,8 +132,6 @@ extension OnBoardingViewController: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "titleCell", for: indexPath)
-
-        //print(indexPath)
         let customView = OnboardingView()
         
         if indexPath.row == 0 {
@@ -146,18 +139,22 @@ extension OnBoardingViewController: UICollectionViewDelegate, UICollectionViewDa
             customView.titleLabel.text = "위치 기반으로 빠르게\n주위 친구를 확인"
             
             let attributedString = NSMutableAttributedString(string: customView.titleLabel.text!)
+            
             attributedString.addAttribute(.foregroundColor, value: UIColor().green, range: (customView.titleLabel.text! as NSString).range(of:"위치 기반"))
             customView.titleLabel.attributedText = attributedString
-            
             customView.imageView.image = UIImage(named: "onboarding_img1")
+            
         } else if indexPath.row == 1 {
 
             customView.titleLabel.text = "관심사가 같은 친구를\n찾을 수 있어요"
+            
             let attributedString = NSMutableAttributedString(string: customView.titleLabel.text!)
+            
             attributedString.addAttribute(.foregroundColor, value: UIColor().green, range: (customView.titleLabel.text! as NSString).range(of:"관심사가 같은 친구"))
             customView.titleLabel.attributedText = attributedString
             
             customView.imageView.image = UIImage(named: "onboarding_img2")
+            
         } else {
 
             customView.titleLabel.text = "SeSAC Friends"
@@ -169,28 +166,15 @@ extension OnBoardingViewController: UICollectionViewDelegate, UICollectionViewDa
         customView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
 
         return cell
     }
     
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath)
-    }
-    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        //collection view가 스크롤될 때, pageControl 또한 바뀌도록 함!
         if fmod(scrollView.contentOffset.x, scrollView.frame.maxX) == 0 { // Switch the location of the page.
             pageControl.currentPage = Int(scrollView.contentOffset.x / scrollView.frame.maxX)
-            
         }
-
     }
-
     
-   
 }
-
-//activity indicator?!
-//page controll
-

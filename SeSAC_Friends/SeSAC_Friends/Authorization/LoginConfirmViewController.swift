@@ -43,7 +43,7 @@ class LoginConfirmViewController: UIViewController {
     let authValidTime: UILabel = {
         let label = UILabel()
         
-        label.text = "05:00"
+        label.text = "01:00"
         label.textColor = UIColor().green
         label.font = UIFont().Title3_M14
         
@@ -56,7 +56,7 @@ class LoginConfirmViewController: UIViewController {
     
     var authCode: String?
     var timer: Timer?
-    var timerNum: Int = 299
+    var timerNum: Int = 60
     
     let disposeBag = DisposeBag()
     let toastStyle = ToastStyle()
@@ -83,8 +83,8 @@ class LoginConfirmViewController: UIViewController {
         print(UserDefaults.standard.string(forKey: UserdefaultKey.fcmToken.string) ?? "")
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         
         if timer != nil && timer!.isValid {
             timer!.invalidate()
@@ -156,7 +156,7 @@ class LoginConfirmViewController: UIViewController {
         }
      
         //타이머 사용값 초기화
-        timerNum = 300
+        timerNum = 60
         //1초 간격 타이머 시작
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerCallback), userInfo: nil, repeats: true)
 

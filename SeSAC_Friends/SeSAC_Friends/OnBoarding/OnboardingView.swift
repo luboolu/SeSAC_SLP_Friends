@@ -49,7 +49,7 @@ class OnboardingView: UIView {
     
     func setConstraints() {
         titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(72)
+            make.top.equalToSuperview().offset(140)
             make.centerX.equalToSuperview()
             make.height.equalTo(76)
         }
