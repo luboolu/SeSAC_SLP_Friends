@@ -9,14 +9,17 @@ import UIKit
 
 import SnapKit
 
-class ProfileMenuView: UIView {
+class ProfileTableViewCell: UITableViewCell {
     
     let profileImage: UIImageView = {
         let imageView = UIImageView()
         
         imageView.image = UIImage(named: "sesac_color")
-        imageView.layer.borderColor = UIColor().gray1.cgColor
-        imageView.layer.borderWidth = 1
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 0.5 * 50
+        imageView.layer.borderColor = UIColor().gray3.cgColor
+        imageView.layer.borderWidth = 2
+        imageView.contentMode = .scaleAspectFit
         
         return imageView
     }()
@@ -38,41 +41,42 @@ class ProfileMenuView: UIView {
         return button
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUp()
         setConstraints()
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError("init(coder:) has not been impl")
     }
     
     func setUp() {
-        self.addSubview(profileImage)
-        self.addSubview(nicknameLabel)
-        self.addSubview(detailButton)
+        contentView.addSubview(profileImage)
+        contentView.addSubview(nicknameLabel)
+        contentView.addSubview(detailButton)
+        
+        detailButton.layer.zPosition = 999
     }
     
     func setConstraints() {
         profileImage.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.leading.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview().offset(15)
             make.width.equalTo(50)
             make.height.equalTo(profileImage.snp.width).multipliedBy(1)
         }
         
         nicknameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview()
+            make.centerY.equalToSuperview()
             make.leading.equalTo(profileImage.snp.trailing).offset(13)
-            make.height.equalTo(50)
+            //make.height.equalTo(50)
         }
         
         detailButton.snp.makeConstraints { make in
-            make.top.equalToSuperview()
+            make.centerY.equalToSuperview()
             make.leading.equalTo(nicknameLabel.snp.trailing).offset(13)
-            make.trailing.equalToSuperview()
+            make.trailing.equalToSuperview().offset(-15)
             make.width.equalTo(15)
         }
     }

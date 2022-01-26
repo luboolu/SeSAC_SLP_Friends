@@ -15,7 +15,6 @@ class MyPageViewController: UIViewController {
     let tableView: UITableView = {
         let tableView = UITableView()
         
-        tableView.backgroundColor = UIColor().error
         tableView.separatorStyle = .none
         
         return tableView
@@ -29,22 +28,23 @@ class MyPageViewController: UIViewController {
     }
     
     let menuList = ["공지사항", "자주 묻는 질문", "1:1 문의", "알림 설정", "이용 약관"]
+    let menuIconList = ["notice", "faq", "qna" ,"bell", "permit"]
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.navigationBar.tintColor = UIColor().black
+        self.navigationController?.navigationBar.topItem?.title = "내정보"
     }
     
     func setUp() {
-        self.navigationController?.navigationBar.tintColor = UIColor().black
-        self.navigationController?.navigationBar.topItem?.title = "내정보"
-        
         view.backgroundColor = UIColor().white
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(IconTableViewCell.self, forCellReuseIdentifier: "IconTableViewCell")
+        tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: "ProfileTableViewCell")
         view.addSubview(tableView)
     }
     
@@ -57,6 +57,11 @@ class MyPageViewController: UIViewController {
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
+    }
+    
+    
+    @objc func profileDetailButtonClicked() {
+        print(#function)
     }
 }
 
@@ -74,31 +79,45 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        <#code#>
-//    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return 100
+        } else {
+            return 72
+        }
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else { return UITableViewCell()}
+        
         
         if indexPath.section == 0 {
-            let profile = ProfileMenuView()
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileTableViewCell") as? ProfileTableViewCell else { return UITableViewCell()}
             
-            profile.nicknameLabel.text = "새싹이"
+            cell.nicknameLabel.text = "새싹이"
+            cell.detailButton.addTarget(self, action: #selector(profileDetailButtonClicked), for: .touchUpInside)
             
-            cell.addSubview(profile)
-            profile.snp.makeConstraints { make in
-                make.edges.equalToSuperview()
-            }
+            return cell
         } else {
-            cell.textLabel?.text = "\(self.menuList[indexPath.row])"
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "IconTableViewCell") as? IconTableViewCell else { return UITableViewCell()}
+            
+            cell.icon.image = UIImage(named: "\(self.menuIconList[indexPath.row])")
+            cell.label.text = "\(self.menuList[indexPath.row])"
+            
+            return cell
         }
         
-        return cell
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        if indexPath.section == 0 {
+            let vc = MyInfoViewController()
+            
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
     }
     
     

@@ -11,7 +11,9 @@
 		DC1873E727A1115C00DE4FBD /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1873E627A1115C00DE4FBD /* FriendsViewController.swift */; };
 		DC1873E927A1117A00DE4FBD /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1873E827A1117A00DE4FBD /* MyPageViewController.swift */; };
 		DC1873EB27A1140E00DE4FBD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1873EA27A1140E00DE4FBD /* MainViewController.swift */; };
-		DC1873EE27A151E200DE4FBD /* ProfileMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1873ED27A151E200DE4FBD /* ProfileMenuView.swift */; };
+		DC1873EE27A151E200DE4FBD /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1873ED27A151E200DE4FBD /* ProfileTableViewCell.swift */; };
+		DC1873F127A1930D00DE4FBD /* IconTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1873F027A1930D00DE4FBD /* IconTableViewCell.swift */; };
+		DC1873F327A1971900DE4FBD /* MyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1873F227A1971900DE4FBD /* MyInfoViewController.swift */; };
 		DCA1AAB9279D7B4F002194B4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = DCA1AAB8279D7B4F002194B4 /* FirebaseAuth */; };
 		DCA1AABB279D7B4F002194B4 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = DCA1AABA279D7B4F002194B4 /* FirebaseMessaging */; };
 		DCA1AABE279DA7CA002194B4 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA1AABD279DA7CA002194B4 /* Endpoint.swift */; };
@@ -59,7 +61,9 @@
 		DC1873E627A1115C00DE4FBD /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		DC1873E827A1117A00DE4FBD /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		DC1873EA27A1140E00DE4FBD /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		DC1873ED27A151E200DE4FBD /* ProfileMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMenuView.swift; sourceTree = "<group>"; };
+		DC1873ED27A151E200DE4FBD /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		DC1873F027A1930D00DE4FBD /* IconTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconTableViewCell.swift; sourceTree = "<group>"; };
+		DC1873F227A1971900DE4FBD /* MyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewController.swift; sourceTree = "<group>"; };
 		DCA1AABD279DA7CA002194B4 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		DCA1AABF279E4531002194B4 /* AuthorizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewModel.swift; sourceTree = "<group>"; };
 		DCA1AAC2279E94D1002194B4 /* UserdefualtKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserdefualtKey.swift; sourceTree = "<group>"; };
@@ -119,9 +123,18 @@
 			isa = PBXGroup;
 			children = (
 				DC1873E827A1117A00DE4FBD /* MyPageViewController.swift */,
-				DC1873ED27A151E200DE4FBD /* ProfileMenuView.swift */,
+				DC1873F227A1971900DE4FBD /* MyInfoViewController.swift */,
 			);
 			path = MyPage;
+			sourceTree = "<group>";
+		};
+		DC1873EF27A192F300DE4FBD /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				DC1873ED27A151E200DE4FBD /* ProfileTableViewCell.swift */,
+				DC1873F027A1930D00DE4FBD /* IconTableViewCell.swift */,
+			);
+			path = TableViewCell;
 			sourceTree = "<group>";
 		};
 		DCA1AABC279DA7BA002194B4 /* API */ = {
@@ -173,6 +186,7 @@
 		DCE2D1BA279694720018895F /* SeSAC_Friends */ = {
 			isa = PBXGroup;
 			children = (
+				DC1873EF27A192F300DE4FBD /* TableViewCell */,
 				DCDCC2DD279FD27B00FB142B /* OnBoarding */,
 				DCA1AABC279DA7BA002194B4 /* API */,
 				DCDE3670279C3A790077847C /* Main */,
@@ -356,15 +370,17 @@
 				DCDE36692799BE190077847C /* NicknameViewController.swift in Sources */,
 				DCE2D1DE2796C9D50018895F /* MainButtonStatus.swift in Sources */,
 				DCE2D1EB2796DB8C0018895F /* UIColor+Extension.swift in Sources */,
-				DC1873EE27A151E200DE4FBD /* ProfileMenuView.swift in Sources */,
+				DC1873EE27A151E200DE4FBD /* ProfileTableViewCell.swift in Sources */,
 				DC1873EB27A1140E00DE4FBD /* MainViewController.swift in Sources */,
 				DC1873E727A1115C00DE4FBD /* FriendsViewController.swift in Sources */,
+				DC1873F327A1971900DE4FBD /* MyInfoViewController.swift in Sources */,
 				DCE2D1FA279809D40018895F /* MainButtonTestViewController.swift in Sources */,
 				DCDE36672799B1440077847C /* LoginConfirmViewController.swift in Sources */,
 				DCE2D1BC279694720018895F /* AppDelegate.swift in Sources */,
 				DCE2D1F72797F3320018895F /* MainTextFieldTestViewController.swift in Sources */,
 				DCE2D1F027970E000018895F /* LoginViewController.swift in Sources */,
 				DCE2D1DC2796A9080018895F /* MainButton.swift in Sources */,
+				DC1873F127A1930D00DE4FBD /* IconTableViewCell.swift in Sources */,
 				DCE2D1BE279694720018895F /* SceneDelegate.swift in Sources */,
 				DC1873E927A1117A00DE4FBD /* MyPageViewController.swift in Sources */,
 				DCE2D1E12796CCD30018895F /* MainTextFieldStatus.swift in Sources */,
