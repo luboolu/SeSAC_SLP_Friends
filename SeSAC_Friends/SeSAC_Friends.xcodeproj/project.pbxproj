@@ -23,7 +23,11 @@
 		DC18740127A2653B00DE4FBD /* BirthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18740027A2653B00DE4FBD /* BirthView.swift */; };
 		DC18740327A266CF00DE4FBD /* EmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18740227A266CF00DE4FBD /* EmailView.swift */; };
 		DC18740527A267EF00DE4FBD /* GenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18740427A267EF00DE4FBD /* GenderView.swift */; };
-		DC18740727A2729700DE4FBD /* GenderSelectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18740627A2729700DE4FBD /* GenderSelectTableViewCell.swift */; };
+		DC18740727A2729700DE4FBD /* TwoButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18740627A2729700DE4FBD /* TwoButtonTableViewCell.swift */; };
+		DC18740927A2CE9400DE4FBD /* TextfieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18740827A2CE9300DE4FBD /* TextfieldTableViewCell.swift */; };
+		DC18740B27A2D53500DE4FBD /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18740A27A2D53500DE4FBD /* SwitchTableViewCell.swift */; };
+		DC18740D27A2D66200DE4FBD /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18740C27A2D66200DE4FBD /* LabelTableViewCell.swift */; };
+		DC18740F27A2D7B000DE4FBD /* DoubleSliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18740E27A2D7AF00DE4FBD /* DoubleSliderTableViewCell.swift */; };
 		DCA1AAB9279D7B4F002194B4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = DCA1AAB8279D7B4F002194B4 /* FirebaseAuth */; };
 		DCA1AABB279D7B4F002194B4 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = DCA1AABA279D7B4F002194B4 /* FirebaseMessaging */; };
 		DCA1AABE279DA7CA002194B4 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA1AABD279DA7CA002194B4 /* Endpoint.swift */; };
@@ -64,6 +68,7 @@
 		DCE2D1FA279809D40018895F /* MainButtonTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1F9279809D40018895F /* MainButtonTestViewController.swift */; };
 		DCE2D20027985D5F0018895F /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = DCE2D1FF27985D5F0018895F /* RxCocoa */; };
 		DCE2D20227985D5F0018895F /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DCE2D20127985D5F0018895F /* RxSwift */; };
+		DCE678E127A2DC0D00ACB1A7 /* MultiSlider in Frameworks */ = {isa = PBXBuildFile; productRef = DCE678E027A2DC0D00ACB1A7 /* MultiSlider */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,7 +88,11 @@
 		DC18740027A2653B00DE4FBD /* BirthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthView.swift; sourceTree = "<group>"; };
 		DC18740227A266CF00DE4FBD /* EmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailView.swift; sourceTree = "<group>"; };
 		DC18740427A267EF00DE4FBD /* GenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderView.swift; sourceTree = "<group>"; };
-		DC18740627A2729700DE4FBD /* GenderSelectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSelectTableViewCell.swift; sourceTree = "<group>"; };
+		DC18740627A2729700DE4FBD /* TwoButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoButtonTableViewCell.swift; sourceTree = "<group>"; };
+		DC18740827A2CE9300DE4FBD /* TextfieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextfieldTableViewCell.swift; sourceTree = "<group>"; };
+		DC18740A27A2D53500DE4FBD /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
+		DC18740C27A2D66200DE4FBD /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
+		DC18740E27A2D7AF00DE4FBD /* DoubleSliderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleSliderTableViewCell.swift; sourceTree = "<group>"; };
 		DCA1AABD279DA7CA002194B4 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		DCA1AABF279E4531002194B4 /* AuthorizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewModel.swift; sourceTree = "<group>"; };
 		DCA1AAC2279E94D1002194B4 /* UserdefualtKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserdefualtKey.swift; sourceTree = "<group>"; };
@@ -127,6 +136,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCE2D20027985D5F0018895F /* RxCocoa in Frameworks */,
+				DCE678E127A2DC0D00ACB1A7 /* MultiSlider in Frameworks */,
 				DCA1AAB9279D7B4F002194B4 /* FirebaseAuth in Frameworks */,
 				DCA1AABB279D7B4F002194B4 /* FirebaseMessaging in Frameworks */,
 				DCE2D20227985D5F0018895F /* RxSwift in Frameworks */,
@@ -155,7 +165,11 @@
 			children = (
 				DC1873ED27A151E200DE4FBD /* ProfileTableViewCell.swift */,
 				DC1873F027A1930D00DE4FBD /* IconTableViewCell.swift */,
-				DC18740627A2729700DE4FBD /* GenderSelectTableViewCell.swift */,
+				DC18740627A2729700DE4FBD /* TwoButtonTableViewCell.swift */,
+				DC18740827A2CE9300DE4FBD /* TextfieldTableViewCell.swift */,
+				DC18740C27A2D66200DE4FBD /* LabelTableViewCell.swift */,
+				DC18740A27A2D53500DE4FBD /* SwitchTableViewCell.swift */,
+				DC18740E27A2D7AF00DE4FBD /* DoubleSliderTableViewCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -317,6 +331,7 @@
 				DCDE3674279C44860077847C /* IQKeyboardManagerSwift */,
 				DCA1AAB8279D7B4F002194B4 /* FirebaseAuth */,
 				DCA1AABA279D7B4F002194B4 /* FirebaseMessaging */,
+				DCE678E027A2DC0D00ACB1A7 /* MultiSlider */,
 			);
 			productName = SeSAC_Friends;
 			productReference = DCE2D1B8279694720018895F /* SeSAC_Friends.app */;
@@ -352,6 +367,7 @@
 				DCDE36612799A0010077847C /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				DCDE3673279C44860077847C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				DCA1AAB7279D7B4F002194B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				DCE678DF27A2DC0D00ACB1A7 /* XCRemoteSwiftPackageReference "MultiSlider" */,
 			);
 			productRefGroup = DCE2D1B9279694720018895F /* Products */;
 			projectDirPath = "";
@@ -406,6 +422,7 @@
 				DCE2D1EB2796DB8C0018895F /* UIColor+Extension.swift in Sources */,
 				DC1873EE27A151E200DE4FBD /* ProfileTableViewCell.swift in Sources */,
 				DC1873EB27A1140E00DE4FBD /* MainViewController.swift in Sources */,
+				DC18740927A2CE9400DE4FBD /* TextfieldTableViewCell.swift in Sources */,
 				DC1873E727A1115C00DE4FBD /* FriendsViewController.swift in Sources */,
 				DC1873F327A1971900DE4FBD /* MyInfoViewController.swift in Sources */,
 				DCE2D1FA279809D40018895F /* MainButtonTestViewController.swift in Sources */,
@@ -417,14 +434,17 @@
 				DC1873F527A19D2600DE4FBD /* CharactorView.swift in Sources */,
 				DC1873FF27A2648700DE4FBD /* NicknameView.swift in Sources */,
 				DCE2D1DC2796A9080018895F /* MainButton.swift in Sources */,
-				DC18740727A2729700DE4FBD /* GenderSelectTableViewCell.swift in Sources */,
+				DC18740727A2729700DE4FBD /* TwoButtonTableViewCell.swift in Sources */,
 				DC1873F127A1930D00DE4FBD /* IconTableViewCell.swift in Sources */,
 				DCE2D1BE279694720018895F /* SceneDelegate.swift in Sources */,
 				DC1873E927A1117A00DE4FBD /* MyPageViewController.swift in Sources */,
+				DC18740D27A2D66200DE4FBD /* LabelTableViewCell.swift in Sources */,
 				DCE2D1E12796CCD30018895F /* MainTextFieldStatus.swift in Sources */,
 				DC18740527A267EF00DE4FBD /* GenderView.swift in Sources */,
 				DCE2D1ED2796FF950018895F /* UIFont+Extension.swift in Sources */,
+				DC18740F27A2D7B000DE4FBD /* DoubleSliderTableViewCell.swift in Sources */,
 				DC1873F927A25EF000DE4FBD /* ViewRepresentable.swift in Sources */,
+				DC18740B27A2D53500DE4FBD /* SwitchTableViewCell.swift in Sources */,
 				DCA1AABE279DA7CA002194B4 /* Endpoint.swift in Sources */,
 				DCE2D1E32796D5310018895F /* ChatTextFieldStatus.swift in Sources */,
 			);
@@ -686,6 +706,14 @@
 				kind = branch;
 			};
 		};
+		DCE678DF27A2DC0D00ACB1A7 /* XCRemoteSwiftPackageReference "MultiSlider" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/yonat/MultiSlider.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -723,6 +751,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DCE2D1FE27985D5F0018895F /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
+		};
+		DCE678E027A2DC0D00ACB1A7 /* MultiSlider */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCE678DF27A2DC0D00ACB1A7 /* XCRemoteSwiftPackageReference "MultiSlider" */;
+			productName = MultiSlider;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

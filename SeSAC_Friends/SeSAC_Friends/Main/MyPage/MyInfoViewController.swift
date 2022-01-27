@@ -9,6 +9,7 @@ import UIKit
 
 import RxCocoa
 import RxSwift
+import MultiSlider
 
 class MyInfoViewController: UIViewController {
     
@@ -43,7 +44,12 @@ class MyInfoViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(GenderSelectTableViewCell.self, forCellReuseIdentifier: "GenderSelectTableViewCell")
+        tableView.register(TwoButtonTableViewCell.self, forCellReuseIdentifier: "TwoButtonTableViewCell")
+        tableView.register(TextfieldTableViewCell.self, forCellReuseIdentifier: "TextfieldTableViewCell")
+        tableView.register(SwitchTableViewCell.self, forCellReuseIdentifier: "SwitchTableViewCell")
+        tableView.register(LabelTableViewCell.self, forCellReuseIdentifier: "LabelTableViewCell")
+        tableView.register(DoubleSliderTableViewCell.self, forCellReuseIdentifier: "DoubleSliderTableViewCell")
+        
         view.addSubview(tableView)
     }
     
@@ -57,8 +63,10 @@ class MyInfoViewController: UIViewController {
         print(#function)
     }
     
-
-        
+    @objc func sliderChanged(_ slider: MultiSlider) {
+        print("thumb \(slider.draggedThumbIndex) moved")
+        print("now thumbs are at \(slider.value)") // e.g., [1.0, 4.5, 5.0]
+    }
 }
 
 extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
@@ -79,14 +87,21 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 72
+        
+        if indexPath.row == 3 {
+            return 120
+        } else {
+            return 72
+        }
+
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row == 0 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "GenderSelectTableViewCell") as? GenderSelectTableViewCell else { return UITableViewCell()}
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "TwoButtonTableViewCell") as? TwoButtonTableViewCell else { return UITableViewCell()}
             
+            cell.selectionStyle = .none
             cell.label.text = "내 성별"
 
             cell.manButton.rx.tap
@@ -122,12 +137,42 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             
             return cell
-        } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "GenderSelectTableViewCell") as? GenderSelectTableViewCell else { return UITableViewCell()}
             
+        }  else if indexPath.row == 1 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "TextfieldTableViewCell") as? TextfieldTableViewCell else { return UITableViewCell()}
+            
+            cell.selectionStyle = .none
             cell.label.text = "자주 하는 취미"
+            cell.textfield.textfield.placeholder = "취미를 입력해주세요"
             
             return cell
+            
+        } else if indexPath.row == 2 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchTableViewCell") as? SwitchTableViewCell else { return UITableViewCell()}
+            
+            cell.selectionStyle = .none
+            cell.label.text = "내 번호 검색 허용"
+            
+            return cell
+            
+        }  else if indexPath.row == 3 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "DoubleSliderTableViewCell") as? DoubleSliderTableViewCell else { return UITableViewCell()}
+            
+            cell.selectionStyle = .none
+            cell.label.text = "상대방 연령대"
+            cell.ageLabel.text = "18-35"
+            
+            cell.slider.addTarget(self, action: #selector(sliderChanged), for: .valueChanged)
+            
+            return cell
+            
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "LabelTableViewCell") as? LabelTableViewCell else { return UITableViewCell()}
+            
+            cell.label.text = "회원탈퇴"
+            
+            return cell
+            
         }
 
     }
@@ -135,4 +180,6 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GenderSelectTableViewCell: UITableViewCell, ViewRepresentable {
+class TwoButtonTableViewCell: UITableViewCell, ViewRepresentable {
 
     let label: UILabel = {
         let label = UILabel()
