@@ -12,13 +12,11 @@ import SwiftUI
 
 class MyPageViewController: UIViewController {
     
-    let tableView: UITableView = {
-        let tableView = UITableView()
-        
-        tableView.separatorStyle = .none
-        
-        return tableView
-    }()
+    let mainView = MyPageView()
+    
+    override func loadView() {
+        self.view = mainView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,21 +39,16 @@ class MyPageViewController: UIViewController {
     func setUp() {
         view.backgroundColor = UIColor().white
         
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(IconTableViewCell.self, forCellReuseIdentifier: "IconTableViewCell")
-        tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: "ProfileTableViewCell")
-        view.addSubview(tableView)
+        mainView.tableView.delegate = self
+        mainView.tableView.dataSource = self
+        mainView.tableView.register(IconTableViewCell.self, forCellReuseIdentifier: "IconTableViewCell")
+        mainView.tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: "ProfileTableViewCell")
+
     }
     
     func setConstraints() {
         
-        tableView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.bottom.equalTo(view.safeAreaLayoutGuide)
-        }
+
         
     }
     
@@ -93,6 +86,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileTableViewCell") as? ProfileTableViewCell else { return UITableViewCell()}
             
+            cell.profileImage.image = UIImage(named: "sesac_face_1")
             cell.nicknameLabel.text = "새싹이"
             cell.detailButton.addTarget(self, action: #selector(profileDetailButtonClicked), for: .touchUpInside)
             

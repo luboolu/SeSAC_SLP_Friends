@@ -109,8 +109,7 @@ class LoginViewController: UIViewController {
     }
     
     func setButton() {
-        //authMessageButton.addTarget(self, action: #selector(authMessageButtonClicked), for: .touchUpInside)
-        
+
         authMessageButton.rx.tap
             .bind {
                 print("button clicked")
@@ -155,14 +154,12 @@ class LoginViewController: UIViewController {
         textfieldView.textfield.rx.text
             .subscribe(onNext: { newValue in
                 self.trimNumber(newValue ?? "")
-                print(newValue)
             }).disposed(by: disposeBag)
         
         //textfield가 활성화되는 시점을 감지
         textfieldView.textfield.rx.controlEvent([.editingDidBegin])
             .asObservable()
             .subscribe(onNext: { _ in
-                print("textfield editing start")
                 self.textfieldView.status = .active
                 self.textfieldView.textfield.placeholder = "휴대폰 번호(- 없이 숫자만 입력)"
             }).disposed(by: disposeBag)
@@ -171,7 +168,6 @@ class LoginViewController: UIViewController {
         textfieldView.textfield.rx.controlEvent([.editingDidEnd])
             .asObservable()
             .subscribe(onNext: { _ in
-                print("textfield editing end")
                 self.textfieldView.status = .inactive
                 self.textfieldView.textfield.placeholder = "휴대폰 번호(- 없이 숫자만 입력)"
             }).disposed(by: disposeBag)
@@ -187,7 +183,6 @@ class LoginViewController: UIViewController {
         
         isNumberValid.skip(1).subscribe(onNext: { value in
             if value == true {
-                print("유효성 검사 성공: \(value)")
                 self.isValid = true
                 self.authMessageButton.status = .fill
             } else {
@@ -197,11 +192,7 @@ class LoginViewController: UIViewController {
         }).disposed(by: disposeBag)
 
     }
-    
-    @objc func authMessageButtonClicked() {
-        print(#function)
-    }
-    
+
     func trimNumber(_ number: String) {
 
         if number.count > 0 {
