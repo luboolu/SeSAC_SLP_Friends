@@ -69,6 +69,8 @@
 		DCE2D20027985D5F0018895F /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = DCE2D1FF27985D5F0018895F /* RxCocoa */; };
 		DCE2D20227985D5F0018895F /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DCE2D20127985D5F0018895F /* RxSwift */; };
 		DCE678E127A2DC0D00ACB1A7 /* MultiSlider in Frameworks */ = {isa = PBXBuildFile; productRef = DCE678E027A2DC0D00ACB1A7 /* MultiSlider */; };
+		DCE678E327A2E61800ACB1A7 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE678E227A2E61800ACB1A7 /* TableViewCell.swift */; };
+		DCE678E527A2EA4D00ACB1A7 /* CardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE678E427A2EA4D00ACB1A7 /* CardTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -128,6 +130,8 @@
 		DCE2D1F327979C010018895F /* MainTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTextFieldView.swift; sourceTree = "<group>"; };
 		DCE2D1F52797CD680018895F /* MainTextFieldTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTextFieldTestViewController.swift; sourceTree = "<group>"; };
 		DCE2D1F9279809D40018895F /* MainButtonTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainButtonTestViewController.swift; sourceTree = "<group>"; };
+		DCE678E227A2E61800ACB1A7 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		DCE678E427A2EA4D00ACB1A7 /* CardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +167,7 @@
 		DC1873EF27A192F300DE4FBD /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				DCE678E227A2E61800ACB1A7 /* TableViewCell.swift */,
 				DC1873ED27A151E200DE4FBD /* ProfileTableViewCell.swift */,
 				DC1873F027A1930D00DE4FBD /* IconTableViewCell.swift */,
 				DC18740627A2729700DE4FBD /* TwoButtonTableViewCell.swift */,
@@ -170,6 +175,7 @@
 				DC18740C27A2D66200DE4FBD /* LabelTableViewCell.swift */,
 				DC18740A27A2D53500DE4FBD /* SwitchTableViewCell.swift */,
 				DC18740E27A2D7AF00DE4FBD /* DoubleSliderTableViewCell.swift */,
+				DCE678E427A2EA4D00ACB1A7 /* CardTableViewCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -404,6 +410,7 @@
 				DCDE366F279AB8920077847C /* GenderViewController.swift in Sources */,
 				DCE2D1D527969AB60018895F /* UserAuthentificationMessageViewController.swift in Sources */,
 				DCDCC2E1279FF27500FB142B /* OnBoardingTitleCollectionViewCell.swift in Sources */,
+				DCE678E527A2EA4D00ACB1A7 /* CardTableViewCell.swift in Sources */,
 				DC1873F727A2466400DE4FBD /* MyPageView.swift in Sources */,
 				DCDCC2DF279FD29500FB142B /* OnBoardingViewController.swift in Sources */,
 				DCA1AAC3279E94D2002194B4 /* UserdefualtKey.swift in Sources */,
@@ -416,6 +423,7 @@
 				DC1873E527A1113200DE4FBD /* ShopViewController.swift in Sources */,
 				DCDCC2E327A0332B00FB142B /* OnboardingView.swift in Sources */,
 				DCDE36692799BE190077847C /* NicknameViewController.swift in Sources */,
+				DCE678E327A2E61800ACB1A7 /* TableViewCell.swift in Sources */,
 				DC18740327A266CF00DE4FBD /* EmailView.swift in Sources */,
 				DC1873FB27A2603000DE4FBD /* LoginView.swift in Sources */,
 				DCE2D1DE2796C9D50018895F /* MainButtonStatus.swift in Sources */,
