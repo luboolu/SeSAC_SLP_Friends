@@ -14,8 +14,9 @@ class CharactorView: UIView {
     let backgroundImage: UIImageView = {
         let imageView = UIImageView()
         
-        imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 5
+        imageView.contentMode = .scaleAspectFit
+//        imageView.clipsToBounds = true
+//        imageView.layer.cornerRadius = 20
         
         return imageView
     }()
@@ -34,10 +35,11 @@ class CharactorView: UIView {
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError("init(coder:) has not been impl")
     }
     
     func setUp() {
+        
         self.addSubview(backgroundImage)
         self.addSubview(charactorImage)
     }

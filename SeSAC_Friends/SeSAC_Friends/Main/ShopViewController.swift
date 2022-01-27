@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-class ShowViewController: UIViewController {
+class ShopViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -12,166 +12,33 @@ import RxSwift
 import Toast
 
 class BirthViewController: UIViewController {
-    
-    let guideLabel1: UILabel = {
-        let label = UILabel()
-        
-        label.text = "생년월일을 알려주세요"
-        label.textColor = UIColor().black
-        label.font = UIFont().Display1_R20
-        label.textAlignment = .center
-        
-        return label
-    }()
-    
-    let yearTextField = MainTextFieldView()
-    let yearLabel: UILabel = {
-        let label = UILabel()
-        
-        label.text = "년"
-        label.textColor = UIColor().black
-        label.font = UIFont().Title2_R16
-        label.textAlignment = .center
-        
-        return label
-    }()
-    
-    let monthTextField = MainTextFieldView()
-    let monthLabel: UILabel = {
-        let label = UILabel()
-        
-        label.text = "월"
-        label.textColor = UIColor().black
-        label.font = UIFont().Title2_R16
-        label.textAlignment = .center
-        
-        return label
-    }()
-    
-    let dayTextField = MainTextFieldView()
-    let dayLabel: UILabel = {
-        let label = UILabel()
-        
-        label.text = "일"
-        label.textColor = UIColor().black
-        label.font = UIFont().Title2_R16
-        label.textAlignment = .center
-        
-        return label
-    }()
-    
-    let stackview: UIStackView = {
-        let stackview = UIStackView()
-        
-        stackview.axis = .horizontal
-        stackview.spacing = 0
-        stackview.distribution = .fillEqually
-        stackview.alignment = .center
-        
-        return stackview
-    }()
-    
-    let nextButton = MainButton(status: .disable)
-    
-    let pickerView: UIDatePicker = {
-        let picker = UIDatePicker()
-        
-        //UIDatePicker(frame: CGRect(x: 200, y: 0, width: UIScreen.main.bounds.width, height: 200))
-        picker.locale = Locale(identifier: "ko")
-        picker.datePickerMode = .date
-        picker.preferredDatePickerStyle = .wheels
-        
-        return picker
-    }()
-    
+
     let disposeBag = DisposeBag()
     let toastStyle = ToastStyle()
+    let mainView = BirthView()
     
     var birthDay: Date?
+    
+    override func loadView() {
+        self.view = mainView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setUp()
-        setConstraints()
-        setTextField()
         setButton()
         createPickerView()
     }
-    
-    func setUp() {
-        view.backgroundColor = UIColor().white
-        
-        view.addSubview(guideLabel1)
-        
-        yearTextField.status = .inactive
-        yearTextField.textfield.placeholder = ""
-        yearTextField.textfield.textAlignment = .center
-        stackview.addArrangedSubview(yearTextField)
-        stackview.addArrangedSubview(yearLabel)
-        
-        monthTextField.status = .inactive
-        monthTextField.textfield.placeholder = ""
-        monthTextField.textfield.textAlignment = .center
-        stackview.addArrangedSubview(monthTextField)
-        stackview.addArrangedSubview(monthLabel)
-        
-        dayTextField.status = .inactive
-        dayTextField.textfield.placeholder = ""
-        dayTextField.textfield.textAlignment = .center
-        stackview.addArrangedSubview(dayTextField)
-        stackview.addArrangedSubview(dayLabel)
-       
-        view.addSubview(stackview)
-        
-        nextButton.setTitle("다음", for: .normal)
-        view.addSubview(nextButton)
-    }
-    
-    func setConstraints() {
-        guideLabel1.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(80)
-            make.centerX.equalToSuperview()
-        }
-        
-        stackview.snp.makeConstraints { make in
-            make.top.equalTo(guideLabel1.snp.bottom).offset(70)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-        }
 
-        nextButton.snp.makeConstraints { make in
-            make.top.equalTo(stackview.snp.bottom).offset(70)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(48)
-        }
-    }
-    
-    func setTextField() {
-        
-        
-        
-    }
-    
     func setButton() {
-        
-        nextButton.rx.tap
+        mainView.nextButton.rx.tap
             .bind {
                 self.nextButtonTapped()
             }
-        
     }
     
     func createPickerView() {
-
-        yearTextField.textfield.inputView = pickerView
-        monthTextField.textfield.inputView = pickerView
-        dayTextField.textfield.inputView = pickerView
-        
-        
-        
-        pickerView.rx.date
+        mainView.pickerView.rx.date
             .subscribe(onNext: { newValue in
                 print(newValue)
                 
@@ -193,18 +60,15 @@ class BirthViewController: UIViewController {
                 
                 print("formatted: \(year) \(month) \(day)")
                 
-                self.yearTextField.textfield.text = "\(year)"
-                self.monthTextField.textfield.text = "\(month)"
-                self.dayTextField.textfield.text = "\(day)"
+                self.mainView.yearTextField.textfield.text = "\(year)"
+                self.mainView.monthTextField.textfield.text = "\(month)"
+                self.mainView.dayTextField.textfield.text = "\(day)"
                 
                 self.birthDay = newValue
-                
-                
             })
             .disposed(by: disposeBag)
         
-        
-        yearTextField.textfield.becomeFirstResponder()
+        mainView.yearTextField.textfield.becomeFirstResponder()
     }
     
     func trimTextField(_ number: String) -> String {
@@ -217,10 +81,8 @@ class BirthViewController: UIViewController {
             //print("number: \(number) trimNum: \(trimNum) last: \(lastInput)")
 
             if Int(lastInput) != nil {
-                //self.authCodeTextField.textfield.text = number
                 result = number
             } else {
-                //self.authCodeTextField.textfield.text = trimNum
                 result = trimNum
             }
          }
@@ -228,7 +90,6 @@ class BirthViewController: UIViewController {
         //6자리 넘게 입력되지 않도록 함
         if number.count > 6 {
             let index = number.index(number.startIndex, offsetBy: 6)
-            //self.authCodeTextField.textfield.text = String(number[..<index])
             result = String(number[..<index])
         }
         

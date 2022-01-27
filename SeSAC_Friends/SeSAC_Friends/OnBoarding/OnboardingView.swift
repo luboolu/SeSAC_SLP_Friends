@@ -38,7 +38,7 @@ class OnboardingView: UIView {
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError("init(coder:) has not been impl")
     }
     
     func setUp() {

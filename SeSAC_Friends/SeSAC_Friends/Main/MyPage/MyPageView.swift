@@ -25,9 +25,7 @@ class MyPageView: UIView, ViewRepresentable {
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setupView()
-        setupConstraints()
+        fatalError("init(coder:) has not been impl")
     }
     
     func setupView() {

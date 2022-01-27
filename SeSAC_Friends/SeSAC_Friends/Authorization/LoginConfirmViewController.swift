@@ -16,44 +16,6 @@ import Toast
 
 class LoginConfirmViewController: UIViewController {
     
-    let guideLabel1: UILabel = {
-        let label = UILabel()
-        
-        label.text = "인증번호가 문자로 전송되었습니다"
-        label.textColor = UIColor().black
-        label.font = UIFont().Display1_R20
-        label.textAlignment = .center
-        
-        return label
-    }()
-    
-    let guideLabel2: UILabel = {
-        let label = UILabel()
-        
-        label.text = "최대 소모 20초"
-        label.textColor = UIColor().gray7
-        label.font = UIFont().Title2_R16
-        label.textAlignment = .center
-        
-        return label
-    }()
-    
-    let authCodeTextField = MainTextFieldView()
-    
-    let authValidTime: UILabel = {
-        let label = UILabel()
-        
-        label.text = "01:00"
-        label.textColor = UIColor().green
-        label.font = UIFont().Title3_M14
-        
-        return label
-    }()
-    
-    let resendAuthButton = MainButton(status: .fill)
-    let authButton = MainButton(status: .disable)
-    
-    
     var authCode: String?
     var timer: Timer?
     var timerNum: Int = 60
@@ -61,14 +23,17 @@ class LoginConfirmViewController: UIViewController {
     let disposeBag = DisposeBag()
     let toastStyle = ToastStyle()
     let viewModel = AuthorizationViewModel()
+    let mainView = LoginConfirmView()
+    
+    override func loadView() {
+        self.view = mainView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.makeToast("인증번호를 보냈습니다" ,duration: 2.0, position: .bottom, style: self.toastStyle)
         
-        setUp()
-        setConstraints()
         startTimer()
         setTextFieldRx()
         setButton()
@@ -91,64 +56,6 @@ class LoginConfirmViewController: UIViewController {
         }
     }
     
-    func setUp() {
-        view.backgroundColor = UIColor().white
-        
-        view.addSubview(guideLabel1)
-        view.addSubview(guideLabel2)
-        
-        authCodeTextField.status = .inactive
-        authCodeTextField.textfield.placeholder = "인증번호 입력"
-        authCodeTextField.textfield.keyboardType = .numberPad
-        view.addSubview(authCodeTextField)
-        
-        resendAuthButton.setTitle("재전송", for: .normal)
-        view.addSubview(resendAuthButton)
-        
-        view.addSubview(authValidTime)
-        
-        authButton.setTitle("인증하고 시작하기", for: .normal)
-        view.addSubview(authButton)
-    }
-    
-    func setConstraints() {
-        guideLabel1.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(160)
-            make.centerX.equalToSuperview()
-        }
-        
-        guideLabel2.snp.makeConstraints { make in
-            make.top.equalTo(guideLabel1.snp.bottom).offset(8)
-            make.centerX.equalToSuperview()
-        }
-        
-        authCodeTextField.snp.makeConstraints { make in
-            make.top.equalTo(guideLabel2.snp.bottom).offset(70)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalTo(resendAuthButton.snp.leading).offset(-8)
-        }
-        
-        resendAuthButton.snp.makeConstraints { make in
-            make.top.equalTo(guideLabel2.snp.bottom).offset(70)
-            make.leading.equalTo(authCodeTextField.snp.trailing).offset(8)
-            make.trailing.equalToSuperview().offset(-8)
-            make.width.equalTo(72)
-            make.height.equalTo(40)
-        }
-        
-        authValidTime.snp.makeConstraints { make in
-            make.centerY.equalTo(resendAuthButton)
-            make.trailing.equalTo(resendAuthButton.snp.leading).offset(-20)
-        }
-        
-        authButton.snp.makeConstraints { make in
-            make.top.equalTo(authCodeTextField.snp.bottom).offset(70)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(48)
-        }
-    }
-    
     func startTimer() {
         //기존에 타이머 동작중이면 중지 처리
         if timer != nil && timer!.isValid {
@@ -165,46 +72,46 @@ class LoginConfirmViewController: UIViewController {
     func setTextFieldRx() {
         
         //textfield의 입력값이 바뀔때 마다 감지 -> 유효성 검사
-        authCodeTextField.textfield.rx.text
+        mainView.authCodeTextField.textfield.rx.text
             .subscribe(onNext: { newValue in
                 let result = self.trimNumber(newValue ?? "")
-                self.authCodeTextField.textfield.text = result
+                self.mainView.authCodeTextField.textfield.text = result
                 
                 if result.count == 6 {
-                    self.authButton.status = .fill
+                    self.mainView.authButton.status = .fill
                 } else {
-                    self.authButton.status = .disable
+                    self.mainView.authButton.status = .disable
                 }
                 
             }).disposed(by: disposeBag)
         
         //textfield가 활성화되는 시점을 감지
-        authCodeTextField.textfield.rx.controlEvent([.editingDidBegin])
+        mainView.authCodeTextField.textfield.rx.controlEvent([.editingDidBegin])
             .asObservable()
             .subscribe(onNext: { _ in
-                self.authCodeTextField.status = .active
-                self.authCodeTextField.textfield.placeholder = "인증번호 입력"
+                self.mainView.authCodeTextField.status = .active
+                self.mainView.authCodeTextField.textfield.placeholder = "인증번호 입력"
             }).disposed(by: disposeBag)
         
         //textfield가 비활성화 되는 시점을 감지
-        authCodeTextField.textfield.rx.controlEvent([.editingDidEnd])
+        mainView.authCodeTextField.textfield.rx.controlEvent([.editingDidEnd])
             .asObservable()
             .subscribe(onNext: { _ in
-                self.authCodeTextField.status = .inactive
-                self.authCodeTextField.textfield.placeholder = "인증번호 입력"
+                self.mainView.authCodeTextField.status = .inactive
+                self.mainView.authCodeTextField.textfield.placeholder = "인증번호 입력"
             }).disposed(by: disposeBag)
         
     }
     
     func setButton() {
         
-        authButton.rx.tap
+        mainView.authButton.rx.tap
             .bind { [self] in
                 print("auth button clicked!")
                 self.authButtonTapped()
             }.disposed(by: disposeBag)
         
-        resendAuthButton.rx.tap
+        mainView.resendAuthButton.rx.tap
             .bind {
                 print("resentAuthButton clicked!")
                 self.resendButtonTapped()
@@ -273,32 +180,7 @@ class LoginConfirmViewController: UIViewController {
                 
             }
         }
-//        //인증번호 6자리가 모두 입력되었는지 확인
-//        if self.authCodeTextField.textfield.text?.count != 6 {
-//            self.view.makeToast("전화 번호 인증 실패" ,duration: 2.0, position: .bottom, style: self.toastStyle)
-//        } else {
-//            //인증번호 6자리가 모두 입력되었다면
-//            //인증번호가 일치하는지 확인
-//            let inputCode = self.authCodeTextField.textfield.text ?? ""
-//
-//            self.viewModel.authSignIn(inputCode: inputCode) { error in
-//                if error != nil {
-//                    self.view.makeToast("전화 번호 인증 실패" ,duration: 2.0, position: .bottom, style: self.toastStyle)
-//                } else {
-//                    //인증 성공했으므로, firebase id token을 요청
-//                    self.viewModel.idTokenRequest { error in
-//                        if error != nil {
-//                            self.view.makeToast("에러가 발생했습니다" ,duration: 2.0, position: .bottom, style: self.toastStyle)
-//                        } else {
-//
-//                            //id token을 제대로 가져왔으면, get user로 가입된 회원인지 확인
-//                            self.viewModel.getUser()
-//
-//                        }
-//                    }
-//                }
-//            }
-//        }
+
     }
     
     func resendButtonTapped() {
@@ -314,9 +196,9 @@ class LoginConfirmViewController: UIViewController {
         let seconds = Int(timerNum % 60)
         
         if seconds < 10 {
-            self.authValidTime.text = "0\(minute):0\(seconds)"
+            self.mainView.authValidTime.text = "0\(minute):0\(seconds)"
         } else {
-            self.authValidTime.text = "0\(minute):\(seconds)"
+            self.mainView.authValidTime.text = "0\(minute):\(seconds)"
         }
         
      
