@@ -39,6 +39,19 @@ class CardTableViewCell: UITableViewCell, ViewRepresentable {
         return stackview
     }()
     
+    let secondStackView: UIStackView = {
+        let stackview = UIStackView()
+        
+        stackview.axis = .vertical
+        stackview.spacing = 0
+        stackview.distribution = .equalSpacing
+        stackview.alignment = .center
+        
+        return stackview
+    }()
+    
+    let testButton = MainButton(status: .fill)
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -51,7 +64,6 @@ class CardTableViewCell: UITableViewCell, ViewRepresentable {
     }
     
     func setupView() {
-        
         firstStackView.clipsToBounds = true
         firstStackView.layer.cornerRadius = 5
         firstStackView.layer.borderColor = UIColor().gray2.cgColor
@@ -60,17 +72,28 @@ class CardTableViewCell: UITableViewCell, ViewRepresentable {
         firstStackView.addArrangedSubview(nicknameLabel)
         firstStackView.addArrangedSubview(moreButton)
         
-        contentView.addSubview(firstStackView)
+        secondStackView.addArrangedSubview(firstStackView)
+        secondStackView.addArrangedSubview(testButton)
+        
+        contentView.addSubview(secondStackView)
         
     }
     
     func setupConstraints() {
         
         firstStackView.snp.makeConstraints { make in
+            //make.top.equalTo(secondStackView.snp.top)
+            make.leading.equalTo(secondStackView.snp.leading)
+            make.trailing.equalTo(secondStackView.snp.trailing)
+            make.height.equalTo(58)
+        }
+        
+        secondStackView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(14)
             make.leading.equalToSuperview().offset(14)
             make.trailing.equalToSuperview().offset(-14)
             make.bottom.equalToSuperview().offset(-14)
+
         }
         
         nicknameLabel.snp.makeConstraints { make in
@@ -80,6 +103,15 @@ class CardTableViewCell: UITableViewCell, ViewRepresentable {
         moreButton.snp.makeConstraints { make in
             make.trailing.equalToSuperview().offset(-14)
             make.width.equalTo(20)
+        }
+        
+        testButton.snp.makeConstraints { make in
+//            make.top.equalTo(firstStackView.snp.top)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+//            make.bottom.equalTo(secondStackView.snp.bottom)
+            make.height.equalTo(30)
+            //make.width.equalToSuperview()
         }
         
     }

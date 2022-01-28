@@ -17,11 +17,15 @@ class MyInfoViewController: UIViewController {
         let tableView = UITableView()
         
         tableView.separatorStyle = .none
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 88
         
         return tableView
     }()
     
     let disposeBag = DisposeBag()
+    
+    var moreButtonTabbed = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,14 +91,20 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
         return 6
     }
     
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//
+//        if indexPath.row == 0 {
+//            return 200
+//        } else if indexPath.row == 3 {
+//            return 120
+//        } else {
+//            return 72
+//        }
+//
+//    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        if indexPath.row == 3 {
-            return 120
-        } else {
-            return 72
-        }
-
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -104,10 +114,14 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.selectionStyle = .none
             cell.nicknameLabel.text = "고래밥"
-            
+            cell.testButton.isHidden = self.moreButtonTabbed
+            print(cell.testButton.isHidden, self.moreButtonTabbed)
             cell.moreButton.rx.tap
                 .bind {
                     print("moreButton tapped")
+                    self.moreButtonTabbed = !self.moreButtonTabbed
+                    tableView.reloadRows(at: [indexPath], with: .fade)
+                    //tableView.reloadData()
                 }.disposed(by: disposeBag)
             
             return cell
