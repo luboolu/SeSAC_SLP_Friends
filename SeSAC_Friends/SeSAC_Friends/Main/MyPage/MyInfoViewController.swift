@@ -121,7 +121,7 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
             cell.selectionStyle = .none
             cell.titleCollectionView.delegate = self
             cell.titleCollectionView.dataSource = self
-            cell.titleCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+            cell.titleCollectionView.register(ButtonCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.ButtonCollectionViewCell.id)
             
             cell.nicknameLabel.text = "고래밥"
             cell.testButton.isHidden = self.moreButtonTabbed
@@ -232,9 +232,14 @@ extension MyInfoViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? UICollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.ButtonCollectionViewCell.id, for: indexPath) as? ButtonCollectionViewCell else { return UICollectionViewCell() }
         
-        cell.backgroundColor = UIColor().green
+        //cell.backgroundColor = UIColor().green
+        cell.button.setTitle("\(indexPath)", for: .normal)
+        cell.button.rx.tap
+            .bind {
+                cell.button.status = .fill
+            }
         
         return cell
     }

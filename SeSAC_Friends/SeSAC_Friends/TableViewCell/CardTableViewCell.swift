@@ -78,7 +78,7 @@ class CardTableViewCell: UITableViewCell, ViewRepresentable {
         //collection view flow layout 설정
         let layout = UICollectionViewFlowLayout()
         let spacing: CGFloat = 8
-        let width = (UIScreen.main.bounds.width - (spacing * 7)) / 2
+        let width = (UIScreen.main.bounds.width - (spacing * 3) - 28) / 2
         let height: CGFloat = 32
         
         print("titlecollectionview width: \(UIScreen.main.bounds.width)")

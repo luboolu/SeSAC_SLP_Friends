@@ -33,6 +33,8 @@
 		DCA1AABE279DA7CA002194B4 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA1AABD279DA7CA002194B4 /* Endpoint.swift */; };
 		DCA1AAC0279E4531002194B4 /* AuthorizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA1AABF279E4531002194B4 /* AuthorizationViewModel.swift */; };
 		DCA1AAC3279E94D2002194B4 /* UserdefualtKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA1AAC2279E94D1002194B4 /* UserdefualtKey.swift */; };
+		DCC419EC27A44845006B2904 /* ButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC419EB27A44845006B2904 /* ButtonCollectionViewCell.swift */; };
+		DCC419EE27A44850006B2904 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC419ED27A44850006B2904 /* CollectionViewCell.swift */; };
 		DCDCC2DF279FD29500FB142B /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCC2DE279FD29500FB142B /* OnBoardingViewController.swift */; };
 		DCDCC2E1279FF27500FB142B /* OnBoardingTitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCC2E0279FF27500FB142B /* OnBoardingTitleCollectionViewCell.swift */; };
 		DCDCC2E327A0332B00FB142B /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCC2E227A0332B00FB142B /* OnboardingView.swift */; };
@@ -98,6 +100,8 @@
 		DCA1AABD279DA7CA002194B4 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		DCA1AABF279E4531002194B4 /* AuthorizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewModel.swift; sourceTree = "<group>"; };
 		DCA1AAC2279E94D1002194B4 /* UserdefualtKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserdefualtKey.swift; sourceTree = "<group>"; };
+		DCC419EB27A44845006B2904 /* ButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCollectionViewCell.swift; sourceTree = "<group>"; };
+		DCC419ED27A44850006B2904 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		DCDCC2DE279FD29500FB142B /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		DCDCC2E0279FF27500FB142B /* OnBoardingTitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingTitleCollectionViewCell.swift; sourceTree = "<group>"; };
 		DCDCC2E227A0332B00FB142B /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -188,6 +192,15 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		DCC419EA27A44832006B2904 /* CollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				DCC419EB27A44845006B2904 /* ButtonCollectionViewCell.swift */,
+				DCC419ED27A44850006B2904 /* CollectionViewCell.swift */,
+			);
+			path = CollectionViewCell;
+			sourceTree = "<group>";
+		};
 		DCDCC2DD279FD27B00FB142B /* OnBoarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -229,6 +242,7 @@
 		DCE2D1BA279694720018895F /* SeSAC_Friends */ = {
 			isa = PBXGroup;
 			children = (
+				DCC419EA27A44832006B2904 /* CollectionViewCell */,
 				DC1873EF27A192F300DE4FBD /* TableViewCell */,
 				DCDCC2DD279FD27B00FB142B /* OnBoarding */,
 				DCA1AABC279DA7BA002194B4 /* API */,
@@ -436,8 +450,10 @@
 				DCE2D1FA279809D40018895F /* MainButtonTestViewController.swift in Sources */,
 				DCDE36672799B1440077847C /* LoginConfirmViewController.swift in Sources */,
 				DC18740127A2653B00DE4FBD /* BirthView.swift in Sources */,
+				DCC419EC27A44845006B2904 /* ButtonCollectionViewCell.swift in Sources */,
 				DCE2D1BC279694720018895F /* AppDelegate.swift in Sources */,
 				DCE2D1F72797F3320018895F /* MainTextFieldTestViewController.swift in Sources */,
+				DCC419EE27A44850006B2904 /* CollectionViewCell.swift in Sources */,
 				DCE2D1F027970E000018895F /* LoginViewController.swift in Sources */,
 				DC1873F527A19D2600DE4FBD /* CharactorView.swift in Sources */,
 				DC1873FF27A2648700DE4FBD /* NicknameView.swift in Sources */,
