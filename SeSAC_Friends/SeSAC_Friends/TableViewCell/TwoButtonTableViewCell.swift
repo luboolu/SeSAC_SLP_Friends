@@ -52,15 +52,19 @@ class TwoButtonTableViewCell: UITableViewCell, ViewRepresentable {
         
         manButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
+            make.top.equalToSuperview().offset(5)
             make.leading.equalTo(label.snp.trailing).offset(15)
+            make.bottom.equalToSuperview().offset(-5)
             make.width.equalTo(56)
             make.height.equalTo(48)
         }
         
         womanButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
+            make.top.equalToSuperview().offset(5)
             make.leading.equalTo(manButton.snp.trailing).offset(4)
-            make.trailing.equalToSuperview().offset(-14)
+            make.trailing.equalToSuperview().offset(-15)
+            make.bottom.equalToSuperview().offset(-5)
             make.width.equalTo(56)
             make.height.equalTo(48)
         }

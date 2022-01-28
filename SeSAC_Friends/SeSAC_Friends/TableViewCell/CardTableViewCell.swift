@@ -28,10 +28,12 @@ class CardTableViewCell: UITableViewCell, ViewRepresentable {
         return button
     }()
     
-    let firstStackView: UIStackView = {
+    let representView = UIView()
+    
+    let cardStackView: UIStackView = {
         let stackview = UIStackView()
         
-        stackview.axis = .horizontal
+        stackview.axis = .vertical
         stackview.spacing = 10
         stackview.distribution = .fill
         stackview.alignment = .center
@@ -39,15 +41,10 @@ class CardTableViewCell: UITableViewCell, ViewRepresentable {
         return stackview
     }()
     
-    let secondStackView: UIStackView = {
-        let stackview = UIStackView()
+    let titleCollectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout.init())
         
-        stackview.axis = .vertical
-        stackview.spacing = 0
-        stackview.distribution = .equalSpacing
-        stackview.alignment = .center
-        
-        return stackview
+        return collectionView
     }()
     
     let testButton = MainButton(status: .fill)
@@ -57,6 +54,9 @@ class CardTableViewCell: UITableViewCell, ViewRepresentable {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupView()
         setupConstraints()
+        
+        print("titlecollectionview width: \(titleCollectionView.frame.width)")
+        //print("width: \(width)")
     }
     
     required init?(coder: NSCoder) {
@@ -64,55 +64,135 @@ class CardTableViewCell: UITableViewCell, ViewRepresentable {
     }
     
     func setupView() {
-        firstStackView.clipsToBounds = true
-        firstStackView.layer.cornerRadius = 5
-        firstStackView.layer.borderColor = UIColor().gray2.cgColor
-        firstStackView.layer.borderWidth = 2
+        representView.clipsToBounds = true
+        representView.layer.cornerRadius = 5
+        representView.layer.borderColor = UIColor().gray2.cgColor
+        representView.layer.borderWidth = 1
+        
+        representView.addSubview(nicknameLabel)
+        representView.addSubview(moreButton)
+        
+        cardStackView.addArrangedSubview(representView)
+        cardStackView.addArrangedSubview(testButton)
+        
+        //collection view flow layout 설정
+        let layout = UICollectionViewFlowLayout()
+        let spacing: CGFloat = 8
+        let width = (UIScreen.main.bounds.width - (spacing * 7)) / 2
+        let height: CGFloat = 32
+        
+        print("titlecollectionview width: \(UIScreen.main.bounds.width)")
+        print("width: \(width)")
 
-        firstStackView.addArrangedSubview(nicknameLabel)
-        firstStackView.addArrangedSubview(moreButton)
+        layout.itemSize = CGSize(width: width, height: height)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: spacing, bottom: 0, right: spacing)
+        layout.minimumLineSpacing = spacing
+        layout.minimumInteritemSpacing = spacing
+        layout.scrollDirection = .vertical
+
+        titleCollectionView.collectionViewLayout = layout
+        titleCollectionView.isPagingEnabled = false
+        titleCollectionView.backgroundColor = UIColor().error
         
-        secondStackView.addArrangedSubview(firstStackView)
-        secondStackView.addArrangedSubview(testButton)
-        
-        contentView.addSubview(secondStackView)
-        
+        cardStackView.addArrangedSubview(titleCollectionView)
+        contentView.addSubview(cardStackView)
     }
     
     func setupConstraints() {
+        cardStackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         
-        firstStackView.snp.makeConstraints { make in
-            //make.top.equalTo(secondStackView.snp.top)
-            make.leading.equalTo(secondStackView.snp.leading)
-            make.trailing.equalTo(secondStackView.snp.trailing)
+        representView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(14)
+            make.trailing.equalToSuperview().offset(-14)
             make.height.equalTo(58)
         }
         
-        secondStackView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(14)
-            make.leading.equalToSuperview().offset(14)
-            make.trailing.equalToSuperview().offset(-14)
-            make.bottom.equalToSuperview().offset(-14)
-
-        }
-        
         nicknameLabel.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
             make.leading.equalToSuperview().offset(14)
         }
         
         moreButton.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.leading.equalTo(nicknameLabel.snp.trailing).offset(14)
             make.trailing.equalToSuperview().offset(-14)
-            make.width.equalTo(20)
         }
         
         testButton.snp.makeConstraints { make in
-//            make.top.equalTo(firstStackView.snp.top)
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-//            make.bottom.equalTo(secondStackView.snp.bottom)
+            make.leading.equalToSuperview().offset(14)
+            make.trailing.equalToSuperview().offset(-14)
             make.height.equalTo(30)
-            //make.width.equalToSuperview()
         }
         
+        titleCollectionView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(14)
+            make.trailing.equalToSuperview().offset(-14)
+            make.height.equalTo(110)
+        }
     }
+//
+//    func setupView() {
+//        firstView.clipsToBounds = true
+//        firstView.layer.cornerRadius = 5
+//        firstView.layer.borderColor = UIColor().gray2.cgColor
+//        firstView.layer.borderWidth = 1
+//
+//        nicknameLabel.backgroundColor = UIColor().error
+//        moreButton.backgroundColor = UIColor().green
+//
+//        firstView.addSubview(nicknameLabel)
+//        firstView.addSubview(moreButton)
+//
+//        secondStackView.addArrangedSubview(firstView)
+//        secondStackView.addArrangedSubview(testButton)
+//
+//        contentView.addSubview(secondStackView)
+//
+//    }
+//
+//    func setupConstraints() {
+//
+//        firstView.snp.makeConstraints { make in
+//            make.top.equalTo(secondStackView.snp.top)
+//            make.leading.equalTo(secondStackView.snp.leading)
+//            make.trailing.equalTo(secondStackView.snp.trailing)
+//            //make.bottom.equalTo(testButton.snp.top)
+//            make.height.equalTo(44+28)
+//        }
+//
+//        secondStackView.snp.makeConstraints { make in
+//            make.top.equalToSuperview().offset(14)
+//            make.leading.equalToSuperview().offset(14)
+//            make.trailing.equalToSuperview().offset(-14)
+//            make.bottom.equalToSuperview().offset(-14)
+//
+//        }
+//
+//        nicknameLabel.snp.makeConstraints { make in
+//            make.centerY.equalToSuperview()
+//            make.leading.equalToSuperview().offset(14)
+//            make.trailing.equalTo(moreButton.snp.leading).offset(-14)
+//            make.height.equalTo(44)
+//        }
+//
+//        moreButton.snp.makeConstraints { make in
+//            make.centerY.equalToSuperview()
+//            make.leading.equalTo(nicknameLabel.snp.trailing).offset(14)
+//            make.trailing.equalToSuperview().offset(-14)
+//            make.height.equalTo(44)
+//            make.width.equalTo(20)
+//        }
+//
+//        testButton.snp.makeConstraints { make in
+//            //make.top.equalTo(firstView.snp.bottom)
+//            make.leading.equalToSuperview()
+//            make.trailing.equalToSuperview()
+//            make.bottom.equalTo(secondStackView.snp.bottom)
+//            make.height.equalTo(30)
+//            //make.width.equalToSuperview()
+//        }
+//
+//    }
 }

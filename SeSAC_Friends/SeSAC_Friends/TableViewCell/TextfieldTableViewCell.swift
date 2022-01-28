@@ -44,12 +44,14 @@ class TextfieldTableViewCell: UITableViewCell, ViewRepresentable {
         label.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.leading.equalToSuperview().offset(14)
+            make.height.equalTo(44)
         }
         
         textfield.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.leading.equalTo(label.snp.trailing).offset(14)
             make.trailing.equalToSuperview().offset(-14)
+            make.height.equalTo(44)
         }
     }
     

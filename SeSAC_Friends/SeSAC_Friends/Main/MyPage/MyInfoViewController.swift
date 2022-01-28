@@ -18,7 +18,7 @@ class MyInfoViewController: UIViewController {
         
         tableView.separatorStyle = .none
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 88
+        //tableView.estimatedRowHeight = 88
         
         return tableView
     }()
@@ -72,6 +72,12 @@ class MyInfoViewController: UIViewController {
         print("thumb \(slider.draggedThumbIndex) moved")
         print("now thumbs are at \(slider.value)") // e.g., [1.0, 4.5, 5.0]
     }
+    
+    @objc func moreButtonClicked() {
+        print("moreButton tapped")
+        self.moreButtonTabbed = !self.moreButtonTabbed
+        self.tableView.reloadRows(at: [[0,0]], with: .fade)
+    }
 }
 
 extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
@@ -108,21 +114,29 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        print(indexPath)
         if indexPath.row == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.CardTableViewCell.id) as? CardTableViewCell else { return UITableViewCell()}
             
             cell.selectionStyle = .none
+            cell.titleCollectionView.delegate = self
+            cell.titleCollectionView.dataSource = self
+            cell.titleCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+            
             cell.nicknameLabel.text = "고래밥"
             cell.testButton.isHidden = self.moreButtonTabbed
+            cell.titleCollectionView.isHidden = self.moreButtonTabbed
             print(cell.testButton.isHidden, self.moreButtonTabbed)
-            cell.moreButton.rx.tap
-                .bind {
-                    print("moreButton tapped")
-                    self.moreButtonTabbed = !self.moreButtonTabbed
-                    tableView.reloadRows(at: [indexPath], with: .fade)
-                    //tableView.reloadData()
-                }.disposed(by: disposeBag)
+            
+            cell.moreButton.addTarget(self, action: #selector(moreButtonClicked), for: .touchUpInside)
+//
+//            cell.moreButton.rx.tap
+//                .bind {
+//                    print("moreButton tapped")
+//                    self.moreButtonTabbed = !self.moreButtonTabbed
+//                    self.tableView.reloadRows(at: [indexPath], with: .fade)
+//                    //tableView.reloadData()
+//                }.disposed(by: disposeBag)
             
             return cell
         } else if indexPath.row == 1 {
@@ -209,4 +223,19 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
 
+}
+
+extension MyInfoViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 6
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? UICollectionViewCell else { return UICollectionViewCell() }
+        
+        cell.backgroundColor = UIColor().green
+        
+        return cell
+    }
 }
