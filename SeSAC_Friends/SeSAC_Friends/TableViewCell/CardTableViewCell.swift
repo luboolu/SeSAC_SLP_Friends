@@ -92,7 +92,7 @@ class CardTableViewCell: UITableViewCell, ViewRepresentable {
 
         titleCollectionView.collectionViewLayout = layout
         titleCollectionView.isPagingEnabled = false
-        titleCollectionView.backgroundColor = UIColor().error
+        titleCollectionView.backgroundColor = UIColor().white
         
         cardStackView.addArrangedSubview(titleCollectionView)
         contentView.addSubview(cardStackView)
@@ -129,70 +129,8 @@ class CardTableViewCell: UITableViewCell, ViewRepresentable {
         titleCollectionView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(14)
             make.trailing.equalToSuperview().offset(-14)
-            make.height.equalTo(110)
+            make.height.equalTo(32 * 3 + 8 * 3)
         }
     }
-//
-//    func setupView() {
-//        firstView.clipsToBounds = true
-//        firstView.layer.cornerRadius = 5
-//        firstView.layer.borderColor = UIColor().gray2.cgColor
-//        firstView.layer.borderWidth = 1
-//
-//        nicknameLabel.backgroundColor = UIColor().error
-//        moreButton.backgroundColor = UIColor().green
-//
-//        firstView.addSubview(nicknameLabel)
-//        firstView.addSubview(moreButton)
-//
-//        secondStackView.addArrangedSubview(firstView)
-//        secondStackView.addArrangedSubview(testButton)
-//
-//        contentView.addSubview(secondStackView)
-//
-//    }
-//
-//    func setupConstraints() {
-//
-//        firstView.snp.makeConstraints { make in
-//            make.top.equalTo(secondStackView.snp.top)
-//            make.leading.equalTo(secondStackView.snp.leading)
-//            make.trailing.equalTo(secondStackView.snp.trailing)
-//            //make.bottom.equalTo(testButton.snp.top)
-//            make.height.equalTo(44+28)
-//        }
-//
-//        secondStackView.snp.makeConstraints { make in
-//            make.top.equalToSuperview().offset(14)
-//            make.leading.equalToSuperview().offset(14)
-//            make.trailing.equalToSuperview().offset(-14)
-//            make.bottom.equalToSuperview().offset(-14)
-//
-//        }
-//
-//        nicknameLabel.snp.makeConstraints { make in
-//            make.centerY.equalToSuperview()
-//            make.leading.equalToSuperview().offset(14)
-//            make.trailing.equalTo(moreButton.snp.leading).offset(-14)
-//            make.height.equalTo(44)
-//        }
-//
-//        moreButton.snp.makeConstraints { make in
-//            make.centerY.equalToSuperview()
-//            make.leading.equalTo(nicknameLabel.snp.trailing).offset(14)
-//            make.trailing.equalToSuperview().offset(-14)
-//            make.height.equalTo(44)
-//            make.width.equalTo(20)
-//        }
-//
-//        testButton.snp.makeConstraints { make in
-//            //make.top.equalTo(firstView.snp.bottom)
-//            make.leading.equalToSuperview()
-//            make.trailing.equalToSuperview()
-//            make.bottom.equalTo(secondStackView.snp.bottom)
-//            make.height.equalTo(30)
-//            //make.width.equalToSuperview()
-//        }
-//
-//    }
+
 }

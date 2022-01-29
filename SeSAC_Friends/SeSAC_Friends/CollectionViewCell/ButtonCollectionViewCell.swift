@@ -12,7 +12,13 @@ import SnapKit
 class ButtonCollectionViewCell: UICollectionViewCell, ViewRepresentable {
     
     
-    let button = MainButton(status: .inactive)
+    let button: MainButton = {
+        let button = MainButton(status: .inactive)
+        
+        button.titleLabel?.font = UIFont().Title4_R14
+        
+        return button
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
