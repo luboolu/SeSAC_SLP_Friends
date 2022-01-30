@@ -14,7 +14,7 @@
 		DC1873EE27A151E200DE4FBD /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1873ED27A151E200DE4FBD /* ProfileTableViewCell.swift */; };
 		DC1873F127A1930D00DE4FBD /* IconTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1873F027A1930D00DE4FBD /* IconTableViewCell.swift */; };
 		DC1873F327A1971900DE4FBD /* MyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1873F227A1971900DE4FBD /* MyInfoViewController.swift */; };
-		DC1873F527A19D2600DE4FBD /* CharactorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1873F427A19D2600DE4FBD /* CharactorView.swift */; };
+		DC1873F527A19D2600DE4FBD /* CharactorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1873F427A19D2600DE4FBD /* CharactorTableViewCell.swift */; };
 		DC1873F727A2466400DE4FBD /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1873F627A2466300DE4FBD /* MyPageView.swift */; };
 		DC1873F927A25EF000DE4FBD /* ViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1873F827A25EF000DE4FBD /* ViewRepresentable.swift */; };
 		DC1873FB27A2603000DE4FBD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1873FA27A2603000DE4FBD /* LoginView.swift */; };
@@ -83,7 +83,7 @@
 		DC1873ED27A151E200DE4FBD /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		DC1873F027A1930D00DE4FBD /* IconTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconTableViewCell.swift; sourceTree = "<group>"; };
 		DC1873F227A1971900DE4FBD /* MyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewController.swift; sourceTree = "<group>"; };
-		DC1873F427A19D2600DE4FBD /* CharactorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactorView.swift; sourceTree = "<group>"; };
+		DC1873F427A19D2600DE4FBD /* CharactorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactorTableViewCell.swift; sourceTree = "<group>"; };
 		DC1873F627A2466300DE4FBD /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		DC1873F827A25EF000DE4FBD /* ViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRepresentable.swift; sourceTree = "<group>"; };
 		DC1873FA27A2603000DE4FBD /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -163,7 +163,6 @@
 				DC1873E827A1117A00DE4FBD /* MyPageViewController.swift */,
 				DC1873F627A2466300DE4FBD /* MyPageView.swift */,
 				DC1873F227A1971900DE4FBD /* MyInfoViewController.swift */,
-				DC1873F427A19D2600DE4FBD /* CharactorView.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -172,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				DCE678E227A2E61800ACB1A7 /* TableViewCell.swift */,
+				DC1873F427A19D2600DE4FBD /* CharactorTableViewCell.swift */,
 				DC1873ED27A151E200DE4FBD /* ProfileTableViewCell.swift */,
 				DC1873F027A1930D00DE4FBD /* IconTableViewCell.swift */,
 				DC18740627A2729700DE4FBD /* TwoButtonTableViewCell.swift */,
@@ -455,7 +455,7 @@
 				DCE2D1F72797F3320018895F /* MainTextFieldTestViewController.swift in Sources */,
 				DCC419EE27A44850006B2904 /* CollectionViewCell.swift in Sources */,
 				DCE2D1F027970E000018895F /* LoginViewController.swift in Sources */,
-				DC1873F527A19D2600DE4FBD /* CharactorView.swift in Sources */,
+				DC1873F527A19D2600DE4FBD /* CharactorTableViewCell.swift in Sources */,
 				DC1873FF27A2648700DE4FBD /* NicknameView.swift in Sources */,
 				DCE2D1DC2796A9080018895F /* MainButton.swift in Sources */,
 				DC18740727A2729700DE4FBD /* TwoButtonTableViewCell.swift in Sources */,

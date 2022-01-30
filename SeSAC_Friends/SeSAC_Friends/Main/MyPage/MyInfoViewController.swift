@@ -25,7 +25,7 @@ class MyInfoViewController: UIViewController {
     
     let disposeBag = DisposeBag()
     
-    var moreButtonTabbed = false
+    var moreButtonTabbed = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +54,7 @@ class MyInfoViewController: UIViewController {
         tableView.register(LabelTableViewCell.self, forCellReuseIdentifier: TableViewCell.LabelTableViewCell.id)
         tableView.register(DoubleSliderTableViewCell.self, forCellReuseIdentifier: TableViewCell.DoubleSliderTableViewCell.id)
         tableView.register(CardTableViewCell.self, forCellReuseIdentifier: TableViewCell.CardTableViewCell.id)
+        tableView.register(CharactorTableViewCell.self, forCellReuseIdentifier: TableViewCell.CharactorTableViewCell.id)
         
         view.addSubview(tableView)
     }
@@ -76,38 +77,26 @@ class MyInfoViewController: UIViewController {
     @objc func moreButtonClicked() {
         print("moreButton tapped")
         self.moreButtonTabbed = !self.moreButtonTabbed
-        self.tableView.reloadRows(at: [[0,0]], with: .fade)
+        self.tableView.reloadRows(at: [[0,1]], with: .fade)
     }
 }
 
 extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
     
     //tableView Header View
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = CharactorView()
-        headerView.backgroundImage.image = UIImage(named: "sesac_background_1")
-        headerView.charactorImage.image = UIImage(named: "sesac_face_1")
-        headerView.layer.masksToBounds = true
-        headerView.layer.cornerRadius = 10
-        
-        return headerView
-    }
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let headerView = CharactorView()
+//        headerView.backgroundImage.image = UIImage(named: "sesac_background_1")
+//        headerView.charactorImage.image = UIImage(named: "sesac_face_1")
+//        headerView.layer.masksToBounds = true
+//        headerView.layer.cornerRadius = 10
+//
+//        return headerView
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return 7
     }
-    
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//
-//        if indexPath.row == 0 {
-//            return 200
-//        } else if indexPath.row == 3 {
-//            return 120
-//        } else {
-//            return 72
-//        }
-//
-//    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
@@ -115,7 +104,17 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print(indexPath)
+        
         if indexPath.row == 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.CharactorTableViewCell.id) as? CharactorTableViewCell else { return UITableViewCell()}
+            
+            cell.backgroundImage.image = UIImage(named: "sesac_background_1")
+            cell.charactorImage.image = UIImage(named: "sesac_face_1")
+
+            
+            return cell
+            
+        } else if indexPath.row == 1 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.CardTableViewCell.id) as? CardTableViewCell else { return UITableViewCell()}
             
             cell.selectionStyle = .none
@@ -124,22 +123,15 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
             cell.titleCollectionView.register(ButtonCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.ButtonCollectionViewCell.id)
             
             cell.nicknameLabel.text = "고래밥"
-            cell.testButton.isHidden = self.moreButtonTabbed
-            cell.titleCollectionView.isHidden = self.moreButtonTabbed
-            print(cell.testButton.isHidden, self.moreButtonTabbed)
-            
+            cell.titleView.isHidden = self.moreButtonTabbed
+            cell.hobbyView.isHidden = true
+            cell.reviewView.isHidden = self.moreButtonTabbed
+
             cell.moreButton.addTarget(self, action: #selector(moreButtonClicked), for: .touchUpInside)
-//
-//            cell.moreButton.rx.tap
-//                .bind {
-//                    print("moreButton tapped")
-//                    self.moreButtonTabbed = !self.moreButtonTabbed
-//                    self.tableView.reloadRows(at: [indexPath], with: .fade)
-//                    //tableView.reloadData()
-//                }.disposed(by: disposeBag)
+
             
             return cell
-        } else if indexPath.row == 1 {
+        } else if indexPath.row == 2 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.TwoButtonTableViewCell.id) as? TwoButtonTableViewCell else { return UITableViewCell()}
             
             cell.selectionStyle = .none
@@ -179,7 +171,7 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
             
             return cell
             
-        }  else if indexPath.row == 2 {
+        }  else if indexPath.row == 3 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.TextfieldTableViewCell.id) as? TextfieldTableViewCell else { return UITableViewCell()}
             
             cell.selectionStyle = .none
@@ -188,7 +180,7 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
             
             return cell
             
-        } else if indexPath.row == 3 {
+        } else if indexPath.row == 4 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.SwitchTableViewCell.id) as? SwitchTableViewCell else { return UITableViewCell()}
             
             cell.selectionStyle = .none
@@ -196,7 +188,7 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
             
             return cell
             
-        }  else if indexPath.row == 4 {
+        }  else if indexPath.row == 5 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.DoubleSliderTableViewCell.id) as? DoubleSliderTableViewCell else { return UITableViewCell()}
             
             cell.selectionStyle = .none
@@ -231,15 +223,15 @@ extension MyInfoViewController: UICollectionViewDelegate, UICollectionViewDataSo
         return 6
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "새싹 타이틀"
-    }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.ButtonCollectionViewCell.id, for: indexPath) as? ButtonCollectionViewCell else { return UICollectionViewCell() }
         
         //cell.backgroundColor = UIColor().green
-        cell.button.setTitle("\(indexPath)", for: .normal)
+        
+        let titleList = ["좋은 매너", "정확한 시간 약속", "빠른 응답", "친절한 성격", "능숙한 취미 실력", "유익한 시간"]
+        
+        cell.button.setTitle("\(titleList[indexPath.row])", for: .normal)
+        
         cell.button.rx.tap
             .bind {
                 cell.button.status = .fill
