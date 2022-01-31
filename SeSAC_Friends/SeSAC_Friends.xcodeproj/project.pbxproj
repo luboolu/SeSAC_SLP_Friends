@@ -31,10 +31,13 @@
 		DCA1AAB9279D7B4F002194B4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = DCA1AAB8279D7B4F002194B4 /* FirebaseAuth */; };
 		DCA1AABB279D7B4F002194B4 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = DCA1AABA279D7B4F002194B4 /* FirebaseMessaging */; };
 		DCA1AABE279DA7CA002194B4 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA1AABD279DA7CA002194B4 /* Endpoint.swift */; };
-		DCA1AAC0279E4531002194B4 /* AuthorizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA1AABF279E4531002194B4 /* AuthorizationViewModel.swift */; };
+		DCA1AAC0279E4531002194B4 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA1AABF279E4531002194B4 /* UserViewModel.swift */; };
 		DCA1AAC3279E94D2002194B4 /* UserdefualtKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA1AAC2279E94D1002194B4 /* UserdefualtKey.swift */; };
 		DCC419EC27A44845006B2904 /* ButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC419EB27A44845006B2904 /* ButtonCollectionViewCell.swift */; };
 		DCC419EE27A44850006B2904 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC419ED27A44850006B2904 /* CollectionViewCell.swift */; };
+		DCC419F027A78D44006B2904 /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC419EF27A78D44006B2904 /* MyInfoView.swift */; };
+		DCC419F227A7CABD006B2904 /* InputDataStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC419F127A7CABD006B2904 /* InputDataStruct.swift */; };
+		DCC419F727A7DE86006B2904 /* OutputDataStructswift.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC419F627A7DE86006B2904 /* OutputDataStructswift.swift */; };
 		DCDCC2DF279FD29500FB142B /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCC2DE279FD29500FB142B /* OnBoardingViewController.swift */; };
 		DCDCC2E1279FF27500FB142B /* OnBoardingTitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCC2E0279FF27500FB142B /* OnBoardingTitleCollectionViewCell.swift */; };
 		DCDCC2E327A0332B00FB142B /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCC2E227A0332B00FB142B /* OnboardingView.swift */; };
@@ -49,12 +52,9 @@
 		DCDE3675279C44860077847C /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DCDE3674279C44860077847C /* IQKeyboardManagerSwift */; };
 		DCE2D1BC279694720018895F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1BB279694720018895F /* AppDelegate.swift */; };
 		DCE2D1BE279694720018895F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1BD279694720018895F /* SceneDelegate.swift */; };
-		DCE2D1C0279694720018895F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1BF279694720018895F /* ViewController.swift */; };
-		DCE2D1C3279694720018895F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCE2D1C1279694720018895F /* Main.storyboard */; };
 		DCE2D1C5279694750018895F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCE2D1C4279694750018895F /* Assets.xcassets */; };
 		DCE2D1C8279694750018895F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCE2D1C6279694750018895F /* LaunchScreen.storyboard */; };
 		DCE2D1D0279694BE0018895F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DCE2D1CF279694BE0018895F /* GoogleService-Info.plist */; };
-		DCE2D1D527969AB60018895F /* UserAuthentificationMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1D427969AB60018895F /* UserAuthentificationMessageViewController.swift */; };
 		DCE2D1D827969AE10018895F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DCE2D1D727969AE10018895F /* SnapKit */; };
 		DCE2D1DC2796A9080018895F /* MainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1DB2796A9080018895F /* MainButton.swift */; };
 		DCE2D1DE2796C9D50018895F /* MainButtonStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1DD2796C9D40018895F /* MainButtonStatus.swift */; };
@@ -98,10 +98,13 @@
 		DC18740C27A2D66200DE4FBD /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
 		DC18740E27A2D7AF00DE4FBD /* DoubleSliderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleSliderTableViewCell.swift; sourceTree = "<group>"; };
 		DCA1AABD279DA7CA002194B4 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
-		DCA1AABF279E4531002194B4 /* AuthorizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewModel.swift; sourceTree = "<group>"; };
+		DCA1AABF279E4531002194B4 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		DCA1AAC2279E94D1002194B4 /* UserdefualtKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserdefualtKey.swift; sourceTree = "<group>"; };
 		DCC419EB27A44845006B2904 /* ButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		DCC419ED27A44850006B2904 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		DCC419EF27A78D44006B2904 /* MyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoView.swift; sourceTree = "<group>"; };
+		DCC419F127A7CABD006B2904 /* InputDataStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputDataStruct.swift; sourceTree = "<group>"; };
+		DCC419F627A7DE86006B2904 /* OutputDataStructswift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputDataStructswift.swift; sourceTree = "<group>"; };
 		DCDCC2DE279FD29500FB142B /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		DCDCC2E0279FF27500FB142B /* OnBoardingTitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingTitleCollectionViewCell.swift; sourceTree = "<group>"; };
 		DCDCC2E227A0332B00FB142B /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -115,13 +118,10 @@
 		DCE2D1B8279694720018895F /* SeSAC_Friends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSAC_Friends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCE2D1BB279694720018895F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DCE2D1BD279694720018895F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DCE2D1BF279694720018895F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		DCE2D1C2279694720018895F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DCE2D1C4279694750018895F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DCE2D1C7279694750018895F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DCE2D1C9279694750018895F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DCE2D1CF279694BE0018895F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Desktop/SeSAC_자료/강의자료/SeSAC_SPL/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		DCE2D1D427969AB60018895F /* UserAuthentificationMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthentificationMessageViewController.swift; sourceTree = "<group>"; };
 		DCE2D1DB2796A9080018895F /* MainButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainButton.swift; sourceTree = "<group>"; };
 		DCE2D1DD2796C9D40018895F /* MainButtonStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainButtonStatus.swift; sourceTree = "<group>"; };
 		DCE2D1E02796CCD30018895F /* MainTextFieldStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTextFieldStatus.swift; sourceTree = "<group>"; };
@@ -163,6 +163,7 @@
 				DC1873E827A1117A00DE4FBD /* MyPageViewController.swift */,
 				DC1873F627A2466300DE4FBD /* MyPageView.swift */,
 				DC1873F227A1971900DE4FBD /* MyInfoViewController.swift */,
+				DCC419EF27A78D44006B2904 /* MyInfoView.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -188,6 +189,8 @@
 			isa = PBXGroup;
 			children = (
 				DCA1AABD279DA7CA002194B4 /* Endpoint.swift */,
+				DCC419F127A7CABD006B2904 /* InputDataStruct.swift */,
+				DCC419F627A7DE86006B2904 /* OutputDataStructswift.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -199,6 +202,27 @@
 				DCC419ED27A44850006B2904 /* CollectionViewCell.swift */,
 			);
 			path = CollectionViewCell;
+			sourceTree = "<group>";
+		};
+		DCC419F327A7DDF3006B2904 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DCC419F427A7DDFF006B2904 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		DCC419F527A7DE06006B2904 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		DCDCC2DD279FD27B00FB142B /* OnBoarding */ = {
@@ -242,6 +266,9 @@
 		DCE2D1BA279694720018895F /* SeSAC_Friends */ = {
 			isa = PBXGroup;
 			children = (
+				DCC419F527A7DE06006B2904 /* ViewModel */,
+				DCC419F427A7DDFF006B2904 /* ViewController */,
+				DCC419F327A7DDF3006B2904 /* View */,
 				DCC419EA27A44832006B2904 /* CollectionViewCell */,
 				DC1873EF27A192F300DE4FBD /* TableViewCell */,
 				DCDCC2DD279FD27B00FB142B /* OnBoarding */,
@@ -254,12 +281,9 @@
 				DCE2D1DA2796A8E30018895F /* Button */,
 				DCE2D1BB279694720018895F /* AppDelegate.swift */,
 				DCE2D1BD279694720018895F /* SceneDelegate.swift */,
-				DCE2D1BF279694720018895F /* ViewController.swift */,
 				DC1873F827A25EF000DE4FBD /* ViewRepresentable.swift */,
 				DCA1AAC2279E94D1002194B4 /* UserdefualtKey.swift */,
-				DCE2D1C1279694720018895F /* Main.storyboard */,
 				DCE2D1C4279694750018895F /* Assets.xcassets */,
-				DCE2D1D427969AB60018895F /* UserAuthentificationMessageViewController.swift */,
 				DCE2D1C6279694750018895F /* LaunchScreen.storyboard */,
 				DCE2D1CF279694BE0018895F /* GoogleService-Info.plist */,
 				DCE2D1C9279694750018895F /* Info.plist */,
@@ -322,7 +346,7 @@
 				DC18740227A266CF00DE4FBD /* EmailView.swift */,
 				DCDE366E279AB8920077847C /* GenderViewController.swift */,
 				DC18740427A267EF00DE4FBD /* GenderView.swift */,
-				DCA1AABF279E4531002194B4 /* AuthorizationViewModel.swift */,
+				DCA1AABF279E4531002194B4 /* UserViewModel.swift */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";
@@ -408,7 +432,6 @@
 				DCE2D1E62796D6DF0018895F /* NotoSansKR-Medium.otf in Resources */,
 				DCE2D1C5279694750018895F /* Assets.xcassets in Resources */,
 				DCE2D1E82796D6EC0018895F /* NotoSansKR-Regular.otf in Resources */,
-				DCE2D1C3279694720018895F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,7 +445,6 @@
 				DCDE3672279C3A950077847C /* HomeViewController.swift in Sources */,
 				DCE2D1F427979C020018895F /* MainTextFieldView.swift in Sources */,
 				DCDE366F279AB8920077847C /* GenderViewController.swift in Sources */,
-				DCE2D1D527969AB60018895F /* UserAuthentificationMessageViewController.swift in Sources */,
 				DCDCC2E1279FF27500FB142B /* OnBoardingTitleCollectionViewCell.swift in Sources */,
 				DCE678E527A2EA4D00ACB1A7 /* CardTableViewCell.swift in Sources */,
 				DC1873F727A2466400DE4FBD /* MyPageView.swift in Sources */,
@@ -432,8 +454,7 @@
 				DCDE366D279A9A4D0077847C /* EmailViewController.swift in Sources */,
 				DCDE36652799A0300077847C /* Toast+Extension.swift in Sources */,
 				DC1873FD27A262B900DE4FBD /* LoginConfirmView.swift in Sources */,
-				DCA1AAC0279E4531002194B4 /* AuthorizationViewModel.swift in Sources */,
-				DCE2D1C0279694720018895F /* ViewController.swift in Sources */,
+				DCA1AAC0279E4531002194B4 /* UserViewModel.swift in Sources */,
 				DC1873E527A1113200DE4FBD /* ShopViewController.swift in Sources */,
 				DCDCC2E327A0332B00FB142B /* OnboardingView.swift in Sources */,
 				DCDE36692799BE190077847C /* NicknameViewController.swift in Sources */,
@@ -448,6 +469,7 @@
 				DC1873E727A1115C00DE4FBD /* FriendsViewController.swift in Sources */,
 				DC1873F327A1971900DE4FBD /* MyInfoViewController.swift in Sources */,
 				DCE2D1FA279809D40018895F /* MainButtonTestViewController.swift in Sources */,
+				DCC419F027A78D44006B2904 /* MyInfoView.swift in Sources */,
 				DCDE36672799B1440077847C /* LoginConfirmViewController.swift in Sources */,
 				DC18740127A2653B00DE4FBD /* BirthView.swift in Sources */,
 				DCC419EC27A44845006B2904 /* ButtonCollectionViewCell.swift in Sources */,
@@ -458,6 +480,7 @@
 				DC1873F527A19D2600DE4FBD /* CharactorTableViewCell.swift in Sources */,
 				DC1873FF27A2648700DE4FBD /* NicknameView.swift in Sources */,
 				DCE2D1DC2796A9080018895F /* MainButton.swift in Sources */,
+				DCC419F727A7DE86006B2904 /* OutputDataStructswift.swift in Sources */,
 				DC18740727A2729700DE4FBD /* TwoButtonTableViewCell.swift in Sources */,
 				DC1873F127A1930D00DE4FBD /* IconTableViewCell.swift in Sources */,
 				DCE2D1BE279694720018895F /* SceneDelegate.swift in Sources */,
@@ -468,6 +491,7 @@
 				DCE2D1ED2796FF950018895F /* UIFont+Extension.swift in Sources */,
 				DC18740F27A2D7B000DE4FBD /* DoubleSliderTableViewCell.swift in Sources */,
 				DC1873F927A25EF000DE4FBD /* ViewRepresentable.swift in Sources */,
+				DCC419F227A7CABD006B2904 /* InputDataStruct.swift in Sources */,
 				DC18740B27A2D53500DE4FBD /* SwitchTableViewCell.swift in Sources */,
 				DCA1AABE279DA7CA002194B4 /* Endpoint.swift in Sources */,
 				DCE2D1E32796D5310018895F /* ChatTextFieldStatus.swift in Sources */,
@@ -477,14 +501,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		DCE2D1C1279694720018895F /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DCE2D1C2279694720018895F /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		DCE2D1C6279694750018895F /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

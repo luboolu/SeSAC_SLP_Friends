@@ -11,6 +11,15 @@ class MainViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("authVerificationID")
+        print(UserDefaults.standard.string(forKey: UserdefaultKey.authVerificationID.string) ?? "")
+        
+        print("idtoken")
+        print(UserDefaults.standard.string(forKey: UserdefaultKey.idToken.string) ?? "")
+        
+        print("fcmToken")
+        print(UserDefaults.standard.string(forKey: UserdefaultKey.fcmToken.string) ?? "")
 
         self.delegate = self
     }

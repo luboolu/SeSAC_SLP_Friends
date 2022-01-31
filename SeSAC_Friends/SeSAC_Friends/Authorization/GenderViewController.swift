@@ -13,7 +13,7 @@ import RxSwift
 
 class GenderViewController: UIViewController {
     
-    let viewModel = AuthorizationViewModel()
+    let viewModel = UserViewModel()
     let mainView = GenderView()
     
     var isMan = false

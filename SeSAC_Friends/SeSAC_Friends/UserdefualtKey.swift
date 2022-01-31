@@ -8,6 +8,7 @@
 import Foundation
 
 enum UserdefaultKey {
+    
     case authVerificationID
     case fcmToken
     case idToken
@@ -38,5 +39,4 @@ enum UserdefaultKey {
         }
     }
     
-
 }

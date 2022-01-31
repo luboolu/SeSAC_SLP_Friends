@@ -13,25 +13,48 @@ import MultiSlider
 
 class MyInfoViewController: UIViewController {
     
-    let tableView: UITableView = {
-        let tableView = UITableView()
-        
-        tableView.separatorStyle = .none
-        tableView.rowHeight = UITableView.automaticDimension
-        //tableView.estimatedRowHeight = 88
-        
-        return tableView
-    }()
-    
+    let mainView = MyInfoView()
+    let viewModel = UserViewModel()
     let disposeBag = DisposeBag()
     
     var moreButtonTabbed = true
+    var preferredAgeGroup = [18, 35]
+    
+    override func loadView() {
+        self.view = mainView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setUp()
-        setConstraints()
+        mainView.tableView.delegate = self
+        mainView.tableView.dataSource = self
+        
+        self.viewModel.getUser() { statusCode, result in
+            print("statusCode: \(statusCode)")
+            
+            DispatchQueue.main.async {
+                //유저정보 가져오는데 성공한 경우
+                if statusCode == 200 {
+                    print(result)
+                    
+                } else if statusCode == 201 {
+
+                } else if statusCode == 401 {
+                    //firebase token 만료
+                    //토큰 갱신해야함
+                    self.viewModel.idTokenRequest { error in
+                        print(error)
+                        if error == nil {
+                            print("토큰 갱신 성공")
+                        }
+                    }
+                }
+            }
+
+            
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,57 +65,34 @@ class MyInfoViewController: UIViewController {
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonClicked))
     }
-    
-    func setUp() {
-        view.backgroundColor = UIColor().white
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(TwoButtonTableViewCell.self, forCellReuseIdentifier: TableViewCell.TwoButtonTableViewCell.id)
-        tableView.register(TextfieldTableViewCell.self, forCellReuseIdentifier: TableViewCell.TextfieldTableViewCell.id)
-        tableView.register(SwitchTableViewCell.self, forCellReuseIdentifier: TableViewCell.SwitchTableViewCell.id)
-        tableView.register(LabelTableViewCell.self, forCellReuseIdentifier: TableViewCell.LabelTableViewCell.id)
-        tableView.register(DoubleSliderTableViewCell.self, forCellReuseIdentifier: TableViewCell.DoubleSliderTableViewCell.id)
-        tableView.register(CardTableViewCell.self, forCellReuseIdentifier: TableViewCell.CardTableViewCell.id)
-        tableView.register(CharactorTableViewCell.self, forCellReuseIdentifier: TableViewCell.CharactorTableViewCell.id)
-        
-        view.addSubview(tableView)
-    }
-    
-    func setConstraints() {
-        tableView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-    }
         
     @objc func saveButtonClicked() {
         print(#function)
+        //정보관리 뷰의 저장 버튼이 클릭 -> 각 테이블뷰 셀의 값을 서버에 업데이트 할 수 있게 해야함
+        //1. 테이블뷰의 데이터 가져오기
+        //2. api 통신
+        
+        
+        //1.
+        //tableview indexPath [0,2] ~ [0,6]
+        
     }
     
     @objc func sliderChanged(_ slider: MultiSlider) {
-        print("thumb \(slider.draggedThumbIndex) moved")
-        print("now thumbs are at \(slider.value)") // e.g., [1.0, 4.5, 5.0]
+        self.preferredAgeGroup[0] = Int(slider.value[0])
+        self.preferredAgeGroup[1] = Int(slider.value[1])
+        
+        self.mainView.tableView.reloadRows(at: [[0, 5]], with: .none)
     }
     
     @objc func moreButtonClicked() {
         print("moreButton tapped")
         self.moreButtonTabbed = !self.moreButtonTabbed
-        self.tableView.reloadRows(at: [[0,1]], with: .fade)
+        self.mainView.tableView.reloadRows(at: [[0, 1]], with: .fade)
     }
 }
 
 extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    //tableView Header View
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let headerView = CharactorView()
-//        headerView.backgroundImage.image = UIImage(named: "sesac_background_1")
-//        headerView.charactorImage.image = UIImage(named: "sesac_face_1")
-//        headerView.layer.masksToBounds = true
-//        headerView.layer.cornerRadius = 10
-//
-//        return headerView
-//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 7
@@ -103,7 +103,6 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print(indexPath)
         
         if indexPath.row == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.CharactorTableViewCell.id) as? CharactorTableViewCell else { return UITableViewCell()}
@@ -192,8 +191,10 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.DoubleSliderTableViewCell.id) as? DoubleSliderTableViewCell else { return UITableViewCell()}
             
             cell.selectionStyle = .none
+            cell.slider.value = [CGFloat(self.preferredAgeGroup[0]), CGFloat(self.preferredAgeGroup[1])]
+            
             cell.label.text = "상대방 연령대"
-            cell.ageLabel.text = "18-35"
+            cell.ageLabel.text = "\(self.preferredAgeGroup[0])-\(self.preferredAgeGroup[1])"
             
             cell.slider.addTarget(self, action: #selector(sliderChanged), for: .valueChanged)
             

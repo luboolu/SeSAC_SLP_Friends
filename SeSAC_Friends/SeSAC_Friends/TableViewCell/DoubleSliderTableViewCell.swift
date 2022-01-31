@@ -40,7 +40,7 @@ class DoubleSliderTableViewCell: UITableViewCell, ViewRepresentable {
         slider.outerTrackColor = UIColor().gray2
         slider.orientation = .horizontal
         slider.thumbImage = UIImage(named: "filter_control")
-        slider.snapStepSize = 0.5
+        slider.snapStepSize = 1
         slider.trackWidth = 5
         slider.value = [20, 40]
         

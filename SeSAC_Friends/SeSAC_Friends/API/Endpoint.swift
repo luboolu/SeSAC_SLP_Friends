@@ -8,6 +8,7 @@
 import Foundation
 
 extension URL {
+    
     static let baseURL = "http://test.monocoding.com:35484"
     
     static func makeEndPoint(_ endpoint: String) -> URL {
@@ -27,3 +28,33 @@ extension URL {
     }
     
 }
+
+enum APIHeader {
+    
+    case ContentType
+    case idtoken
+    
+    var string: String {
+        switch self {
+        case .ContentType:
+            return "Content-Type"
+        case .idtoken:
+            return "idtoken"
+        }
+    }
+    
+}
+
+enum APIHeaderValue {
+    
+    case ContentType
+    
+    var string: String {
+        switch self {
+        case .ContentType:
+            return "application/x-www-form-urlencoded"
+        }
+    }
+}
+
+

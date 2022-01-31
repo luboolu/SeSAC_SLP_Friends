@@ -10,20 +10,7 @@ import Foundation
 import FirebaseAuth
 import FirebaseMessaging
 
-// MARK: - UserSignIn
-struct UserSignIn: Codable {
-    let phoneNumber, fcMtoken, nick, birth: String
-    let email: String
-    let gender: Int
-
-    enum CodingKeys: String, CodingKey {
-        case phoneNumber
-        case fcMtoken = "FCMtoken"
-        case nick, birth, email, gender
-    }
-}
-
-class AuthorizationViewModel {
+class UserViewModel {
     
     //firebase에 phoneNumber로 인증 메세지 요청
     func authRequest(phoneNumber: String, completion: @escaping (Error?) -> Void)  {
@@ -33,7 +20,6 @@ class AuthorizationViewModel {
                     print(error)
                     completion(error)
                 } else {
-                    print("authCode: \(verificationID)")
                     UserDefaults.standard.set(verificationID, forKey: UserdefaultKey.authVerificationID.string)
                     completion(error)
                 }
@@ -68,7 +54,6 @@ class AuthorizationViewModel {
             }
             
             if let idToken = idToken {
-                print(idToken)
                 UserDefaults.standard.set(idToken, forKey: UserdefaultKey.idToken.string)
             }
             
@@ -76,15 +61,15 @@ class AuthorizationViewModel {
         }
     }
     
-    func getUser(completion: @escaping (Int?) -> Void) {
+    func getUser(completion: @escaping (Int?, UserInfo?) -> Void) {
         
         let url = URL(string: "\(URL.user)")!
         let idtoken = UserDefaults.standard.string(forKey: UserdefaultKey.idToken.string) ?? ""
         var request = URLRequest(url: url)
         
         request.httpMethod = "GET"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("\(idtoken)", forHTTPHeaderField: "idtoken")
+        request.setValue(APIHeaderValue.ContentType.string, forHTTPHeaderField: APIHeader.ContentType.string)
+        request.setValue("\(idtoken)", forHTTPHeaderField: APIHeader.idtoken.string)
         
         let session = URLSession.shared
         
@@ -93,19 +78,28 @@ class AuthorizationViewModel {
 
             if error != nil {
                 print(error)
-                completion(-1)
+                completion(-1, nil)
             }
 
             guard let response = response as? HTTPURLResponse else {
-                completion(-1)
+                completion(-1, nil)
                 return
             }
 
             if let data = data {
                 print(data)
+                do {
+                    let decoder = JSONDecoder()
+                    let userData = try decoder.decode(UserInfo.self, from: data)
+                    
+                    completion(response.statusCode, userData)
+                } catch {
+                    print("decoding error")
+                }
+
             }
             
-            completion(response.statusCode)
+            completion(response.statusCode, nil)
 
         }.resume()
         
@@ -126,13 +120,12 @@ class AuthorizationViewModel {
         let gender = UserDefaults.standard.integer(forKey: UserdefaultKey.gender.string)
         
         let body = UserSignIn(phoneNumber: phoneNumber, fcMtoken: fcmToken, nick: nick, birth: birth, email: email, gender: gender)
+        
         guard let uploadBody = try? JSONEncoder().encode(body) else { return }
         
-        print(idtoken)
-        
         request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("\(idtoken)", forHTTPHeaderField: "idtoken")
+        request.setValue(APIHeaderValue.ContentType.string, forHTTPHeaderField: APIHeader.ContentType.string)
+        request.setValue("\(idtoken)", forHTTPHeaderField: APIHeader.idtoken.string)
         
         let session = URLSession.shared
         

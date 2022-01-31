@@ -23,7 +23,7 @@ class LoginViewController: UIViewController {
     var isValid = false
     
     let toastStyle = ToastStyle()
-    let viewModel = AuthorizationViewModel()
+    let viewModel = UserViewModel()
     let mainView = LoginView()
 
     override func loadView() {

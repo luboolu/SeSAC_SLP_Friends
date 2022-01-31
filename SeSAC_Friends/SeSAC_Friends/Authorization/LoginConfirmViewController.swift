@@ -22,7 +22,7 @@ class LoginConfirmViewController: UIViewController {
     
     let disposeBag = DisposeBag()
     let toastStyle = ToastStyle()
-    let viewModel = AuthorizationViewModel()
+    let viewModel = UserViewModel()
     let mainView = LoginConfirmView()
     
     override func loadView() {
@@ -156,7 +156,7 @@ class LoginConfirmViewController: UIViewController {
             } else {
                 print("유저!!")
                 //id token을 제대로 가져왔으면, get user로 가입된 회원인지 확인
-                self.viewModel.getUser() { statusCode in
+                self.viewModel.getUser() { statusCode, result in
                     print("statusCode: \(statusCode)")
                     
                     DispatchQueue.main.async {
