@@ -41,8 +41,9 @@ class UserViewModel {
         }
     }
     
+    //firebase id token (갱신)요청
     func idTokenRequest(completion: @escaping (Error?) -> Void) {
-        //firebase id token (갱신)요청
+        
         let currentUser = Auth.auth().currentUser
         currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
             
@@ -59,6 +60,7 @@ class UserViewModel {
         }
     }
     
+    //user 정보 요청
     func getUser(completion: @escaping (Int?, UserInfo?) -> Void) {
         
         let url = URL(string: "\(URL.user)")!
@@ -103,6 +105,7 @@ class UserViewModel {
         
     }
     
+    //회원가입
     func signIn(completion: @escaping (Int?) -> Void) {
         
         let url = URL(string: "\(URL.user)")!
@@ -160,6 +163,40 @@ class UserViewModel {
             
             completion(response.statusCode)
         }.resume()
+        
+    }
+    
+    //회원탈퇴
+    func userWithdraw(completion: @escaping (Int?, APIResult?) -> Void) {
+        
+        let url = URL(string: "\(URL.userWithdraw)")!
+        let idtoken = UserDefaults.standard.string(forKey: UserdefaultKey.idToken.string) ?? ""
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "POST"
+        request.setValue(APIHeaderValue.ContentType.string, forHTTPHeaderField: APIHeader.ContentType.string)
+        request.setValue("\(idtoken)", forHTTPHeaderField: APIHeader.idtoken.string)
+        
+        let session = URLSession.shared
+        
+        session.dataTask(with: request) { data, response, error in
+            print("userwithdraw 결과")
+
+            if error != nil {
+                print(error)
+                completion(nil, .failed)
+            }
+
+            guard let response = response as? HTTPURLResponse else {
+                completion(nil, .invalidResponse)
+                return
+            }
+
+            if let data = data {
+                print(data)
+                completion(response.statusCode, .succeed)
+            }
+        }
         
     }
 

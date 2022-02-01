@@ -96,7 +96,7 @@ class MyInfoViewController: UIViewController {
 
     }
     
-    func userWithdraw() {
+    func userWithdrawRequest() {
         //회원탈퇴 api 통신
     }
 

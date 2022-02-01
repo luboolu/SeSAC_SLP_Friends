@@ -28,6 +28,7 @@
 		DC18740B27A2D53500DE4FBD /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18740A27A2D53500DE4FBD /* SwitchTableViewCell.swift */; };
 		DC18740D27A2D66200DE4FBD /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18740C27A2D66200DE4FBD /* LabelTableViewCell.swift */; };
 		DC18740F27A2D7B000DE4FBD /* DoubleSliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18740E27A2D7AF00DE4FBD /* DoubleSliderTableViewCell.swift */; };
+		DC6E55DA27A97CE500998FF9 /* APIenum.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55D927A97CE500998FF9 /* APIenum.swift */; };
 		DCA1AAB9279D7B4F002194B4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = DCA1AAB8279D7B4F002194B4 /* FirebaseAuth */; };
 		DCA1AABB279D7B4F002194B4 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = DCA1AABA279D7B4F002194B4 /* FirebaseMessaging */; };
 		DCA1AABE279DA7CA002194B4 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA1AABD279DA7CA002194B4 /* Endpoint.swift */; };
@@ -97,6 +98,7 @@
 		DC18740A27A2D53500DE4FBD /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
 		DC18740C27A2D66200DE4FBD /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
 		DC18740E27A2D7AF00DE4FBD /* DoubleSliderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleSliderTableViewCell.swift; sourceTree = "<group>"; };
+		DC6E55D927A97CE500998FF9 /* APIenum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIenum.swift; sourceTree = "<group>"; };
 		DCA1AABD279DA7CA002194B4 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		DCA1AABF279E4531002194B4 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		DCA1AAC2279E94D1002194B4 /* UserdefualtKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserdefualtKey.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				DCA1AABD279DA7CA002194B4 /* Endpoint.swift */,
+				DC6E55D927A97CE500998FF9 /* APIenum.swift */,
 				DCC419F127A7CABD006B2904 /* InputDataStruct.swift */,
 				DCC419F627A7DE86006B2904 /* OutputDataStructswift.swift */,
 			);
@@ -447,6 +450,7 @@
 				DCDE366F279AB8920077847C /* GenderViewController.swift in Sources */,
 				DCDCC2E1279FF27500FB142B /* OnBoardingTitleCollectionViewCell.swift in Sources */,
 				DCE678E527A2EA4D00ACB1A7 /* CardTableViewCell.swift in Sources */,
+				DC6E55DA27A97CE500998FF9 /* APIenum.swift in Sources */,
 				DC1873F727A2466400DE4FBD /* MyPageView.swift in Sources */,
 				DCDCC2DF279FD29500FB142B /* OnBoardingViewController.swift in Sources */,
 				DCA1AAC3279E94D2002194B4 /* UserdefualtKey.swift in Sources */,
