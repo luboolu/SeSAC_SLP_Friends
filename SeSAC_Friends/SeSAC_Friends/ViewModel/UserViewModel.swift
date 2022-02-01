@@ -167,7 +167,7 @@ class UserViewModel {
     }
     
     //회원탈퇴
-    func userWithdraw(completion: @escaping (Int?, APIResult?) -> Void) {
+    func userWithdraw(completion: @escaping (APIResult?) -> Void) {
         
         let url = URL(string: "\(URL.userWithdraw)")!
         let idtoken = UserDefaults.standard.string(forKey: UserdefaultKey.idToken.string) ?? ""
@@ -179,24 +179,44 @@ class UserViewModel {
         
         let session = URLSession.shared
         
+        print(url)
+        print(request.allHTTPHeaderFields)
+        
         session.dataTask(with: request) { data, response, error in
             print("userwithdraw 결과")
 
             if error != nil {
                 print(error)
-                completion(nil, .failed)
+                completion(.failed)
             }
-
+            
             guard let response = response as? HTTPURLResponse else {
-                completion(nil, .invalidResponse)
+                completion(.invalidResponse)
                 return
             }
 
             if let data = data {
                 print(data)
-                completion(response.statusCode, .succeed)
             }
-        }
+            print("회원탈퇴!!!")
+            print(response.statusCode)
+            print(data)
+            
+            if response.statusCode == 200 {
+                completion(.succeed)
+            } else if response.statusCode == 401 {
+                completion(.tokenError)
+            } else if response.statusCode == 406 {
+                completion(.processed)
+            } else if response.statusCode == 500 {
+                completion(.serverError)
+            } else if response.statusCode == 501 {
+                completion(.clientError)
+            } else {
+                completion(.failed)
+            }
+            
+        }.resume()
         
     }
 

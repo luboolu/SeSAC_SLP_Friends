@@ -94,7 +94,7 @@ class GenderViewController: UIViewController {
                 
                 //회원가입 api 통신 시작!
                 self.viewModel.signIn { statusCode in
-                    print("회원가입 완료")
+                    print("회원가입 완료 \(statusCode)")
                     
                     if statusCode == 200 {
                         

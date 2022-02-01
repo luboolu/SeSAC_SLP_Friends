@@ -15,6 +15,7 @@ enum APIResult: Error {
     case invalidData
     case succeed //200 ~ 299
     case tokenError //401
+    case processed //406
     case serverError //500
     case clientError //501
 }

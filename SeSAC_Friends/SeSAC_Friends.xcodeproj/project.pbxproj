@@ -29,6 +29,7 @@
 		DC18740D27A2D66200DE4FBD /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18740C27A2D66200DE4FBD /* LabelTableViewCell.swift */; };
 		DC18740F27A2D7B000DE4FBD /* DoubleSliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18740E27A2D7AF00DE4FBD /* DoubleSliderTableViewCell.swift */; };
 		DC6E55DA27A97CE500998FF9 /* APIenum.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55D927A97CE500998FF9 /* APIenum.swift */; };
+		DC6E55DC27A98A7800998FF9 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55DB27A98A7800998FF9 /* Alert.swift */; };
 		DCA1AAB9279D7B4F002194B4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = DCA1AAB8279D7B4F002194B4 /* FirebaseAuth */; };
 		DCA1AABB279D7B4F002194B4 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = DCA1AABA279D7B4F002194B4 /* FirebaseMessaging */; };
 		DCA1AABE279DA7CA002194B4 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA1AABD279DA7CA002194B4 /* Endpoint.swift */; };
@@ -99,6 +100,7 @@
 		DC18740C27A2D66200DE4FBD /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
 		DC18740E27A2D7AF00DE4FBD /* DoubleSliderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleSliderTableViewCell.swift; sourceTree = "<group>"; };
 		DC6E55D927A97CE500998FF9 /* APIenum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIenum.swift; sourceTree = "<group>"; };
+		DC6E55DB27A98A7800998FF9 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		DCA1AABD279DA7CA002194B4 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		DCA1AABF279E4531002194B4 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		DCA1AAC2279E94D1002194B4 /* UserdefualtKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserdefualtKey.swift; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 				DCE2D1DA2796A8E30018895F /* Button */,
 				DCE2D1BB279694720018895F /* AppDelegate.swift */,
 				DCE2D1BD279694720018895F /* SceneDelegate.swift */,
+				DC6E55DB27A98A7800998FF9 /* Alert.swift */,
 				DC1873F827A25EF000DE4FBD /* ViewRepresentable.swift */,
 				DCA1AAC2279E94D1002194B4 /* UserdefualtKey.swift */,
 				DCE2D1C4279694750018895F /* Assets.xcassets */,
@@ -491,6 +494,7 @@
 				DC1873E927A1117A00DE4FBD /* MyPageViewController.swift in Sources */,
 				DC18740D27A2D66200DE4FBD /* LabelTableViewCell.swift in Sources */,
 				DCE2D1E12796CCD30018895F /* MainTextFieldStatus.swift in Sources */,
+				DC6E55DC27A98A7800998FF9 /* Alert.swift in Sources */,
 				DC18740527A267EF00DE4FBD /* GenderView.swift in Sources */,
 				DCE2D1ED2796FF950018895F /* UIFont+Extension.swift in Sources */,
 				DC18740F27A2D7B000DE4FBD /* DoubleSliderTableViewCell.swift in Sources */,
