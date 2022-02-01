@@ -15,10 +15,16 @@ class MyInfoViewController: UIViewController {
     
     let mainView = MyInfoView()
     let viewModel = UserViewModel()
-    let disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
     
     var moreButtonTabbed = true
-    var preferredAgeGroup = [18, 35]
+    var myInfo: UserInfo?
+    
+    //tableview에서 선택된 값
+    var myGender = -1
+    var myHobby = ""
+    var myNumberSearch = 0
+    var myPreferredAge = [18, 35]
     
     override func loadView() {
         self.view = mainView
@@ -30,31 +36,7 @@ class MyInfoViewController: UIViewController {
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
         
-        self.viewModel.getUser() { statusCode, result in
-            print("statusCode: \(statusCode)")
-            
-            DispatchQueue.main.async {
-                //유저정보 가져오는데 성공한 경우
-                if statusCode == 200 {
-                    print(result)
-                    
-                } else if statusCode == 201 {
-
-                } else if statusCode == 401 {
-                    //firebase token 만료
-                    //토큰 갱신해야함
-                    self.viewModel.idTokenRequest { error in
-                        print(error)
-                        if error == nil {
-                            print("토큰 갱신 성공")
-                        }
-                    }
-                }
-            }
-
-            
-        }
-        
+        getUserInfo()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,6 +47,59 @@ class MyInfoViewController: UIViewController {
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonClicked))
     }
+    
+    func getUserInfo() {
+        print(#function)
+        
+        self.viewModel.getUser() { statusCode, result in
+            DispatchQueue.main.async {
+                print("statusCode: \(statusCode)")
+                
+                //유저정보 가져오는데 성공한 경우
+                if statusCode == 200 {
+                    if let result = result {
+                        print(result)
+                        self.myInfo = result
+                        
+                        self.myGender = result.gender
+                        self.myHobby = result.hobby
+                        self.myNumberSearch = result.searchable
+                        self.myPreferredAge = [result.ageMin, result.ageMax]
+                        
+                        self.mainView.tableView.reloadData()
+                    }
+                    
+                } else if statusCode == 201 {
+
+                } else if statusCode == 401 {
+                    //firebase token 만료
+                    //토큰 갱신해야함
+                    print("idtoken 갱신 필요")
+                    self.reloadIdToken()
+                    //return
+                }
+            }
+        }
+    }
+    
+    func reloadIdToken() {
+        self.viewModel.idTokenRequest { error in
+            DispatchQueue.main.async {
+                print(error)
+                if error == nil {
+                    print("토큰 갱신 성공")
+                    //갱신된 토큰으로 다시 유저 정보 요청
+                    self.getUserInfo()
+                }
+            }
+        }
+
+    }
+    
+    func userWithdraw() {
+        //회원탈퇴 api 통신
+    }
+
         
     @objc func saveButtonClicked() {
         print(#function)
@@ -72,15 +107,16 @@ class MyInfoViewController: UIViewController {
         //1. 테이블뷰의 데이터 가져오기
         //2. api 통신
         
-        
+        print("myGender: \(myGender) myHobby: \(myHobby) myNumberSearch: \(myNumberSearch) myPreferredAge: \(myPreferredAge)")
         //1.
         //tableview indexPath [0,2] ~ [0,6]
+        
         
     }
     
     @objc func sliderChanged(_ slider: MultiSlider) {
-        self.preferredAgeGroup[0] = Int(slider.value[0])
-        self.preferredAgeGroup[1] = Int(slider.value[1])
+        self.myPreferredAge[0] = Int(slider.value[0])
+        self.myPreferredAge[1] = Int(slider.value[1])
         
         self.mainView.tableView.reloadRows(at: [[0, 5]], with: .none)
     }
@@ -121,7 +157,10 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
             cell.titleCollectionView.dataSource = self
             cell.titleCollectionView.register(ButtonCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.ButtonCollectionViewCell.id)
             
-            cell.nicknameLabel.text = "고래밥"
+            if let data = self.myInfo {
+                cell.nicknameLabel.text = data.nick
+            }
+            
             cell.titleView.isHidden = self.moreButtonTabbed
             cell.hobbyView.isHidden = true
             cell.reviewView.isHidden = self.moreButtonTabbed
@@ -135,38 +174,36 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.selectionStyle = .none
             cell.label.text = "내 성별"
-
+            
+            if self.myGender == 0 {
+                cell.womanButton.status = .fill
+            } else if self.myGender == 1 {
+                cell.manButton.status = .fill
+            } else {
+                cell.womanButton.status = .inactive
+                cell.manButton.status = .inactive
+            }
+            
             cell.manButton.rx.tap
-                .bind { _ in
-                    cell.manButton.isSelected = !cell.manButton.isSelected
-                    print(cell.manButton.isSelected)
-                    
-                    if cell.manButton.isSelected {
-                        cell.manButton.status = .fill
-                    } else {
-                        cell.manButton.status = .inactive
-                    }
-                    cell.womanButton.isSelected = false
+                .scan(cell.manButton.status) { lastState, newState in
                     cell.womanButton.status = .inactive
-                    
-                    print("man: \(cell.manButton.isSelected) woman: \(cell.womanButton.isSelected)")
+                    self.myGender = 1
+                    return .fill
                 }
+                .map { $0 }
+                .bind(to: cell.manButton.rx.status)
+                .disposed(by: self.disposeBag)
             
             cell.womanButton.rx.tap
-                .bind { _ in
-                    cell.womanButton.isSelected = !cell.womanButton.isSelected
-                    print(cell.womanButton.isSelected)
-                    
-                    if cell.womanButton.isSelected {
-                        cell.womanButton.status = .fill
-                    } else {
-                        cell.womanButton.status = .inactive
-                    }
-                    cell.manButton.isSelected = false
+                .scan(cell.womanButton.status) { lastState, newState in
                     cell.manButton.status = .inactive
-                    
-                    print("man: \(cell.manButton.isSelected) woman: \(cell.womanButton.isSelected)")
+                    self.myGender = 0
+                    return .fill
                 }
+                .map { $0 }
+                .bind(to: cell.womanButton.rx.status)
+                .disposed(by: self.disposeBag)
+
             
             return cell
             
@@ -176,6 +213,24 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
             cell.selectionStyle = .none
             cell.label.text = "자주 하는 취미"
             cell.textfield.textfield.placeholder = "취미를 입력해주세요"
+            cell.textfield.textfield.text = self.myHobby
+            
+            //textfield가 활성화되는 시점을 감지
+            cell.textfield.textfield.rx.controlEvent([.editingDidBegin])
+                .asObservable()
+                .subscribe(onNext: { _ in
+                    cell.textfield.status = .active
+                    cell.textfield.textfield.placeholder = "취미를 입력해주세요"
+                }).disposed(by: disposeBag)
+            
+            //textfield가 비활성화 되는 시점을 감지
+            cell.textfield.textfield.rx.controlEvent([.editingDidEnd])
+                .asObservable()
+                .subscribe(onNext: { _ in
+                    cell.textfield.status = .inactive
+                    cell.textfield.textfield.placeholder = "취미를 입력해주세요"
+                    self.myHobby = cell.textfield.textfield.text ?? ""
+                }).disposed(by: disposeBag)
             
             return cell
             
@@ -185,16 +240,33 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
             cell.selectionStyle = .none
             cell.label.text = "내 번호 검색 허용"
             
+            if self.myNumberSearch == 1 {
+                cell.switchButton.isOn = true
+            } else {
+                cell.switchButton.isOn = false
+            }
+            
+            cell.switchButton.rx.controlEvent([.valueChanged])
+                .subscribe { _ in
+                    if cell.switchButton.isOn == true {
+                        self.myNumberSearch = 1
+                    } else {
+                        self.myNumberSearch = 0
+                    }
+                    
+                }
+                .disposed(by: self.disposeBag)
+            
             return cell
             
         }  else if indexPath.row == 5 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.DoubleSliderTableViewCell.id) as? DoubleSliderTableViewCell else { return UITableViewCell()}
             
             cell.selectionStyle = .none
-            cell.slider.value = [CGFloat(self.preferredAgeGroup[0]), CGFloat(self.preferredAgeGroup[1])]
+            cell.slider.value = [CGFloat(self.myPreferredAge[0]), CGFloat(self.myPreferredAge[1])]
             
             cell.label.text = "상대방 연령대"
-            cell.ageLabel.text = "\(self.preferredAgeGroup[0])-\(self.preferredAgeGroup[1])"
+            cell.ageLabel.text = "\(self.myPreferredAge[0])-\(self.myPreferredAge[1])"
             
             cell.slider.addTarget(self, action: #selector(sliderChanged), for: .valueChanged)
             

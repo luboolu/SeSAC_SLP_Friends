@@ -22,7 +22,6 @@ class MyPageViewController: UIViewController {
         super.viewDidLoad()
         
         setUp()
-        setConstraints()
     }
     
     let menuList = ["공지사항", "자주 묻는 질문", "1:1 문의", "알림 설정", "이용 약관"]
@@ -45,12 +44,7 @@ class MyPageViewController: UIViewController {
         mainView.tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: "ProfileTableViewCell")
 
     }
-    
-    func setConstraints() {
-        
 
-        
-    }
     
     
     @objc func profileDetailButtonClicked() {

@@ -14,6 +14,7 @@ class CardTableViewCell: UITableViewCell, ViewRepresentable {
     let nicknameLabel: UILabel = {
         let label = UILabel()
         
+        label.text = "   "
         label.font = UIFont().Title1_M16
         label.textColor = UIColor().black
         

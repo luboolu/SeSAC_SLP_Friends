@@ -221,6 +221,7 @@
 		DCC419F527A7DE06006B2904 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				DCA1AABF279E4531002194B4 /* UserViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -346,7 +347,6 @@
 				DC18740227A266CF00DE4FBD /* EmailView.swift */,
 				DCDE366E279AB8920077847C /* GenderViewController.swift */,
 				DC18740427A267EF00DE4FBD /* GenderView.swift */,
-				DCA1AABF279E4531002194B4 /* UserViewModel.swift */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";

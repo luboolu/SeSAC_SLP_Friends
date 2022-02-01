@@ -107,16 +107,12 @@ class LoginConfirmViewController: UIViewController {
         
         mainView.authButton.rx.tap
             .bind { [self] in
-                print("auth button clicked!")
                 self.authButtonTapped()
             }.disposed(by: disposeBag)
         
         mainView.resendAuthButton.rx.tap
             .bind {
-                print("resentAuthButton clicked!")
                 self.resendButtonTapped()
-
-                
             }.disposed(by: disposeBag)
         
     }
@@ -150,40 +146,63 @@ class LoginConfirmViewController: UIViewController {
     }
     
     func authButtonTapped() {
-        self.viewModel.idTokenRequest { error in
-            if error != nil {
-                self.view.makeToast("에러가 발생했습니다" ,duration: 2.0, position: .bottom, style: self.toastStyle)
-            } else {
-                print("유저!!")
-                //id token을 제대로 가져왔으면, get user로 가입된 회원인지 확인
-                self.viewModel.getUser() { statusCode, result in
-                    print("statusCode: \(statusCode)")
-                    
-                    DispatchQueue.main.async {
-                        //기존 유저인 경우
-                        if statusCode == 200 {
-                            //루트 뷰 자체를 바꿔줌
-                            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
-                            windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: MainViewController())
-                            windowScene.windows.first?.makeKeyAndVisible()
-                            
-                        } else if statusCode == 201 {
-                            //미가입 유저인 경우
-                            //닉네임 입력 화면으로 화면 전환!
-                            let vc = NicknameViewController()
-                            self.navigationController?.pushViewController(vc, animated: true)
-                        }
-                    }
+        print("auth button clicked!")
+        
+        DispatchQueue.main.async {
+            //1. 인증번호 6자리 입력 확인
+            //인증번호 6자리가 모두 입력되었는지 확인
+            if self.mainView.authCodeTextField.textfield.text?.count != 6 {
+                self.view.makeToast("전화 번호 인증 실패" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                return
+            }
+            
+            //2. 입력된 인증번호가 일치하는지 확인
+            let inputCode = self.mainView.authCodeTextField.textfield.text ?? ""
 
-                    
+            self.viewModel.authSignIn(inputCode: inputCode) { error in
+                if error != nil {
+                    self.view.makeToast("전화 번호 인증 실패" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    return
                 }
+            }
+            
+            //3. id token 요청
+            self.viewModel.idTokenRequest { error in
+                if error != nil {
+                    self.view.makeToast("에러가 발생했습니다" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    return
+                }
+            }
+            
+            //4. 기존 회원인지 확인
+            self.viewModel.getUser() { statusCode, result in
+                print("statusCode: \(statusCode)")
                 
+                DispatchQueue.main.async {
+                    //기존 유저인 경우
+                    //5-1. 기존 회원이라면 main화면으로 전환
+                    if statusCode == 200 {
+                        //루트 뷰 자체를 바꿔줌
+                        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                        windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: MainViewController())
+                        windowScene.windows.first?.makeKeyAndVisible()
+                        
+                    } else if statusCode == 201 {
+                        //미가입 유저인 경우
+                        //닉네임 입력 화면으로 화면 전환!
+                        //5-2. 미가입 회원이라면 닉네임 입력 화면으로 전환
+                        let vc = NicknameViewController()
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                }
             }
         }
+
 
     }
     
     func resendButtonTapped() {
+        print("auth resend button clicked!")
         //timer 초기화
         self.startTimer()
         //firebase 인증 문자 재전송

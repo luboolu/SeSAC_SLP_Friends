@@ -17,7 +17,6 @@ class UserViewModel {
         PhoneAuthProvider.provider()
             .verifyPhoneNumber(phoneNumber, uiDelegate: nil) { verificationID, error in
                 if let error = error {
-                    print(error)
                     completion(error)
                 } else {
                     UserDefaults.standard.set(verificationID, forKey: UserdefaultKey.authVerificationID.string)
@@ -34,7 +33,6 @@ class UserViewModel {
         
         Auth.auth().signIn(with: credential) { success, error in
             if error == nil {
-                print(success ?? "")
                 print("인증 성공!!Id token 요청하기")
                 completion(error)
             } else {
@@ -44,7 +42,7 @@ class UserViewModel {
     }
     
     func idTokenRequest(completion: @escaping (Error?) -> Void) {
-        //firebase id token 요청
+        //firebase id token (갱신)요청
         let currentUser = Auth.auth().currentUser
         currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
             
