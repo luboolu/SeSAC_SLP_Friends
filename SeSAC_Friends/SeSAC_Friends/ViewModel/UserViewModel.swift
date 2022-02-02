@@ -9,10 +9,8 @@ import Foundation
 
 import FirebaseAuth
 import FirebaseMessaging
-import UIKit
 
 class UserViewModel {
-    
     //firebase에 phoneNumber로 인증 메세지 요청
     func authRequest(phoneNumber: String, completion: @escaping (Error?) -> Void)  {
         PhoneAuthProvider.provider()
@@ -20,7 +18,7 @@ class UserViewModel {
                 if let error = error {
                     completion(error)
                 } else {
-                    UserDefaults.standard.set(verificationID, forKey: UserdefaultKey.authVerificationID.string)
+                    UserDefaults.standard.set(verificationID, forKey: UserdefaultKey.authVerificationID.rawValue)
                     completion(error)
                 }
           }
@@ -29,7 +27,7 @@ class UserViewModel {
     //입력된 인증번호가 일치하는지 확인
     func authSignIn(inputCode: String, completion: @escaping (Error?) -> Void) {
         
-        let verificationID = UserDefaults.standard.string(forKey: UserdefaultKey.authVerificationID.string) ?? ""
+        let verificationID = UserDefaults.standard.string(forKey: UserdefaultKey.authVerificationID.rawValue) ?? ""
         let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: inputCode)
         
         Auth.auth().signIn(with: credential) { success, error in
@@ -54,7 +52,7 @@ class UserViewModel {
             }
             
             if let idToken = idToken {
-                UserDefaults.standard.set(idToken, forKey: UserdefaultKey.idToken.string)
+                UserDefaults.standard.set(idToken, forKey: UserdefaultKey.idToken.rawValue)
             }
             
             completion(error)
@@ -65,7 +63,7 @@ class UserViewModel {
     func getUser(completion: @escaping (APIResult?, GetUserResult?, UserInfo?) -> Void) {
         
         let url = URL(string: "\(URL.user)")!
-        let idtoken = UserDefaults.standard.string(forKey: UserdefaultKey.idToken.string) ?? ""
+        let idtoken = UserDefaults.standard.string(forKey: UserdefaultKey.idToken.rawValue) ?? ""
         var request = URLRequest(url: url)
         
         request.httpMethod = "GET"
@@ -105,7 +103,9 @@ class UserViewModel {
             } else if response.statusCode == 201 {
                 completion(.succeed, .newUser, nil)
             } else if response.statusCode == 401 {
-                completion(.failed, .tokenError, nil)
+                self.idTokenRequest { error in
+                    completion(.failed, .tokenError, nil)
+                }
             } else if response.statusCode == 500 {
                 completion(.failed, .serverError, nil)
             } else if response.statusCode == 501 {
@@ -122,15 +122,15 @@ class UserViewModel {
     func signIn(completion: @escaping (Int?) -> Void) {
         
         let url = URL(string: "\(URL.user)")!
-        let idtoken = UserDefaults.standard.string(forKey: UserdefaultKey.idToken.string) ?? ""
+        let idtoken = UserDefaults.standard.string(forKey: UserdefaultKey.idToken.rawValue) ?? ""
         
         //httpBody
-        let phoneNumber = UserDefaults.standard.string(forKey: UserdefaultKey.phoneNumber.string) ?? ""
-        let FCMtoken = UserDefaults.standard.string(forKey: UserdefaultKey.fcmToken.string) ?? ""
-        let nick = UserDefaults.standard.string(forKey: UserdefaultKey.nickname.string) ?? ""
-        let birth = UserDefaults.standard.string(forKey: UserdefaultKey.birthDay.string) ?? ""
-        let email = UserDefaults.standard.string(forKey: UserdefaultKey.email.string) ?? ""
-        let gender = UserDefaults.standard.integer(forKey: UserdefaultKey.gender.string)
+        let phoneNumber = UserDefaults.standard.string(forKey: UserdefaultKey.phoneNumber.rawValue) ?? ""
+        let FCMtoken = UserDefaults.standard.string(forKey: UserdefaultKey.fcmToken.rawValue) ?? ""
+        let nick = UserDefaults.standard.string(forKey: UserdefaultKey.nickname.rawValue) ?? ""
+        let birth = UserDefaults.standard.string(forKey: UserdefaultKey.birthDay.rawValue) ?? ""
+        let email = UserDefaults.standard.string(forKey: UserdefaultKey.email.rawValue) ?? ""
+        let gender = UserDefaults.standard.integer(forKey: UserdefaultKey.gender.rawValue)
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -179,7 +179,7 @@ class UserViewModel {
     func userWithdraw(completion: @escaping (APIResult?, UserWithdrawResult?) -> Void) {
         
         let url = URL(string: "\(URL.userWithdraw)")!
-        let idtoken = UserDefaults.standard.string(forKey: UserdefaultKey.idToken.string) ?? ""
+        let idtoken = UserDefaults.standard.string(forKey: UserdefaultKey.idToken.rawValue) ?? ""
         var request = URLRequest(url: url)
         
         request.httpMethod = "POST"
@@ -209,7 +209,9 @@ class UserViewModel {
             if response.statusCode == 200 {
                 completion(.succeed, .succeed)
             } else if response.statusCode == 401 {
-                completion(.failed, .tokenError)
+                self.idTokenRequest { error in
+                    completion(.failed, .tokenError)
+                }
             } else if response.statusCode == 406 {
                 completion(.failed, .alreadyProcessed)
             } else if response.statusCode == 500 {
@@ -222,6 +224,54 @@ class UserViewModel {
             
         }.resume()
         
+    }
+    
+    func userInfoUpdate(searchable: Int, ageMin: Int, ageMax: Int, gender: Int, hobby: String, completion: @escaping (APIResult?, UserInfoUpdateResult?) -> Void) {
+        
+        let url = URL(string: "\(URL.userInfoUpdate)")!
+        let idtoken = UserDefaults.standard.string(forKey: UserdefaultKey.idToken.rawValue) ?? ""
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "POST"
+        request.httpBody = "searchable=\(searchable)&ageMin=\(ageMin)&ageMax=\(ageMax)&gender=\(gender)&hobby=\(hobby)".data(using: .utf8, allowLossyConversion: false)
+        request.setValue(APIHeaderValue.ContentType.string, forHTTPHeaderField: APIHeader.ContentType.string)
+        request.setValue("\(idtoken)", forHTTPHeaderField: APIHeader.idtoken.string)
+        
+        let session = URLSession.shared
+        
+        session.dataTask(with: request) { data, response, error in
+            if error != nil {
+                completion(.failed, nil)
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse else {
+                completion(.invalidResponse, nil)
+                return
+            }
+
+            guard let data = data else {
+                completion(.noData, nil)
+                return
+            }
+            
+            if response.statusCode == 200 {
+                completion(.succeed, .succeed)
+            } else if response.statusCode == 401 {
+                //여기서 idtoken 업데이트를 해야하나?
+                self.idTokenRequest { error in
+                    completion(.failed, .tokenError)
+                }
+            } else if response.statusCode == 500 {
+                completion(.failed, .serverError)
+            } else if response.statusCode == 501 {
+                completion(.failed, .clientError)
+            } else {
+                completion(.failed, nil)
+            }
+            
+            
+        }.resume()
     }
 
 }

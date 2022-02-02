@@ -83,13 +83,13 @@ class GenderViewController: UIViewController {
                 //여자:0, 남자:1, 미선택: -1
                 if self.isWoman == true {
                     //여자
-                    UserDefaults.standard.set(0, forKey: UserdefaultKey.gender.string)
+                    UserDefaults.standard.set(0, forKey: UserdefaultKey.gender.rawValue)
                 } else if self.isMan == true {
                     //남자
-                    UserDefaults.standard.set(1, forKey: UserdefaultKey.gender.string)
+                    UserDefaults.standard.set(1, forKey: UserdefaultKey.gender.rawValue)
                 } else {
                     //미선택
-                    UserDefaults.standard.set(-1, forKey: UserdefaultKey.gender.string)
+                    UserDefaults.standard.set(-1, forKey: UserdefaultKey.gender.rawValue)
                 }
                 
                 //회원가입 api 통신 시작!

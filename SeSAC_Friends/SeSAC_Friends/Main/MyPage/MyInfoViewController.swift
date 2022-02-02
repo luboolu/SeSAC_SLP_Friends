@@ -75,8 +75,7 @@ class MyInfoViewController: UIViewController {
                     //firebase token 만료
                     //토큰 갱신해야함
                     print("idtoken 갱신 필요")
-                    self.reloadIdToken()
-                    //return
+                    self.getUserInfo()
                 } else {
                     self.view.makeToast("에러가 발생했습니다! 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
                 }
@@ -84,20 +83,7 @@ class MyInfoViewController: UIViewController {
         }
     }
     
-    func reloadIdToken() {
-        self.viewModel.idTokenRequest { error in
-            DispatchQueue.main.async {
-                print(error)
-                if error == nil {
-                    print("토큰 갱신 성공")
-                    //갱신된 토큰으로 다시 유저 정보 요청
-                    self.getUserInfo()
-                }
-            }
-        }
 
-    }
-    
     func userWithdrawRequest() {
         print("회원탈퇴 시작")
         //회원탈퇴 api 통신
@@ -110,11 +96,30 @@ class MyInfoViewController: UIViewController {
                     windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: OnBoardingViewController())
                     windowScene.windows.first?.makeKeyAndVisible()
                 }
+            } else if userWithdrawResult == .tokenError {
+                self.userWithdrawRequest()
             } else {
                 //에러
                 self.view.makeToast("에러가 발생했습니다! 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
             }
         }
+    }
+    
+    func userInfoUpdateRequest() {
+        
+        self.viewModel.userInfoUpdate(searchable: self.myNumberSearch, ageMin: self.myPreferredAge[0], ageMax: self.myPreferredAge[1], gender: self.myGender, hobby: self.myHobby) { apiResult, userInfoUpdateResult in
+            
+            if userInfoUpdateResult == .succeed {
+                print("업데이트 성공")
+                self.getUserInfo()
+            } else if userInfoUpdateResult == .tokenError {
+                self.userInfoUpdateRequest()
+            } else {
+                self.view.makeToast("에러가 발생했습니다! 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+            }
+            
+        }
+        
     }
 
         
@@ -124,11 +129,8 @@ class MyInfoViewController: UIViewController {
         //1. 테이블뷰의 데이터 가져오기
         //2. api 통신
         
-        print("myGender: \(myGender) myHobby: \(myHobby) myNumberSearch: \(myNumberSearch) myPreferredAge: \(myPreferredAge)")
-        //1.
-        //tableview indexPath [0,2] ~ [0,6]
-        
-        
+        //print("myGender: \(myGender) myHobby: \(myHobby) myNumberSearch: \(myNumberSearch) myPreferredAge: \(myPreferredAge)")
+        self.userInfoUpdateRequest()
     }
     
     @objc func sliderChanged(_ slider: MultiSlider) {
@@ -344,11 +346,16 @@ extension MyInfoViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let titleList = ["좋은 매너", "정확한 시간 약속", "빠른 응답", "친절한 성격", "능숙한 취미 실력", "유익한 시간"]
         
         cell.button.setTitle("\(titleList[indexPath.row])", for: .normal)
+        cell.button.isEnabled = false
+        cell.button.status = .inactive
         
-        cell.button.rx.tap
-            .bind {
+        if let data = self.myInfo {
+            if data.reputation[indexPath.row] == 0 {
+                cell.button.status = .inactive
+            } else {
                 cell.button.status = .fill
             }
+        }
         
         return cell
     }

@@ -40,13 +40,13 @@ class MyPageViewController: UIViewController {
         
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
-        mainView.tableView.register(IconTableViewCell.self, forCellReuseIdentifier: "IconTableViewCell")
-        mainView.tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: "ProfileTableViewCell")
+        mainView.tableView.register(IconTableViewCell.self, forCellReuseIdentifier: TableViewCell.IconTableViewCell.id)
+        mainView.tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: TableViewCell.ProfileTableViewCell.id)
 
     }
 
-    
-    
+
+
     @objc func profileDetailButtonClicked() {
         print(#function)
     }
@@ -76,17 +76,16 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
         if indexPath.section == 0 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileTableViewCell") as? ProfileTableViewCell else { return UITableViewCell()}
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.ProfileTableViewCell.id) as? ProfileTableViewCell else { return UITableViewCell()}
             
             cell.profileImage.image = UIImage(named: "sesac_face_1")
-            cell.nicknameLabel.text = "새싹이"
+            cell.nicknameLabel.text = UserDefaults.standard.string(forKey: UserdefaultKey.nickname.rawValue) ?? ""
             cell.detailButton.addTarget(self, action: #selector(profileDetailButtonClicked), for: .touchUpInside)
             
             return cell
         } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "IconTableViewCell") as? IconTableViewCell else { return UITableViewCell()}
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.IconTableViewCell.id) as? IconTableViewCell else { return UITableViewCell()}
             
             cell.icon.image = UIImage(named: "\(self.menuIconList[indexPath.row])")
             cell.label.text = "\(self.menuList[indexPath.row])"

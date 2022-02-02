@@ -39,13 +39,13 @@ class LoginConfirmViewController: UIViewController {
         setButton()
         
         print("authVerificationID")
-        print(UserDefaults.standard.string(forKey: UserdefaultKey.authVerificationID.string) ?? "")
+        print(UserDefaults.standard.string(forKey: UserdefaultKey.authVerificationID.rawValue) ?? "")
         
         print("idtoken")
-        print(UserDefaults.standard.string(forKey: UserdefaultKey.idToken.string) ?? "")
+        print(UserDefaults.standard.string(forKey: UserdefaultKey.idToken.rawValue) ?? "")
         
         print("fcmToken")
-        print(UserDefaults.standard.string(forKey: UserdefaultKey.fcmToken.string) ?? "")
+        print(UserDefaults.standard.string(forKey: UserdefaultKey.fcmToken.rawValue) ?? "")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -204,7 +204,7 @@ class LoginConfirmViewController: UIViewController {
         print("auth resend button clicked!")
         //firebase 인증 문자 재전송
         //firebase auth 시작
-        let number = UserDefaults.standard.string(forKey: UserdefaultKey.phoneNumber.string) ?? ""
+        let number = UserDefaults.standard.string(forKey: UserdefaultKey.phoneNumber.rawValue) ?? ""
         
         self.viewModel.authRequest(phoneNumber: number) { error in
             if let error = error {

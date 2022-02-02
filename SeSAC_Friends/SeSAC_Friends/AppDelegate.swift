@@ -14,8 +14,6 @@ import IQKeyboardManagerSwift
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
@@ -26,6 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.enableAutoToolbar = false
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+        
+
 
         //메시지 대리자 설정
         Messaging.messaging().delegate = self
@@ -68,7 +68,7 @@ extension AppDelegate: MessagingDelegate {
         
         print("Firebase registration token: \(String(describing: fcmToken))")
         
-        UserDefaults.standard.set(fcmToken, forKey: UserdefaultKey.fcmToken.string)
+        UserDefaults.standard.set(fcmToken, forKey: UserdefaultKey.fcmToken.rawValue)
         
         let dataDict: [String: String] = ["token": fcmToken ?? ""]
         NotificationCenter.default.post(

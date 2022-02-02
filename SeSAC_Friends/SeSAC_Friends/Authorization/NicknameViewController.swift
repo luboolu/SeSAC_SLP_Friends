@@ -65,7 +65,7 @@ class NicknameViewController: UIViewController {
         
         if input.count > 0 {
             //UserDefault에 저장
-            UserDefaults.standard.set(input, forKey: UserdefaultKey.nickname.string)
+            UserDefaults.standard.set(input, forKey: UserdefaultKey.nickname.rawValue)
             
             let vc = BirthViewController()
             self.navigationController?.pushViewController(vc, animated: true)

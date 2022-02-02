@@ -37,13 +37,13 @@ class LoginViewController: UIViewController {
         self.view.addGestureRecognizer(tagGesture)
         
         print("authVerificationID")
-        print(UserDefaults.standard.string(forKey: UserdefaultKey.authVerificationID.string) ?? "")
+        print(UserDefaults.standard.string(forKey: UserdefaultKey.authVerificationID.rawValue) ?? "")
         
         print("idtoken")
-        print(UserDefaults.standard.string(forKey: UserdefaultKey.idToken.string) ?? "")
+        print(UserDefaults.standard.string(forKey: UserdefaultKey.idToken.rawValue) ?? "")
         
         print("fcmToken")
-        print(UserDefaults.standard.string(forKey: UserdefaultKey.fcmToken.string) ?? "")
+        print(UserDefaults.standard.string(forKey: UserdefaultKey.fcmToken.rawValue) ?? "")
 
         setButton()
         setTextFieldRx()
@@ -63,7 +63,7 @@ class LoginViewController: UIViewController {
                     let number = "+82 \(self.mainView.textfieldView.textfield.text!)"
                     print(number)
                     
-                    UserDefaults.standard.set(number, forKey: UserdefaultKey.phoneNumber.string)
+                    UserDefaults.standard.set(number, forKey: UserdefaultKey.phoneNumber.rawValue)
                     //firebase auth 시작
                     self.viewModel.authRequest(phoneNumber: number) { error in
                         if let error = error {

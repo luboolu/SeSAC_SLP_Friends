@@ -23,6 +23,10 @@ extension URL {
         return URL(string: "\(URL.user)/withdraw")!
     }
     
+    static var userInfoUpdate: URL {
+        return URL(string: "\(URL.user)/update/mypage")!
+    }
+    
     static var userUpdateFCM: URL {
         return URL(string: "\(URL.user)/update_fcm_token")!
     }

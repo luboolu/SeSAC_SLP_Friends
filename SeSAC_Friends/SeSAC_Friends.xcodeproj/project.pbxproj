@@ -31,6 +31,9 @@
 		DC6E55DA27A97CE500998FF9 /* APIenum.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55D927A97CE500998FF9 /* APIenum.swift */; };
 		DC6E55DC27A98A7800998FF9 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55DB27A98A7800998FF9 /* Alert.swift */; };
 		DC6E55DE27AA519200998FF9 /* APIStatusResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55DD27AA519200998FF9 /* APIStatusResult.swift */; };
+		DC6E55E127AAD6B300998FF9 /* HobbySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55E027AAD6B300998FF9 /* HobbySearchViewController.swift */; };
+		DC6E55E327AAD71A00998FF9 /* HobbySearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55E227AAD71A00998FF9 /* HobbySearchView.swift */; };
+		DC6E55E527AAD83900998FF9 /* HomeViewswift.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55E427AAD83900998FF9 /* HomeViewswift.swift */; };
 		DCA1AAB9279D7B4F002194B4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = DCA1AAB8279D7B4F002194B4 /* FirebaseAuth */; };
 		DCA1AABB279D7B4F002194B4 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = DCA1AABA279D7B4F002194B4 /* FirebaseMessaging */; };
 		DCA1AABE279DA7CA002194B4 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA1AABD279DA7CA002194B4 /* Endpoint.swift */; };
@@ -103,6 +106,9 @@
 		DC6E55D927A97CE500998FF9 /* APIenum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIenum.swift; sourceTree = "<group>"; };
 		DC6E55DB27A98A7800998FF9 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		DC6E55DD27AA519200998FF9 /* APIStatusResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIStatusResult.swift; sourceTree = "<group>"; };
+		DC6E55E027AAD6B300998FF9 /* HobbySearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbySearchViewController.swift; sourceTree = "<group>"; };
+		DC6E55E227AAD71A00998FF9 /* HobbySearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbySearchView.swift; sourceTree = "<group>"; };
+		DC6E55E427AAD83900998FF9 /* HomeViewswift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewswift.swift; sourceTree = "<group>"; };
 		DCA1AABD279DA7CA002194B4 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		DCA1AABF279E4531002194B4 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		DCA1AAC2279E94D1002194B4 /* UserdefualtKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserdefualtKey.swift; sourceTree = "<group>"; };
@@ -191,6 +197,17 @@
 			path = TableViewCell;
 			sourceTree = "<group>";
 		};
+		DC6E55DF27AABFCD00998FF9 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				DCDE3671279C3A940077847C /* HomeViewController.swift */,
+				DC6E55E427AAD83900998FF9 /* HomeViewswift.swift */,
+				DC6E55E027AAD6B300998FF9 /* HobbySearchViewController.swift */,
+				DC6E55E227AAD71A00998FF9 /* HobbySearchView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		DCA1AABC279DA7BA002194B4 /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -247,9 +264,9 @@
 		DCDE3670279C3A790077847C /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				DC6E55DF27AABFCD00998FF9 /* Home */,
 				DC1873EC27A151CB00DE4FBD /* MyPage */,
 				DC1873EA27A1140E00DE4FBD /* MainViewController.swift */,
-				DCDE3671279C3A940077847C /* HomeViewController.swift */,
 				DC1873E427A1113200DE4FBD /* ShopViewController.swift */,
 				DC1873E627A1115C00DE4FBD /* FriendsViewController.swift */,
 			);
@@ -470,10 +487,12 @@
 				DCDE36692799BE190077847C /* NicknameViewController.swift in Sources */,
 				DCE678E327A2E61800ACB1A7 /* TableViewCell.swift in Sources */,
 				DC18740327A266CF00DE4FBD /* EmailView.swift in Sources */,
+				DC6E55E327AAD71A00998FF9 /* HobbySearchView.swift in Sources */,
 				DC1873FB27A2603000DE4FBD /* LoginView.swift in Sources */,
 				DCE2D1DE2796C9D50018895F /* MainButtonStatus.swift in Sources */,
 				DCE2D1EB2796DB8C0018895F /* UIColor+Extension.swift in Sources */,
 				DC1873EE27A151E200DE4FBD /* ProfileTableViewCell.swift in Sources */,
+				DC6E55E527AAD83900998FF9 /* HomeViewswift.swift in Sources */,
 				DC1873EB27A1140E00DE4FBD /* MainViewController.swift in Sources */,
 				DC18740927A2CE9400DE4FBD /* TextfieldTableViewCell.swift in Sources */,
 				DC1873E727A1115C00DE4FBD /* FriendsViewController.swift in Sources */,
@@ -496,6 +515,7 @@
 				DCE2D1BE279694720018895F /* SceneDelegate.swift in Sources */,
 				DC1873E927A1117A00DE4FBD /* MyPageViewController.swift in Sources */,
 				DC18740D27A2D66200DE4FBD /* LabelTableViewCell.swift in Sources */,
+				DC6E55E127AAD6B300998FF9 /* HobbySearchViewController.swift in Sources */,
 				DC6E55DE27AA519200998FF9 /* APIStatusResult.swift in Sources */,
 				DCE2D1E12796CCD30018895F /* MainTextFieldStatus.swift in Sources */,
 				DC6E55DC27A98A7800998FF9 /* Alert.swift in Sources */,

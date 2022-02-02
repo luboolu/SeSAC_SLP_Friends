@@ -114,7 +114,7 @@ class BirthViewController: UIViewController {
             guard let formatted = self.birthDay?.ISO8601Format() else {
                 return
             }
-            UserDefaults.standard.set(formatted, forKey: UserdefaultKey.birthDay.string)
+            UserDefaults.standard.set(formatted, forKey: UserdefaultKey.birthDay.rawValue)
             
             let vc = EmailViewController()
             self.navigationController?.pushViewController(vc, animated: true)

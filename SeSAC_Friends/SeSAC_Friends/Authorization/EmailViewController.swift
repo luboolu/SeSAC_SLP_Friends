@@ -54,7 +54,7 @@ class EmailViewController: UIViewController {
         let input = mainView.emailTextField.textfield.text ?? ""
         
         if isValidEmail(email: input) {
-            UserDefaults.standard.set(input, forKey: UserdefaultKey.email.string)
+            UserDefaults.standard.set(input, forKey: UserdefaultKey.email.rawValue)
             
             let vc = GenderViewController()
             self.navigationController?.pushViewController(vc, animated: true)
