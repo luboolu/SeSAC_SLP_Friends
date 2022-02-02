@@ -53,32 +53,32 @@ class MyInfoViewController: UIViewController {
     func getUserInfo() {
         print(#function)
         
-        self.viewModel.getUser() { statusCode, result in
+        self.viewModel.getUser() { apiResult, getUserResult, data in
             DispatchQueue.main.async {
-                print("statusCode: \(statusCode)")
+                print("statusCode: \(apiResult)")
                 
                 //유저정보 가져오는데 성공한 경우
-                if statusCode == 200 {
-                    if let result = result {
-                        print(result)
-                        self.myInfo = result
+                if getUserResult == .existingUser {
+                    if let data = data {
+                        print(data)
+                        self.myInfo = data
                         
-                        self.myGender = result.gender
-                        self.myHobby = result.hobby
-                        self.myNumberSearch = result.searchable
-                        self.myPreferredAge = [result.ageMin, result.ageMax]
+                        self.myGender = data.gender
+                        self.myHobby = data.hobby
+                        self.myNumberSearch = data.searchable
+                        self.myPreferredAge = [data.ageMin, data.ageMax]
                         
                         self.mainView.tableView.reloadData()
                     }
                     
-                } else if statusCode == 201 {
-
-                } else if statusCode == 401 {
+                } else if getUserResult == .tokenError {
                     //firebase token 만료
                     //토큰 갱신해야함
                     print("idtoken 갱신 필요")
                     self.reloadIdToken()
                     //return
+                } else {
+                    self.view.makeToast("에러가 발생했습니다! 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
                 }
             }
         }
@@ -101,9 +101,9 @@ class MyInfoViewController: UIViewController {
     func userWithdrawRequest() {
         print("회원탈퇴 시작")
         //회원탈퇴 api 통신
-        self.viewModel.userWithdraw { apiResult in
-            print(apiResult)
-            if apiResult == .succeed || apiResult == .processed{
+        self.viewModel.userWithdraw { apiResult, userWithdrawResult in
+            print(userWithdrawResult)
+            if userWithdrawResult == .succeed || userWithdrawResult == .alreadyProcessed {
                 DispatchQueue.main.async {
                     //온보딩 화면으로 이동
                     guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
@@ -203,6 +203,7 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.manButton.rx.tap
                 .scan(cell.manButton.status) { lastState, newState in
+                    print(cell.manButton.status)
                     cell.womanButton.status = .inactive
                     self.myGender = 1
                     return .fill

@@ -9,6 +9,7 @@ import Foundation
 
 import FirebaseAuth
 import FirebaseMessaging
+import UIKit
 
 class UserViewModel {
     
@@ -61,7 +62,7 @@ class UserViewModel {
     }
     
     //user 정보 요청
-    func getUser(completion: @escaping (Int?, UserInfo?) -> Void) {
+    func getUser(completion: @escaping (APIResult?, GetUserResult?, UserInfo?) -> Void) {
         
         let url = URL(string: "\(URL.user)")!
         let idtoken = UserDefaults.standard.string(forKey: UserdefaultKey.idToken.string) ?? ""
@@ -72,34 +73,46 @@ class UserViewModel {
         request.setValue("\(idtoken)", forHTTPHeaderField: APIHeader.idtoken.string)
         
         let session = URLSession.shared
-        
         session.dataTask(with: request) { data, response, error in
             print("getUser 결과")
 
             if error != nil {
-                print(error)
-                completion(-1, nil)
+                completion(.failed, nil, nil)
+                return
             }
-
+            
             guard let response = response as? HTTPURLResponse else {
-                completion(-1, nil)
+                completion(.invalidResponse, nil, nil)
+                return
+            }
+            
+            guard let data = data else {
+                completion(.noData, nil, nil)
                 return
             }
 
-            if let data = data {
-                print(data)
+            //상태코드에 따른 분기처리
+            //200: 기존회원, 201: 미가입회원
+            if response.statusCode == 200 {
                 do {
                     let decoder = JSONDecoder()
                     let userData = try decoder.decode(UserInfo.self, from: data)
-                    
-                    completion(response.statusCode, userData)
+                    print(userData)
+                    completion(.succeed, .existingUser, userData)
                 } catch {
-                    print("decoding error")
+                    completion(.invalidData, nil, nil)
                 }
-
+            } else if response.statusCode == 201 {
+                completion(.succeed, .newUser, nil)
+            } else if response.statusCode == 401 {
+                completion(.failed, .tokenError, nil)
+            } else if response.statusCode == 500 {
+                completion(.failed, .serverError, nil)
+            } else if response.statusCode == 501 {
+                completion(.failed, .clientError, nil)
+            } else {
+                completion(.failed, nil, nil)
             }
-            
-            completion(response.statusCode, nil)
 
         }.resume()
         
@@ -110,27 +123,23 @@ class UserViewModel {
         
         let url = URL(string: "\(URL.user)")!
         let idtoken = UserDefaults.standard.string(forKey: UserdefaultKey.idToken.string) ?? ""
-        var request = URLRequest(url: url)
         
         //httpBody
         let phoneNumber = UserDefaults.standard.string(forKey: UserdefaultKey.phoneNumber.string) ?? ""
-        let fcmToken = UserDefaults.standard.string(forKey: UserdefaultKey.fcmToken.string) ?? ""
+        let FCMtoken = UserDefaults.standard.string(forKey: UserdefaultKey.fcmToken.string) ?? ""
         let nick = UserDefaults.standard.string(forKey: UserdefaultKey.nickname.string) ?? ""
         let birth = UserDefaults.standard.string(forKey: UserdefaultKey.birthDay.string) ?? ""
         let email = UserDefaults.standard.string(forKey: UserdefaultKey.email.string) ?? ""
         let gender = UserDefaults.standard.integer(forKey: UserdefaultKey.gender.string)
         
-        let body = UserSignIn(phoneNumber: phoneNumber, fcMtoken: fcmToken, nick: nick, birth: birth, email: email, gender: gender)
-        
-        guard let uploadBody = try? JSONEncoder().encode(body) else { return }
-        
+        var request = URLRequest(url: url)
         request.httpMethod = "POST"
+        request.httpBody = "phoneNumber=\(phoneNumber)&FCMtoken=\(FCMtoken)&nick=\(nick)&birth=\(birth)&email=\(email)&gender=\(gender)".data(using: .utf8, allowLossyConversion: false)
         request.setValue(APIHeaderValue.ContentType.string, forHTTPHeaderField: APIHeader.ContentType.string)
         request.setValue("\(idtoken)", forHTTPHeaderField: APIHeader.idtoken.string)
         
         let session = URLSession.shared
-        
-        session.uploadTask(with: request, from: uploadBody) { data, response, error in
+        session.dataTask(with: request) { data, response, error in
             if error != nil {
                 print(error)
                 completion(-1)
@@ -167,7 +176,7 @@ class UserViewModel {
     }
     
     //회원탈퇴
-    func userWithdraw(completion: @escaping (APIResult?) -> Void) {
+    func userWithdraw(completion: @escaping (APIResult?, UserWithdrawResult?) -> Void) {
         
         let url = URL(string: "\(URL.userWithdraw)")!
         let idtoken = UserDefaults.standard.string(forKey: UserdefaultKey.idToken.string) ?? ""
@@ -178,42 +187,37 @@ class UserViewModel {
         request.setValue("\(idtoken)", forHTTPHeaderField: APIHeader.idtoken.string)
         
         let session = URLSession.shared
-        
-        print(url)
-        print(request.allHTTPHeaderFields)
-        
+
         session.dataTask(with: request) { data, response, error in
             print("userwithdraw 결과")
 
             if error != nil {
-                print(error)
-                completion(.failed)
+                completion(.failed, nil)
+                return
             }
             
             guard let response = response as? HTTPURLResponse else {
-                completion(.invalidResponse)
+                completion(.invalidResponse, nil)
                 return
             }
 
-            if let data = data {
-                print(data)
+            guard let data = data else {
+                completion(.noData, nil)
+                return
             }
-            print("회원탈퇴!!!")
-            print(response.statusCode)
-            print(data)
             
             if response.statusCode == 200 {
-                completion(.succeed)
+                completion(.succeed, .succeed)
             } else if response.statusCode == 401 {
-                completion(.tokenError)
+                completion(.failed, .tokenError)
             } else if response.statusCode == 406 {
-                completion(.processed)
+                completion(.failed, .alreadyProcessed)
             } else if response.statusCode == 500 {
-                completion(.serverError)
+                completion(.failed, .serverError)
             } else if response.statusCode == 501 {
-                completion(.clientError)
+                completion(.failed, .clientError)
             } else {
-                completion(.failed)
+                completion(.failed, nil)
             }
             
         }.resume()

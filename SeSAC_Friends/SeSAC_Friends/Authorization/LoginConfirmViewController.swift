@@ -175,19 +175,18 @@ class LoginConfirmViewController: UIViewController {
             }
             
             //4. 기존 회원인지 확인
-            self.viewModel.getUser() { statusCode, result in
-                print("statusCode: \(statusCode)")
+            self.viewModel.getUser() { apiResult, getUserResult, data in
+                print("statusCode: \(apiResult)")
                 
                 DispatchQueue.main.async {
                     //기존 유저인 경우
                     //5-1. 기존 회원이라면 main화면으로 전환
-                    if statusCode == 200 {
+                    if getUserResult == .existingUser {
                         //루트 뷰 자체를 바꿔줌
                         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
                         windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: MainViewController())
                         windowScene.windows.first?.makeKeyAndVisible()
-                        
-                    } else if statusCode == 201 {
+                    } else if getUserResult == .newUser {
                         //미가입 유저인 경우
                         //닉네임 입력 화면으로 화면 전환!
                         //5-2. 미가입 회원이라면 닉네임 입력 화면으로 전환
@@ -203,9 +202,25 @@ class LoginConfirmViewController: UIViewController {
     
     func resendButtonTapped() {
         print("auth resend button clicked!")
-        //timer 초기화
-        self.startTimer()
         //firebase 인증 문자 재전송
+        //firebase auth 시작
+        let number = UserDefaults.standard.string(forKey: UserdefaultKey.phoneNumber.string) ?? ""
+        
+        self.viewModel.authRequest(phoneNumber: number) { error in
+            if let error = error {
+                if error.localizedDescription == "We have blocked all requests from this device due to unusual activity. Try again later." {
+                    self.view.makeToast("과도한 인증 시도가 있었습니다. 나중에 다시 시도해 주세요." ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                } else {
+                    self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                }
+            } else {
+                //전화번호 인증 문자 전송 성공 -> 타이머 초기화
+                //timer 초기화
+                self.startTimer()
+                self.view.makeToast("문자가 재전송되었습니다." ,duration: 2.0, position: .bottom, style: self.toastStyle)
+            }
+            
+        }
     }
     
     //타이머 동작 func

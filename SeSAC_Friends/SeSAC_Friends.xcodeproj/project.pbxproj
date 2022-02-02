@@ -30,6 +30,7 @@
 		DC18740F27A2D7B000DE4FBD /* DoubleSliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18740E27A2D7AF00DE4FBD /* DoubleSliderTableViewCell.swift */; };
 		DC6E55DA27A97CE500998FF9 /* APIenum.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55D927A97CE500998FF9 /* APIenum.swift */; };
 		DC6E55DC27A98A7800998FF9 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55DB27A98A7800998FF9 /* Alert.swift */; };
+		DC6E55DE27AA519200998FF9 /* APIStatusResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55DD27AA519200998FF9 /* APIStatusResult.swift */; };
 		DCA1AAB9279D7B4F002194B4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = DCA1AAB8279D7B4F002194B4 /* FirebaseAuth */; };
 		DCA1AABB279D7B4F002194B4 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = DCA1AABA279D7B4F002194B4 /* FirebaseMessaging */; };
 		DCA1AABE279DA7CA002194B4 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA1AABD279DA7CA002194B4 /* Endpoint.swift */; };
@@ -101,6 +102,7 @@
 		DC18740E27A2D7AF00DE4FBD /* DoubleSliderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleSliderTableViewCell.swift; sourceTree = "<group>"; };
 		DC6E55D927A97CE500998FF9 /* APIenum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIenum.swift; sourceTree = "<group>"; };
 		DC6E55DB27A98A7800998FF9 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		DC6E55DD27AA519200998FF9 /* APIStatusResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIStatusResult.swift; sourceTree = "<group>"; };
 		DCA1AABD279DA7CA002194B4 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		DCA1AABF279E4531002194B4 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		DCA1AAC2279E94D1002194B4 /* UserdefualtKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserdefualtKey.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 			children = (
 				DCA1AABD279DA7CA002194B4 /* Endpoint.swift */,
 				DC6E55D927A97CE500998FF9 /* APIenum.swift */,
+				DC6E55DD27AA519200998FF9 /* APIStatusResult.swift */,
 				DCC419F127A7CABD006B2904 /* InputDataStruct.swift */,
 				DCC419F627A7DE86006B2904 /* OutputDataStructswift.swift */,
 			);
@@ -493,6 +496,7 @@
 				DCE2D1BE279694720018895F /* SceneDelegate.swift in Sources */,
 				DC1873E927A1117A00DE4FBD /* MyPageViewController.swift in Sources */,
 				DC18740D27A2D66200DE4FBD /* LabelTableViewCell.swift in Sources */,
+				DC6E55DE27AA519200998FF9 /* APIStatusResult.swift in Sources */,
 				DCE2D1E12796CCD30018895F /* MainTextFieldStatus.swift in Sources */,
 				DC6E55DC27A98A7800998FF9 /* Alert.swift in Sources */,
 				DC18740527A267EF00DE4FBD /* GenderView.swift in Sources */,

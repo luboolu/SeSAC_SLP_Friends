@@ -65,7 +65,6 @@ class LoginViewController: UIViewController {
                     
                     UserDefaults.standard.set(number, forKey: UserdefaultKey.phoneNumber.string)
                     //firebase auth 시작
-                    
                     self.viewModel.authRequest(phoneNumber: number) { error in
                         if let error = error {
                             if error.localizedDescription == "We have blocked all requests from this device due to unusual activity. Try again later." {
