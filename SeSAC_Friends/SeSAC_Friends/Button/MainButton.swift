@@ -111,7 +111,6 @@ class MainButton: UIButton {
     
     convenience init(status: MainButtonStatus) {
         self.init()
-
     }
 
 }

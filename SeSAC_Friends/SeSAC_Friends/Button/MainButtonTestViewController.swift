@@ -34,6 +34,7 @@ class MainButtonTestViewController: UIViewController {
         view.addSubview(mainButton5)
         
         mainButton1.status = .inactive
+        mainButton1.icon = true
         mainButton1.setTitle("버튼 내용", for: .normal)
         
         mainButton2.status = .fill
