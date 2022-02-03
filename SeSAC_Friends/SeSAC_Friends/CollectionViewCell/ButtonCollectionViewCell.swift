@@ -11,7 +11,6 @@ import SnapKit
 
 class ButtonCollectionViewCell: UICollectionViewCell, ViewRepresentable {
     
-    
     let button: MainButton = {
         let button = MainButton(status: .inactive)
         
@@ -40,4 +39,19 @@ class ButtonCollectionViewCell: UICollectionViewCell, ViewRepresentable {
             make.edges.equalToSuperview()
         }
     }
+
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        super.preferredLayoutAttributesFitting(layoutAttributes)
+        layoutIfNeeded()
+        
+        let size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
+        var frame = layoutAttributes.frame
+        
+        frame.size.height = ceil(size.height)
+        
+        layoutAttributes.frame = frame
+        
+        return layoutAttributes
+    }
+
 }

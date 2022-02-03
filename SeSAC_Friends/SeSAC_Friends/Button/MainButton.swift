@@ -44,7 +44,7 @@ class MainButton: UIButton {
                 self.backgroundColor = UIColor().white
                 self.clipsToBounds = true
                 self.borderColor = UIColor().gray2
-                self.borderWidth = 2
+                self.borderWidth = 1
                 self.setTitleColor(UIColor().black, for: .normal)
                 //self.titleLabel?.font = UIFont().Body3_R14
                 self.cornerRadius = 10
@@ -59,7 +59,7 @@ class MainButton: UIButton {
                 self.backgroundColor = UIColor().white
                 self.clipsToBounds = true
                 self.borderColor = UIColor().green
-                self.borderWidth = 2
+                self.borderWidth = 1
                 self.setTitleColor(UIColor().green, for: .normal)
                 //self.titleLabel?.font = UIFont().Body3_R14
                 self.cornerRadius = 10
@@ -75,6 +75,14 @@ class MainButton: UIButton {
                 self.clipsToBounds = true
                 self.borderWidth = 0
                 self.setTitleColor(UIColor().white, for: .normal)
+                //self.titleLabel?.font = UIFont().Body3_R14
+                self.cornerRadius = 10
+            case .focus:
+                self.backgroundColor = UIColor().white
+                self.clipsToBounds = true
+                self.borderColor = UIColor().error
+                self.borderWidth = 1
+                self.setTitleColor(UIColor().error, for: .normal)
                 //self.titleLabel?.font = UIFont().Body3_R14
                 self.cornerRadius = 10
             }
@@ -94,57 +102,7 @@ class MainButton: UIButton {
     
     convenience init(status: MainButtonStatus) {
         self.init()
-        
-        switch status {
-        case .inactive:
-            self.backgroundColor = UIColor().white
-            self.clipsToBounds = true
-            self.borderColor = UIColor().gray2
-            self.borderWidth = 1
-            self.setTitleColor(UIColor().black, for: .normal)
-            //self.titleLabel?.font = UIFont().Body3_R14
-            self.cornerRadius = 10
-        case .fill:
-            self.backgroundColor = UIColor().green
-            self.clipsToBounds = true
-            self.borderWidth = 0
-            self.setTitleColor(UIColor().white, for: .normal)
-            //self.titleLabel?.font = UIFont().Body3_R14
-            self.cornerRadius = 10
-        case .outline:
-            self.backgroundColor = UIColor().white
-            self.clipsToBounds = true
-            self.borderColor = UIColor().green
-            self.borderWidth = 1
-            self.setTitleColor(UIColor().green, for: .normal)
-            //self.titleLabel?.font = UIFont().Body3_R14
-            self.cornerRadius = 10
-        case .cancel:
-            self.backgroundColor = UIColor().gray2
-            self.clipsToBounds = true
-            self.borderWidth = 0
-            self.setTitleColor(UIColor().black, for: .normal)
-            //self.titleLabel?.font = UIFont().Body3_R14
-            self.cornerRadius = 10
-        case .disable:
-            self.backgroundColor = UIColor().gray6
-            self.clipsToBounds = true
-            self.borderWidth = 0
-            self.setTitleColor(UIColor().white, for: .normal)
-            //self.titleLabel?.font = UIFont().Body3_R14
-            self.cornerRadius = 10
-        }
-        
+
     }
-    
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-////        self.backgroundColor = .systemBlue
-////        self.setTitleColor(UIColor().white, for: .normal)
-////        self.cornerRadius = 10
-//    }
-//    
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
+
 }

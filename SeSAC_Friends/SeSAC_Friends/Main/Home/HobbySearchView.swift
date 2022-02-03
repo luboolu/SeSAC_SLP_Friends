@@ -11,6 +11,14 @@ import SnapKit
 
 class HobbySearchView: UIView, ViewRepresentable {
     
+    let searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        
+        searchBar.placeholder = "띄어쓰기로 복수 입력이 가능해요"
+        
+        return searchBar
+    }()
+    
     let nearLabel: UILabel = {
         let label = UILabel()
         
@@ -24,7 +32,7 @@ class HobbySearchView: UIView, ViewRepresentable {
     let nearCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout.init())
         
-        collectionView.backgroundColor = UIColor().whitegreen
+        collectionView.isScrollEnabled = false
         
         return collectionView
     }()
@@ -42,7 +50,7 @@ class HobbySearchView: UIView, ViewRepresentable {
     let myCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout.init())
         
-        collectionView.backgroundColor = UIColor().whitegreen
+        collectionView.isScrollEnabled = false
         
         return collectionView
     }()
@@ -78,9 +86,9 @@ class HobbySearchView: UIView, ViewRepresentable {
         
         nearCollectionView.snp.makeConstraints { make in
             make.top.equalTo(nearLabel.snp.bottom)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(200)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            //make.height.equalTo(200)
         }
         
         myLabel.snp.makeConstraints { make in
@@ -91,9 +99,8 @@ class HobbySearchView: UIView, ViewRepresentable {
         
         myCollectionView.snp.makeConstraints { make in
             make.top.equalTo(myLabel.snp.bottom)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(200)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
         }
     }
     

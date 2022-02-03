@@ -13,4 +13,5 @@ enum MainButtonStatus {
     case outline
     case cancel
     case disable
+    case focus
 }
