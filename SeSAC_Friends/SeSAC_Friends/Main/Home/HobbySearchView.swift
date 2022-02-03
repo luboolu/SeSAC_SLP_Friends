@@ -32,7 +32,7 @@ class HobbySearchView: UIView, ViewRepresentable {
     let nearCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout.init())
         
-        collectionView.isScrollEnabled = false
+        collectionView.isScrollEnabled = true
         
         return collectionView
     }()
@@ -50,9 +50,27 @@ class HobbySearchView: UIView, ViewRepresentable {
     let myCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout.init())
         
-        collectionView.isScrollEnabled = false
+        collectionView.isScrollEnabled = true
         
         return collectionView
+    }()
+    
+    let testButton: UIButton = {
+        let button = UIButton()
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("더보기", for: .normal) //title넣기
+        //button.setImage(#imageLiteral(resourceName: "arrow_left_48px"), for: .normal)// 이미지 넣기
+        button.setTitleColor(UIColor().black, for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.titleLabel?.font = .boldSystemFont(ofSize: 12)
+        button.contentHorizontalAlignment = .center
+        button.semanticContentAttribute = .forceRightToLeft //<- 중요
+        button.imageEdgeInsets = .init(top: 0, left: 15, bottom: 0, right: 15) //<- 중요
+
+
+
+        return button
     }()
     
     override init(frame: CGRect) {
@@ -79,7 +97,7 @@ class HobbySearchView: UIView, ViewRepresentable {
     
     func setupConstraints() {
         nearLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.safeAreaLayoutGuide).offset(32)
+            make.top.equalTo(self.safeAreaLayoutGuide).offset(30)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
         }
@@ -88,11 +106,11 @@ class HobbySearchView: UIView, ViewRepresentable {
             make.top.equalTo(nearLabel.snp.bottom)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
-            //make.height.equalTo(200)
+            make.height.equalTo(200)
         }
         
         myLabel.snp.makeConstraints { make in
-            make.top.equalTo(nearCollectionView.snp.bottom).offset(32)
+            make.top.equalTo(nearCollectionView.snp.bottom).offset(30)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
         }
@@ -101,6 +119,7 @@ class HobbySearchView: UIView, ViewRepresentable {
             make.top.equalTo(myLabel.snp.bottom)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
+            make.height.equalTo(200)
         }
     }
     

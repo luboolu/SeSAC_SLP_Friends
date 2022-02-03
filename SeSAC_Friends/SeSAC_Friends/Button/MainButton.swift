@@ -94,6 +94,15 @@ class MainButton: UIButton {
             switch icon {
             case true:
                 self.setImage(UIImage(named: "star"), for: .normal)
+                //self.setTitle("더보기", for: .normal) //title넣기
+                //self.setImage(#imageLiteral(resourceName: "arrow_left_48px"), for: .normal)// 이미지 넣기
+                //self.setTitleColor(.black, for: .normal)
+                self.imageView?.contentMode = .scaleAspectFit
+                //self.titleLabel?.font = .boldSystemFont(ofSize: 12)
+                self.contentHorizontalAlignment = .center
+                self.semanticContentAttribute = .forceRightToLeft //<- 중요
+                self.imageEdgeInsets = .init(top: 0, left: 15, bottom: 0, right: 15) //<- 중요
+
             case false:
                 self.setImage(UIImage(named: "star.fill"), for: .normal)
             }

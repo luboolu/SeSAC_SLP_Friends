@@ -14,6 +14,8 @@ class HobbySearchViewController: UIViewController {
     let nearHobbyList = ["아무거나", "SeSAC", "코딩", "맛집탐방", "공원산책", "독서모임", "식물", "카페투어"]
     let myHobbyList = ["코딩", "클라이밍", "달리기", "오일파스텔", "축구", "배드민턴", "테니스"]
     
+    @IBOutlet weak var nearCollectionViewHeight: NSLayoutConstraint!
+    
     override func loadView() {
         self.view = mainView
     }
@@ -41,25 +43,30 @@ class HobbySearchViewController: UIViewController {
         mainView.myCollectionView.dataSource = self
         
         mainView.myCollectionView.register(ButtonCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.ButtonCollectionViewCell.id)
-        
-        mainView.nearCollectionView.snp.makeConstraints { make in
-            //make.height.equalTo(200)
-        }
-        
-        //mainView.nearCollectionView.contentSize = CGSize(width: mainView.nearCollectionView.frame.width, height: 100)
-        
-        mainView.nearCollectionView.invalidateIntrinsicContentSize()
-        mainView.myCollectionView.invalidateIntrinsicContentSize()
-        
-        mainView.nearCollectionView.layoutIfNeeded()
-        mainView.myCollectionView.layoutIfNeeded()
-    
 
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = false
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let nearHeight = mainView.nearCollectionView.collectionViewLayout.collectionViewContentSize.height
+        
+        mainView.nearCollectionView.snp.makeConstraints { make in
+            make.height.equalTo(nearHeight + 32)
+        }
+        
+        let myHeight = mainView.myCollectionView.collectionViewLayout.collectionViewContentSize.height
+        
+        mainView.myCollectionView.snp.makeConstraints { make in
+            make.height.equalTo(myHeight + 32)
+        }
+        
+        self.view.layoutIfNeeded()
     }
 }
 
@@ -73,7 +80,7 @@ extension HobbySearchViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print(collectionView)
+
         if collectionView == self.mainView.nearCollectionView {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.ButtonCollectionViewCell.id, for: indexPath) as? ButtonCollectionViewCell else {
                 return UICollectionViewCell()
@@ -94,18 +101,13 @@ extension HobbySearchViewController: UICollectionViewDelegate, UICollectionViewD
             }
 
             cell.button.setTitle("\(self.myHobbyList[indexPath.row])", for: .normal)
-            
-            if indexPath.row > 2 {
-                cell.button.status = .inactive
-            } else {
-                cell.button .status = .focus
-            }
+            cell.button.status = .outline
+            cell.button.icon = true
             
             return cell
         }
     }
 
-//estimated: 속성 찾아보기 -> 
 }
 
 extension HobbySearchViewController: UICollectionViewDelegateFlowLayout {
