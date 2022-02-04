@@ -7,6 +7,9 @@
 
 import UIKit
 
+import RxCocoa
+import RxSwift
+
 final class TwoButtonTableViewCell: UITableViewCell, ViewRepresentable {
 
     let label: UILabel = {
@@ -21,6 +24,13 @@ final class TwoButtonTableViewCell: UITableViewCell, ViewRepresentable {
     let manButton = MainButton(status: .inactive)
     
     let womanButton = MainButton(status: .inactive)
+    
+    var bag = DisposeBag()
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        bag = DisposeBag()
+    }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

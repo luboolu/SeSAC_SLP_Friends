@@ -212,7 +212,7 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
                 }
                 .map { $0 }
                 .bind(to: cell.manButton.rx.status)
-                .disposed(by: self.disposeBag)
+                .disposed(by: cell.bag)
             
             cell.womanButton.rx.tap
                 .scan(cell.womanButton.status) { lastState, newState in
@@ -222,7 +222,7 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
                 }
                 .map { $0 }
                 .bind(to: cell.womanButton.rx.status)
-                .disposed(by: self.disposeBag)
+                .disposed(by: cell.bag)
 
             
             return cell

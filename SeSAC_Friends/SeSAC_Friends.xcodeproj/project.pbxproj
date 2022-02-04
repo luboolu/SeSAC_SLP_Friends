@@ -33,7 +33,7 @@
 		DC6E55DE27AA519200998FF9 /* APIStatusResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55DD27AA519200998FF9 /* APIStatusResult.swift */; };
 		DC6E55E127AAD6B300998FF9 /* HobbySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55E027AAD6B300998FF9 /* HobbySearchViewController.swift */; };
 		DC6E55E327AAD71A00998FF9 /* HobbySearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55E227AAD71A00998FF9 /* HobbySearchView.swift */; };
-		DC6E55E527AAD83900998FF9 /* HomeViewswift.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55E427AAD83900998FF9 /* HomeViewswift.swift */; };
+		DC6E55E527AAD83900998FF9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55E427AAD83900998FF9 /* HomeView.swift */; };
 		DC6E55E727ABCC3A00998FF9 /* CollectionViewLeftAlignFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55E627ABCC3A00998FF9 /* CollectionViewLeftAlignFlowLayout.swift */; };
 		DCA1AAB9279D7B4F002194B4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = DCA1AAB8279D7B4F002194B4 /* FirebaseAuth */; };
 		DCA1AABB279D7B4F002194B4 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = DCA1AABA279D7B4F002194B4 /* FirebaseMessaging */; };
@@ -109,7 +109,7 @@
 		DC6E55DD27AA519200998FF9 /* APIStatusResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIStatusResult.swift; sourceTree = "<group>"; };
 		DC6E55E027AAD6B300998FF9 /* HobbySearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbySearchViewController.swift; sourceTree = "<group>"; };
 		DC6E55E227AAD71A00998FF9 /* HobbySearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbySearchView.swift; sourceTree = "<group>"; };
-		DC6E55E427AAD83900998FF9 /* HomeViewswift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewswift.swift; sourceTree = "<group>"; };
+		DC6E55E427AAD83900998FF9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		DC6E55E627ABCC3A00998FF9 /* CollectionViewLeftAlignFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewLeftAlignFlowLayout.swift; sourceTree = "<group>"; };
 		DCA1AABD279DA7CA002194B4 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		DCA1AABF279E4531002194B4 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
@@ -203,7 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				DCDE3671279C3A940077847C /* HomeViewController.swift */,
-				DC6E55E427AAD83900998FF9 /* HomeViewswift.swift */,
+				DC6E55E427AAD83900998FF9 /* HomeView.swift */,
 				DC6E55E027AAD6B300998FF9 /* HobbySearchViewController.swift */,
 				DC6E55E227AAD71A00998FF9 /* HobbySearchView.swift */,
 			);
@@ -495,7 +495,7 @@
 				DCE2D1DE2796C9D50018895F /* MainButtonStatus.swift in Sources */,
 				DCE2D1EB2796DB8C0018895F /* UIColor+Extension.swift in Sources */,
 				DC1873EE27A151E200DE4FBD /* ProfileTableViewCell.swift in Sources */,
-				DC6E55E527AAD83900998FF9 /* HomeViewswift.swift in Sources */,
+				DC6E55E527AAD83900998FF9 /* HomeView.swift in Sources */,
 				DC1873EB27A1140E00DE4FBD /* MainViewController.swift in Sources */,
 				DC18740927A2CE9400DE4FBD /* TextfieldTableViewCell.swift in Sources */,
 				DC1873E727A1115C00DE4FBD /* FriendsViewController.swift in Sources */,

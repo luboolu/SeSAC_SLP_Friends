@@ -14,6 +14,8 @@ import RxSwift
 final class HomeViewController: UIViewController {
 
     private let mainView = HomeView()
+    
+    private let disposeBag = DisposeBag()
 
     override func loadView() {
         self.view = mainView
@@ -38,7 +40,7 @@ final class HomeViewController: UIViewController {
     }
     
     private func setupView() {
-        view.backgroundColor = UIColor().white
+
     }
     
     private func setupButton() {
@@ -47,7 +49,7 @@ final class HomeViewController: UIViewController {
                 print("tapped!")
                 let vc = HobbySearchViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
-            }
+            }.disposed(by: disposeBag)
     }
 
 }
