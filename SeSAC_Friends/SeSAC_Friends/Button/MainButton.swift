@@ -89,22 +89,19 @@ class MainButton: UIButton {
         }
     }
     
-    var icon = false {
+    var imageStyle: MainButtonImageStyle = .none {
         didSet {
-            switch icon {
-            case true:
-                self.setImage(UIImage(named: "star"), for: .normal)
-                //self.setTitle("더보기", for: .normal) //title넣기
-                //self.setImage(#imageLiteral(resourceName: "arrow_left_48px"), for: .normal)// 이미지 넣기
-                //self.setTitleColor(.black, for: .normal)
+            switch imageStyle {
+            case .close_color:
+                self.setImage(UIImage(named: "close_color"), for: .normal)
                 self.imageView?.contentMode = .scaleAspectFit
-                //self.titleLabel?.font = .boldSystemFont(ofSize: 12)
-                self.contentHorizontalAlignment = .center
                 self.semanticContentAttribute = .forceRightToLeft //<- 중요
-                self.imageEdgeInsets = .init(top: 0, left: 15, bottom: 0, right: 15) //<- 중요
+                //cell.button.imageEdgeInsets = .init(top: 5, left: 20, bottom: 5, right: 16) //<- 중요
+                
+                self.contentHorizontalAlignment = .center
 
-            case false:
-                self.setImage(UIImage(named: "star.fill"), for: .normal)
+            case .none:
+                self.setImage(UIImage(named: ""), for: .normal)
             }
         }
     }

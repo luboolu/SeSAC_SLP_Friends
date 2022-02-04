@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import MapKit
 
 import SnapKit
 import RxCocoa
@@ -35,11 +34,7 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //self.navigationController?.navigationBar.topItem?.title = ""
         self.navigationController?.navigationBar.isHidden = true
-        
-
-
     }
     
     func setupView() {

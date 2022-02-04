@@ -15,3 +15,8 @@ enum MainButtonStatus {
     case disable
     case focus
 }
+
+enum MainButtonImageStyle {
+    case none
+    case close_color
+}

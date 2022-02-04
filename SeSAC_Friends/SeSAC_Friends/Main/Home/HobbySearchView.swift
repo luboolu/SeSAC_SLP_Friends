@@ -54,24 +54,8 @@ class HobbySearchView: UIView, ViewRepresentable {
         
         return collectionView
     }()
-    
-    let testButton: UIButton = {
-        let button = UIButton()
-        
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("더보기", for: .normal) //title넣기
-        //button.setImage(#imageLiteral(resourceName: "arrow_left_48px"), for: .normal)// 이미지 넣기
-        button.setTitleColor(UIColor().black, for: .normal)
-        button.imageView?.contentMode = .scaleAspectFit
-        button.titleLabel?.font = .boldSystemFont(ofSize: 12)
-        button.contentHorizontalAlignment = .center
-        button.semanticContentAttribute = .forceRightToLeft //<- 중요
-        button.imageEdgeInsets = .init(top: 0, left: 15, bottom: 0, right: 15) //<- 중요
 
-
-
-        return button
-    }()
+    let findButton = MainButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -83,7 +67,6 @@ class HobbySearchView: UIView, ViewRepresentable {
         fatalError("init(coder:) has not been impl")
     }
     
-    
     func setupView() {
         self.backgroundColor = UIColor().white
         
@@ -92,7 +75,11 @@ class HobbySearchView: UIView, ViewRepresentable {
         
         self.addSubview(myLabel)
         self.addSubview(myCollectionView)
-
+        
+        findButton.setTitle("새싹 찾기", for: .normal)
+        findButton.status = .fill
+        findButton.titleLabel?.font = UIFont().Body3_R14
+        self.addSubview(findButton)
     }
     
     func setupConstraints() {
@@ -106,7 +93,6 @@ class HobbySearchView: UIView, ViewRepresentable {
             make.top.equalTo(nearLabel.snp.bottom)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
-            make.height.equalTo(200)
         }
         
         myLabel.snp.makeConstraints { make in
@@ -119,7 +105,13 @@ class HobbySearchView: UIView, ViewRepresentable {
             make.top.equalTo(myLabel.snp.bottom)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
-            make.height.equalTo(200)
+        }
+        
+        findButton.snp.makeConstraints { make in
+            make.bottom.equalTo(self.safeAreaLayoutGuide).offset(-16)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.height.equalTo(48)
         }
     }
     
