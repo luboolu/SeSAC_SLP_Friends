@@ -8,6 +8,7 @@
 import UIKit
 
 import SnapKit
+import RxSwift
 
 class ButtonCollectionViewCell: UICollectionViewCell, ViewRepresentable {
     
@@ -18,6 +19,13 @@ class ButtonCollectionViewCell: UICollectionViewCell, ViewRepresentable {
         
         return button
     }()
+    
+    var bag = DisposeBag()
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        bag = DisposeBag()
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

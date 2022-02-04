@@ -16,7 +16,12 @@ class HobbySearchViewController: UIViewController {
     let disposeBag = DisposeBag()
     
     let nearHobbyList = ["아무거나", "SeSAC", "코딩", "맛집탐방", "공원산책", "독서모임", "식물", "카페투어"]
-    var myHobbyList: [String] = []
+    var myHobbyList: [String] = [] {
+        didSet {
+            print("didset")
+            self.mainView.myCollectionView.reloadData()
+        }
+    }
 //    var myHobbyList = ["코딩", "클라이밍", "달리기", "오일파스텔", "축구", "배드민턴", "테니스"]
     
     override func loadView() {
@@ -102,7 +107,7 @@ class HobbySearchViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    @objc func myHobbyDelete() {
+    @objc func myHobbyDelete(index: Int) {
         print("my hobby tapped ")
 //        print(self.myHobbyList)
 //        self.myHobbyList.remove(at: index)
@@ -147,25 +152,37 @@ extension HobbySearchViewController: UICollectionViewDelegate, UICollectionViewD
                 make.height.equalTo(32)
             }
 
-            //cell.button.setTitle("\(self.myHobbyList[indexPath.row])", for: .normal)
-            cell.button.setTitle("\(indexPath.row)", for: .normal)
+            cell.button.setTitle("\(self.myHobbyList[indexPath.row])", for: .normal)
             cell.button.status = .outline
             cell.button.imageStyle = .close_color
+            cell.button.isEnabled = true
             
-            cell.button.addTarget(self, action: #selector(myHobbyDelete), for: .touchUpInside)
-//            cell.button.rx.tap
-//                .bind {
-//                    print("my hobby tapped \(indexPath.row)")
-//                    print(self.myHobbyList)
-//                    self.myHobbyList.remove(at: indexPath.row)
-//                    print(self.myHobbyList)
-//                    DispatchQueue.main.async {
-//                        self.mainView.myCollectionView.reloadData()
-//                    }
-//                }.disposed(by: disposeBag)
+            cell.button.rx.tap
+                .bind {
+                    DispatchQueue.main.async {
+                        self.myHobbyList.remove(at: indexPath.row)
+                        self.mainView.myCollectionView.reloadData()
+                    }
+                }.disposed(by: cell.bag)
 
-            
             return cell
+        }
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath)
+        if collectionView == self.mainView.nearCollectionView {
+            
+        } else {
+            DispatchQueue.main.async {
+                print("my hobby tapped \(indexPath.row)")
+                print(self.myHobbyList)
+                self.myHobbyList.remove(at: indexPath.row)
+                print(self.myHobbyList)
+
+                self.mainView.myCollectionView.reloadData()
+            }
         }
     }
 
