@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-class TextfieldTableViewCell: UITableViewCell, ViewRepresentable {
+final class TextfieldTableViewCell: UITableViewCell, ViewRepresentable {
     
     let label: UILabel = {
         let label = UILabel()

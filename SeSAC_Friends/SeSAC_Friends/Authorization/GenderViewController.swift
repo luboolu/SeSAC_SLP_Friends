@@ -11,13 +11,13 @@ import SnapKit
 import RxCocoa
 import RxSwift
 
-class GenderViewController: UIViewController {
+final class GenderViewController: UIViewController {
     
-    let viewModel = UserViewModel()
-    let mainView = GenderView()
+    private let viewModel = UserViewModel()
+    private let mainView = GenderView()
     
-    var isMan = false
-    var isWoman = false
+    private var isMan = false
+    private var isWoman = false
     
     override func loadView() {
         self.view = mainView
@@ -29,7 +29,7 @@ class GenderViewController: UIViewController {
         setButton()
     }
 
-    func setButton() {
+    private func setButton() {
         mainView.manButton.rx.tap
             .bind {
                 self.isMan = !self.isMan

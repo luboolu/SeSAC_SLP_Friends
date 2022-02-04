@@ -10,19 +10,13 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-class HobbySearchViewController: UIViewController {
+final class HobbySearchViewController: UIViewController {
     
-    let mainView = HobbySearchView()
-    let disposeBag = DisposeBag()
+    private let mainView = HobbySearchView()
+    private let disposeBag = DisposeBag()
     
-    let nearHobbyList = ["아무거나", "SeSAC", "코딩", "맛집탐방", "공원산책", "독서모임", "식물", "카페투어"]
-    var myHobbyList: [String] = [] {
-        didSet {
-            print("didset")
-            self.mainView.myCollectionView.reloadData()
-        }
-    }
-//    var myHobbyList = ["코딩", "클라이밍", "달리기", "오일파스텔", "축구", "배드민턴", "테니스"]
+    private let nearHobbyList = ["아무거나", "SeSAC", "코딩", "맛집탐방", "공원산책", "독서모임", "식물", "카페투어"]
+    private var myHobbyList: [String] = []
     
     override func loadView() {
         self.view = mainView
@@ -45,10 +39,14 @@ class HobbySearchViewController: UIViewController {
         super.viewDidLayoutSubviews()
         //cell의 갯수(높이)에 따라 collectionview의 height를 설정
         let nearHeight = mainView.nearCollectionView.collectionViewLayout.collectionViewContentSize.height
-        mainView.nearCollectionView.snp.makeConstraints { make in
+        mainView.nearCollectionView.snp.removeConstraints()
+        mainView.nearCollectionView.snp.remakeConstraints { make in
+            make.top.equalTo(mainView.nearLabel.snp.bottom)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
             make.height.equalTo(nearHeight + 32)
         }
-        
+
         let myHeight = mainView.myCollectionView.collectionViewLayout.collectionViewContentSize.height
 
         mainView.myCollectionView.snp.removeConstraints()
@@ -62,7 +60,7 @@ class HobbySearchViewController: UIViewController {
         self.view.layoutIfNeeded()
     }
     
-    func setCollectionView() {
+    private func setCollectionView() {
         mainView.nearCollectionView.collectionViewLayout = CollectionViewLeftAlignFlowLayout()
         mainView.myCollectionView.collectionViewLayout = CollectionViewLeftAlignFlowLayout()
         
@@ -83,7 +81,7 @@ class HobbySearchViewController: UIViewController {
 
     }
     
-    func setSearchBar() {
+    private func setSearchBar() {
         //searchBar 입력 끝 -> myCollectionView.reloadData()
         mainView.searchBar.rx.textDidEndEditing
             .bind {
@@ -107,15 +105,6 @@ class HobbySearchViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    @objc func myHobbyDelete(index: Int) {
-        print("my hobby tapped ")
-//        print(self.myHobbyList)
-//        self.myHobbyList.remove(at: index)
-//        print(self.myHobbyList)
-//        DispatchQueue.main.async {
-//            self.mainView.myCollectionView.reloadData()
-//        }
-    }
 }
 
 extension HobbySearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -157,35 +146,21 @@ extension HobbySearchViewController: UICollectionViewDelegate, UICollectionViewD
             cell.button.imageStyle = .close_color
             cell.button.isEnabled = true
             
-            cell.button.rx.tap
-                .bind {
+            cell.button.rx.tap.asDriver()
+                .throttle(.seconds(1))
+                .drive(onNext: { _ in
                     DispatchQueue.main.async {
                         self.myHobbyList.remove(at: indexPath.row)
                         self.mainView.myCollectionView.reloadData()
+                        self.viewDidLayoutSubviews()
                     }
-                }.disposed(by: cell.bag)
+                }).disposed(by: cell.bag)
 
             return cell
         }
         
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath)
-        if collectionView == self.mainView.nearCollectionView {
-            
-        } else {
-            DispatchQueue.main.async {
-                print("my hobby tapped \(indexPath.row)")
-                print(self.myHobbyList)
-                self.myHobbyList.remove(at: indexPath.row)
-                print(self.myHobbyList)
-
-                self.mainView.myCollectionView.reloadData()
-            }
-        }
-    }
-
 }
 
 extension HobbySearchViewController: UICollectionViewDelegateFlowLayout {

@@ -14,17 +14,17 @@ import RxCocoa
 import Toast
 
 
-class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController {
     
-    let disposeBag = DisposeBag()
-    let tagGesture: UITapGestureRecognizer = UITapGestureRecognizer()
+    private let disposeBag = DisposeBag()
+    private let tagGesture: UITapGestureRecognizer = UITapGestureRecognizer()
     
-    var isNumberValid: Observable<Bool> = Observable<Bool>.just(false)
-    var isValid = false
+    private var isNumberValid: Observable<Bool> = Observable<Bool>.just(false)
+    private var isValid = false
     
-    let toastStyle = ToastStyle()
-    let viewModel = UserViewModel()
-    let mainView = LoginView()
+    private let toastStyle = ToastStyle()
+    private let viewModel = UserViewModel()
+    private let mainView = LoginView()
 
     override func loadView() {
         self.view = mainView
@@ -51,7 +51,7 @@ class LoginViewController: UIViewController {
     }
 
     
-    func setButton() {
+    private func setButton() {
 
         mainView.authMessageButton.rx.tap
             .bind {
@@ -89,7 +89,7 @@ class LoginViewController: UIViewController {
         
     }
     
-    func setTextFieldRx() {
+    private func setTextFieldRx() {
         //textfield rxswift 사용하기
         
         //textfield의 입력값이 바뀔때 마다 감지 -> 유효성 검사
@@ -135,7 +135,7 @@ class LoginViewController: UIViewController {
 
     }
 
-    func trimNumber(_ number: String) {
+    private func trimNumber(_ number: String) {
 
         if number.count > 0 {
             //마지막으로 입력된거 문자니깐 textfield에서 지워줘야함

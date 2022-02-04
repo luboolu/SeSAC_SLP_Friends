@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-class ProfileTableViewCell: UITableViewCell {
+final class ProfileTableViewCell: UITableViewCell {
     
     let profileImage: UIImageView = {
         let imageView = UIImageView()

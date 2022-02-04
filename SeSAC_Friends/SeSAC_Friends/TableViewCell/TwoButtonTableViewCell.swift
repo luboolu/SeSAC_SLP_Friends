@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TwoButtonTableViewCell: UITableViewCell, ViewRepresentable {
+final class TwoButtonTableViewCell: UITableViewCell, ViewRepresentable {
 
     let label: UILabel = {
         let label = UILabel()

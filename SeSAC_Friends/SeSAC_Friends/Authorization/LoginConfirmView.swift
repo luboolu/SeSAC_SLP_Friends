@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-class LoginConfirmView: UIView, ViewRepresentable {
+final class LoginConfirmView: UIView, ViewRepresentable {
     
     let guideLabel1: UILabel = {
         let label = UILabel()

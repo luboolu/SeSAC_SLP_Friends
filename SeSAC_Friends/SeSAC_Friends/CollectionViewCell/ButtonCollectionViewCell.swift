@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import RxSwift
 
-class ButtonCollectionViewCell: UICollectionViewCell, ViewRepresentable {
+final class ButtonCollectionViewCell: UICollectionViewCell, ViewRepresentable {
     
     let button: MainButton = {
         let button = MainButton(status: .inactive)

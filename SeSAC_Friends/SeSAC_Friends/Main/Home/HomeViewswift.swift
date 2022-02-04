@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-class HomeView: UIView, ViewRepresentable {
+final class HomeView: UIView, ViewRepresentable {
     
     let searchButton: UIButton = {
         let button = UIButton()

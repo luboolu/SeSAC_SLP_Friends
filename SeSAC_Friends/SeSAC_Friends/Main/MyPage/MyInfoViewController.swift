@@ -12,21 +12,21 @@ import RxSwift
 import MultiSlider
 import Toast
 
-class MyInfoViewController: UIViewController {
+final class MyInfoViewController: UIViewController {
     
-    let mainView = MyInfoView()
-    let viewModel = UserViewModel()
-    let toastStyle = ToastStyle()
-    var disposeBag = DisposeBag()
+    private let mainView = MyInfoView()
+    private let viewModel = UserViewModel()
+    private let toastStyle = ToastStyle()
+    private var disposeBag = DisposeBag()
     
-    var moreButtonTabbed = true
-    var myInfo: UserInfo?
+    private var moreButtonTabbed = true
+    private var myInfo: UserInfo?
     
     //tableview에서 선택된 값
-    var myGender = -1
-    var myHobby = ""
-    var myNumberSearch = 0
-    var myPreferredAge = [18, 35]
+    private var myGender = -1
+    private var myHobby = ""
+    private var myNumberSearch = 0
+    private var myPreferredAge = [18, 35]
     
     override func loadView() {
         self.view = mainView
@@ -50,7 +50,7 @@ class MyInfoViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonClicked))
     }
     
-    func getUserInfo() {
+    private func getUserInfo() {
         print(#function)
         
         self.viewModel.getUser() { apiResult, getUserResult, data in
@@ -84,7 +84,7 @@ class MyInfoViewController: UIViewController {
     }
     
 
-    func userWithdrawRequest() {
+    private func userWithdrawRequest() {
         print("회원탈퇴 시작")
         //회원탈퇴 api 통신
         self.viewModel.userWithdraw { apiResult, userWithdrawResult in
@@ -105,7 +105,7 @@ class MyInfoViewController: UIViewController {
         }
     }
     
-    func userInfoUpdateRequest() {
+    private func userInfoUpdateRequest() {
         
         self.viewModel.userInfoUpdate(searchable: self.myNumberSearch, ageMin: self.myPreferredAge[0], ageMax: self.myPreferredAge[1], gender: self.myGender, hobby: self.myHobby) { apiResult, userInfoUpdateResult in
             

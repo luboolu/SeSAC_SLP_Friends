@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-class CardTableViewCell: UITableViewCell, ViewRepresentable {
+final class CardTableViewCell: UITableViewCell, ViewRepresentable {
     
     let nicknameLabel: UILabel = {
         let label = UILabel()

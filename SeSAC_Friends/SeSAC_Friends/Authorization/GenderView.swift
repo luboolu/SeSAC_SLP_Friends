@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-class GenderView: UIView, ViewRepresentable {
+final class GenderView: UIView, ViewRepresentable {
     
     let guideLabel1: UILabel = {
         let label = UILabel()

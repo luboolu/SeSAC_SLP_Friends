@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-class SwitchTableViewCell: UITableViewCell, ViewRepresentable {
+final class SwitchTableViewCell: UITableViewCell, ViewRepresentable {
     
     let label: UILabel = {
         let label = UILabel()

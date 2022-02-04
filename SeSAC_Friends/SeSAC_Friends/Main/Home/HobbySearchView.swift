@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-class HobbySearchView: UIView, ViewRepresentable {
+final class HobbySearchView: UIView, ViewRepresentable {
     
     let searchBar: UISearchBar = {
         let searchBar = UISearchBar()

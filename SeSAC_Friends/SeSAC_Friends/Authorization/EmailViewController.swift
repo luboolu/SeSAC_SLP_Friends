@@ -12,11 +12,11 @@ import RxSwift
 import RxCocoa
 import Toast
 
-class EmailViewController: UIViewController {
+final class EmailViewController: UIViewController {
     
-    let toastStyle = ToastStyle()
-    let disposeBag = DisposeBag()
-    let mainView = EmailView()
+    private let toastStyle = ToastStyle()
+    private let disposeBag = DisposeBag()
+    private let mainView = EmailView()
     
     override func loadView() {
         self.view = mainView
@@ -30,7 +30,7 @@ class EmailViewController: UIViewController {
         
     }
 
-    func setTextField() {
+    private func setTextField() {
         mainView.emailTextField.textfield.rx.text
             .subscribe(onNext: { newValue in
                 
@@ -43,14 +43,14 @@ class EmailViewController: UIViewController {
             }).disposed(by: disposeBag)
     }
     
-    func setButton() {
+    private func setButton() {
         mainView.nextButton.rx.tap
             .bind {
                 self.nextButtonTapped()
             }
     }
     
-    func nextButtonTapped() {
+    private func nextButtonTapped() {
         let input = mainView.emailTextField.textfield.text ?? ""
         
         if isValidEmail(email: input) {
@@ -64,7 +64,7 @@ class EmailViewController: UIViewController {
         
     }
     
-    func isValidEmail(email: String?) -> Bool {
+    private func isValidEmail(email: String?) -> Bool {
         guard email != nil else { return false}
         
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"

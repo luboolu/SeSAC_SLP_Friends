@@ -11,13 +11,13 @@ import SnapKit
 import RxSwift
 import Toast
 
-class BirthViewController: UIViewController {
+final class BirthViewController: UIViewController {
 
-    let disposeBag = DisposeBag()
-    let toastStyle = ToastStyle()
-    let mainView = BirthView()
+    private let disposeBag = DisposeBag()
+    private let toastStyle = ToastStyle()
+    private let mainView = BirthView()
     
-    var birthDay: Date?
+    private var birthDay: Date?
     
     override func loadView() {
         self.view = mainView
@@ -30,14 +30,14 @@ class BirthViewController: UIViewController {
         createPickerView()
     }
 
-    func setButton() {
+    private func setButton() {
         mainView.nextButton.rx.tap
             .bind {
                 self.nextButtonTapped()
             }
     }
     
-    func createPickerView() {
+    private func createPickerView() {
         mainView.pickerView.rx.date
             .subscribe(onNext: { newValue in
                 print(newValue)
@@ -71,7 +71,7 @@ class BirthViewController: UIViewController {
         mainView.yearTextField.textfield.becomeFirstResponder()
     }
     
-    func trimTextField(_ number: String) -> String {
+    private func trimTextField(_ number: String) -> String {
         
         var result = ""
 
@@ -96,7 +96,7 @@ class BirthViewController: UIViewController {
         return result
     }
     
-    func nextButtonTapped() {
+    private func nextButtonTapped() {
         self.view.endEditing(true)
         //만 17세 이상인지 확인
         let today = Date.now

@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-class EmailView: UIView, ViewRepresentable {
+final class EmailView: UIView, ViewRepresentable {
     
     let guideLabel1: UILabel = {
         let label = UILabel()

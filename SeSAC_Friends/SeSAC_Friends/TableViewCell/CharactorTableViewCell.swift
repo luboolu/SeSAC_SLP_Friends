@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-class CharactorTableViewCell: UITableViewCell{
+final class CharactorTableViewCell: UITableViewCell{
     
     let backgroundImage: UIImageView = {
         let imageView = UIImageView()

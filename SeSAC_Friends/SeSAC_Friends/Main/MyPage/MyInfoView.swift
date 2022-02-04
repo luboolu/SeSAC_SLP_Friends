@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-class MyInfoView: UIView, ViewRepresentable {
+final class MyInfoView: UIView, ViewRepresentable {
     
     let tableView: UITableView = {
         let tableView = UITableView()

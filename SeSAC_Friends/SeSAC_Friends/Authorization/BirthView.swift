@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-class BirthView: UIView, ViewRepresentable {
+final class BirthView: UIView, ViewRepresentable {
     
     let guideLabel1: UILabel = {
         let label = UILabel()

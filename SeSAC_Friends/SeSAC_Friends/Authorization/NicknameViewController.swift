@@ -11,11 +11,11 @@ import RxCocoa
 import RxSwift
 import Toast
 
-class NicknameViewController: UIViewController {
+final class NicknameViewController: UIViewController {
     
-    let disposeBag = DisposeBag()
-    let toastStyle = ToastStyle()
-    let mainView = NicknameView()
+    private let disposeBag = DisposeBag()
+    private let toastStyle = ToastStyle()
+    private let mainView = NicknameView()
     
     override func loadView() {
         self.view = mainView
@@ -32,7 +32,7 @@ class NicknameViewController: UIViewController {
     }
     
     
-    func setTextField() {
+    private func setTextField() {
         
         mainView.nicknameTextField.textfield.rx.text
             .subscribe(onNext: { newValue in
@@ -49,7 +49,7 @@ class NicknameViewController: UIViewController {
         
     }
     
-    func setButton() {
+    private func setButton() {
         
         mainView.nextButton.rx.tap
             .bind {
@@ -59,7 +59,7 @@ class NicknameViewController: UIViewController {
         
     }
     
-    func nextButtonTapped() {
+    private func nextButtonTapped() {
         //입력된 닉네임이 1~10자 내인지 확인
         let input = mainView.nicknameTextField.textfield.text!
         
@@ -76,7 +76,7 @@ class NicknameViewController: UIViewController {
     }
     
     
-    func trimString(_ str: String) -> String {
+    private func trimString(_ str: String) -> String {
         
         var result = ""
 

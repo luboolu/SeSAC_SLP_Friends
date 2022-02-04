@@ -10,9 +10,9 @@ import UIKit
 import SnapKit
 import SwiftUI
 
-class MyPageViewController: UIViewController {
+final class MyPageViewController: UIViewController {
     
-    let mainView = MyPageView()
+    final let mainView = MyPageView()
     
     override func loadView() {
         self.view = mainView
@@ -35,7 +35,7 @@ class MyPageViewController: UIViewController {
         self.navigationController?.navigationBar.topItem?.title = "내정보"
     }
     
-    func setUp() {
+    private func setUp() {
         view.backgroundColor = UIColor().white
         
         mainView.tableView.delegate = self

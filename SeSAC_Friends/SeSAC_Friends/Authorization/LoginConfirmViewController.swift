@@ -14,16 +14,16 @@ import RxSwift
 import RxCocoa
 import Toast
 
-class LoginConfirmViewController: UIViewController {
+final class LoginConfirmViewController: UIViewController {
     
-    var authCode: String?
-    var timer: Timer?
-    var timerNum: Int = 60
+    private var authCode: String?
+    private var timer: Timer?
+    private var timerNum: Int = 60
     
-    let disposeBag = DisposeBag()
-    let toastStyle = ToastStyle()
-    let viewModel = UserViewModel()
-    let mainView = LoginConfirmView()
+    private let disposeBag = DisposeBag()
+    private let toastStyle = ToastStyle()
+    private let viewModel = UserViewModel()
+    private let mainView = LoginConfirmView()
     
     override func loadView() {
         self.view = mainView
@@ -56,7 +56,7 @@ class LoginConfirmViewController: UIViewController {
         }
     }
     
-    func startTimer() {
+    private func startTimer() {
         //기존에 타이머 동작중이면 중지 처리
         if timer != nil && timer!.isValid {
             timer!.invalidate()
@@ -69,7 +69,7 @@ class LoginConfirmViewController: UIViewController {
 
     }
     
-    func setTextFieldRx() {
+    private func setTextFieldRx() {
         
         //textfield의 입력값이 바뀔때 마다 감지 -> 유효성 검사
         mainView.authCodeTextField.textfield.rx.text
@@ -103,7 +103,7 @@ class LoginConfirmViewController: UIViewController {
         
     }
     
-    func setButton() {
+    private func setButton() {
         
         mainView.authButton.rx.tap
             .bind { [self] in
@@ -117,7 +117,7 @@ class LoginConfirmViewController: UIViewController {
         
     }
     
-    func trimNumber(_ number: String) -> String {
+    private func trimNumber(_ number: String) -> String {
         
         var result = ""
 
@@ -145,7 +145,7 @@ class LoginConfirmViewController: UIViewController {
         return result
     }
     
-    func authButtonTapped() {
+    private func authButtonTapped() {
         print("auth button clicked!")
         
         DispatchQueue.main.async {
@@ -200,7 +200,7 @@ class LoginConfirmViewController: UIViewController {
 
     }
     
-    func resendButtonTapped() {
+    private func resendButtonTapped() {
         print("auth resend button clicked!")
         //firebase 인증 문자 재전송
         //firebase auth 시작

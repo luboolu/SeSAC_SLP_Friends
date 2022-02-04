@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import MultiSlider
 
-class DoubleSliderTableViewCell: UITableViewCell, ViewRepresentable {
+final class DoubleSliderTableViewCell: UITableViewCell, ViewRepresentable {
     
     let label: UILabel = {
         let label = UILabel()

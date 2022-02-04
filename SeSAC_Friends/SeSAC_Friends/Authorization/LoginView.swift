@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-class LoginView: UIView, ViewRepresentable {
+final class LoginView: UIView, ViewRepresentable {
     
     let guideLabel: UILabel = {
         let label = UILabel()

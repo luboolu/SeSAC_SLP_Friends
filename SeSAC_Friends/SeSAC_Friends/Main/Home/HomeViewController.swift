@@ -11,9 +11,9 @@ import SnapKit
 import RxCocoa
 import RxSwift
 
-class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController {
 
-    let mainView = HomeView()
+    private let mainView = HomeView()
 
     override func loadView() {
         self.view = mainView
@@ -37,11 +37,11 @@ class HomeViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
     }
     
-    func setupView() {
+    private func setupView() {
         view.backgroundColor = UIColor().white
     }
     
-    func setupButton() {
+    private func setupButton() {
         mainView.searchButton.rx.tap
             .bind {
                 print("tapped!")

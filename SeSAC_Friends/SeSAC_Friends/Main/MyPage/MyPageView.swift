@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class MyPageView: UIView, ViewRepresentable {
+final class MyPageView: UIView, ViewRepresentable {
     
     let tableView: UITableView = {
         let tableView = UITableView()

@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class IconTableViewCell: UITableViewCell {
+final class IconTableViewCell: UITableViewCell {
     
     let icon: UIImageView = {
         let imageView = UIImageView()
