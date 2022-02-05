@@ -44,11 +44,48 @@ final class HomeViewController: UIViewController {
     }
     
     private func setupButton() {
+        //searchButton
         mainView.searchButton.rx.tap
             .bind {
                 print("tapped!")
                 let vc = HobbySearchViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
+            }.disposed(by: disposeBag)
+        
+        //gender filter button
+        mainView.genderButton1.rx.tap
+            .scan(mainView.genderButton1.status) { lastState, newState in
+                self.mainView.genderButton2.status = .inactive
+                self.mainView.genderButton3.status = .inactive
+                return .fill
+            }
+            .map{ $0 }
+            .bind(to: mainView.genderButton1.rx.status)
+            .disposed(by: disposeBag)
+        
+        mainView.genderButton2.rx.tap
+            .scan(mainView.genderButton1.status) { lastState, newState in
+                self.mainView.genderButton1.status = .inactive
+                self.mainView.genderButton3.status = .inactive
+                return .fill
+            }
+            .map{ $0 }
+            .bind(to: mainView.genderButton2.rx.status)
+            .disposed(by: disposeBag)
+        
+        mainView.genderButton3.rx.tap
+            .scan(mainView.genderButton1.status) { lastState, newState in
+                self.mainView.genderButton1.status = .inactive
+                self.mainView.genderButton2.status = .inactive
+                return .fill
+            }
+            .map{ $0 }
+            .bind(to: mainView.genderButton3.rx.status)
+            .disposed(by: disposeBag)
+        
+        mainView.locationButton.rx.tap
+            .bind {
+                print("location button tap")
             }.disposed(by: disposeBag)
     }
 

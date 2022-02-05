@@ -13,8 +13,11 @@ import RxSwift
 final class ButtonCollectionViewCell: UICollectionViewCell, ViewRepresentable {
     
     let button: MainButton = {
-        let button = MainButton(status: .inactive)
+        let button = MainButton()
         
+        button.status = .inactive
+        button.isBorder = true
+        button.isRounded = true
         button.titleLabel?.font = UIFont().Title4_R14
         
         return button

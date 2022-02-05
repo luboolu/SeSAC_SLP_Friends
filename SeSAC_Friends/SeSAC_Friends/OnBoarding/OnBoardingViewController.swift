@@ -35,7 +35,15 @@ class OnBoardingViewController: UIViewController {
         return pageControl
     }()
     
-    let startButton = MainButton(status: .fill)
+    let startButton: MainButton = {
+        let button = MainButton()
+        
+        button.status = .fill
+        button.isBorder = true
+        button.isRounded = true
+        
+        return button
+    }()
     
     
     override func viewDidLoad() {
@@ -72,7 +80,7 @@ class OnBoardingViewController: UIViewController {
         view.addSubview(collectionView)
         
         view.addSubview(pageControl)
-        
+        //startButton.status = .fill
         startButton.setTitle("시작하기", for: .normal)
         view.addSubview(startButton)
         

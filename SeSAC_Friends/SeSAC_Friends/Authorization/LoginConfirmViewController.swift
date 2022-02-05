@@ -176,7 +176,7 @@ final class LoginConfirmViewController: UIViewController {
             
             //4. 기존 회원인지 확인
             self.viewModel.getUser() { apiResult, getUserResult, data in
-                print("statusCode: \(apiResult)")
+                print("statusCode: \(apiResult) \(getUserResult)")
                 
                 DispatchQueue.main.async {
                     //기존 유저인 경우

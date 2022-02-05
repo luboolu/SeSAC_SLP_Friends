@@ -69,7 +69,15 @@ final class BirthView: UIView, ViewRepresentable {
         return stackview
     }()
     
-    let nextButton = MainButton(status: .disable)
+    let nextButton: MainButton = {
+        let button = MainButton()
+        
+        button.status = .disable
+        button.isBorder = true
+        button.isRounded = true
+        
+        return button
+    }()
     
     let pickerView: UIDatePicker = {
         let picker = UIDatePicker()

@@ -22,7 +22,15 @@ final class NicknameView: UIView, ViewRepresentable {
     }()
     
     let nicknameTextField = MainTextFieldView()
-    let nextButton = MainButton(status: .disable)
+    let nextButton: MainButton = {
+        let button = MainButton()
+        
+        button.status = .disable
+        button.isBorder = true
+        button.isRounded = true
+        
+        return button
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)

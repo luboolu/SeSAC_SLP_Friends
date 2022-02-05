@@ -44,47 +44,50 @@ class MainButton: UIButton {
                 self.backgroundColor = UIColor().white
                 self.clipsToBounds = true
                 self.borderColor = UIColor().gray2
-                self.borderWidth = 1
+                //self.borderWidth = 1
                 self.setTitleColor(UIColor().black, for: .normal)
                 //self.titleLabel?.font = UIFont().Body3_R14
-                self.cornerRadius = 10
+                //self.cornerRadius = 10
             case .fill:
                 self.backgroundColor = UIColor().green
                 self.clipsToBounds = true
-                self.borderWidth = 0
+                //self.borderWidth = 0
+                self.borderColor = UIColor().green
                 self.setTitleColor(UIColor().white, for: .normal)
                 //self.titleLabel?.font = UIFont().Body3_R14
-                self.cornerRadius = 10
+                //self.cornerRadius = 10
             case .outline:
                 self.backgroundColor = UIColor().white
                 self.clipsToBounds = true
                 self.borderColor = UIColor().green
-                self.borderWidth = 1
+                //self.borderWidth = 1
                 self.setTitleColor(UIColor().green, for: .normal)
                 //self.titleLabel?.font = UIFont().Body3_R14
-                self.cornerRadius = 10
+                //self.cornerRadius = 10
             case .cancel:
                 self.backgroundColor = UIColor().gray2
                 self.clipsToBounds = true
-                self.borderWidth = 0
+                //self.borderWidth = 0
+                self.borderColor = UIColor().gray2
                 self.setTitleColor(UIColor().black, for: .normal)
                 //self.titleLabel?.font = UIFont().Body3_R14
-                self.cornerRadius = 10
+                //self.cornerRadius = 10
             case .disable:
                 self.backgroundColor = UIColor().gray6
                 self.clipsToBounds = true
-                self.borderWidth = 0
+                //self.borderWidth = 0
+                self.borderColor = UIColor().gray6
                 self.setTitleColor(UIColor().white, for: .normal)
                 //self.titleLabel?.font = UIFont().Body3_R14
-                self.cornerRadius = 10
+                //self.cornerRadius = 10
             case .focus:
                 self.backgroundColor = UIColor().white
                 self.clipsToBounds = true
                 self.borderColor = UIColor().error
-                self.borderWidth = 1
+                //self.borderWidth = 1
                 self.setTitleColor(UIColor().error, for: .normal)
                 //self.titleLabel?.font = UIFont().Body3_R14
-                self.cornerRadius = 10
+                //self.cornerRadius = 10
             }
         }
     }
@@ -102,6 +105,28 @@ class MainButton: UIButton {
 
             case .none:
                 self.setImage(UIImage(named: ""), for: .normal)
+            }
+        }
+    }
+    
+    var isRounded: Bool = true {
+        didSet {
+            switch isRounded {
+            case true:
+                self.cornerRadius = 10
+            case false:
+                self.cornerRadius = 0
+            }
+        }
+    }
+    
+    var isBorder: Bool = true {
+        didSet {
+            switch isBorder {
+            case true:
+                self.borderWidth = 1
+            case false:
+                self.borderWidth = 0
             }
         }
     }

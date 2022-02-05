@@ -45,8 +45,25 @@ final class LoginConfirmView: UIView, ViewRepresentable {
         return label
     }()
     
-    let resendAuthButton = MainButton(status: .fill)
-    let authButton = MainButton(status: .disable)
+    let resendAuthButton: MainButton = {
+        let button = MainButton()
+        
+        button.status = .fill
+        button.isBorder = true
+        button.isRounded = true
+        
+        return button
+    }()
+    
+    let authButton: MainButton = {
+        let button = MainButton()
+        
+        button.status = .disable
+        button.isBorder = true
+        button.isRounded = true
+        
+        return button
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)

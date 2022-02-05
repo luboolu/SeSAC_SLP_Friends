@@ -21,9 +21,25 @@ final class TwoButtonTableViewCell: UITableViewCell, ViewRepresentable {
         return label
     }()
     
-    let manButton = MainButton(status: .inactive)
+    let manButton: MainButton = {
+        let button = MainButton()
+        
+        button.status = .inactive
+        button.isBorder = true
+        button.isRounded = true
+        
+        return button
+    }()
     
-    let womanButton = MainButton(status: .inactive)
+    let womanButton: MainButton = {
+        let button = MainButton()
+        
+        button.status = .inactive
+        button.isBorder = true
+        button.isRounded = true
+        
+        return button
+    }()
     
     var bag = DisposeBag()
     

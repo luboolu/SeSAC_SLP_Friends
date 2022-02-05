@@ -55,7 +55,15 @@ final class HobbySearchView: UIView, ViewRepresentable {
         return collectionView
     }()
 
-    let findButton = MainButton()
+    let findButton: MainButton = {
+        let button = MainButton()
+        
+        button.status = .fill
+        button.isBorder = true
+        button.isRounded = true
+        
+        return button
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)

@@ -11,6 +11,8 @@ import SnapKit
 
 final class HomeView: UIView, ViewRepresentable {
     
+    let genderView = UIView()
+    
     let genderStackView: UIStackView = {
         let stackview = UIStackView()
         
@@ -24,37 +26,38 @@ final class HomeView: UIView, ViewRepresentable {
         return stackview
     }()
     
-    let genderButton1: UIButton = {
-        let button = UIButton()
+    let genderButton1: MainButton = {
+        let button = MainButton()
         
+        button.status = .fill
+        button.isBorder = false
+        button.isRounded = false
         button.setTitle("전체", for: .normal)
-        button.backgroundColor = UIColor().green
-        button.setTitleColor(UIColor().black, for: .normal)
-        button.titleLabel?.font = UIFont().Title3_M14
+        button.titleLabel?.font = UIFont().Title4_R14
         
         return button
     }()
     
-    let genderButton2: UIButton = {
-        let button = UIButton()
+    let genderButton2: MainButton = {
+        let button = MainButton()
         
+        button.status = .inactive
+        button.isBorder = false
+        button.isRounded = false
         button.setTitle("남자", for: .normal)
-        button.setTitleColor(UIColor().black, for: .normal)
-        button.backgroundColor = UIColor().white
-        button.tintColor = UIColor().black
-        button.titleLabel?.font = UIFont().Title3_M14
+        button.titleLabel?.font = UIFont().Title4_R14
         
         return button
     }()
     
-    let genderButton3: UIButton = {
-        let button = UIButton()
+    let genderButton3: MainButton = {
+        let button = MainButton()
         
+        button.status = .inactive
+        button.isBorder = false
+        button.isRounded = false
         button.setTitle("여자", for: .normal)
-        button.setTitleColor(UIColor().black, for: .normal)
-        button.backgroundColor = UIColor().green
-        button.tintColor = UIColor().black
-        button.titleLabel?.font = UIFont().Title3_M14
+        button.titleLabel?.font = UIFont().Title4_R14
         
         return button
     }()
@@ -66,6 +69,11 @@ final class HomeView: UIView, ViewRepresentable {
         button.setImage(UIImage(named: "place"), for: .normal)
         button.clipsToBounds = true
         button.layer.cornerRadius = 8
+        button.layer.shadowColor = UIColor().black.cgColor // 색깔
+        button.layer.masksToBounds = false  // 내부에 속한 요소들이 UIView 밖을 벗어날 때, 잘라낼 것인지. 그림자는 밖에 그려지는 것이므로 false 로 설정
+        button.layer.shadowOffset = CGSize(width: 0, height: 4) // 위치조정
+        button.layer.shadowRadius = 3 // 반경
+        button.layer.shadowOpacity = 0.3 // alpha값
         
         return button
     }()
@@ -75,6 +83,11 @@ final class HomeView: UIView, ViewRepresentable {
         
         button.backgroundColor = UIColor.clear
         button.setImage(UIImage(named: "default_button"), for: .normal)
+        button.layer.shadowColor = UIColor().black.cgColor // 색깔
+        button.layer.masksToBounds = false  // 내부에 속한 요소들이 UIView 밖을 벗어날 때, 잘라낼 것인지. 그림자는 밖에 그려지는 것이므로 false 로 설정
+        button.layer.shadowOffset = CGSize(width: 0, height: 4) // 위치조정
+        button.layer.shadowRadius = 3 // 반경
+        button.layer.shadowOpacity = 0.3 // alpha값
         
         return button
     }()
@@ -91,14 +104,23 @@ final class HomeView: UIView, ViewRepresentable {
     
     
     func setupView() {
-        self.backgroundColor = UIColor().gray4
+        self.backgroundColor = UIColor().white
         self.addSubview(searchButton)
+        
         
         genderStackView.addArrangedSubview(genderButton1)
         genderStackView.addArrangedSubview(genderButton2)
         genderStackView.addArrangedSubview(genderButton3)
         
-        self.addSubview(genderStackView)
+        //뷰 그림자
+        genderView.layer.shadowColor = UIColor().black.cgColor // 색깔
+        genderView.layer.masksToBounds = false  // 내부에 속한 요소들이 UIView 밖을 벗어날 때, 잘라낼 것인지. 그림자는 밖에 그려지는 것이므로 false 로 설정
+        genderView.layer.shadowOffset = CGSize(width: 0, height: 4) // 위치조정
+        genderView.layer.shadowRadius = 3 // 반경
+        genderView.layer.shadowOpacity = 0.3 // alpha값
+        
+        genderView.addSubview(genderStackView)
+        self.addSubview(genderView)
         self.addSubview(locationButton)
     }
     
@@ -110,11 +132,15 @@ final class HomeView: UIView, ViewRepresentable {
             make.height.equalTo(searchButton.snp.width).multipliedBy(1)
         }
         
-        genderStackView.snp.makeConstraints { make in
+        genderView.snp.makeConstraints { make in
             make.top.equalTo(self.safeAreaLayoutGuide).offset(16)
             make.leading.equalToSuperview().offset(16)
             make.width.equalTo(48)
             make.height.equalTo(144)
+        }
+        
+        genderStackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
         
         genderButton1.snp.makeConstraints { make in

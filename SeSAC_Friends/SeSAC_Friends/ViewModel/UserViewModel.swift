@@ -100,7 +100,7 @@ class UserViewModel {
                 } catch {
                     completion(.invalidData, nil, nil)
                 }
-            } else if response.statusCode == 201 {
+            } else if response.statusCode == 406 {
                 completion(.succeed, .newUser, nil)
             } else if response.statusCode == 401 {
                 self.idTokenRequest { error in

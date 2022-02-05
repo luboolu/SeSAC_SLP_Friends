@@ -25,7 +25,15 @@ final class LoginView: UIView, ViewRepresentable {
     }()
     
     let textfieldView = MainTextFieldView()
-    let authMessageButton = MainButton(status: .disable)
+    let authMessageButton: MainButton = {
+        let button = MainButton()
+        
+        button.status = .disable
+        button.isBorder = true
+        button.isRounded = true
+        
+        return button
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
