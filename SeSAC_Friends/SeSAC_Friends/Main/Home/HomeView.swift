@@ -6,10 +6,15 @@
 //
 
 import UIKit
+import MapKit
+import CoreLocation
+import CoreLocationUI
 
 import SnapKit
 
 final class HomeView: UIView, ViewRepresentable {
+    
+    let mapView = MKMapView()
     
     let genderView = UIView()
     
@@ -105,8 +110,9 @@ final class HomeView: UIView, ViewRepresentable {
     
     func setupView() {
         self.backgroundColor = UIColor().white
-        self.addSubview(searchButton)
         
+        self.addSubview(mapView)
+        self.addSubview(searchButton)
         
         genderStackView.addArrangedSubview(genderButton1)
         genderStackView.addArrangedSubview(genderButton2)
@@ -125,6 +131,14 @@ final class HomeView: UIView, ViewRepresentable {
     }
     
     func setupConstraints() {
+        
+        mapView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.bottom.equalTo(self.safeAreaLayoutGuide)
+        }
+        
         searchButton.snp.makeConstraints { make in
             make.bottom.equalTo(self.safeAreaLayoutGuide).offset(-16)
             make.trailing.equalToSuperview().offset(-16)
