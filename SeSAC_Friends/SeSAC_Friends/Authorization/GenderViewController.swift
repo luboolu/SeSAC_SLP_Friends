@@ -10,11 +10,13 @@ import UIKit
 import SnapKit
 import RxCocoa
 import RxSwift
+import Toast
 
 final class GenderViewController: UIViewController {
     
     private let viewModel = UserViewModel()
     private let mainView = GenderView()
+    private let toastStyle = ToastStyle()
     
     private var isMan = false
     private var isWoman = false
@@ -91,38 +93,35 @@ final class GenderViewController: UIViewController {
                     //미선택
                     UserDefaults.standard.set(-1, forKey: UserdefaultKey.gender.rawValue)
                 }
-                
-                //회원가입 api 통신 시작!
-                self.viewModel.signIn { statusCode in
-                    print("회원가입 완료 \(statusCode)")
-                    
-                    if statusCode == 200 {
-                        
-                        DispatchQueue.main.async {
-                            
-                            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
-                            windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: MainViewController())
-                            windowScene.windows.first?.makeKeyAndVisible()
-                        }
-                        
-                    } else if statusCode == 201 {
-                        
-                    } else if statusCode == 202 {
-                        
-                    } else if statusCode == 401 {
-                        
-                    } else if statusCode == 500 {
-                        
-                    } else if statusCode == 501 {
-                        
-                    } else {
-                        
-                    }
-                    
-                }
-                
+                self.signInRequest() //회원가입 요청
             }
         
+    }
+    
+    private func signInRequest() {
+        //회원가입 api 통신 시작!
+        self.viewModel.signIn { apiResult, signInResult in
+            print("회원가입 완료 \(signInResult)")
+            
+            if signInResult == .succeed || signInResult == .alreadyProcessed {
+                DispatchQueue.main.async {
+                    guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                    windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: MainViewController())
+                    windowScene.windows.first?.makeKeyAndVisible()
+                }
+                
+            } else if signInResult == .invalidNickname {
+                //닉네임 입력 화면으로 전환
+                DispatchQueue.main.async {
+                    guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                    windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: NicknameViewController())
+                    windowScene.windows.first?.makeKeyAndVisible()
+                }
+            } else {
+                self.view.makeToast("에러가 발생했습니다" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+            }
+            
+        }
     }
     
 }

@@ -90,7 +90,7 @@ class UserViewModel {
             }
 
             //상태코드에 따른 분기처리
-            //200: 기존회원, 201: 미가입회원
+            //200: 기존회원, 406: 미가입회원
             if response.statusCode == 200 {
                 do {
                     let decoder = JSONDecoder()
@@ -119,7 +119,7 @@ class UserViewModel {
     }
     
     //회원가입
-    func signIn(completion: @escaping (Int?) -> Void) {
+    func signIn(completion: @escaping (APIResult?, SignInResult?) -> Void) {
         
         let url = URL(string: "\(URL.user)")!
         let idtoken = UserDefaults.standard.string(forKey: UserdefaultKey.idToken.rawValue) ?? ""
@@ -141,36 +141,48 @@ class UserViewModel {
         let session = URLSession.shared
         session.dataTask(with: request) { data, response, error in
             if error != nil {
-                print(error)
-                completion(-1)
-            }
-
-            guard let response = response as? HTTPURLResponse else {
-                completion(-1)
+                completion(.failed, nil)
                 return
             }
-
-            if let data = data {
-                print(data)
+            
+            guard let response = response as? HTTPURLResponse else {
+                completion(.invalidResponse, nil)
+                return
+            }
+            
+            guard let data = data else {
+                completion(.noData, nil)
+                return
             }
             
             if response.statusCode == 200 {
                 //회원가입 성공
+                completion(.succeed, .succeed)
             } else if response.statusCode == 201 {
                 //이미 가입한 유저
+                completion(.succeed, .alreadyProcessed)
             } else if response.statusCode == 202 {
                 //사용할 수 없는 닉네임
+                completion(.succeed, .invalidNickname)
             } else if response.statusCode == 401 {
                 //firebase token error
+                self.idTokenRequest { error in
+                    completion(.failed, .tokenError)
+                }
+            } else if response.statusCode == 406 {
+                //not user
+                completion(.failed, .notUser)
             } else if response.statusCode == 500 {
                 //server error
+                completion(.failed, .serverError)
             } else if response.statusCode == 501 {
                 //client error
+                completion(.failed, .clientError)
             } else {
                 //not defined error
+                completion(.failed, nil)
             }
             
-            completion(response.statusCode)
         }.resume()
         
     }
@@ -258,7 +270,6 @@ class UserViewModel {
             if response.statusCode == 200 {
                 completion(.succeed, .succeed)
             } else if response.statusCode == 401 {
-                //여기서 idtoken 업데이트를 해야하나?
                 self.idTokenRequest { error in
                     completion(.failed, .tokenError)
                 }

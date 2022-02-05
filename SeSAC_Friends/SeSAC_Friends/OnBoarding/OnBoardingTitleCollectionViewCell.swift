@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OnBoardingTitleCollectionViewCell: UICollectionViewCell {
+final class OnBoardingTitleCollectionViewCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)

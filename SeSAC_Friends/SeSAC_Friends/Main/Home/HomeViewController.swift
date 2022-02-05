@@ -36,6 +36,7 @@ final class HomeViewController: UIViewController {
         
         setupMap()
         setupButton()
+        updateLocation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -179,6 +180,13 @@ extension HomeViewController: CLLocationManagerDelegate {
         
         
     }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "MyMarker")
+        annotationView.markerTintColor = UIColor.clear
+        annotationView.image = UIImage(named: "map_marker")
+        return annotationView
+    }
 
     //4. 사용자가 위치 허용을 한 경우 실행되는 부분
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -189,7 +197,7 @@ extension HomeViewController: CLLocationManagerDelegate {
             mainView.mapView.removeAnnotations(annotations)
             
             let annotation = MKPointAnnotation()
-            annotation.title = "Current Location"
+            //annotation.title = "Current Location"
             annotation.coordinate = coordinate
             mainView.mapView.addAnnotation(annotation)
             
@@ -197,28 +205,7 @@ extension HomeViewController: CLLocationManagerDelegate {
             let region = MKCoordinateRegion(center: coordinate, span: span)
             mainView.mapView.setRegion(region, animated: true)
             print(region)
-            //한글 주소 변환
-//            let findLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-//            let geocoder = CLGeocoder()
-//            let locale = Locale(identifier: "ko-kr")
-//
-//            geocoder.reverseGeocodeLocation(findLocation, preferredLocale: locale, completionHandler: {(placemarks, error) in
-//
-//                if let address: [CLPlacemark] = placemarks { if let name: String = address.last?.name {
-//                    print(name)
-//                    //self.addressLabel.text = "\(name)"
-//                } //전체 주소
-//
-//                }
-//
-//            })
-//
-//            nowLatitude = coordinate.latitude
-//            nowLongitude = coordinate.longitude
-//
-//            getWeatherInfo(lat: coordinate.latitude, lon: coordinate.longitude)
-                
-            
+
             
         } else {
             print("Location Cannot Find")
@@ -264,4 +251,19 @@ extension HomeViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         print("여기야!!!")
     }
+    
+    func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
+        //현재 보고 있는 지도의 중심을 찾음
+        let center = mapView.centerCoordinate
+        print(center)
+        //맵뷰의 annotation을 삭제
+        let annotations = mainView.mapView.annotations
+        mainView.mapView.removeAnnotations(annotations)
+        
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = center
+        mainView.mapView.addAnnotation(annotation)
+    }
+    
+
 }

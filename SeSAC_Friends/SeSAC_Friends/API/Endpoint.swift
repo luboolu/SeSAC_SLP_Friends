@@ -19,6 +19,11 @@ extension URL {
         return makeEndPoint("/user")
     }
     
+    static var queue: URL {
+        return makeEndPoint("/queue")
+    }
+    
+    //MARK: User
     static var userWithdraw: URL {
         return URL(string: "\(URL.user)/withdraw")!
     }
@@ -30,6 +35,25 @@ extension URL {
     static var userUpdateFCM: URL {
         return URL(string: "\(URL.user)/update_fcm_token")!
     }
+    
+    //MARK: Queue
+    static var queueOn: URL {
+        return URL(string: "\(URL.queue)/onqueue")!
+    }
+    
+    static var queueRequest: URL {
+        return URL(string: "\(URL.queue)/hobbyrequest")!
+    }
+    
+    static var queueAcceepr: URL {
+        return URL(string: "\(URL.queue)/hobbyaccept")!
+    }
+    
+    static var queueState: URL {
+        return URL(string: "\(URL.queue)/myQueueState")!
+    }
+    
+    
     
 }
 
