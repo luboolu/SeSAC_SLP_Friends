@@ -105,6 +105,8 @@ final class HobbySearchViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
+    
+    
 }
 
 extension HobbySearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {

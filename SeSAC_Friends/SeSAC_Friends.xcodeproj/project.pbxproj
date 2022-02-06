@@ -232,16 +232,12 @@
 			path = CollectionViewCell;
 			sourceTree = "<group>";
 		};
-		DCC419F327A7DDF3006B2904 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		DCC419F427A7DDFF006B2904 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				DCDCC2DD279FD27B00FB142B /* OnBoarding */,
+				DCE2D1EE27970DEC0018895F /* Authorization */,
+				DCDE3670279C3A790077847C /* Main */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -295,19 +291,12 @@
 		DCE2D1BA279694720018895F /* SeSAC_Friends */ = {
 			isa = PBXGroup;
 			children = (
+				DCF8942D27AF92FE001BE5DF /* Custom */,
 				DCC419F527A7DE06006B2904 /* ViewModel */,
 				DCC419F427A7DDFF006B2904 /* ViewController */,
-				DCC419F327A7DDF3006B2904 /* View */,
-				DCC419EA27A44832006B2904 /* CollectionViewCell */,
-				DC1873EF27A192F300DE4FBD /* TableViewCell */,
-				DCDCC2DD279FD27B00FB142B /* OnBoarding */,
 				DCA1AABC279DA7BA002194B4 /* API */,
-				DCDE3670279C3A790077847C /* Main */,
-				DCE2D1EE27970DEC0018895F /* Authorization */,
 				DCE2D1E92796DB820018895F /* Extension */,
 				DCE2D1E42796D6D00018895F /* Font */,
-				DCE2D1DF2796CCC30018895F /* TextField */,
-				DCE2D1DA2796A8E30018895F /* Button */,
 				DCE2D1BB279694720018895F /* AppDelegate.swift */,
 				DCE2D1BD279694720018895F /* SceneDelegate.swift */,
 				DC6E55DB27A98A7800998FF9 /* Alert.swift */,
@@ -378,6 +367,17 @@
 				DC18740427A267EF00DE4FBD /* GenderView.swift */,
 			);
 			path = Authorization;
+			sourceTree = "<group>";
+		};
+		DCF8942D27AF92FE001BE5DF /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				DC1873EF27A192F300DE4FBD /* TableViewCell */,
+				DCC419EA27A44832006B2904 /* CollectionViewCell */,
+				DCE2D1DA2796A8E30018895F /* Button */,
+				DCE2D1DF2796CCC30018895F /* TextField */,
+			);
+			path = Custom;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
