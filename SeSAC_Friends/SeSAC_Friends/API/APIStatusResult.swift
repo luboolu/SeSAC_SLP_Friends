@@ -48,4 +48,66 @@ enum UserInfoUpdateResult {
 }
 
 //MARK: QueueViewModel
+//친구 찾기 요청 시작
+enum QueueStart {
+    case succeed       //200
+    case blocked       //201
+    case penaltyLv1    //203
+    case penaltyLv2    //204
+    case penaltyLv3    //205
+    case invalidGender //206
+    case tokenError    //401
+    case notUser       //406
+    case serverError   //500
+    case clientError   //501
+}
+
+//친구 찾기 요청 취소
+enum QueueStop {
+    case succeed      //200
+    case matched      //201
+    case tokenError   //401
+    case notUser      //406
+    case serverError  //500
+    case clientError  //501
+}
+
+//친구 찾기 요청 취소
+enum QueueOn {
+    case succeed      //200
+    case tokenError   //401
+    case notUser      //406
+    case serverError  //500
+    case clientError  //501
+}
+
+//취미 함께하기 요청
+enum QueueHobbyRequest {
+    case succeed      //200
+    case requested    //201
+    case stopped      //202
+    case tokenError   //401
+    case notUser      //406
+    case serverError  //500
+    case clientError  //501
+}
+
+enum QueueHobbyAccept {
+    case succeed      //200
+    case otherMatched //201
+    case stopped      //202
+    case tokenError   //401
+    case notUser      //406
+    case serverError  //500
+    case clientError  //501
+}
+
+enum QueueState {
+    case succeed      //200
+    case stopped      //201
+    case tokenError   //401
+    case notUser      //406
+    case serverError  //500
+    case clientError  //501
+}
 

@@ -80,6 +80,7 @@
 		DCE678E127A2DC0D00ACB1A7 /* MultiSlider in Frameworks */ = {isa = PBXBuildFile; productRef = DCE678E027A2DC0D00ACB1A7 /* MultiSlider */; };
 		DCE678E327A2E61800ACB1A7 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE678E227A2E61800ACB1A7 /* TableViewCell.swift */; };
 		DCE678E527A2EA4D00ACB1A7 /* CardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE678E427A2EA4D00ACB1A7 /* CardTableViewCell.swift */; };
+		DCF8942F27B0B9E3001BE5DF /* QueueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF8942E27B0B9E3001BE5DF /* QueueViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -150,6 +151,7 @@
 		DCE2D1F9279809D40018895F /* MainButtonTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainButtonTestViewController.swift; sourceTree = "<group>"; };
 		DCE678E227A2E61800ACB1A7 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		DCE678E427A2EA4D00ACB1A7 /* CardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTableViewCell.swift; sourceTree = "<group>"; };
+		DCF8942E27B0B9E3001BE5DF /* QueueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				DCA1AABF279E4531002194B4 /* UserViewModel.swift */,
+				DCF8942E27B0B9E3001BE5DF /* QueueViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -512,6 +515,7 @@
 				DCE2D1F027970E000018895F /* LoginViewController.swift in Sources */,
 				DC1873F527A19D2600DE4FBD /* CharactorTableViewCell.swift in Sources */,
 				DC1873FF27A2648700DE4FBD /* NicknameView.swift in Sources */,
+				DCF8942F27B0B9E3001BE5DF /* QueueViewModel.swift in Sources */,
 				DCE2D1DC2796A9080018895F /* MainButton.swift in Sources */,
 				DCC419F727A7DE86006B2904 /* OutputDataStructswift.swift in Sources */,
 				DC18740727A2729700DE4FBD /* TwoButtonTableViewCell.swift in Sources */,

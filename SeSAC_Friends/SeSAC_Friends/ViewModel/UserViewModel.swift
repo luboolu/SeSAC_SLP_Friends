@@ -52,6 +52,8 @@ class UserViewModel {
             }
             
             if let idToken = idToken {
+                print("idtoken")
+                print(idToken)
                 UserDefaults.standard.set(idToken, forKey: UserdefaultKey.idToken.rawValue)
             }
             
