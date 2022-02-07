@@ -10,7 +10,7 @@ import Foundation
 import FirebaseAuth
 import FirebaseMessaging
 
-class UserViewModel {
+final class UserViewModel {
     //firebase에 phoneNumber로 인증 메세지 요청
     func authRequest(phoneNumber: String, completion: @escaping (Error?) -> Void)  {
         PhoneAuthProvider.provider()

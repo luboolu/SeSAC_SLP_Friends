@@ -9,6 +9,7 @@ import UIKit
 
 import RxCocoa
 import RxSwift
+import SnapKit
 
 final class HobbySearchViewController: UIViewController {
     
@@ -103,6 +104,37 @@ final class HobbySearchViewController: UIViewController {
                 }
             }
             .disposed(by: disposeBag)
+        
+        //키보드 return key 입력시, 내려가도록 함
+        mainView.searchBar.rx.searchButtonClicked
+            .bind {
+                self.mainView.searchBar.resignFirstResponder()
+            }
+            .disposed(by: disposeBag)
+        
+//        let buttonAccView = UIView()
+        let button = MainButton()
+        button.setTitle("새싹 찾기", for: .normal)
+        button.status = .fill
+        button.isRounded = false
+//
+//        buttonAccView.addSubview(button)
+//        button.snp.makeConstraints { make in
+//            make.edges.equalToSuperview()
+//        }
+        
+        let ViewForDoneButtonOnKeyboard = UIToolbar()
+        ViewForDoneButtonOnKeyboard.sizeToFit()
+        let flexSpace: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+//        let button = UIButton.init(type: .custom)
+//        button.setImage(UIImage.init(named: "login-logo"), for: .normal)
+        //button.addTarget(self, action:#selector(doneBtnfromKeyboardClicked), for:.touchUpInside)
+        button.frame = CGRect.init(x: 0, y: 0, width:UIScreen.main.bounds.width, height: 48) //CGRectMake(0, 0, 30, 30)
+        let barButton = UIBarButtonItem.init(customView: button)
+        ViewForDoneButtonOnKeyboard.items = [flexSpace, barButton, flexSpace]
+
+        
+        mainView.searchBar.inputAccessoryView = ViewForDoneButtonOnKeyboard
     }
     
     
@@ -186,3 +218,4 @@ extension HobbySearchViewController: UICollectionViewDelegateFlowLayout {
     }
 
 }
+
