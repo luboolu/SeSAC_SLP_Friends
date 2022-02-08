@@ -25,6 +25,14 @@ final class SeSacFindViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setPagingButton()
+        setButton()
+        
+        DispatchQueue.main.async {
+            self.nearViewButtonClicked()
+        }
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,10 +48,6 @@ final class SeSacFindViewController: UIViewController {
         backButton.tintColor = UIColor().black
         
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
-        
-        //setParchment()
-        setPagingButton()
-        nearViewButtonClicked()
     }
     
     private func setPagingButton() {
@@ -90,10 +94,11 @@ final class SeSacFindViewController: UIViewController {
     private func nearViewButtonClicked() {
         print(#function)
         if mainView.contentView.subviews.count > 0 {
+            print("remove")
             self.recivedVC.view.removeFromSuperview()
             self.recivedVC.removeFromParent()
         }
-        nearVC.view.frame = mainView.contentView.frame
+        nearVC.view.frame = mainView.contentView.bounds
         mainView.contentView.addSubview(nearVC.view)
         self.addChild(nearVC)
         nearVC.didMove(toParent: self)
@@ -104,15 +109,30 @@ final class SeSacFindViewController: UIViewController {
     private func recivedButtonClicked() {
         print(#function)
         if mainView.contentView.subviews.count > 0 {
+            print("remove")
             self.nearVC.view.removeFromSuperview()
             self.nearVC.removeFromParent()
         }
-        recivedVC.view.frame = mainView.contentView.frame
+        print(mainView.contentView.frame)
+        print(mainView.contentView.bounds)
+        recivedVC.view.frame = mainView.contentView.bounds
         mainView.contentView.addSubview(recivedVC.view)
         self.addChild(recivedVC)
         recivedVC.didMove(toParent: self)
         
         self.reloadInputViews()
+    }
+    
+    private func setButton() {
+        mainView.hobbyChangeButton.rx.tap
+            .bind {
+                print("hobbyChange")
+            }.disposed(by: disposeBag)
+        
+        mainView.resetButton.rx.tap
+            .bind {
+                print("Reset")
+            }.disposed(by: disposeBag)
     }
     
     @objc func indexChanged(_ sender: UISegmentedControl) {

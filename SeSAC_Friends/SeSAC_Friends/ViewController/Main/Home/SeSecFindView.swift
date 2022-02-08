@@ -11,18 +11,6 @@ import SnapKit
 
 final class SeSacFindView: UIView, ViewRepresentable {
     
-    let segmentView = UIView()
-    
-    let mySegment: UISegmentedControl = {
-        let segment = UISegmentedControl(items: ["주변 새싹", "받은 요청"])
-        
-        segment.selectedSegmentIndex = 0
-        segment.backgroundColor = UIColor().white
-        segment.selectedSegmentTintColor = UIColor().white
-                
-        return segment
-    }()
-    
     let buttonView = UIView()
     
     let buttonStackView: UIStackView = {
@@ -32,7 +20,6 @@ final class SeSacFindView: UIView, ViewRepresentable {
         stackView.spacing = 0
         stackView.distribution = .fillEqually
         stackView.alignment = .center
-        //stackView.backgroundColor = UIColor().error
         
         return stackView
     }()
@@ -89,6 +76,30 @@ final class SeSacFindView: UIView, ViewRepresentable {
     
     let contentView = UIView()
     
+    let hobbyChangeButton: MainButton = {
+        let button = MainButton()
+        
+        button.status = .fill
+        button.isBorder = false
+        button.isRounded = true
+        button.setTitle("취미 변경하기", for: .normal)
+        button.titleLabel?.font = UIFont().Body3_R14
+        
+        return button
+    }()
+    
+    let resetButton: MainButton = {
+        let button = MainButton()
+        
+        button.status = .outline
+        button.isBorder = true
+        button.isRounded = true
+        button.imageStyle = .reset_color
+        button.setTitle("", for: .normal)
+        
+        return button
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -117,6 +128,9 @@ final class SeSacFindView: UIView, ViewRepresentable {
         self.addSubview(buttonStackView)
         contentView.backgroundColor = UIColor().error
         self.addSubview(contentView)
+        
+        self.addSubview(hobbyChangeButton)
+        self.addSubview(resetButton)
     }
     
     func setupConstraints() {
@@ -168,31 +182,25 @@ final class SeSacFindView: UIView, ViewRepresentable {
             make.top.equalTo(buttonStackView.snp.bottom)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
-            make.bottom.equalToSuperview()
+        }
+        
+        hobbyChangeButton.snp.makeConstraints { make in
+            make.top.equalTo(contentView.snp.bottom).offset(16)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalTo(resetButton.snp.leading).offset(-8)
+            make.bottom.equalTo(self.safeAreaLayoutGuide)
+            make.height.equalTo(48)
+        }
+        
+        resetButton.snp.makeConstraints { make in
+            make.top.equalTo(contentView.snp.bottom).offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.bottom.equalTo(self.safeAreaLayoutGuide)
+            make.width.equalTo(48)
+            make.height.equalTo(48)
         }
 
         
     }
-    
-    func useSegmentControl() {
-        segmentView.backgroundColor = UIColor().green
-        segmentView.addSubview(mySegment)
-        self.addSubview(segmentView)
-        
-        segmentView.snp.makeConstraints { make in
-            make.top.equalTo(self.safeAreaLayoutGuide)
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.height.equalTo(42)
-        }
-        
-        mySegment.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.height.equalTo(40)
-        }
-    }
-    
     
 }

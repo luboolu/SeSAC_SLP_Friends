@@ -19,4 +19,5 @@ enum MainButtonStatus {
 enum MainButtonImageStyle {
     case none
     case close_color
+    case reset_color
 }

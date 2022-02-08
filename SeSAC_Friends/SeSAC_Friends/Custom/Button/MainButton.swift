@@ -102,7 +102,13 @@ class MainButton: UIButton {
                 //cell.button.imageEdgeInsets = .init(top: 5, left: 20, bottom: 5, right: 16) //<- 중요
                 
                 self.contentHorizontalAlignment = .center
-
+            case .reset_color:
+                self.setImage(UIImage(named: "reset_color"), for: .normal)
+                self.imageView?.contentMode = .scaleAspectFit
+                self.semanticContentAttribute = .forceRightToLeft //<- 중요
+                //cell.button.imageEdgeInsets = .init(top: 5, left: 20, bottom: 5, right: 16) //<- 중요
+                
+                self.contentHorizontalAlignment = .center
             case .none:
                 self.setImage(UIImage(named: ""), for: .normal)
             }
