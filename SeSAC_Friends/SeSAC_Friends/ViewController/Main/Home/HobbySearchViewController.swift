@@ -14,6 +14,7 @@ import SnapKit
 final class HobbySearchViewController: UIViewController {
     
     private let mainView = HobbySearchView()
+    private let viewModel = QueueViewModel()
     private let disposeBag = DisposeBag()
     
     private let nearHobbyList = ["아무거나", "SeSAC", "코딩", "맛집탐방", "공원산책", "독서모임", "식물", "카페투어"]
@@ -28,11 +29,13 @@ final class HobbySearchViewController: UIViewController {
         self.navigationItem.titleView = mainView.searchBar
         setCollectionView()
         setSearchBar()
+        setButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = false
+
     }
     
     override func viewDidLayoutSubviews() {
@@ -47,7 +50,7 @@ final class HobbySearchViewController: UIViewController {
             make.trailing.equalToSuperview()
             make.height.equalTo(nearHeight + 32)
         }
-
+        
         let myHeight = mainView.myCollectionView.collectionViewLayout.collectionViewContentSize.height
 
         mainView.myCollectionView.snp.removeConstraints()
@@ -111,30 +114,27 @@ final class HobbySearchViewController: UIViewController {
                 self.mainView.searchBar.resignFirstResponder()
             }
             .disposed(by: disposeBag)
+    }
+    
+    private func setButton() {
+        mainView.findButton.rx.tap
+            .bind {
+                self.findButtonClicked()
+            }.disposed(by: disposeBag)
         
-//        let buttonAccView = UIView()
-        let button = MainButton()
-        button.setTitle("새싹 찾기", for: .normal)
-        button.status = .fill
-        button.isRounded = false
+        mainView.accFindButton.rx.tap
+            .bind {
+                self.findButtonClicked()
+            }.disposed(by: disposeBag)
+    }
+    
+    private func findButtonClicked() {
+        print(#function)
+//        viewModel.queueStart(gender: <#T##Int#>, region: <#T##Int#>, lat: <#T##Double#>, long: <#T##Double#>, hobby: <#T##[String]#>) { apiResult, queueStart in
 //
-//        buttonAccView.addSubview(button)
-//        button.snp.makeConstraints { make in
-//            make.edges.equalToSuperview()
 //        }
-        
-        let ViewForDoneButtonOnKeyboard = UIToolbar()
-        ViewForDoneButtonOnKeyboard.sizeToFit()
-        let flexSpace: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-//        let button = UIButton.init(type: .custom)
-//        button.setImage(UIImage.init(named: "login-logo"), for: .normal)
-        //button.addTarget(self, action:#selector(doneBtnfromKeyboardClicked), for:.touchUpInside)
-        button.frame = CGRect.init(x: 0, y: 0, width:UIScreen.main.bounds.width, height: 48) //CGRectMake(0, 0, 30, 30)
-        let barButton = UIBarButtonItem.init(customView: button)
-        ViewForDoneButtonOnKeyboard.items = [flexSpace, barButton, flexSpace]
-
-        
-        mainView.searchBar.inputAccessoryView = ViewForDoneButtonOnKeyboard
+        let vc = SeSacFindViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     

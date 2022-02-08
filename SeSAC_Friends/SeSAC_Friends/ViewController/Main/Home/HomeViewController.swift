@@ -28,7 +28,7 @@ final class HomeViewController: UIViewController {
         
         let backButton = UIBarButtonItem()
         backButton.title = ""
-        backButton.tintColor = UIColor().gray7
+        backButton.tintColor = UIColor().black
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
         
         locationManager.delegate = self

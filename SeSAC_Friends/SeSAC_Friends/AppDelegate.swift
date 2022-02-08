@@ -25,11 +25,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enableAutoToolbar = false
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         
+        //네비게이션&탭바 폰트 설정
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont().Title3_M14], for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont().Title3_M14], for: .highlighted)
+        UINavigationBar.appearance().titleTextAttributes = [ NSAttributedString.Key.font: UIFont().Title3_M14]
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont().Body4_R12], for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont().Body4_R12], for: .highlighted)
 
-
-        //메시지 대리자 설정
+        //파이어베이스 메시지 대리자 설정
         Messaging.messaging().delegate = self
-        
         Messaging.messaging().token { token, error in
             if let error = error {
                 print("Error fetching FCM registration token: \(error)")

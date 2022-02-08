@@ -59,8 +59,22 @@ final class HobbySearchView: UIView, ViewRepresentable {
         let button = MainButton()
         
         button.status = .fill
-        button.isBorder = true
+        button.isBorder = false
         button.isRounded = true
+        button.setTitle("새싹 찾기", for: .normal)
+        button.titleLabel?.font = UIFont().Body3_R14
+        
+        return button
+    }()
+    
+    let accFindButton: MainButton = {
+        let button = MainButton()
+        
+        button.status = .fill
+        button.isBorder = false
+        button.isRounded = false
+        button.setTitle("새싹 찾기", for: .normal)
+        button.titleLabel?.font = UIFont().Body3_R14
         
         return button
     }()
@@ -69,6 +83,7 @@ final class HobbySearchView: UIView, ViewRepresentable {
         super.init(frame: frame)
         setupView()
         setupConstraints()
+        setAccView()
     }
     
     required init?(coder: NSCoder) {
@@ -84,9 +99,6 @@ final class HobbySearchView: UIView, ViewRepresentable {
         self.addSubview(myLabel)
         self.addSubview(myCollectionView)
         
-        findButton.setTitle("새싹 찾기", for: .normal)
-        findButton.status = .fill
-        findButton.titleLabel?.font = UIFont().Body3_R14
         self.addSubview(findButton)
     }
     
@@ -121,6 +133,20 @@ final class HobbySearchView: UIView, ViewRepresentable {
             make.trailing.equalToSuperview().offset(-16)
             make.height.equalTo(48)
         }
+    }
+    
+    private func setAccView() {
+        //키보드가 올라왔을때 보여지는 악세서리 뷰를 정의
+        let ViewForDoneButtonOnKeyboard = UIToolbar()
+        ViewForDoneButtonOnKeyboard.sizeToFit()
+        
+        let flexSpace: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+
+        accFindButton.frame = CGRect.init(x: 0, y: 0, width:UIScreen.main.bounds.width, height: 48)
+        let barButton = UIBarButtonItem.init(customView: accFindButton)
+        ViewForDoneButtonOnKeyboard.items = [flexSpace, barButton, flexSpace]
+        
+        searchBar.inputAccessoryView = ViewForDoneButtonOnKeyboard
     }
     
     
