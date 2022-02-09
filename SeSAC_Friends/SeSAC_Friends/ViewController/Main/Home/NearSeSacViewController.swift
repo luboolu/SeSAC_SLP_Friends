@@ -34,6 +34,23 @@ final class NearSeSacViewController: UIViewController {
         mainView.friendsTableView.register(CharactorTableViewCell.self, forCellReuseIdentifier: TableViewCell.CharactorTableViewCell.id)
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        guard let cell = mainView.friendsTableView.dequeueReusableCell(withIdentifier: TableViewCell.CardTableViewCell.id) as? CardTableViewCell else { return }
+        
+        let height = cell.hobbyCollectionView.collectionViewLayout.collectionViewContentSize.height
+        
+        cell.hobbyCollectionView.snp.removeConstraints()
+        cell.hobbyCollectionView.snp.remakeConstraints { make in
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.height.equalTo(height + 32)
+        }
+        
+        self.view.layoutIfNeeded()
+    }
+    
     @objc func moreButtonClicked() {
         print("moreButton tapped")
         //self.moreButtonTapped = !self.moreButtonTapped
@@ -43,6 +60,7 @@ final class NearSeSacViewController: UIViewController {
     func moreButton(section: Int, row: Int) {
         self.moreButtonTapped[section] = !self.moreButtonTapped[section]
         self.mainView.friendsTableView.reloadRows(at: [[section, row]], with: .fade)
+        self.viewDidLayoutSubviews()
     }
 }
 
@@ -80,11 +98,18 @@ extension NearSeSacViewController: UITableViewDelegate, UITableViewDataSource {
             cell.titleCollectionView.register(ButtonCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.ButtonCollectionViewCell.id)
             cell.titleCollectionView.tag = 101
             
-            cell.hobbyView.backgroundColor = UIColor().gray5
+            //cell.hobbyView.backgroundColor = UIColor().gray5
             cell.hobbyCollectionView.delegate = self
             cell.hobbyCollectionView.dataSource = self
             cell.hobbyCollectionView.register(ButtonCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.ButtonCollectionViewCell.id)
             cell.hobbyCollectionView.tag = 102
+            
+            cell.hobbyCollectionView.collectionViewLayout = CollectionViewLeftAlignFlowLayout()
+            cell.hobbyCollectionView.backgroundColor = UIColor().error
+            
+            if let flowLayout = cell.hobbyCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+                flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+              }
             
             cell.nicknameLabel.text = "바바유"
             
@@ -119,8 +144,6 @@ extension NearSeSacViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-
-        
         if collectionView.tag == 101 {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.ButtonCollectionViewCell.id, for: indexPath) as? ButtonCollectionViewCell else { return UICollectionViewCell() }
             
@@ -129,14 +152,7 @@ extension NearSeSacViewController: UICollectionViewDelegate, UICollectionViewDat
             cell.button.setTitle("\(titleList[indexPath.row])", for: .normal)
             cell.button.isEnabled = false
             cell.button.status = .inactive
-            
-    //        if let data = self.myInfo {
-    //            if data.reputation[indexPath.row] == 0 {
-    //                cell.button.status = .inactive
-    //            } else {
-    //                cell.button.status = .fill
-    //            }
-    //        }
+
             
             return cell
         } else {
@@ -145,6 +161,18 @@ extension NearSeSacViewController: UICollectionViewDelegate, UICollectionViewDat
             cell.button.setTitle("\(self.wantedHobby[indexPath.row])", for: .normal)
             cell.button.isEnabled = false
             cell.button.status = .inactive
+            
+            let height = collectionView.collectionViewLayout.collectionViewContentSize.height
+            
+            collectionView.snp.removeConstraints()
+            collectionView.snp.remakeConstraints { make in
+                make.leading.equalToSuperview()
+                make.trailing.equalToSuperview()
+                make.bottom.equalToSuperview()
+                make.height.equalTo(height + 16)
+            }
+            
+            self.view.layoutIfNeeded()
             
     //        if let data = self.myInfo {
     //            if data.reputation[indexPath.row] == 0 {
@@ -157,5 +185,19 @@ extension NearSeSacViewController: UICollectionViewDelegate, UICollectionViewDat
             return cell
         }
 
+    }
+}
+
+extension NearSeSacViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView.tag == 101 {
+            return CGSize(width: Int((collectionView.frame.width - 40 ) / 2), height: 32)
+        } else {
+            let button = UIButton(frame: CGRect.zero)
+            button.setTitle("\(self.wantedHobby[indexPath.row])", for: .normal)
+            button.sizeToFit()
+            
+            return CGSize(width: button.frame.width + 10, height: 32)
+        }
     }
 }

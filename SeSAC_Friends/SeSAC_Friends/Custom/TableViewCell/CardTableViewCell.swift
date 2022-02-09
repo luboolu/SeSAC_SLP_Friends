@@ -86,7 +86,7 @@ final class CardTableViewCell: UITableViewCell, ViewRepresentable {
         label.text = "하고 싶은 취미"
         label.textColor = UIColor().black
         label.font = UIFont().Title6_R12
-        label.backgroundColor = UIColor().error
+        //label.backgroundColor = UIColor().error
         
         return label
     }()
@@ -108,7 +108,7 @@ final class CardTableViewCell: UITableViewCell, ViewRepresentable {
 
         collectionView.collectionViewLayout = layout
         collectionView.isPagingEnabled = false
-        collectionView.backgroundColor = UIColor().whitegreen
+        //collectionView.backgroundColor = UIColor().whitegreen
         
         return collectionView
     }()
@@ -237,14 +237,14 @@ final class CardTableViewCell: UITableViewCell, ViewRepresentable {
             make.top.equalToSuperview().offset(14)
             make.leading.equalToSuperview().offset(8)
             make.trailing.equalToSuperview().offset(-8)
-            make.bottom.equalTo(hobbyCollectionView.snp.top).offset(-14)
+            make.bottom.equalTo(hobbyCollectionView.snp.top).offset(0)
         }
         
         hobbyCollectionView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(0)
             make.trailing.equalToSuperview().offset(0)
             make.bottom.equalToSuperview()
-            make.height.equalTo(32 * 3 + 8 * 3)
+            make.height.equalTo(48)
         }
         
         reviewView.snp.makeConstraints { make in
@@ -256,13 +256,14 @@ final class CardTableViewCell: UITableViewCell, ViewRepresentable {
             make.top.equalToSuperview().offset(14)
             make.leading.equalToSuperview().offset(8)
             make.trailing.equalToSuperview().offset(-8)
-            make.bottom.equalTo(reviewTextView.snp.top).offset(-14)
+            //make.bottom.equalTo(reviewTextView.snp.top).offset(-14)
         }
         
         reviewTextView.snp.makeConstraints { make in
+            make.top.equalTo(reviewLabel.snp.bottom).offset(14)
             make.leading.equalToSuperview().offset(8)
             make.trailing.equalToSuperview().offset(-8)
-            make.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-14)
         }
     }
     
