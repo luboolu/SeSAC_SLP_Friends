@@ -8,6 +8,8 @@
 import UIKit
 
 import SnapKit
+import RxCocoa
+import RxSwift
 
 final class CardTableViewCell: UITableViewCell, ViewRepresentable {
     
@@ -134,6 +136,13 @@ final class CardTableViewCell: UITableViewCell, ViewRepresentable {
         
         return textview
     }()
+    
+    var bag = DisposeBag()
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        bag = DisposeBag()
+    }
 
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

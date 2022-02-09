@@ -14,6 +14,8 @@ final class NearSeSacViewController: UIViewController {
     private let mainView = NearSeSacView()
     private let disposeBag = DisposeBag()
     
+    private var moreButtonTapped = true
+    
     override func loadView() {
         super.loadView()
         self.view = mainView
@@ -27,6 +29,12 @@ final class NearSeSacViewController: UIViewController {
         //custom tableview cell register
         mainView.friendsTableView.register(CardTableViewCell.self, forCellReuseIdentifier: TableViewCell.CardTableViewCell.id)
         mainView.friendsTableView.register(CharactorTableViewCell.self, forCellReuseIdentifier: TableViewCell.CharactorTableViewCell.id)
+    }
+    
+    @objc func moreButtonClicked() {
+        print("moreButton tapped")
+        self.moreButtonTapped = !self.moreButtonTapped
+        self.mainView.friendsTableView.reloadRows(at: [[0, 1]], with: .fade)
     }
 }
 
@@ -49,9 +57,9 @@ extension NearSeSacViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.CharactorTableViewCell.id) as? CharactorTableViewCell else { return UITableViewCell()}
             
+            cell.selectionStyle = .none
             cell.backgroundImage.image = UIImage(named: "sesac_background_1")
             cell.charactorImage.image = UIImage(named: "sesac_face_1")
-
             
             return cell
             
@@ -63,17 +71,39 @@ extension NearSeSacViewController: UITableViewDelegate, UITableViewDataSource {
             cell.titleCollectionView.dataSource = self
             cell.titleCollectionView.register(ButtonCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.ButtonCollectionViewCell.id)
             
-//            if let data = self.myInfo {
-//                cell.nicknameLabel.text = data.nick
-//            }
+            cell.nicknameLabel.text = "바바유"
             
-//            cell.titleView.isHidden = self.moreButtonTabbed
-//            cell.hobbyView.isHidden = true
-//            cell.reviewView.isHidden = self.moreButtonTabbed
+            cell.titleView.isHidden = self.moreButtonTapped
+            cell.hobbyView.isHidden = self.moreButtonTapped
+            cell.reviewView.isHidden = self.moreButtonTapped
 
-            cell.titleView.isHidden = false
-            cell.hobbyView.isHidden = false
-            cell.reviewView.isHidden = false
+//            cell.moreButton.addTarget(self, action: #selector(moreButtonClicked), for: .touchUpInside)
+
+            cell.moreButton.rx.tap
+                .scan(false) { lastState, newState in
+                    return !lastState
+                }.map { $0 }
+                .bind(to: cell.moreButton.rx.isSelected)
+                .disposed(by: cell.bag)
+//
+            cell.moreButton.rx.tap
+                .bind {
+                    print(cell.moreButton.isSelected)
+                    self.moreButtonClicked()
+                }.disposed(by: cell.bag)
+            
+//            cell.moreButton.rx.tap
+//                .bind {
+//                    print(cell.moreButton.isSelected)
+//                    cell.titleView.isHidden = cell.moreButton.isSelected
+//                    cell.hobbyView.isHidden = cell.moreButton.isSelected
+//                    cell.reviewView.isHidden = cell.moreButton.isSelected
+//                    DispatchQueue.main.async {
+//                        //self.mainView.friendsTableView.reloadData()
+//                        //self.mainView.friendsTableView.reloadRows(at: [[0,1]], with: .automatic)
+//                    }
+//                }.disposed(by: cell.bag)
+
 
             
 //            cell.moreButton.addTarget(self, action: #selector(moreButtonClicked), for: .touchUpInside)

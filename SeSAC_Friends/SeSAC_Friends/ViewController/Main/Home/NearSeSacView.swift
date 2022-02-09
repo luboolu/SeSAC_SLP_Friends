@@ -8,7 +8,14 @@ import UIKit
 
 final class NearSeSacView: UIView, ViewRepresentable {
     
-    let friendsTableView = UITableView()
+    let friendsTableView: UITableView = {
+        let tableView = UITableView()
+        
+        tableView.separatorStyle = .none
+        tableView.rowHeight = UITableView.automaticDimension
+        
+        return tableView
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)

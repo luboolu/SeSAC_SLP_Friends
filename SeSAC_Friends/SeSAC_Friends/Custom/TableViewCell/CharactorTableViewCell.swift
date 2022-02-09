@@ -15,8 +15,8 @@ final class CharactorTableViewCell: UITableViewCell{
         let imageView = UIImageView()
         
         imageView.contentMode = .scaleToFill
-//        imageView.clipsToBounds = true
-//        imageView.layer.cornerRadius = 20
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 5
         
         return imageView
     }()
@@ -46,10 +46,10 @@ final class CharactorTableViewCell: UITableViewCell{
     
     func setupConstraints() {
         backgroundImage.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.top.equalToSuperview().offset(16)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.bottom.equalToSuperview().offset(0)
 //            make.centerX.equalToSuperview()
 //            make.centerY.equalToSuperview()
         }
