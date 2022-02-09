@@ -147,7 +147,7 @@ final class CardTableViewCell: UITableViewCell, ViewRepresentable {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.translatesAutoresizingMaskIntoConstraints = false
+        //self.translatesAutoresizingMaskIntoConstraints = false
         setupView()
         setupConstraints()
     }

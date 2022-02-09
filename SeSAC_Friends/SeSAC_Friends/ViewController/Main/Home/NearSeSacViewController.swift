@@ -14,7 +14,10 @@ final class NearSeSacViewController: UIViewController {
     private let mainView = NearSeSacView()
     private let disposeBag = DisposeBag()
     
-    private var moreButtonTapped = true
+    private var moreButtonTapped = [true, true, true]
+    private var friendsNum = 3
+    
+    private var wantedHobby = ["코딩", "iOS","보드게임"]
     
     override func loadView() {
         super.loadView()
@@ -33,15 +36,20 @@ final class NearSeSacViewController: UIViewController {
     
     @objc func moreButtonClicked() {
         print("moreButton tapped")
-        self.moreButtonTapped = !self.moreButtonTapped
+        //self.moreButtonTapped = !self.moreButtonTapped
         self.mainView.friendsTableView.reloadRows(at: [[0, 1]], with: .fade)
+    }
+    
+    func moreButton(section: Int, row: Int) {
+        self.moreButtonTapped[section] = !self.moreButtonTapped[section]
+        self.mainView.friendsTableView.reloadRows(at: [[section, row]], with: .fade)
     }
 }
 
 extension NearSeSacViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return self.friendsNum
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -70,43 +78,25 @@ extension NearSeSacViewController: UITableViewDelegate, UITableViewDataSource {
             cell.titleCollectionView.delegate = self
             cell.titleCollectionView.dataSource = self
             cell.titleCollectionView.register(ButtonCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.ButtonCollectionViewCell.id)
+            cell.titleCollectionView.tag = 101
+            
+            cell.hobbyView.backgroundColor = UIColor().gray5
+            cell.hobbyCollectionView.delegate = self
+            cell.hobbyCollectionView.dataSource = self
+            cell.hobbyCollectionView.register(ButtonCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.ButtonCollectionViewCell.id)
+            cell.hobbyCollectionView.tag = 102
             
             cell.nicknameLabel.text = "바바유"
             
-            cell.titleView.isHidden = self.moreButtonTapped
-            cell.hobbyView.isHidden = self.moreButtonTapped
-            cell.reviewView.isHidden = self.moreButtonTapped
-
+            cell.titleView.isHidden = self.moreButtonTapped[indexPath.section]
+            cell.hobbyView.isHidden = self.moreButtonTapped[indexPath.section]
+            cell.reviewView.isHidden = self.moreButtonTapped[indexPath.section]
+            
 //            cell.moreButton.addTarget(self, action: #selector(moreButtonClicked), for: .touchUpInside)
-
-            cell.moreButton.rx.tap
-                .scan(false) { lastState, newState in
-                    return !lastState
-                }.map { $0 }
-                .bind(to: cell.moreButton.rx.isSelected)
-                .disposed(by: cell.bag)
-//
             cell.moreButton.rx.tap
                 .bind {
-                    print(cell.moreButton.isSelected)
-                    self.moreButtonClicked()
+                    self.moreButton(section: indexPath.section, row: indexPath.row)
                 }.disposed(by: cell.bag)
-            
-//            cell.moreButton.rx.tap
-//                .bind {
-//                    print(cell.moreButton.isSelected)
-//                    cell.titleView.isHidden = cell.moreButton.isSelected
-//                    cell.hobbyView.isHidden = cell.moreButton.isSelected
-//                    cell.reviewView.isHidden = cell.moreButton.isSelected
-//                    DispatchQueue.main.async {
-//                        //self.mainView.friendsTableView.reloadData()
-//                        //self.mainView.friendsTableView.reloadRows(at: [[0,1]], with: .automatic)
-//                    }
-//                }.disposed(by: cell.bag)
-
-
-            
-//            cell.moreButton.addTarget(self, action: #selector(moreButtonClicked), for: .touchUpInside)
 
             
             return cell
@@ -118,28 +108,54 @@ extension NearSeSacViewController: UITableViewDelegate, UITableViewDataSource {
 extension NearSeSacViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        
+        if collectionView.tag == 101 {
+            return 6
+        } else {
+            return self.wantedHobby.count
+        }
+
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.ButtonCollectionViewCell.id, for: indexPath) as? ButtonCollectionViewCell else { return UICollectionViewCell() }
         
-        //cell.backgroundColor = UIColor().green
+
         
-        let titleList = ["좋은 매너", "정확한 시간 약속", "빠른 응답", "친절한 성격", "능숙한 취미 실력", "유익한 시간"]
-        
-        cell.button.setTitle("\(titleList[indexPath.row])", for: .normal)
-        cell.button.isEnabled = false
-        cell.button.status = .inactive
-        
-//        if let data = self.myInfo {
-//            if data.reputation[indexPath.row] == 0 {
-//                cell.button.status = .inactive
-//            } else {
-//                cell.button.status = .fill
-//            }
-//        }
-        
-        return cell
+        if collectionView.tag == 101 {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.ButtonCollectionViewCell.id, for: indexPath) as? ButtonCollectionViewCell else { return UICollectionViewCell() }
+            
+            let titleList = ["좋은 매너", "정확한 시간 약속", "빠른 응답", "친절한 성격", "능숙한 취미 실력", "유익한 시간"]
+            
+            cell.button.setTitle("\(titleList[indexPath.row])", for: .normal)
+            cell.button.isEnabled = false
+            cell.button.status = .inactive
+            
+    //        if let data = self.myInfo {
+    //            if data.reputation[indexPath.row] == 0 {
+    //                cell.button.status = .inactive
+    //            } else {
+    //                cell.button.status = .fill
+    //            }
+    //        }
+            
+            return cell
+        } else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.ButtonCollectionViewCell.id, for: indexPath) as? ButtonCollectionViewCell else { return UICollectionViewCell() }
+            
+            cell.button.setTitle("\(self.wantedHobby[indexPath.row])", for: .normal)
+            cell.button.isEnabled = false
+            cell.button.status = .inactive
+            
+    //        if let data = self.myInfo {
+    //            if data.reputation[indexPath.row] == 0 {
+    //                cell.button.status = .inactive
+    //            } else {
+    //                cell.button.status = .fill
+    //            }
+    //        }
+            
+            return cell
+        }
+
     }
 }
