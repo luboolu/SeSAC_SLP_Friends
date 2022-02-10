@@ -124,7 +124,7 @@ final class QueueViewModel {
         let idtoken = UserDefaults.standard.string(forKey: UserdefaultKey.idToken.rawValue) ?? ""
         var request = URLRequest(url: url)
         
-        request.httpMethod = "DELETE"
+        request.httpMethod = "POST"
         request.setValue(APIHeaderValue.ContentType.string, forHTTPHeaderField: APIHeader.ContentType.string)
         request.httpBody = "region=\(region)&lat=\(lat)&long=\(long)".data(using: .utf8, allowLossyConversion: false)
         request.setValue("\(idtoken)", forHTTPHeaderField: APIHeader.idtoken.string)
@@ -146,7 +146,7 @@ final class QueueViewModel {
                 completion(.noData, nil)
                 return
             }
-            
+            print(response)
             if response.statusCode == 200 {
                 completion(.succeed, .succeed)
             } else if response.statusCode == 401 {

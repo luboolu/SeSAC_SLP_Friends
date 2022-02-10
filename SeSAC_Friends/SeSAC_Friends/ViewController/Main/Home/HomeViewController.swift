@@ -163,21 +163,8 @@ final class HomeViewController: UIViewController {
         print("gender: ", genderFilter)
         
         viewModel.queueOn(region: region, lat: self.nowLocation[0], long: self.nowLocation[1]) { apiResult, queueOn in
-//            switch queueOn {
-//            case .succeed:
-//                print("성공")
-//            case .tokenError:
-//                print("토큰 갱신 필요")
-//                self.searchFriends()
-//            case .notUser:
-//                print("미가입회원")
-//            case .serverError:
-//                print("서버 에러")
-//            case .clientError:
-//                print("클라이언트 에러")
-//                break
-//            }
-//
+            
+            print(apiResult, queueOn)
         }
         
     }
@@ -321,7 +308,7 @@ extension HomeViewController: MKMapViewDelegate {
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
         //현재 보고 있는 지도의 중심을 찾음
         let center = mapView.centerCoordinate
-        print(center)
+        //print(center)
         nowLocation[0] = center.latitude
         nowLocation[1] = center.longitude
         //맵뷰의 annotation을 삭제
