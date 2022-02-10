@@ -13,11 +13,21 @@ import RxSwift
 import CoreLocation
 import MapKit
 
+enum gender {
+    case all
+    case man
+    case woman
+}
+
 final class HomeViewController: UIViewController {
 
     private let mainView = HomeView()
+    private let viewModel = QueueViewModel()
     private let disposeBag = DisposeBag()
     private let locationManager = CLLocationManager()
+    
+    private var nowLocation = [37.51769437533214, 126.88639758186552]
+    private var genderFilter: gender = .all
 
     override func loadView() {
         self.view = mainView
@@ -41,19 +51,17 @@ final class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         self.navigationController?.navigationBar.isHidden = true
     }
     
     private func setupMap() {
-        //37.556124592490924, 126.97235991352282
-        let location = CLLocationCoordinate2D(latitude: 37.556124592490924, longitude: 126.97235991352282)
+        //영등포 싹 캠퍼스 위치: 37.51769437533214, 126.88639758186552
+        let location = CLLocationCoordinate2D(latitude: nowLocation[0], longitude: nowLocation[1])
         let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         let region = MKCoordinateRegion(center: location, span: span)
         mainView.mapView.setRegion(region, animated: true)
         
         let annotation = MKPointAnnotation()
-        annotation.title = "Here!"
         annotation.coordinate = location
         mainView.mapView.addAnnotation(annotation)
     }
@@ -64,6 +72,7 @@ final class HomeViewController: UIViewController {
             .bind {
                 print("tapped!")
                 let vc = HobbySearchViewController()
+                vc.userLocation = self.nowLocation
                 self.navigationController?.pushViewController(vc, animated: true)
             }.disposed(by: disposeBag)
         
@@ -72,6 +81,7 @@ final class HomeViewController: UIViewController {
             .scan(mainView.genderButton1.status) { lastState, newState in
                 self.mainView.genderButton2.status = .inactive
                 self.mainView.genderButton3.status = .inactive
+                self.genderFilter = .all
                 return .fill
             }
             .map{ $0 }
@@ -82,6 +92,7 @@ final class HomeViewController: UIViewController {
             .scan(mainView.genderButton1.status) { lastState, newState in
                 self.mainView.genderButton1.status = .inactive
                 self.mainView.genderButton3.status = .inactive
+                self.genderFilter = .man
                 return .fill
             }
             .map{ $0 }
@@ -92,6 +103,7 @@ final class HomeViewController: UIViewController {
             .scan(mainView.genderButton1.status) { lastState, newState in
                 self.mainView.genderButton1.status = .inactive
                 self.mainView.genderButton2.status = .inactive
+                self.genderFilter = .woman
                 return .fill
             }
             .map{ $0 }
@@ -113,8 +125,62 @@ final class HomeViewController: UIViewController {
             print("stop")
         }
         
+        searchFriends()
+        
     }
     
+    private func getRegion(location: [Double]) -> Int {
+        
+        let lat = String(location[0] + 90)
+        let long = String(location[1] + 180)
+        var region = ""
+
+        for i in lat {
+            if i != "." {
+                region.append(i)
+                if region.count == 5 {
+                    break
+                }
+            }
+        }
+        
+        for i in long {
+            if i != "." {
+                region.append(i)
+                if region.count == 10 {
+                    break
+                }
+            }
+        }
+
+        return Int(region) ?? 1275130688
+    }
+    
+    private func searchFriends() {
+        let region = getRegion(location: self.nowLocation)
+        print(self.nowLocation)
+        print("region", region)
+        print("gender: ", genderFilter)
+        
+        viewModel.queueOn(region: region, lat: self.nowLocation[0], long: self.nowLocation[1]) { apiResult, queueOn in
+//            switch queueOn {
+//            case .succeed:
+//                print("성공")
+//            case .tokenError:
+//                print("토큰 갱신 필요")
+//                self.searchFriends()
+//            case .notUser:
+//                print("미가입회원")
+//            case .serverError:
+//                print("서버 에러")
+//            case .clientError:
+//                print("클라이언트 에러")
+//                break
+//            }
+//
+        }
+        
+    }
     
 
 }
@@ -256,6 +322,8 @@ extension HomeViewController: MKMapViewDelegate {
         //현재 보고 있는 지도의 중심을 찾음
         let center = mapView.centerCoordinate
         print(center)
+        nowLocation[0] = center.latitude
+        nowLocation[1] = center.longitude
         //맵뷰의 annotation을 삭제
         let annotations = mainView.mapView.annotations
         mainView.mapView.removeAnnotations(annotations)

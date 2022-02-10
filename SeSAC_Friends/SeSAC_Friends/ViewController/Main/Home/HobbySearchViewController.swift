@@ -19,6 +19,7 @@ final class HobbySearchViewController: UIViewController {
     
     private let nearHobbyList = ["아무거나", "SeSAC", "코딩", "맛집탐방", "공원산책", "독서모임", "식물", "카페투어"]
     private var myHobbyList: [String] = []
+    var userLocation: [Double]?
     
     override func loadView() {
         self.view = mainView

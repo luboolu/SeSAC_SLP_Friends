@@ -36,20 +36,18 @@ final class NearSeSacViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+    
 
     }
     
-    @objc func moreButtonClicked() {
-        print("moreButton tapped")
-        //self.moreButtonTapped = !self.moreButtonTapped
-        self.mainView.friendsTableView.reloadRows(at: [[0, 1]], with: .fade)
-    }
-    
-    func moreButton(section: Int, row: Int) {
+    func moreButtonClicked(section: Int, row: Int) {
         self.moreButtonTapped[section] = !self.moreButtonTapped[section]
         self.mainView.friendsTableView.reloadRows(at: [[section, row]], with: .fade)
         self.viewDidLayoutSubviews()
+    }
+    
+    func matchingButtonClicked(section: Int, row: Int) {
+        print(#function)
     }
 }
 
@@ -75,6 +73,12 @@ extension NearSeSacViewController: UITableViewDelegate, UITableViewDataSource {
             cell.selectionStyle = .none
             cell.backgroundImage.image = UIImage(named: "sesac_background_1")
             cell.charactorImage.image = UIImage(named: "sesac_face_1")
+            cell.matchingButton.status = .request
+            
+            cell.matchingButton.rx.tap
+                .bind {
+                    self.matchingButtonClicked(section: indexPath.section, row: indexPath.row)
+                }.disposed(by: cell.bag)
             
             return cell
             
@@ -87,10 +91,6 @@ extension NearSeSacViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.updateCell(row: self.wantedHobby[indexPath.section])
             
-            if let flowLayout = cell.hobbyCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-                flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-              }
-            
             cell.nicknameLabel.text = "\(indexPath)"
             
             cell.titleView.isHidden = self.moreButtonTapped[indexPath.section]
@@ -99,7 +99,7 @@ extension NearSeSacViewController: UITableViewDelegate, UITableViewDataSource {
 
             cell.moreButton.rx.tap
                 .bind {
-                    self.moreButton(section: indexPath.section, row: indexPath.row)
+                    self.moreButtonClicked(section: indexPath.section, row: indexPath.row)
                 }.disposed(by: cell.bag)
 
             

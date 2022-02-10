@@ -157,6 +157,7 @@ final class CardTableViewCell: UITableViewCell, ViewRepresentable {
         titleCollectionView.dataSource = self
         titleCollectionView.register(ButtonCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.ButtonCollectionViewCell.id)
         
+        
         hobbyCollectionView.delegate = self
         hobbyCollectionView.dataSource = self
         hobbyCollectionView.register(ButtonCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.ButtonCollectionViewCell.id)
@@ -281,6 +282,10 @@ final class CardTableViewCell: UITableViewCell, ViewRepresentable {
     }
     
     func setHobbyCollectionViewLayout() {
+        
+        if let flowLayout = hobbyCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+          }
 
         let height = hobbyCollectionView.collectionViewLayout.collectionViewContentSize.height
         
@@ -300,6 +305,7 @@ extension CardTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
     
     func updateCell(row: [String]) {
         self.userHobbyData = row
+        self.titleCollectionView.reloadData()
         self.hobbyCollectionView.reloadData()
     }
     
@@ -323,7 +329,6 @@ extension CardTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
             cell.button.setTitle("\(titleList[indexPath.row])", for: .normal)
             cell.button.isEnabled = false
             cell.button.status = .inactive
-
             
             return cell
         } else {

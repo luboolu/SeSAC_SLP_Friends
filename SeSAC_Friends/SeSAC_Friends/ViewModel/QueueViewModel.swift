@@ -10,7 +10,7 @@ import Foundation
 final class QueueViewModel {
     private let userViewModel = UserViewModel()
     
-    //user 정보 요청
+    //새싹 친구 찾기 시작
     func queueStart(gender: Int, region: Int, lat: Double, long: Double, hobby: [String] ,completion: @escaping (APIResult?, QueueStart?) -> Void) {
         
         let url = URL(string: "\(URL.queue)")!
@@ -44,23 +44,120 @@ final class QueueViewModel {
                 completion(.succeed, .succeed)
             } else if response.statusCode == 201 {
                 completion(.succeed, .blocked)
-            }  else if response.statusCode == 203 {
+            } else if response.statusCode == 203 {
                 completion(.succeed, .penaltyLv1)
-            }  else if response.statusCode == 204 {
+            } else if response.statusCode == 204 {
                 completion(.succeed, .penaltyLv2)
-            }  else if response.statusCode == 205 {
+            } else if response.statusCode == 205 {
                 completion(.succeed, .penaltyLv3)
-            }  else if response.statusCode == 206 {
+            } else if response.statusCode == 206 {
                 completion(.succeed, .invalidGender)
-            }  else if response.statusCode == 401 {
+            } else if response.statusCode == 401 {
                 self.userViewModel.idTokenRequest { error in
                     completion(.succeed, .tokenError)
                 }
-            }  else if response.statusCode == 406 {
+            } else if response.statusCode == 406 {
                 completion(.succeed, .notUser)
-            }  else if response.statusCode == 500 {
+            } else if response.statusCode == 500 {
                 completion(.succeed, .serverError)
-            }  else if response.statusCode == 501 {
+            } else if response.statusCode == 501 {
+                completion(.succeed, .clientError)
+            } else {
+                completion(.failed, nil)
+            }
+        }.resume()
+    }
+    
+    //새싹 친구 찾기 중단
+    func queueEnd(completion: @escaping (APIResult?, QueueStop?) -> Void) {
+        
+        let url = URL(string: "\(URL.queue)")!
+        let idtoken = UserDefaults.standard.string(forKey: UserdefaultKey.idToken.rawValue) ?? ""
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "DELETE"
+        request.setValue(APIHeaderValue.ContentType.string, forHTTPHeaderField: APIHeader.ContentType.string)
+        request.setValue("\(idtoken)", forHTTPHeaderField: APIHeader.idtoken.string)
+        
+        let session = URLSession.shared
+        session.dataTask(with: request) { data, response, error in
+
+            if error != nil {
+                completion(.failed, nil)
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse else {
+                completion(.invalidResponse, nil)
+                return
+            }
+            
+            guard let data = data else {
+                completion(.noData, nil)
+                return
+            }
+            
+            if response.statusCode == 200 {
+                completion(.succeed, .succeed)
+            } else if response.statusCode == 201 {
+                completion(.succeed, .matched)
+            } else if response.statusCode == 401 {
+                self.userViewModel.idTokenRequest { error in
+                    completion(.succeed, .tokenError)
+                }
+            } else if response.statusCode == 406 {
+                completion(.succeed, .notUser)
+            } else if response.statusCode == 500 {
+                completion(.succeed, .serverError)
+            } else if response.statusCode == 501 {
+                completion(.succeed, .clientError)
+            } else {
+                completion(.failed, nil)
+            }
+        }.resume()
+    }
+    
+    //새싹 친구 검색
+    func queueOn(region: Int, lat: Double, long: Double, completion: @escaping (APIResult?, QueueOn?) -> Void) {
+        
+        let url = URL(string: "\(URL.queueOn)")!
+        let idtoken = UserDefaults.standard.string(forKey: UserdefaultKey.idToken.rawValue) ?? ""
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "DELETE"
+        request.setValue(APIHeaderValue.ContentType.string, forHTTPHeaderField: APIHeader.ContentType.string)
+        request.httpBody = "region=\(region)&lat=\(lat)&long=\(long)".data(using: .utf8, allowLossyConversion: false)
+        request.setValue("\(idtoken)", forHTTPHeaderField: APIHeader.idtoken.string)
+        
+        let session = URLSession.shared
+        session.dataTask(with: request) { data, response, error in
+
+            if error != nil {
+                completion(.failed, nil)
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse else {
+                completion(.invalidResponse, nil)
+                return
+            }
+            
+            guard let data = data else {
+                completion(.noData, nil)
+                return
+            }
+            
+            if response.statusCode == 200 {
+                completion(.succeed, .succeed)
+            } else if response.statusCode == 401 {
+                self.userViewModel.idTokenRequest { error in
+                    completion(.succeed, .tokenError)
+                }
+            } else if response.statusCode == 406 {
+                completion(.succeed, .notUser)
+            } else if response.statusCode == 500 {
+                completion(.succeed, .serverError)
+            } else if response.statusCode == 501 {
                 completion(.succeed, .clientError)
             } else {
                 completion(.failed, nil)

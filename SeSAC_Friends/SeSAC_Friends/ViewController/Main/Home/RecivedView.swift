@@ -8,6 +8,15 @@ import UIKit
 
 final class RecivedView: UIView, ViewRepresentable {
     
+    let friendsTableView: UITableView = {
+        let tableView = UITableView()
+        
+        tableView.separatorStyle = .none
+        tableView.rowHeight = UITableView.automaticDimension
+        
+        return tableView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -21,10 +30,13 @@ final class RecivedView: UIView, ViewRepresentable {
     
     func setupView() {
         self.backgroundColor = UIColor().white
+        self.addSubview(friendsTableView)
     }
-    
+     
     func setupConstraints() {
-        
+        friendsTableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
     
     

@@ -8,6 +8,8 @@
 import UIKit
 
 import SnapKit
+import RxCocoa
+import RxSwift
 
 final class CharactorTableViewCell: UITableViewCell{
     
@@ -35,6 +37,13 @@ final class CharactorTableViewCell: UITableViewCell{
         
         return button
     }()
+    
+    var bag = DisposeBag()
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        bag = DisposeBag()
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
