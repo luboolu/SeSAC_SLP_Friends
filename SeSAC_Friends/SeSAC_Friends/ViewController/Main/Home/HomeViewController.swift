@@ -162,8 +162,8 @@ final class HomeViewController: UIViewController {
 //        print("region", region)
 //        print("gender: ", genderFilter)
         
-        viewModel.queueStart(gender: 2, region: region, lat: self.nowLocation[0], long: self.nowLocation[1], hobby: ["산책"]) { apiResult, queueStart in
-            print("queueStart")
+        viewModel.queueStart(gender: 2, region: region, lat: self.nowLocation[0], long: self.nowLocation[1], hobby: "산책") { apiResult, queueStart in
+            print(queueStart)
         }
         
         
