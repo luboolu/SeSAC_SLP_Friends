@@ -118,7 +118,7 @@ final class QueueViewModel {
     }
     
     //새싹 친구 검색
-    func queueOn(region: Int, lat: Double, long: Double, completion: @escaping (APIResult?, QueueOn?) -> Void) {
+    func queueOn(region: Int, lat: Double, long: Double, completion: @escaping (APIResult?, QueueOn?, QueueOnData?) -> Void) {
         
         let url = URL(string: "\(URL.queueOn)")!
         let idtoken = UserDefaults.standard.string(forKey: UserdefaultKey.idToken.rawValue) ?? ""
@@ -133,34 +133,44 @@ final class QueueViewModel {
         session.dataTask(with: request) { data, response, error in
 
             if error != nil {
-                completion(.failed, nil)
+                completion(.failed, nil, nil)
                 return
             }
             
             guard let response = response as? HTTPURLResponse else {
-                completion(.invalidResponse, nil)
+                completion(.invalidResponse, nil, nil)
                 return
             }
             
             guard let data = data else {
-                completion(.noData, nil)
+                completion(.noData, nil, nil)
                 return
             }
-            print(response)
+            
             if response.statusCode == 200 {
-                completion(.succeed, .succeed)
+
+                do {
+                    let decoder = JSONDecoder()
+                    let queueOnData = try decoder.decode(QueueOnData.self, from: data)
+                    
+                    completion(.succeed, .succeed, queueOnData)
+                } catch {
+                    completion(.invalidData, nil, nil)
+                }
+                
+                
             } else if response.statusCode == 401 {
                 self.userViewModel.idTokenRequest { error in
-                    completion(.succeed, .tokenError)
+                    completion(.succeed, .tokenError, nil)
                 }
             } else if response.statusCode == 406 {
-                completion(.succeed, .notUser)
+                completion(.succeed, .notUser, nil)
             } else if response.statusCode == 500 {
-                completion(.succeed, .serverError)
+                completion(.succeed, .serverError, nil)
             } else if response.statusCode == 501 {
-                completion(.succeed, .clientError)
+                completion(.succeed, .clientError, nil)
             } else {
-                completion(.failed, nil)
+                completion(.failed, nil, nil)
             }
         }.resume()
     }

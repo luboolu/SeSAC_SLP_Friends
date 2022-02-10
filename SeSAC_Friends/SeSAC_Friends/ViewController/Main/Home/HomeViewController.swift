@@ -158,13 +158,34 @@ final class HomeViewController: UIViewController {
     
     private func searchFriends() {
         let region = getRegion(location: self.nowLocation)
-        print(self.nowLocation)
-        print("region", region)
-        print("gender: ", genderFilter)
+//        print(self.nowLocation)
+//        print("region", region)
+//        print("gender: ", genderFilter)
         
-        viewModel.queueOn(region: region, lat: self.nowLocation[0], long: self.nowLocation[1]) { apiResult, queueOn in
+        viewModel.queueStart(gender: 2, region: region, lat: self.nowLocation[0], long: self.nowLocation[1], hobby: ["산책"]) { apiResult, queueStart in
+            print("queueStart")
+        }
+        
+        
+        
+        viewModel.queueOn(region: region, lat: self.nowLocation[0], long: self.nowLocation[1]) { apiResult, queueOn, queueOnData in
             
-            print(apiResult, queueOn)
+            if let queueOn = queueOn {
+                switch queueOn {
+                case .succeed:
+                    print(queueOnData?.fromQueueDB)
+                case .tokenError:
+                    self.searchFriends()
+                    return
+                case .notUser:
+                    print("미가입 회원입니다! - 화면전환")
+                case .serverError:
+                    print("에러 잠시 후 시도 ㅂㅌ")
+                case .clientError:
+                    print("에러 잠시 후 시도 ㅂㅌ")
+                }
+            }
+            
         }
         
     }
@@ -318,6 +339,8 @@ extension HomeViewController: MKMapViewDelegate {
         let annotation = MKPointAnnotation()
         annotation.coordinate = center
         mainView.mapView.addAnnotation(annotation)
+        
+        self.searchFriends()
     }
     
 
