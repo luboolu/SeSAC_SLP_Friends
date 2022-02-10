@@ -27,6 +27,15 @@ final class CharactorTableViewCell: UITableViewCell{
         return imageView
     }()
     
+    let matchingButton: SubButton = {
+        let button = SubButton()
+        
+        button.status = .request
+        button.layer.zPosition = 999
+        
+        return button
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         //self.translatesAutoresizingMaskIntoConstraints = false
@@ -40,8 +49,9 @@ final class CharactorTableViewCell: UITableViewCell{
     
     func setupView() {
         
-        self.addSubview(backgroundImage)
-        self.addSubview(charactorImage)
+        contentView.addSubview(backgroundImage)
+        contentView.addSubview(charactorImage)
+        contentView.addSubview(matchingButton)
     }
     
     func setupConstraints() {
@@ -50,8 +60,6 @@ final class CharactorTableViewCell: UITableViewCell{
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.bottom.equalToSuperview().offset(0)
-//            make.centerX.equalToSuperview()
-//            make.centerY.equalToSuperview()
         }
         
         charactorImage.snp.makeConstraints { make in
@@ -59,6 +67,13 @@ final class CharactorTableViewCell: UITableViewCell{
             make.top.equalToSuperview()
             make.bottom.equalToSuperview()
             make.width.equalTo(charactorImage.snp.height).multipliedBy(1)
+        }
+        
+        matchingButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(16 + 12)
+            make.trailing.equalToSuperview().offset(-16 - 12)
+            make.height.equalTo(40)
+            make.width.equalTo(80)
         }
         
     }

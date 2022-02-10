@@ -164,7 +164,7 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.backgroundImage.image = UIImage(named: "sesac_background_1")
             cell.charactorImage.image = UIImage(named: "sesac_face_1")
-
+            cell.matchingButton.isHidden = true
             
             return cell
             

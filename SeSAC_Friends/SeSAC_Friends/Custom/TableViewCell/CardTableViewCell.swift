@@ -137,6 +137,8 @@ final class CardTableViewCell: UITableViewCell, ViewRepresentable {
         return textview
     }()
     
+    var userHobbyData: [String]?
+    
     var bag = DisposeBag()
     
     override func prepareForReuse() {
@@ -150,6 +152,17 @@ final class CardTableViewCell: UITableViewCell, ViewRepresentable {
         //self.translatesAutoresizingMaskIntoConstraints = false
         setupView()
         setupConstraints()
+        
+        titleCollectionView.delegate = self
+        titleCollectionView.dataSource = self
+        titleCollectionView.register(ButtonCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.ButtonCollectionViewCell.id)
+        
+        hobbyCollectionView.delegate = self
+        hobbyCollectionView.dataSource = self
+        hobbyCollectionView.register(ButtonCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.ButtonCollectionViewCell.id)
+        hobbyCollectionView.collectionViewLayout = CollectionViewLeftAlignFlowLayout()
+        
+        setHobbyCollectionViewLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -267,8 +280,95 @@ final class CardTableViewCell: UITableViewCell, ViewRepresentable {
         }
     }
     
-//    override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
-//        <#code#>
-//    }
+    func setHobbyCollectionViewLayout() {
 
+        let height = hobbyCollectionView.collectionViewLayout.collectionViewContentSize.height
+        
+        hobbyCollectionView.snp.removeConstraints()
+        hobbyCollectionView.snp.remakeConstraints { make in
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.height.equalTo(height + 32)
+        }
+        
+        self.layoutIfNeeded()
+    }
+
+}
+
+extension CardTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func updateCell(row: [String]) {
+        self.userHobbyData = row
+        self.hobbyCollectionView.reloadData()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        if collectionView.tag == 101 {
+            return 6
+        } else {
+            return self.userHobbyData?.count ?? 0
+        }
+
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        if collectionView.tag == 101 {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.ButtonCollectionViewCell.id, for: indexPath) as? ButtonCollectionViewCell else { return UICollectionViewCell() }
+            
+            let titleList = ["좋은 매너", "정확한 시간 약속", "빠른 응답", "친절한 성격", "능숙한 취미 실력", "유익한 시간"]
+            
+            cell.button.setTitle("\(titleList[indexPath.row])", for: .normal)
+            cell.button.isEnabled = false
+            cell.button.status = .inactive
+
+            
+            return cell
+        } else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.ButtonCollectionViewCell.id, for: indexPath) as? ButtonCollectionViewCell else { return UICollectionViewCell() }
+            
+            cell.button.setTitle("\(self.userHobbyData?[indexPath.row] ?? "")", for: .normal)
+            cell.button.isEnabled = false
+            cell.button.status = .inactive
+            
+            let height = collectionView.collectionViewLayout.collectionViewContentSize.height
+            
+            collectionView.snp.removeConstraints()
+            collectionView.snp.remakeConstraints { make in
+                make.leading.equalToSuperview()
+                make.trailing.equalToSuperview()
+                make.bottom.equalToSuperview()
+                make.height.equalTo(height + 16)
+            }
+            
+    //        self.view.layoutIfNeeded()
+            
+    //        if let data = self.myInfo {
+    //            if data.reputation[indexPath.row] == 0 {
+    //                cell.button.status = .inactive
+    //            } else {
+    //                cell.button.status = .fill
+    //            }
+    //        }
+            
+            return cell
+        }
+
+    }
+}
+
+extension CardTableViewCell: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView.tag == 101 {
+            return CGSize(width: Int((collectionView.frame.width - 40 ) / 2), height: 32)
+        } else {
+            let button = UIButton(frame: CGRect.zero)
+            button.setTitle("\(self.userHobbyData?[indexPath.row] ?? "")", for: .normal)
+            button.sizeToFit()
+            
+            return CGSize(width: button.frame.width + 10, height: 32)
+        }
+    }
 }

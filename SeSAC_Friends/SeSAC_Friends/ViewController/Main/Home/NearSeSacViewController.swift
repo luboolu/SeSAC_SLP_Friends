@@ -17,7 +17,7 @@ final class NearSeSacViewController: UIViewController {
     private var moreButtonTapped = [true, true, true]
     private var friendsNum = 3
     
-    private var wantedHobby = ["코딩", "iOS","보드게임"]
+    private var wantedHobby = [["코딩1", "iOS1","보드게임1"],["코딩2", "iOS2","보드게임2"],["코딩3", "iOS3","보드게임3"]]
     
     override func loadView() {
         super.loadView()
@@ -37,18 +37,7 @@ final class NearSeSacViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        guard let cell = mainView.friendsTableView.dequeueReusableCell(withIdentifier: TableViewCell.CardTableViewCell.id) as? CardTableViewCell else { return }
-        
-        let height = cell.hobbyCollectionView.collectionViewLayout.collectionViewContentSize.height
-        
-        cell.hobbyCollectionView.snp.removeConstraints()
-        cell.hobbyCollectionView.snp.remakeConstraints { make in
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.height.equalTo(height + 32)
-        }
-        
-        self.view.layoutIfNeeded()
+
     }
     
     @objc func moreButtonClicked() {
@@ -93,31 +82,21 @@ extension NearSeSacViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.CardTableViewCell.id) as? CardTableViewCell else { return UITableViewCell()}
             
             cell.selectionStyle = .none
-            cell.titleCollectionView.delegate = self
-            cell.titleCollectionView.dataSource = self
-            cell.titleCollectionView.register(ButtonCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.ButtonCollectionViewCell.id)
             cell.titleCollectionView.tag = 101
-            
-            //cell.hobbyView.backgroundColor = UIColor().gray5
-            cell.hobbyCollectionView.delegate = self
-            cell.hobbyCollectionView.dataSource = self
-            cell.hobbyCollectionView.register(ButtonCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.ButtonCollectionViewCell.id)
             cell.hobbyCollectionView.tag = 102
             
-            cell.hobbyCollectionView.collectionViewLayout = CollectionViewLeftAlignFlowLayout()
-            cell.hobbyCollectionView.backgroundColor = UIColor().error
+            cell.updateCell(row: self.wantedHobby[indexPath.section])
             
             if let flowLayout = cell.hobbyCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
                 flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
               }
             
-            cell.nicknameLabel.text = "바바유"
+            cell.nicknameLabel.text = "\(indexPath)"
             
             cell.titleView.isHidden = self.moreButtonTapped[indexPath.section]
             cell.hobbyView.isHidden = self.moreButtonTapped[indexPath.section]
             cell.reviewView.isHidden = self.moreButtonTapped[indexPath.section]
-            
-//            cell.moreButton.addTarget(self, action: #selector(moreButtonClicked), for: .touchUpInside)
+
             cell.moreButton.rx.tap
                 .bind {
                     self.moreButton(section: indexPath.section, row: indexPath.row)
@@ -130,74 +109,4 @@ extension NearSeSacViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 
-extension NearSeSacViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        if collectionView.tag == 101 {
-            return 6
-        } else {
-            return self.wantedHobby.count
-        }
 
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        if collectionView.tag == 101 {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.ButtonCollectionViewCell.id, for: indexPath) as? ButtonCollectionViewCell else { return UICollectionViewCell() }
-            
-            let titleList = ["좋은 매너", "정확한 시간 약속", "빠른 응답", "친절한 성격", "능숙한 취미 실력", "유익한 시간"]
-            
-            cell.button.setTitle("\(titleList[indexPath.row])", for: .normal)
-            cell.button.isEnabled = false
-            cell.button.status = .inactive
-
-            
-            return cell
-        } else {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.ButtonCollectionViewCell.id, for: indexPath) as? ButtonCollectionViewCell else { return UICollectionViewCell() }
-            
-            cell.button.setTitle("\(self.wantedHobby[indexPath.row])", for: .normal)
-            cell.button.isEnabled = false
-            cell.button.status = .inactive
-            
-            let height = collectionView.collectionViewLayout.collectionViewContentSize.height
-            
-            collectionView.snp.removeConstraints()
-            collectionView.snp.remakeConstraints { make in
-                make.leading.equalToSuperview()
-                make.trailing.equalToSuperview()
-                make.bottom.equalToSuperview()
-                make.height.equalTo(height + 16)
-            }
-            
-            self.view.layoutIfNeeded()
-            
-    //        if let data = self.myInfo {
-    //            if data.reputation[indexPath.row] == 0 {
-    //                cell.button.status = .inactive
-    //            } else {
-    //                cell.button.status = .fill
-    //            }
-    //        }
-            
-            return cell
-        }
-
-    }
-}
-
-extension NearSeSacViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView.tag == 101 {
-            return CGSize(width: Int((collectionView.frame.width - 40 ) / 2), height: 32)
-        } else {
-            let button = UIButton(frame: CGRect.zero)
-            button.setTitle("\(self.wantedHobby[indexPath.row])", for: .normal)
-            button.sizeToFit()
-            
-            return CGSize(width: button.frame.width + 10, height: 32)
-        }
-    }
-}
