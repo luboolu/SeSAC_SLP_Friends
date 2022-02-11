@@ -92,7 +92,7 @@ final class HomeView: UIView, ViewRepresentable {
         return button
     }()
     
-    let searchButton: UIButton = {
+    let floatingButton: UIButton = {
         let button = UIButton()
         
         button.backgroundColor = UIColor.clear
@@ -121,7 +121,7 @@ final class HomeView: UIView, ViewRepresentable {
         self.backgroundColor = UIColor().white
         
         self.addSubview(mapView)
-        self.addSubview(searchButton)
+        self.addSubview(floatingButton)
         self.addSubview(centerMarker)
         
         genderStackView.addArrangedSubview(genderButton1)
@@ -149,11 +149,11 @@ final class HomeView: UIView, ViewRepresentable {
             make.bottom.equalTo(self.safeAreaLayoutGuide)
         }
         
-        searchButton.snp.makeConstraints { make in
+        floatingButton.snp.makeConstraints { make in
             make.bottom.equalTo(self.safeAreaLayoutGuide).offset(-16)
             make.trailing.equalToSuperview().offset(-16)
             make.width.equalTo(64)
-            make.height.equalTo(searchButton.snp.width).multipliedBy(1)
+            make.height.equalTo(floatingButton.snp.width).multipliedBy(1)
         }
         
         centerMarker.snp.makeConstraints { make in

@@ -6,18 +6,14 @@
 //
 
 import UIKit
+import CoreLocation
+import MapKit
 
 import SnapKit
 import RxCocoa
 import RxSwift
-import CoreLocation
-import MapKit
+import Toast
 
-enum gender {
-    case all
-    case man
-    case woman
-}
 
 final class HomeViewController: UIViewController {
 
@@ -25,9 +21,10 @@ final class HomeViewController: UIViewController {
     private let viewModel = QueueViewModel()
     private let disposeBag = DisposeBag()
     private let locationManager = CLLocationManager()
+    private let toastStyle = ToastStyle()
     
     private var nowLocation = [37.51769437533214, 126.88639758186552]
-    private var genderFilter: gender = .all
+    private var genderFilter = 2
 
     override func loadView() {
         self.view = mainView
@@ -35,7 +32,7 @@ final class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         let backButton = UIBarButtonItem()
         backButton.title = ""
         backButton.tintColor = UIColor().black
@@ -52,6 +49,8 @@ final class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
+        
+        self.searchFriends()
     }
     
     private func setupMap() {
@@ -68,12 +67,10 @@ final class HomeViewController: UIViewController {
     
     private func setupButton() {
         //searchButton
-        mainView.searchButton.rx.tap
+        mainView.floatingButton.rx.tap
             .bind {
                 print("tapped!")
-                let vc = HobbySearchViewController()
-                vc.userLocation = self.nowLocation
-                self.navigationController?.pushViewController(vc, animated: true)
+                self.floatingButtonClicked()
             }.disposed(by: disposeBag)
         
         //gender filter button
@@ -81,7 +78,12 @@ final class HomeViewController: UIViewController {
             .scan(mainView.genderButton1.status) { lastState, newState in
                 self.mainView.genderButton2.status = .inactive
                 self.mainView.genderButton3.status = .inactive
-                self.genderFilter = .all
+                //annotation 지우고 다시 보여주기
+                let ants = self.mainView.mapView.annotations
+                self.mainView.mapView.removeAnnotations(ants)
+                
+                self.genderFilter = 2
+                self.searchFriends()
                 return .fill
             }
             .map{ $0 }
@@ -92,7 +94,12 @@ final class HomeViewController: UIViewController {
             .scan(mainView.genderButton1.status) { lastState, newState in
                 self.mainView.genderButton1.status = .inactive
                 self.mainView.genderButton3.status = .inactive
-                self.genderFilter = .man
+                //annotation 지우고 다시 보여주기
+                let ants = self.mainView.mapView.annotations
+                self.mainView.mapView.removeAnnotations(ants)
+                
+                self.genderFilter = 1
+                self.searchFriends()
                 return .fill
             }
             .map{ $0 }
@@ -103,7 +110,12 @@ final class HomeViewController: UIViewController {
             .scan(mainView.genderButton1.status) { lastState, newState in
                 self.mainView.genderButton1.status = .inactive
                 self.mainView.genderButton2.status = .inactive
-                self.genderFilter = .woman
+                //annotation 지우고 다시 보여주기
+                let ants = self.mainView.mapView.annotations
+                self.mainView.mapView.removeAnnotations(ants)
+                
+                self.genderFilter = 0
+                self.searchFriends()
                 return .fill
             }
             .map{ $0 }
@@ -158,12 +170,34 @@ final class HomeViewController: UIViewController {
     
     private func searchFriends() {
         let region = getRegion(location: self.nowLocation)
-//        print(self.nowLocation)
-//        print("region", region)
-//        print("gender: ", genderFilter)
-        
-        viewModel.queueStart(gender: 2, region: region, lat: self.nowLocation[0], long: self.nowLocation[1], hobby: "산책") { apiResult, queueStart in
-            print(queueStart)
+
+        viewModel.queueStart(type: 2, region: region, lat: self.nowLocation[0], long: self.nowLocation[1], hobby: "") { apiResult, queueStart in
+            
+            if let queueStart = queueStart {
+//                switch queueStart {
+//                case .succeed:
+//                    <#code#>
+//                case .blocked:
+//                    <#code#>
+//                case .penaltyLv1:
+//                    <#code#>
+//                case .penaltyLv2:
+//                    <#code#>
+//                case .penaltyLv3:
+//                    <#code#>
+//                case .invalidGender:
+//                    <#code#>
+//                case .tokenError:
+//                    <#code#>
+//                case .notUser:
+//                    <#code#>
+//                case .serverError:
+//                    <#code#>
+//                case .clientError:
+//                    <#code#>
+//                }
+            }
+            
         }
  
         viewModel.queueOn(region: region, lat: self.nowLocation[0], long: self.nowLocation[1]) { apiResult, queueOn, queueOnData in
@@ -203,16 +237,40 @@ final class HomeViewController: UIViewController {
             
             for data in friends.fromQueueDB {
                 let annotation = MKPointAnnotation()
-                print(data.nick)
-                annotation.title = "\(data.sesac)"
+                //print(data.nick)
+                annotation.subtitle = "\(data.sesac)"
                 annotation.coordinate = CLLocationCoordinate2D(latitude: data.lat, longitude: data.long)
-                annotations.append(annotation)
+                
+                //성별 필터
+                if self.genderFilter == 2 {
+                    annotations.append(annotation)
+                } else if self.genderFilter == data.gender {
+                    annotations.append(annotation)
+                }
+
             }
             
             mainView.mapView.addAnnotations(annotations)
         }
+    }
+    
+    private func floatingButtonClicked() {
+        //플로팅 버튼 클릭 시 flow
+        //1. 위치 권한 설정 확인 -> 허용 안되어 있으면 설정 화면으로 이동
+        //2. 사용자의 성별이 설정되어있어야 함(남1 or 여0) -> 안되어 있다면 "새싹찾기 기능을 사용하기 위해서는 성별이 필요해요!" 토스트 메시지 이후, 정보관리화면으로 전환
+        //3. 1,2를 만족하면 취미 입력 화면으로 전환
         
+        let userGender = UserDefaults.standard.integer(forKey: UserdefaultKey.gender.rawValue)
         
+        if userGender == 2 {
+            self.view.makeToast("새싹 찾기 기능을 사용하기 위해서는 성별이 필요해요!", duration: 2.0, position: .bottom, style: self.toastStyle)
+            return
+        }
+        
+        let vc = HobbySearchViewController()
+        vc.userLocation = self.nowLocation
+        
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 
@@ -237,7 +295,6 @@ extension HomeViewController: CLLocationManagerDelegate {
             checkCurrentLocationAuthorization(authorizationStatus)
         } else {
             print("iOS 위치 서비스를 켜주세요")
-            
         }
     }
     
@@ -280,36 +337,7 @@ extension HomeViewController: CLLocationManagerDelegate {
         
     }
     
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "MyMarker")
-        annotationView.markerTintColor = UIColor.clear
-        annotationView.canShowCallout = false
-        let size = CGSize(width: 83, height: 83)
-        UIGraphicsBeginImageContext(size)
-        
-        switch annotation.title! {
-        case "0":
-            print("0")
-            annotationView.image = UIImage(named: "sesac_face_1")
-        case "1":
-            print("1")
-            annotationView.image = UIImage(named: "sesac_face_2")
-        case "2":
-            print("2")
-            annotationView.image = UIImage(named: "sesac_face_3")
-        case "3":
-            print("3")
-            annotationView.image = UIImage(named: "sesac_face_4")
-        case "4":
-            print("4")
-            annotationView.image = UIImage(named: "sesac_face_5")
-        default :
-            break
-        }
 
-        
-        return annotationView
-    }
 
     //4. 사용자가 위치 허용을 한 경우 실행되는 부분
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -360,6 +388,32 @@ extension HomeViewController: CLLocationManagerDelegate {
 }
 
 extension HomeViewController: MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "MyMarker")
+        annotationView.markerTintColor = UIColor.clear
+        annotationView.canShowCallout = false
+        let size = CGSize(width: 83, height: 83)
+        UIGraphicsBeginImageContext(size)
+        
+        switch annotation.subtitle! {
+        case "0":
+            annotationView.image = UIImage(named: "sesac_face_1")
+        case "1":
+            annotationView.image = UIImage(named: "sesac_face_2")
+        case "2":
+            annotationView.image = UIImage(named: "sesac_face_3")
+        case "3":
+            annotationView.image = UIImage(named: "sesac_face_4")
+        case "4":
+            annotationView.image = UIImage(named: "sesac_face_5")
+        default :
+            break
+        }
+
+        
+        return annotationView
+    }
     
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
         //현재 보고 있는 지도의 중심을 찾음

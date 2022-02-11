@@ -11,17 +11,17 @@ final class QueueViewModel {
     private let userViewModel = UserViewModel()
     
     //새싹 친구 찾기 시작
-    func queueStart(gender: Int, region: Int, lat: Double, long: Double, hobby: String ,completion: @escaping (APIResult?, QueueStart?) -> Void) {
+    func queueStart(type: Int, region: Int, lat: Double, long: Double, hobby: String ,completion: @escaping (APIResult?, QueueStart?) -> Void) {
         
         let url = URL(string: "\(URL.queue)")!
         let idtoken = UserDefaults.standard.string(forKey: UserdefaultKey.idToken.rawValue) ?? ""
         var request = URLRequest(url: url)
         
         request.httpMethod = "POST"
-        request.httpBody = "type=\(gender)&region=\(region)&lat=\(lat)&long=\(long)&hf=\(hobby)".data(using: .utf8, allowLossyConversion: false)
+        request.httpBody = "type=\(type)&region=\(region)&lat=\(lat)&long=\(long)&hf=\(hobby)".data(using: .utf8, allowLossyConversion: false)
         request.setValue(APIHeaderValue.ContentType.string, forHTTPHeaderField: APIHeader.ContentType.string)
         request.setValue("\(idtoken)", forHTTPHeaderField: APIHeader.idtoken.string)
-        print(request)
+
         let session = URLSession.shared
         session.dataTask(with: request) { data, response, error in
 

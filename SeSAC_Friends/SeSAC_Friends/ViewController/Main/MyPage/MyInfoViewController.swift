@@ -111,6 +111,9 @@ final class MyInfoViewController: UIViewController {
             
             if userInfoUpdateResult == .succeed {
                 print("업데이트 성공")
+                //userDefault에 업데이트 시켜야함!(성별,
+                UserDefaults.standard.set(self.myGender, forKey: UserdefaultKey.gender.rawValue)
+                
                 self.getUserInfo()
             } else if userInfoUpdateResult == .tokenError {
                 self.userInfoUpdateRequest()
