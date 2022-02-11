@@ -165,15 +165,17 @@ final class HomeViewController: UIViewController {
         viewModel.queueStart(gender: 2, region: region, lat: self.nowLocation[0], long: self.nowLocation[1], hobby: "산책") { apiResult, queueStart in
             print(queueStart)
         }
-        
-        
-        
+ 
         viewModel.queueOn(region: region, lat: self.nowLocation[0], long: self.nowLocation[1]) { apiResult, queueOn, queueOnData in
             
             if let queueOn = queueOn {
                 switch queueOn {
                 case .succeed:
-                    print(queueOnData?.fromQueueDB)
+                    if let queueOnData = queueOnData {
+                        DispatchQueue.main.async {
+                            self.markFriends(friends: queueOnData)
+                        }
+                    }
                 case .tokenError:
                     self.searchFriends()
                     return
@@ -187,6 +189,29 @@ final class HomeViewController: UIViewController {
             }
             
         }
+        
+    }
+    
+    private func markFriends(friends: QueueOnData?) {
+        
+        guard let friends = friends else {
+            return
+        }
+        
+        if friends.fromQueueDB.count > 0 {
+            var annotations: [MKAnnotation] = []
+            
+            for data in friends.fromQueueDB {
+                let annotation = MKPointAnnotation()
+                print(data.nick)
+                annotation.title = "\(data.sesac)"
+                annotation.coordinate = CLLocationCoordinate2D(latitude: data.lat, longitude: data.long)
+                annotations.append(annotation)
+            }
+            
+            mainView.mapView.addAnnotations(annotations)
+        }
+        
         
     }
     
@@ -258,7 +283,31 @@ extension HomeViewController: CLLocationManagerDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "MyMarker")
         annotationView.markerTintColor = UIColor.clear
-        annotationView.image = UIImage(named: "map_marker")
+        annotationView.canShowCallout = false
+        let size = CGSize(width: 83, height: 83)
+        UIGraphicsBeginImageContext(size)
+        
+        switch annotation.title! {
+        case "0":
+            print("0")
+            annotationView.image = UIImage(named: "sesac_face_1")
+        case "1":
+            print("1")
+            annotationView.image = UIImage(named: "sesac_face_2")
+        case "2":
+            print("2")
+            annotationView.image = UIImage(named: "sesac_face_3")
+        case "3":
+            print("3")
+            annotationView.image = UIImage(named: "sesac_face_4")
+        case "4":
+            print("4")
+            annotationView.image = UIImage(named: "sesac_face_5")
+        default :
+            break
+        }
+
+        
         return annotationView
     }
 
@@ -266,21 +315,10 @@ extension HomeViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let coordinate = locations.last?.coordinate {
             
-            //맵뷰의 annotation을 삭제하고자 할때
-            let annotations = mainView.mapView.annotations
-            mainView.mapView.removeAnnotations(annotations)
-            
-            let annotation = MKPointAnnotation()
-            //annotation.title = "Current Location"
-            annotation.coordinate = coordinate
-            mainView.mapView.addAnnotation(annotation)
-            
             let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
             let region = MKCoordinateRegion(center: coordinate, span: span)
             mainView.mapView.setRegion(region, animated: true)
-            print(region)
 
-            
         } else {
             print("Location Cannot Find")
         }
@@ -322,9 +360,6 @@ extension HomeViewController: CLLocationManagerDelegate {
 }
 
 extension HomeViewController: MKMapViewDelegate {
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        print("여기야!!!")
-    }
     
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
         //현재 보고 있는 지도의 중심을 찾음
@@ -332,14 +367,7 @@ extension HomeViewController: MKMapViewDelegate {
         //print(center)
         nowLocation[0] = center.latitude
         nowLocation[1] = center.longitude
-        //맵뷰의 annotation을 삭제
-        let annotations = mainView.mapView.annotations
-        mainView.mapView.removeAnnotations(annotations)
-        
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = center
-        mainView.mapView.addAnnotation(annotation)
-        
+
         self.searchFriends()
     }
     

@@ -16,6 +16,15 @@ final class HomeView: UIView, ViewRepresentable {
     
     let mapView = MKMapView()
     
+    let centerMarker: UIImageView = {
+        let imageView = UIImageView()
+        
+        imageView.image = UIImage(named: "map_marker")
+        imageView.contentMode = .scaleAspectFit
+        
+        return imageView
+    }()
+    
     let genderView = UIView()
     
     let genderStackView: UIStackView = {
@@ -113,6 +122,7 @@ final class HomeView: UIView, ViewRepresentable {
         
         self.addSubview(mapView)
         self.addSubview(searchButton)
+        self.addSubview(centerMarker)
         
         genderStackView.addArrangedSubview(genderButton1)
         genderStackView.addArrangedSubview(genderButton2)
@@ -144,6 +154,11 @@ final class HomeView: UIView, ViewRepresentable {
             make.trailing.equalToSuperview().offset(-16)
             make.width.equalTo(64)
             make.height.equalTo(searchButton.snp.width).multipliedBy(1)
+        }
+        
+        centerMarker.snp.makeConstraints { make in
+            make.centerX.equalTo(mapView)
+            make.centerY.equalTo(mapView)
         }
         
         genderView.snp.makeConstraints { make in
