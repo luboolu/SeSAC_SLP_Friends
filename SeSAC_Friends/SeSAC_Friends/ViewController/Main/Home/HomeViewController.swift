@@ -170,35 +170,35 @@ final class HomeViewController: UIViewController {
     
     private func searchFriends() {
         let region = getRegion(location: self.nowLocation)
-
-        viewModel.queueStart(type: 2, region: region, lat: self.nowLocation[0], long: self.nowLocation[1], hobby: "") { apiResult, queueStart in
-            
-            if let queueStart = queueStart {
-//                switch queueStart {
-//                case .succeed:
-//                    <#code#>
-//                case .blocked:
-//                    <#code#>
-//                case .penaltyLv1:
-//                    <#code#>
-//                case .penaltyLv2:
-//                    <#code#>
-//                case .penaltyLv3:
-//                    <#code#>
-//                case .invalidGender:
-//                    <#code#>
-//                case .tokenError:
-//                    <#code#>
-//                case .notUser:
-//                    <#code#>
-//                case .serverError:
-//                    <#code#>
-//                case .clientError:
-//                    <#code#>
-//                }
-            }
-            
-        }
+//
+//        viewModel.queueStart(type: 2, region: region, lat: self.nowLocation[0], long: self.nowLocation[1], hobby: "") { apiResult, queueStart in
+//
+//            if let queueStart = queueStart {
+////                switch queueStart {
+////                case .succeed:
+////                    <#code#>
+////                case .blocked:
+////                    <#code#>
+////                case .penaltyLv1:
+////                    <#code#>
+////                case .penaltyLv2:
+////                    <#code#>
+////                case .penaltyLv3:
+////                    <#code#>
+////                case .invalidGender:
+////                    <#code#>
+////                case .tokenError:
+////                    <#code#>
+////                case .notUser:
+////                    <#code#>
+////                case .serverError:
+////                    <#code#>
+////                case .clientError:
+////                    <#code#>
+////                }
+//            }
+//
+//        }
  
         viewModel.queueOn(region: region, lat: self.nowLocation[0], long: self.nowLocation[1]) { apiResult, queueOn, queueOnData in
             
@@ -214,7 +214,12 @@ final class HomeViewController: UIViewController {
                     self.searchFriends()
                     return
                 case .notUser:
-                    print("미가입 회원입니다! - 화면전환")
+                    DispatchQueue.main.async {
+                        //온보딩 화면으로 이동
+                        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                        windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: OnBoardingViewController())
+                        windowScene.windows.first?.makeKeyAndVisible()
+                    }
                 case .serverError:
                     print("에러 잠시 후 시도 ㅂㅌ")
                 case .clientError:
@@ -231,7 +236,7 @@ final class HomeViewController: UIViewController {
         guard let friends = friends else {
             return
         }
-        
+
         if friends.fromQueueDB.count > 0 {
             var annotations: [MKAnnotation] = []
             
@@ -265,12 +270,16 @@ final class HomeViewController: UIViewController {
         if userGender == 2 {
             self.view.makeToast("새싹 찾기 기능을 사용하기 위해서는 성별이 필요해요!", duration: 2.0, position: .bottom, style: self.toastStyle)
             return
+        } else {
+            let vc = HobbySearchViewController()
+            
+            let region = getRegion(location: self.nowLocation)
+            vc.region = region
+            vc.userLocation = self.nowLocation
+            
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         
-        let vc = HobbySearchViewController()
-        vc.userLocation = self.nowLocation
-        
-        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 

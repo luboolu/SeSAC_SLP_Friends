@@ -32,7 +32,7 @@ final class HobbySearchView: UIView, ViewRepresentable {
     let nearCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout.init())
         
-        collectionView.isScrollEnabled = true
+        collectionView.isScrollEnabled = false
         
         return collectionView
     }()
@@ -50,7 +50,7 @@ final class HobbySearchView: UIView, ViewRepresentable {
     let myCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout.init())
         
-        collectionView.isScrollEnabled = true
+        collectionView.isScrollEnabled = false
         
         return collectionView
     }()

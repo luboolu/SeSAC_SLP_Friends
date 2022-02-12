@@ -14,10 +14,10 @@ final class MainViewController: UITabBarController {
         
         print("authVerificationID")
         print(UserDefaults.standard.string(forKey: UserdefaultKey.authVerificationID.rawValue) ?? "")
-        
+
         print("idtoken")
         print(UserDefaults.standard.string(forKey: UserdefaultKey.idToken.rawValue) ?? "")
-        
+
         print("fcmToken")
         print(UserDefaults.standard.string(forKey: UserdefaultKey.fcmToken.rawValue) ?? "")
 
