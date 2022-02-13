@@ -19,6 +19,8 @@ final class RecivedViewController: UIViewController {
     
     private var wantedHobby = [["코딩1", "iOS1","보드게임1"],["코딩2", "iOS2","보드게임2"],["코딩3", "iOS3","보드게임3"]]
     
+    var recivedData: QueueOnData?
+    
     override func loadView() {
         super.loadView()
         self.view = mainView
@@ -33,6 +35,22 @@ final class RecivedViewController: UIViewController {
         //custom tableview cell register
         mainView.friendsTableView.register(CardTableViewCell.self, forCellReuseIdentifier: TableViewCell.CardTableViewCell.id)
         mainView.friendsTableView.register(CharactorTableViewCell.self, forCellReuseIdentifier: TableViewCell.CharactorTableViewCell.id)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print(#function)
+        print(recivedData)
+        
+        if let recivedData = recivedData {
+            self.moreButtonTapped.removeAll()
+            
+            for i in 0...recivedData.fromQueueDBRequested.count {
+                self.moreButtonTapped.append(true)
+            }
+        }
+        
+        self.mainView.friendsTableView.reloadData()
     }
     
     func moreButtonClicked(section: Int, row: Int) {
@@ -51,7 +69,7 @@ final class RecivedViewController: UIViewController {
 extension RecivedViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return self.friendsNum
+        return self.recivedData?.fromQueueDBRequested.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -63,6 +81,10 @@ extension RecivedViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        //셀 데이터 입력
+        guard let recivedData = self.recivedData else { return UITableViewCell() }
+        let row = recivedData.fromQueueDBRequested[indexPath.section]
         
         if indexPath.row == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.CharactorTableViewCell.id) as? CharactorTableViewCell else { return UITableViewCell()}
@@ -86,7 +108,8 @@ extension RecivedViewController: UITableViewDelegate, UITableViewDataSource {
             cell.titleCollectionView.tag = 101
             cell.hobbyCollectionView.tag = 102
             
-            cell.updateCell(row: self.wantedHobby[indexPath.section])
+            //cell.updateCell(row: self.wantedHobby[indexPath.section])
+            cell.updateCell(reputation: row.reputation, review: row.reviews, hobby: row.hf)
             
             cell.nicknameLabel.text = "\(indexPath)"
             
@@ -98,6 +121,12 @@ extension RecivedViewController: UITableViewDelegate, UITableViewDataSource {
                 .bind {
                     self.moreButtonClicked(section: indexPath.section, row: indexPath.row)
                 }.disposed(by: cell.bag)
+            
+            //셀 데이터 입력
+            if let recivedData = self.recivedData {
+                let row = recivedData.fromQueueDBRequested[indexPath.section]
+                cell.nicknameLabel.text = "\(row.nick)"
+            }
 
             
             return cell

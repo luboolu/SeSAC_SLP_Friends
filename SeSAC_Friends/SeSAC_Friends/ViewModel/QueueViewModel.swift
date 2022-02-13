@@ -15,12 +15,13 @@ final class QueueViewModel {
         
         let url = URL(string: "\(URL.queue)")!
         let idtoken = UserDefaults.standard.string(forKey: UserdefaultKey.idToken.rawValue) ?? ""
+        //let hfBody = try? JSONSerialization.data(withJSONObject: hobby)
         var request = URLRequest(url: url)
-        
+        //print(hfBody)
         request.httpMethod = "POST"
         request.httpBody = "type=\(type)&region=\(region)&lat=\(lat)&long=\(long)&hf=\(hobby)".data(using: .utf8, allowLossyConversion: false)
-        request.setValue(APIHeaderValue.ContentType.string, forHTTPHeaderField: APIHeader.ContentType.string)
-        request.setValue("\(idtoken)", forHTTPHeaderField: APIHeader.idtoken.string)
+        request.addValue(APIHeaderValue.ContentType.string, forHTTPHeaderField: APIHeader.ContentType.string)
+        request.addValue("\(idtoken)", forHTTPHeaderField: APIHeader.idtoken.string)
 
         let session = URLSession.shared
         session.dataTask(with: request) { data, response, error in

@@ -152,11 +152,48 @@ final class HobbySearchViewController: UIViewController {
     
     private func findButtonClicked() {
         print(#function)
-//        viewModel.queueStart(gender: <#T##Int#>, region: <#T##Int#>, lat: <#T##Double#>, long: <#T##Double#>, hobby: <#T##[String]#>) { apiResult, queueStart in
-//
-//        }
-        let vc = SeSacFindViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        
+        guard let userLocation = userLocation, let region = region else {
+            return
+        }
+        
+        var hf = ""
+        for hobby in myHobby {
+            hf.append("\(hobby), ")
+        }
+
+        viewModel.queueStart(type: 2, region: region, lat: userLocation[0], long: userLocation[1], hobby: "커피") { apiResult, queueStart in
+            print(queueStart)
+            if let queueStart = queueStart {
+                switch queueStart {
+                case .succeed:
+                    DispatchQueue.main.async {
+                        let vc = SeSacFindViewController()
+                        vc.location = [userLocation[0], userLocation[1]]
+                        vc.region = region
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                case .blocked:
+                     print("blocked")
+                case .penaltyLv1:
+                    print("penaltyLv1")
+                case .penaltyLv2:
+                    print("penaltyLv2")
+                case .penaltyLv3:
+                    print("penaltyLv3")
+                case .invalidGender:
+                    print("invalidGender")
+                case .tokenError:
+                    print("tokenError")
+                case .notUser:
+                    print("notUser")
+                case .serverError:
+                    print("serverError")
+                case .clientError:
+                    print("clientError")
+                }
+            }
+        }
     }
     
     private func searchHobby() {

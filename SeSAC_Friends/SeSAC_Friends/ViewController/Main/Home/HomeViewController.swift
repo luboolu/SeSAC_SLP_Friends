@@ -169,39 +169,15 @@ final class HomeViewController: UIViewController {
     }
     
     private func searchFriends() {
+        print(#function)
         let region = getRegion(location: self.nowLocation)
 //
-//        viewModel.queueStart(type: 2, region: region, lat: self.nowLocation[0], long: self.nowLocation[1], hobby: "") { apiResult, queueStart in
-//
-//            if let queueStart = queueStart {
-////                switch queueStart {
-////                case .succeed:
-////                    <#code#>
-////                case .blocked:
-////                    <#code#>
-////                case .penaltyLv1:
-////                    <#code#>
-////                case .penaltyLv2:
-////                    <#code#>
-////                case .penaltyLv3:
-////                    <#code#>
-////                case .invalidGender:
-////                    <#code#>
-////                case .tokenError:
-////                    <#code#>
-////                case .notUser:
-////                    <#code#>
-////                case .serverError:
-////                    <#code#>
-////                case .clientError:
-////                    <#code#>
-////                }
-//            }
-//
-//        }
+        viewModel.queueStart(type: 2, region: region, lat: self.nowLocation[0], long: self.nowLocation[1], hobby: "anything") { apiResult, queueStart in
+            print(queueStart)
+        }
  
         viewModel.queueOn(region: region, lat: self.nowLocation[0], long: self.nowLocation[1]) { apiResult, queueOn, queueOnData in
-            
+            print(queueOn)
             if let queueOn = queueOn {
                 switch queueOn {
                 case .succeed:
@@ -237,26 +213,31 @@ final class HomeViewController: UIViewController {
             return
         }
 
-        if friends.fromQueueDB.count > 0 {
-            var annotations: [MKAnnotation] = []
+        //if friends.fromQueueDB.count > 0 {
+        //annotation 지우고 다시 보여주기
+        let ants = self.mainView.mapView.annotations
+        self.mainView.mapView.removeAnnotations(ants)
+        
+        var annotations: [MKAnnotation] = []
+        
+        for data in friends.fromQueueDB {
+            let annotation = MKPointAnnotation()
+            print(data.nick)
+            print(data.hf)
+            annotation.subtitle = "\(data.sesac)"
+            annotation.coordinate = CLLocationCoordinate2D(latitude: data.lat, longitude: data.long)
             
-            for data in friends.fromQueueDB {
-                let annotation = MKPointAnnotation()
-                //print(data.nick)
-                annotation.subtitle = "\(data.sesac)"
-                annotation.coordinate = CLLocationCoordinate2D(latitude: data.lat, longitude: data.long)
-                
-                //성별 필터
-                if self.genderFilter == 2 {
-                    annotations.append(annotation)
-                } else if self.genderFilter == data.gender {
-                    annotations.append(annotation)
-                }
-
+            //성별 필터
+            if self.genderFilter == 2 {
+                annotations.append(annotation)
+            } else if self.genderFilter == data.gender {
+                annotations.append(annotation)
             }
-            
-            mainView.mapView.addAnnotations(annotations)
+
         }
+        
+        mainView.mapView.addAnnotations(annotations)
+        //}
     }
     
     private func floatingButtonClicked() {

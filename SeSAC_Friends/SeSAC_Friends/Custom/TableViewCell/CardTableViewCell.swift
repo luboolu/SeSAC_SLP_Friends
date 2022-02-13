@@ -137,7 +137,13 @@ final class CardTableViewCell: UITableViewCell, ViewRepresentable {
         return textview
     }()
     
-    var userHobbyData: [String]?
+    var userHobbyData: [String] = ["밥", "냠냠"]
+    var userData: FromQueueDB?
+    
+    //cardview에 보여줄 유저 정보
+    var userReputation: [Int]?
+    var userHobby: [String]?
+    var userReview: [String]?
     
     var bag = DisposeBag()
     
@@ -303,10 +309,18 @@ final class CardTableViewCell: UITableViewCell, ViewRepresentable {
 
 extension CardTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     
-    func updateCell(row: [String]) {
-        self.userHobbyData = row
+    func updateCell(reputation: [Int], review: [String], hobby: [String]) {
+        self.userReputation = reputation
+        self.userReview = review
+        self.userHobby = hobby
+        
+        if review.count > 0 {
+            self.reviewTextView.text = "\(review[0])"
+        }
+        
         self.titleCollectionView.reloadData()
         self.hobbyCollectionView.reloadData()
+        self.reviewView.reloadInputViews()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -314,7 +328,7 @@ extension CardTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
         if collectionView.tag == 101 {
             return 6
         } else {
-            return self.userHobbyData?.count ?? 0
+            return self.userHobby?.count ?? 0
         }
 
     }
@@ -328,13 +342,18 @@ extension CardTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
             
             cell.button.setTitle("\(titleList[indexPath.row])", for: .normal)
             cell.button.isEnabled = false
-            cell.button.status = .inactive
+
+            if self.userReputation?[indexPath.row] ?? 0 > 0 {
+                cell.button.status = .fill
+            } else {
+                cell.button.status = .inactive
+            }
             
             return cell
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.ButtonCollectionViewCell.id, for: indexPath) as? ButtonCollectionViewCell else { return UICollectionViewCell() }
             
-            cell.button.setTitle("\(self.userHobbyData?[indexPath.row] ?? "")", for: .normal)
+            cell.button.setTitle("\(self.userHobby?[indexPath.row] ?? "")", for: .normal)
             cell.button.isEnabled = false
             cell.button.status = .inactive
             
@@ -348,16 +367,6 @@ extension CardTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
                 make.height.equalTo(height + 16)
             }
             
-    //        self.view.layoutIfNeeded()
-            
-    //        if let data = self.myInfo {
-    //            if data.reputation[indexPath.row] == 0 {
-    //                cell.button.status = .inactive
-    //            } else {
-    //                cell.button.status = .fill
-    //            }
-    //        }
-            
             return cell
         }
 
@@ -370,7 +379,7 @@ extension CardTableViewCell: UICollectionViewDelegateFlowLayout {
             return CGSize(width: Int((collectionView.frame.width - 40 ) / 2), height: 32)
         } else {
             let button = UIButton(frame: CGRect.zero)
-            button.setTitle("\(self.userHobbyData?[indexPath.row] ?? "")", for: .normal)
+            button.setTitle("\(self.userHobby?[indexPath.row] ?? "")", for: .normal)
             button.sizeToFit()
             
             return CGSize(width: button.frame.width + 10, height: 32)

@@ -19,6 +19,8 @@ final class NearSeSacViewController: UIViewController {
     
     private var wantedHobby = [["코딩1", "iOS1","보드게임1"],["코딩2", "iOS2","보드게임2"],["코딩3", "iOS3","보드게임3"]]
     
+    var nearData: QueueOnData?
+    
     override func loadView() {
         super.loadView()
         self.view = mainView
@@ -32,12 +34,24 @@ final class NearSeSacViewController: UIViewController {
         //custom tableview cell register
         mainView.friendsTableView.register(CardTableViewCell.self, forCellReuseIdentifier: TableViewCell.CardTableViewCell.id)
         mainView.friendsTableView.register(CharactorTableViewCell.self, forCellReuseIdentifier: TableViewCell.CharactorTableViewCell.id)
+        
+        print(nearData)
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-    
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print(#function)
+        print(nearData)
+        
+        if let nearData = nearData {
+            self.moreButtonTapped.removeAll()
+            
+            for i in 0...nearData.fromQueueDB.count {
+                self.moreButtonTapped.append(true)
+            }
+        }
+        
+        self.mainView.friendsTableView.reloadData()
     }
     
     func moreButtonClicked(section: Int, row: Int) {
@@ -54,7 +68,8 @@ final class NearSeSacViewController: UIViewController {
 extension NearSeSacViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return self.friendsNum
+        print("테이블뷰: \(self.nearData?.fromQueueDB.count ?? 0)")
+        return self.nearData?.fromQueueDB.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -67,12 +82,16 @@ extension NearSeSacViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        //셀 데이터 입력
+        guard let nearData = self.nearData else { return UITableViewCell() }
+        let row = nearData.fromQueueDB[indexPath.section]
+        
         if indexPath.row == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.CharactorTableViewCell.id) as? CharactorTableViewCell else { return UITableViewCell()}
             
             cell.selectionStyle = .none
-            cell.backgroundImage.image = UIImage(named: "sesac_background_1")
-            cell.charactorImage.image = UIImage(named: "sesac_face_1")
+            cell.backgroundImage.image = UIImage(named: "sesac_background_\(row.background + 1)")
+            cell.charactorImage.image = UIImage(named: "sesac_face_\(row.sesac + 1)")
             cell.matchingButton.status = .request
             
             cell.matchingButton.rx.tap
@@ -85,13 +104,14 @@ extension NearSeSacViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.CardTableViewCell.id) as? CardTableViewCell else { return UITableViewCell()}
             
+            cell.nicknameLabel.text = "\(row.nick)"
+            
+            
             cell.selectionStyle = .none
             cell.titleCollectionView.tag = 101
             cell.hobbyCollectionView.tag = 102
             
-            cell.updateCell(row: self.wantedHobby[indexPath.section])
-            
-            cell.nicknameLabel.text = "\(indexPath)"
+            cell.updateCell(reputation: row.reputation, review: row.reviews, hobby: row.hf)
             
             cell.titleView.isHidden = self.moreButtonTapped[indexPath.section]
             cell.hobbyView.isHidden = self.moreButtonTapped[indexPath.section]

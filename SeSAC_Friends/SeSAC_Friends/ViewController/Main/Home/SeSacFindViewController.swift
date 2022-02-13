@@ -13,10 +13,16 @@ import RxSwift
 final class SeSacFindViewController: UIViewController {
     
     private let mainView = SeSacFindView()
+    private let viewModel = QueueViewModel()
     private let disposeBag = DisposeBag()
     
-    private let nearVC = NearSeSacViewController()
-    private let recivedVC = RecivedViewController()
+    private var nearVC = NearSeSacViewController()
+    private var recivedVC = RecivedViewController()
+    
+    private var friendsData: QueueOnData?
+    var region: Int?
+    var location: [Double]?
+    
     
     override func loadView() {
         super.loadView()
@@ -28,10 +34,6 @@ final class SeSacFindViewController: UIViewController {
         
         setPagingButton()
         setButton()
-        
-        DispatchQueue.main.async {
-            self.nearViewButtonClicked()
-        }
 
     }
     
@@ -48,6 +50,11 @@ final class SeSacFindViewController: UIViewController {
         backButton.tintColor = UIColor().black
         
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+        
+        DispatchQueue.main.async {
+            self.findFriends()
+            self.nearViewButtonClicked()
+        }
     }
     
     private func setPagingButton() {
@@ -93,6 +100,11 @@ final class SeSacFindViewController: UIViewController {
     
     private func nearViewButtonClicked() {
         print(#function)
+        //데이터 전달
+        if let friendsData = friendsData {
+            nearVC.nearData = friendsData
+        }
+        
         if mainView.contentView.subviews.count > 0 {
             print("remove")
             self.recivedVC.view.removeFromSuperview()
@@ -108,6 +120,11 @@ final class SeSacFindViewController: UIViewController {
     
     private func recivedButtonClicked() {
         print(#function)
+        //데이터 전달
+        if let friendsData = friendsData {
+            recivedVC.recivedData = friendsData
+        }
+        
         if mainView.contentView.subviews.count > 0 {
             print("remove")
             self.nearVC.view.removeFromSuperview()
@@ -133,6 +150,71 @@ final class SeSacFindViewController: UIViewController {
             .bind {
                 print("Reset")
             }.disposed(by: disposeBag)
+    }
+    
+    private func findFriends() {
+        guard let region = region, let location = location else {
+            return
+        }
+        
+        viewModel.queueStart(type: 2, region: region, lat: location[0], long: location[1], hobby: "anything") { apiResult, queueStart in
+            if let queueStart = queueStart {
+                switch queueStart {
+                case .succeed:
+                    print(queueStart)
+                case .blocked:
+                    return
+                case .penaltyLv1:
+                    return
+                case .penaltyLv2:
+                    return
+                case .penaltyLv3:
+                    return
+                case .invalidGender:
+                    return
+                case .tokenError:
+                    self.findFriends()
+                case .notUser:
+                    return
+                case .serverError:
+                    return
+                case .clientError:
+                    return
+                }
+            }
+        }
+
+        viewModel.queueOn(region: region, lat: location[0], long: location[1]) { apiResult, queueOn, queueOnData in
+            print("새싹친구찾기 결과")
+            print(queueOn)
+            if let queueOn = queueOn {
+                switch queueOn {
+                case .succeed:
+                    if let queueOnData = queueOnData {
+                        DispatchQueue.main.async {
+                            self.friendsData = queueOnData
+                            //print(self.friendsData)
+                            self.nearViewButtonClicked()
+                        }
+                    }
+                case .tokenError:
+                    self.findFriends()
+                    return
+                case .notUser:
+                    DispatchQueue.main.async {
+                        //온보딩 화면으로 이동
+                        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                        windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: OnBoardingViewController())
+                        windowScene.windows.first?.makeKeyAndVisible()
+                    }
+                case .serverError:
+                    print("에러 잠시 후 시도 ㅂㅌ")
+                case .clientError:
+                    print("에러 잠시 후 시도 ㅂㅌ")
+                }
+            }
+            
+        }
     }
     
     @objc func indexChanged(_ sender: UISegmentedControl) {
