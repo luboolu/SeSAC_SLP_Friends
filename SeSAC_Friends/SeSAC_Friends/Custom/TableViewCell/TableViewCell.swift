@@ -17,6 +17,7 @@ enum TableViewCell {
     case DoubleSliderTableViewCell
     case CardTableViewCell
     case CharactorTableViewCell
+    case TextViewTableViewCell
     
     var id: String {
         switch self {
@@ -38,6 +39,8 @@ enum TableViewCell {
             return "CardTableViewCell"
         case .CharactorTableViewCell:
             return "CharactorTableViewCell"
+        case .TextViewTableViewCell:
+            return "TextViewTableViewCell"
         }
     }
 }

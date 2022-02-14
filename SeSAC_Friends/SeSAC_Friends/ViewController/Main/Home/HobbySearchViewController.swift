@@ -111,8 +111,7 @@ final class HobbySearchViewController: UIViewController {
                                 if split.count <= 8 {
                                     self.myHobby.append(String(split))
                                 } else {
-                                    //토스트 메세지
-                                    self.view.makeToast("최소 한 자 이상, 최대 8글자까지 작성 가능합니다", duration: 2.0, position: .bottom, style: self.toastStyle)
+
                                 }
                             } else {
                                 //토스트 메세지
@@ -168,6 +167,9 @@ final class HobbySearchViewController: UIViewController {
                 switch queueStart {
                 case .succeed:
                     DispatchQueue.main.async {
+                        //userdefault matchingSate 값 변경
+                        UserDefaults.standard.set(matchingState.waiting.rawValue, forKey: UserdefaultKey.matchingState.rawValue)
+                        
                         let vc = SeSacFindViewController()
                         vc.location = [userLocation[0], userLocation[1]]
                         vc.region = region

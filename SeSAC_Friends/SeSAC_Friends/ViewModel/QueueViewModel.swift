@@ -175,5 +175,63 @@ final class QueueViewModel {
             }
         }.resume()
     }
+    
+    func queueMyState(completion: @escaping (APIResult?, QueueState?, MyQueueState?) -> Void) {
+        
+        let url = URL(string: "\(URL.queueState)")!
+        let idtoken = UserDefaults.standard.string(forKey: UserdefaultKey.idToken.rawValue) ?? ""
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "GET"
+        request.setValue(APIHeaderValue.ContentType.string, forHTTPHeaderField: APIHeader.ContentType.string)
+        request.setValue("\(idtoken)", forHTTPHeaderField: APIHeader.idtoken.string)
+        
+        let session = URLSession.shared
+        session.dataTask(with: request) { data, response, error in
+
+            if error != nil {
+                completion(.failed, nil, nil)
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse else {
+                completion(.invalidResponse, nil, nil)
+                return
+            }
+            
+            guard let data = data else {
+                completion(.noData, nil, nil)
+                return
+            }
+            
+            if response.statusCode == 200 {
+                //상태 확인 성공
+                do {
+                    let decoder = JSONDecoder()
+                    let queueStateData = try decoder.decode(MyQueueState.self, from: data)
+                    
+                    completion(.succeed, .succeed, queueStateData)
+                } catch {
+                    completion(.invalidData, nil, nil)
+                }
+            } else if response.statusCode == 201 {
+                //친구 찾기 중단이 된 상태
+                completion(.succeed, .stopped, nil)
+            } else if response.statusCode == 401 {
+                self.userViewModel.idTokenRequest { error in
+                    completion(.succeed, .tokenError, nil)
+                }
+            } else if response.statusCode == 406 {
+                completion(.succeed, .notUser, nil)
+            } else if response.statusCode == 500 {
+                completion(.succeed, .serverError, nil)
+            } else if response.statusCode == 501 {
+                completion(.succeed, .clientError, nil)
+            } else {
+                completion(.failed, nil, nil)
+            }
+        }.resume()
+    }
+
 
 }

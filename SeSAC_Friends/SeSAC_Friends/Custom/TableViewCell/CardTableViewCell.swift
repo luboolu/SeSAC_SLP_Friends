@@ -125,6 +125,14 @@ final class CardTableViewCell: UITableViewCell, ViewRepresentable {
         return label
     }()
     
+    let reviewMoreButton: UIButton = {
+        let button = UIButton()
+        
+        button.setImage(UIImage(named: "more_arrow"), for: .normal)
+        
+        return button
+    }()
+    
     let reviewTextView: UITextView = {
         let textview = UITextView()
         
@@ -195,6 +203,7 @@ final class CardTableViewCell: UITableViewCell, ViewRepresentable {
         cardStackView.addArrangedSubview(hobbyView)
         
         reviewView.addSubview(reviewLabel)
+        reviewView.addSubview(reviewMoreButton)
         reviewView.addSubview(reviewTextView)
         cardStackView.addArrangedSubview(reviewView)
         
@@ -275,8 +284,16 @@ final class CardTableViewCell: UITableViewCell, ViewRepresentable {
         reviewLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(14)
             make.leading.equalToSuperview().offset(8)
-            make.trailing.equalToSuperview().offset(-8)
+            //make.trailing.equalToSuperview().offset(-8)
             //make.bottom.equalTo(reviewTextView.snp.top).offset(-14)
+        }
+        
+        reviewMoreButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(14)
+            make.leading.equalTo(reviewLabel.snp.trailing).offset(14)
+            make.trailing.equalToSuperview().offset(-8)
+            make.bottom.equalTo(reviewTextView.snp.top).offset(-14)
+            make.width.equalTo(22)
         }
         
         reviewTextView.snp.makeConstraints { make in

@@ -50,3 +50,9 @@ struct FromQueueDB: Codable {
     let gender, type, sesac, background: Int
 }
 
+
+//myQueueState 결과
+struct MyQueueState: Codable {
+    let dodged, matched, reviewed: Int
+    let matchedNick, matchedUid: String? //matched가 1인 경우에만 반환되는 값이라 optional 달아주기
+}

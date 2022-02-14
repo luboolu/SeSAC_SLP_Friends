@@ -9,12 +9,14 @@ import UIKit
 
 import RxCocoa
 import RxSwift
+import Toast
 
 final class SeSacFindViewController: UIViewController {
     
     private let mainView = SeSacFindView()
     private let viewModel = QueueViewModel()
     private let disposeBag = DisposeBag()
+    private let toastStyle = ToastStyle()
     
     private var nearVC = NearSeSacViewController()
     private var recivedVC = RecivedViewController()
@@ -42,7 +44,7 @@ final class SeSacFindViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.tintColor = UIColor().black
         self.navigationItem.title = "새싹 찾기"
-        
+         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "찾기중단", style: .plain, target: self, action: #selector(findStopButtonClicked))
         
         let backButton = UIBarButtonItem()
@@ -102,14 +104,18 @@ final class SeSacFindViewController: UIViewController {
         print(#function)
         //데이터 전달
         if let friendsData = friendsData {
-            nearVC.nearData = friendsData
+            //nearVC.nearData = friendsData
+            nearVC.region = self.region
+            nearVC.location = self.location
         }
-        
-        if mainView.contentView.subviews.count > 0 {
-            print("remove")
-            self.recivedVC.view.removeFromSuperview()
-            self.recivedVC.removeFromParent()
-        }
+        print("subviews")
+        print(mainView.contentView.subviews)
+//        if mainView.contentView.subviews.count > 0 {
+//            print(mainView.contentView.subviews)
+//            print("remove")
+//            self.recivedVC.view.removeFromSuperview()
+//            self.recivedVC.removeFromParent()
+//        }
         nearVC.view.frame = mainView.contentView.bounds
         mainView.contentView.addSubview(nearVC.view)
         self.addChild(nearVC)
@@ -208,12 +214,49 @@ final class SeSacFindViewController: UIViewController {
                         windowScene.windows.first?.makeKeyAndVisible()
                     }
                 case .serverError:
-                    print("에러 잠시 후 시도 ㅂㅌ")
+                    self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
                 case .clientError:
-                    print("에러 잠시 후 시도 ㅂㅌ")
+                    self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
                 }
             }
             
+        }
+    }
+    
+    private func updateMyState() {
+        print(#function)
+        
+        viewModel.queueMyState { apiResult, queueState, myQueueState in
+            if let queueState = queueState {
+                switch queueState {
+                case .succeed:
+                    if let myQueueState = myQueueState {
+                        print(myQueueState)
+                        
+                        if myQueueState.matched == 1 {
+                            //매칭된 상태이므로 토스트 메세지를 띄우고, 채팅방으로 이동
+                            self.view.makeToast("000님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다." ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                        }
+                        
+                    }
+                case .stopped:
+                    self.view.makeToast("오랜 시간 동안 매칭되지 않아 새싹 친구 찾기를 그만둡니다." ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                case .tokenError:
+                    self.updateMyState()
+                    return
+                case .notUser:
+                    DispatchQueue.main.async {
+                        //온보딩 화면으로 이동
+                        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                        windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: OnBoardingViewController())
+                        windowScene.windows.first?.makeKeyAndVisible()
+                    }
+                case .serverError:
+                    self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                case .clientError:
+                    self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                }
+            }
         }
     }
     
@@ -223,9 +266,44 @@ final class SeSacFindViewController: UIViewController {
     
     @objc private func findStopButtonClicked() {
         print(#function)
+        //새싹찾기중단 api 호출 후 성공하면, 홈 화면으로 전환
+        viewModel.queueEnd { apiResult, queueStop in
+            if let queueStop = queueStop {
+                switch queueStop {
+                case .succeed:
+                    DispatchQueue.main.async {
+                        //userdefault matchingSate 값 변경
+                        UserDefaults.standard.set(matchingState.noState.rawValue, forKey: UserdefaultKey.matchingState.rawValue)
+                        //홈 화면으로 이동
+                        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                        windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: MainViewController())
+                        windowScene.windows.first?.makeKeyAndVisible()
+                    }
+                case .matched:
+                    //토스트 메세지
+                    self.view.makeToast("앗! 누군가가 나의 취미 함께 하기를 수락하였어요!", duration: 2.0, position: .bottom, style: self.toastStyle)
+                    
+                    //myQueueState api 호출
+                    
+                case .tokenError:
+                    self.findStopButtonClicked()
+                    return
+                case .notUser:
+                    //미가입 유저인 경우
+                    DispatchQueue.main.async {
+                        //온보딩 화면으로 이동
+                        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                        windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: OnBoardingViewController())
+                        windowScene.windows.first?.makeKeyAndVisible()
+                    }
+                case .serverError:
+                    self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                case .clientError:
+                    self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                }
+            }
+        }
     }
-
-    
 
 }
 

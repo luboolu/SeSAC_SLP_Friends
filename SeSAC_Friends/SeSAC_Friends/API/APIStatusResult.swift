@@ -92,6 +92,7 @@ enum QueueHobbyRequest {
     case clientError  //501
 }
 
+//취미 함께하기 수락
 enum QueueHobbyAccept {
     case succeed      //200
     case otherMatched //201
@@ -102,6 +103,7 @@ enum QueueHobbyAccept {
     case clientError  //501
 }
 
+//내 매칭 상태 확인
 enum QueueState {
     case succeed      //200
     case stopped      //201

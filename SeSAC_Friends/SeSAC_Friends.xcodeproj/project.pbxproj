@@ -40,6 +40,10 @@
 		DCA1AABE279DA7CA002194B4 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA1AABD279DA7CA002194B4 /* Endpoint.swift */; };
 		DCA1AAC0279E4531002194B4 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA1AABF279E4531002194B4 /* UserViewModel.swift */; };
 		DCA1AAC3279E94D2002194B4 /* UserdefualtKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA1AAC2279E94D1002194B4 /* UserdefualtKey.swift */; };
+		DCA592D427BA2E610088940B /* MatchingStateEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA592D327BA2E610088940B /* MatchingStateEnum.swift */; };
+		DCA592D627BA36F70088940B /* ReviewDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA592D527BA36F70088940B /* ReviewDetailViewController.swift */; };
+		DCA592D827BA36FE0088940B /* ReviewDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA592D727BA36FE0088940B /* ReviewDetailView.swift */; };
+		DCA592DA27BA38A20088940B /* TextViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA592D927BA38A20088940B /* TextViewTableViewCell.swift */; };
 		DCC419EC27A44845006B2904 /* ButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC419EB27A44845006B2904 /* ButtonCollectionViewCell.swift */; };
 		DCC419EE27A44850006B2904 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC419ED27A44850006B2904 /* CollectionViewCell.swift */; };
 		DCC419F027A78D44006B2904 /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC419EF27A78D44006B2904 /* MyInfoView.swift */; };
@@ -123,6 +127,10 @@
 		DCA1AABD279DA7CA002194B4 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		DCA1AABF279E4531002194B4 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		DCA1AAC2279E94D1002194B4 /* UserdefualtKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserdefualtKey.swift; sourceTree = "<group>"; };
+		DCA592D327BA2E610088940B /* MatchingStateEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchingStateEnum.swift; sourceTree = "<group>"; };
+		DCA592D527BA36F70088940B /* ReviewDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailViewController.swift; sourceTree = "<group>"; };
+		DCA592D727BA36FE0088940B /* ReviewDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailView.swift; sourceTree = "<group>"; };
+		DCA592D927BA38A20088940B /* TextViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewTableViewCell.swift; sourceTree = "<group>"; };
 		DCC419EB27A44845006B2904 /* ButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		DCC419ED27A44850006B2904 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		DCC419EF27A78D44006B2904 /* MyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoView.swift; sourceTree = "<group>"; };
@@ -213,6 +221,7 @@
 				DC18740A27A2D53500DE4FBD /* SwitchTableViewCell.swift */,
 				DC18740E27A2D7AF00DE4FBD /* DoubleSliderTableViewCell.swift */,
 				DCE678E427A2EA4D00ACB1A7 /* CardTableViewCell.swift */,
+				DCA592D927BA38A20088940B /* TextViewTableViewCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -230,6 +239,8 @@
 				DCF8943B27B22BCE001BE5DF /* NearSeSacView.swift */,
 				DCF8943927B22B8F001BE5DF /* RecivedViewController.swift */,
 				DCF8943D27B22BDF001BE5DF /* RecivedView.swift */,
+				DCA592D527BA36F70088940B /* ReviewDetailViewController.swift */,
+				DCA592D727BA36FE0088940B /* ReviewDetailView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -327,6 +338,7 @@
 				DC6E55DB27A98A7800998FF9 /* Alert.swift */,
 				DC1873F827A25EF000DE4FBD /* ViewRepresentable.swift */,
 				DCA1AAC2279E94D1002194B4 /* UserdefualtKey.swift */,
+				DCA592D327BA2E610088940B /* MatchingStateEnum.swift */,
 				DCE2D1C4279694750018895F /* Assets.xcassets */,
 				DCE2D1C6279694750018895F /* LaunchScreen.storyboard */,
 				DCE2D1CF279694BE0018895F /* GoogleService-Info.plist */,
@@ -514,6 +526,7 @@
 				DCDE366B2799C0BD0077847C /* BirthViewController.swift in Sources */,
 				DCDE366D279A9A4D0077847C /* EmailViewController.swift in Sources */,
 				DCF8943827B22B7F001BE5DF /* NearSeSacViewController.swift in Sources */,
+				DCA592DA27BA38A20088940B /* TextViewTableViewCell.swift in Sources */,
 				DCDE36652799A0300077847C /* Toast+Extension.swift in Sources */,
 				DC1873FD27A262B900DE4FBD /* LoginConfirmView.swift in Sources */,
 				DCA1AAC0279E4531002194B4 /* UserViewModel.swift in Sources */,
@@ -523,8 +536,10 @@
 				DCE678E327A2E61800ACB1A7 /* TableViewCell.swift in Sources */,
 				DC18740327A266CF00DE4FBD /* EmailView.swift in Sources */,
 				DC6E55E327AAD71A00998FF9 /* HobbySearchView.swift in Sources */,
+				DCA592D827BA36FE0088940B /* ReviewDetailView.swift in Sources */,
 				DC1873FB27A2603000DE4FBD /* LoginView.swift in Sources */,
 				DCF8943A27B22B8F001BE5DF /* RecivedViewController.swift in Sources */,
+				DCA592D427BA2E610088940B /* MatchingStateEnum.swift in Sources */,
 				DCE2D1DE2796C9D50018895F /* MainButtonStatus.swift in Sources */,
 				DCE2D1EB2796DB8C0018895F /* UIColor+Extension.swift in Sources */,
 				DC1873EE27A151E200DE4FBD /* ProfileTableViewCell.swift in Sources */,
@@ -536,6 +551,7 @@
 				DC6E55E727ABCC3A00998FF9 /* CollectionViewLeftAlignFlowLayout.swift in Sources */,
 				DCE2D1FA279809D40018895F /* MainButtonTestViewController.swift in Sources */,
 				DCF8943127B21D12001BE5DF /* SeSecFindView.swift in Sources */,
+				DCA592D627BA36F70088940B /* ReviewDetailViewController.swift in Sources */,
 				DCC419F027A78D44006B2904 /* MyInfoView.swift in Sources */,
 				DCDE36672799B1440077847C /* LoginConfirmViewController.swift in Sources */,
 				DC18740127A2653B00DE4FBD /* BirthView.swift in Sources */,
