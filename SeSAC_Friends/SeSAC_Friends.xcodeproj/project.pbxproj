@@ -44,6 +44,7 @@
 		DCA592D627BA36F70088940B /* ReviewDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA592D527BA36F70088940B /* ReviewDetailViewController.swift */; };
 		DCA592D827BA36FE0088940B /* ReviewDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA592D727BA36FE0088940B /* ReviewDetailView.swift */; };
 		DCA592DA27BA38A20088940B /* TextViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA592D927BA38A20088940B /* TextViewTableViewCell.swift */; };
+		DCA592DC27BAB47B0088940B /* EmptySeSacTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA592DB27BAB47A0088940B /* EmptySeSacTableViewCell.swift */; };
 		DCC419EC27A44845006B2904 /* ButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC419EB27A44845006B2904 /* ButtonCollectionViewCell.swift */; };
 		DCC419EE27A44850006B2904 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC419ED27A44850006B2904 /* CollectionViewCell.swift */; };
 		DCC419F027A78D44006B2904 /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC419EF27A78D44006B2904 /* MyInfoView.swift */; };
@@ -131,6 +132,7 @@
 		DCA592D527BA36F70088940B /* ReviewDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailViewController.swift; sourceTree = "<group>"; };
 		DCA592D727BA36FE0088940B /* ReviewDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailView.swift; sourceTree = "<group>"; };
 		DCA592D927BA38A20088940B /* TextViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewTableViewCell.swift; sourceTree = "<group>"; };
+		DCA592DB27BAB47A0088940B /* EmptySeSacTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySeSacTableViewCell.swift; sourceTree = "<group>"; };
 		DCC419EB27A44845006B2904 /* ButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		DCC419ED27A44850006B2904 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		DCC419EF27A78D44006B2904 /* MyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoView.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				DC18740E27A2D7AF00DE4FBD /* DoubleSliderTableViewCell.swift */,
 				DCE678E427A2EA4D00ACB1A7 /* CardTableViewCell.swift */,
 				DCA592D927BA38A20088940B /* TextViewTableViewCell.swift */,
+				DCA592DB27BAB47A0088940B /* EmptySeSacTableViewCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -579,6 +582,7 @@
 				DCE2D1ED2796FF950018895F /* UIFont+Extension.swift in Sources */,
 				DC18740F27A2D7B000DE4FBD /* DoubleSliderTableViewCell.swift in Sources */,
 				DC1873F927A25EF000DE4FBD /* ViewRepresentable.swift in Sources */,
+				DCA592DC27BAB47B0088940B /* EmptySeSacTableViewCell.swift in Sources */,
 				DCC419F227A7CABD006B2904 /* InputDataStruct.swift in Sources */,
 				DC18740B27A2D53500DE4FBD /* SwitchTableViewCell.swift in Sources */,
 				DCA1AABE279DA7CA002194B4 /* Endpoint.swift in Sources */,

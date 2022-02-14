@@ -40,6 +40,7 @@ final class RecivedViewController: UIViewController {
         //custom tableview cell register
         mainView.friendsTableView.register(CardTableViewCell.self, forCellReuseIdentifier: TableViewCell.CardTableViewCell.id)
         mainView.friendsTableView.register(CharactorTableViewCell.self, forCellReuseIdentifier: TableViewCell.CharactorTableViewCell.id)
+        mainView.friendsTableView.register(EmptySeSacTableViewCell.self, forCellReuseIdentifier: TableViewCell.EmptySeSacTableViewCell.id)
         
         if let recivedData = recivedData {
             self.moreButtonTapped.removeAll()
@@ -190,11 +191,26 @@ final class RecivedViewController: UIViewController {
 extension RecivedViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return self.recivedData?.fromQueueDBRequested.count ?? 0
+        let dataNum = self.recivedData?.fromQueueDBRequested.count ?? 0
+        
+        if dataNum == 0 {
+            print("section 1개")
+            return 1
+        } else {
+            return dataNum
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        let dataNum = self.recivedData?.fromQueueDBRequested.count ?? 0
+        
+        if dataNum == 0 {
+            print("row 1개")
+            return 1
+        } else {
+            return 2
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -204,7 +220,20 @@ extension RecivedViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //셀 데이터 입력
-        guard let recivedData = self.recivedData else { return UITableViewCell() }
+        guard let recivedData = self.recivedData else {
+            return UITableViewCell()
+        }
+        
+        let dataNum = self.recivedData?.fromQueueDBRequested.count ?? 0
+        
+        if dataNum == 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.EmptySeSacTableViewCell.id) as? EmptySeSacTableViewCell else { return UITableViewCell()}
+            
+            cell.backgroundColor = UIColor().error
+            
+            return cell
+        }
+        
         let row = recivedData.fromQueueDBRequested[indexPath.section]
         
         if indexPath.row == 0 {
