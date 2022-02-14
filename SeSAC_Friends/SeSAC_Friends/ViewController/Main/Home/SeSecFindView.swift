@@ -188,14 +188,14 @@ final class SeSacFindView: UIView, ViewRepresentable {
             make.top.equalTo(contentView.snp.bottom).offset(16)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalTo(resetButton.snp.leading).offset(-8)
-            make.bottom.equalTo(self.safeAreaLayoutGuide)
+            make.bottom.equalTo(self.safeAreaLayoutGuide).offset(-30)
             make.height.equalTo(48)
         }
         
         resetButton.snp.makeConstraints { make in
             make.top.equalTo(contentView.snp.bottom).offset(16)
             make.trailing.equalToSuperview().offset(-16)
-            make.bottom.equalTo(self.safeAreaLayoutGuide)
+            make.bottom.equalTo(self.safeAreaLayoutGuide).offset(-30)
             make.width.equalTo(48)
             make.height.equalTo(48)
         }

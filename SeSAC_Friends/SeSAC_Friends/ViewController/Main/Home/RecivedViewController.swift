@@ -21,7 +21,6 @@ final class RecivedViewController: UIViewController {
     private var friendsNum = 3
     
     private var wantedHobby = [["코딩1", "iOS1","보드게임1"],["코딩2", "iOS2","보드게임2"],["코딩3", "iOS3","보드게임3"]]
-    private var timer: Timer?
     
     var recivedData: QueueOnData?
     var region: Int?
@@ -67,22 +66,18 @@ final class RecivedViewController: UIViewController {
             }
         }
         
-        if timer != nil && timer!.isValid {
-            timer!.invalidate()
-        }
-        
-        //5초마다 myQueueState 실행하여 데이터 갱신
-        timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(updateMyState), userInfo: nil, repeats: true)
+//        if timer != nil && timer!.isValid {
+//            timer!.invalidate()
+//        }
+//        
+//        //5초마다 myQueueState 실행하여 데이터 갱신
+//        timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(updateMyState), userInfo: nil, repeats: true)
         
         findFriends()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        if timer != nil && timer!.isValid {
-            timer!.invalidate()
-        }
     }
     
     private func findFriends() {
@@ -216,8 +211,8 @@ extension RecivedViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.CharactorTableViewCell.id) as? CharactorTableViewCell else { return UITableViewCell()}
             
             cell.selectionStyle = .none
-            cell.backgroundImage.image = UIImage(named: "sesac_background_1")
-            cell.charactorImage.image = UIImage(named: "sesac_face_1")
+            cell.backgroundImage.image = UIImage(named: "sesac_background_\(row.background + 1)")
+            cell.charactorImage.image = UIImage(named: "sesac_face_\(row.sesac + 1)")
             cell.matchingButton.status = .accept
             
             cell.matchingButton.rx.tap
@@ -230,14 +225,13 @@ extension RecivedViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.CardTableViewCell.id) as? CardTableViewCell else { return UITableViewCell()}
             
+            cell.nicknameLabel.text = "\(row.nick)"
+            
             cell.selectionStyle = .none
             cell.titleCollectionView.tag = 101
             cell.hobbyCollectionView.tag = 102
-            
-            //cell.updateCell(row: self.wantedHobby[indexPath.section])
+
             cell.updateCell(reputation: row.reputation, review: row.reviews, hobby: row.hf)
-            
-            cell.nicknameLabel.text = "\(indexPath)"
             
             cell.titleView.isHidden = self.moreButtonTapped[indexPath.section]
             cell.hobbyView.isHidden = self.moreButtonTapped[indexPath.section]
@@ -248,11 +242,22 @@ extension RecivedViewController: UITableViewDelegate, UITableViewDataSource {
                     self.moreButtonClicked(section: indexPath.section, row: indexPath.row)
                 }.disposed(by: cell.bag)
             
-            //셀 데이터 입력
-            if let recivedData = self.recivedData {
-                let row = recivedData.fromQueueDBRequested[indexPath.section]
-                cell.nicknameLabel.text = "\(row.nick)"
+            //리뷰가 1개 이상일때만 reviewMoreButton을 보여줌
+            if row.reviews.count > 1 {
+                cell.reviewMoreButton.isHidden = false
+            } else {
+                cell.reviewMoreButton.isHidden = true
             }
+            
+            cell.reviewMoreButton.rx.tap
+                .bind {
+                    print(#function)
+                    DispatchQueue.main.async {
+                        let vc = ReviewDetailViewController()
+                        vc.reviews = row.reviews
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                }.disposed(by: cell.bag)
 
             
             return cell

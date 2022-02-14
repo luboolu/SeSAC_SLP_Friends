@@ -19,7 +19,6 @@ final class NearSeSacViewController: UIViewController {
     
     private var moreButtonTapped = [true, true, true]
     private var friendsNum = 3
-    private var timer: Timer?
     
     private var wantedHobby = [["코딩1", "iOS1","보드게임1"],["코딩2", "iOS2","보드게임2"],["코딩3", "iOS3","보드게임3"]]
     
@@ -61,22 +60,12 @@ final class NearSeSacViewController: UIViewController {
         print(#function)
         print(nearData)
         
-        if timer != nil && timer!.isValid {
-            timer!.invalidate()
-        }
-        
-        //5초마다 myQueueState 실행하여 데이터 갱신
-        timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(updateMyState), userInfo: nil, repeats: true)
-        
         findFriends()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        if timer != nil && timer!.isValid {
-            timer!.invalidate()
-        }
+        print("near view disappear")
     }
     
     private func findFriends() {
@@ -225,7 +214,6 @@ extension NearSeSacViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.CardTableViewCell.id) as? CardTableViewCell else { return UITableViewCell()}
             
             cell.nicknameLabel.text = "\(row.nick)"
-            
             
             cell.selectionStyle = .none
             cell.titleCollectionView.tag = 101
