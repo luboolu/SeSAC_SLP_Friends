@@ -108,8 +108,7 @@ final class SeSacFindViewController: UIViewController {
             nearVC.region = self.region
             nearVC.location = self.location
         }
-        print("subviews")
-        print(mainView.contentView.subviews)
+
 //        if mainView.contentView.subviews.count > 0 {
 //            print(mainView.contentView.subviews)
 //            print("remove")
@@ -136,8 +135,7 @@ final class SeSacFindViewController: UIViewController {
             self.nearVC.view.removeFromSuperview()
             self.nearVC.removeFromParent()
         }
-        print(mainView.contentView.frame)
-        print(mainView.contentView.bounds)
+
         recivedVC.view.frame = mainView.contentView.bounds
         mainView.contentView.addSubview(recivedVC.view)
         self.addChild(recivedVC)
@@ -161,33 +159,6 @@ final class SeSacFindViewController: UIViewController {
     private func findFriends() {
         guard let region = region, let location = location else {
             return
-        }
-        
-        viewModel.queueStart(type: 2, region: region, lat: location[0], long: location[1], hobby: "anything") { apiResult, queueStart in
-            if let queueStart = queueStart {
-                switch queueStart {
-                case .succeed:
-                    print(queueStart)
-                case .blocked:
-                    return
-                case .penaltyLv1:
-                    return
-                case .penaltyLv2:
-                    return
-                case .penaltyLv3:
-                    return
-                case .invalidGender:
-                    return
-                case .tokenError:
-                    self.findFriends()
-                case .notUser:
-                    return
-                case .serverError:
-                    return
-                case .clientError:
-                    return
-                }
-            }
         }
 
         viewModel.queueOn(region: region, lat: location[0], long: location[1]) { apiResult, queueOn, queueOnData in
@@ -259,11 +230,7 @@ final class SeSacFindViewController: UIViewController {
             }
         }
     }
-    
-    @objc func indexChanged(_ sender: UISegmentedControl) {
-            print("\(sender.selectedSegmentIndex)")
-    }
-    
+
     @objc private func findStopButtonClicked() {
         print(#function)
         //새싹찾기중단 api 호출 후 성공하면, 홈 화면으로 전환

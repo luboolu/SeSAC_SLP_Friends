@@ -19,6 +19,7 @@ final class NearSeSacViewController: UIViewController {
     
     private var moreButtonTapped = [true, true, true]
     private var friendsNum = 3
+    private var timer: Timer?
     
     private var wantedHobby = [["코딩1", "iOS1","보드게임1"],["코딩2", "iOS2","보드게임2"],["코딩3", "iOS3","보드게임3"]]
     
@@ -32,7 +33,7 @@ final class NearSeSacViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print(#function)
         mainView.friendsTableView.delegate = self
         mainView.friendsTableView.dataSource = self
         
@@ -47,6 +48,11 @@ final class NearSeSacViewController: UIViewController {
                 self.moreButtonTapped.append(true)
             }
         }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(100)) {
+            self.findFriends()
+        }
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,39 +61,27 @@ final class NearSeSacViewController: UIViewController {
         print(#function)
         print(nearData)
         
-        self.findFriends()
+        if timer != nil && timer!.isValid {
+            timer!.invalidate()
+        }
+        
+        //5초마다 myQueueState 실행하여 데이터 갱신
+        timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(updateMyState), userInfo: nil, repeats: true)
+        
+        findFriends()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if timer != nil && timer!.isValid {
+            timer!.invalidate()
+        }
     }
     
     private func findFriends() {
         guard let region = region, let location = location else {
             return
-        }
-        
-        viewModel.queueStart(type: 2, region: region, lat: location[0], long: location[1], hobby: "anything") { apiResult, queueStart in
-            if let queueStart = queueStart {
-                switch queueStart {
-                case .succeed:
-                    print(queueStart)
-                case .blocked:
-                    return
-                case .penaltyLv1:
-                    return
-                case .penaltyLv2:
-                    return
-                case .penaltyLv3:
-                    return
-                case .invalidGender:
-                    return
-                case .tokenError:
-                    self.findFriends()
-                case .notUser:
-                    return
-                case .serverError:
-                    return
-                case .clientError:
-                    return
-                }
-            }
         }
 
         viewModel.queueOn(region: region, lat: location[0], long: location[1]) { apiResult, queueOn, queueOnData in
@@ -99,20 +93,20 @@ final class NearSeSacViewController: UIViewController {
                     if let queueOnData = queueOnData {
                         DispatchQueue.main.async {
                             //기존의 moreButtonTapped의 값을 그대로 유지해야함
-                            let origin = self.nearData?.fromQueueDB.count ?? 0
-                            let new = queueOnData.fromQueueDB.count
-                            if origin != new {
-                                //데이터에 갱신된 부분이 있다면 화면도 갱신해줌
-                                print("데이터 달라짐~~")
-                                self.moreButtonTapped.removeAll()
-                                
-                                for _ in 0...queueOnData.fromQueueDB.count {
-                                    self.moreButtonTapped.append(true)
-                                }
-                                self.nearData = queueOnData
-                                self.mainView.friendsTableView.reloadData()
-                                
+//                            let origin = self.nearData?.fromQueueDB.count ?? 0
+//                            let new = queueOnData.fromQueueDB.count
+//                            if origin != new {
+                            //데이터에 갱신된 부분이 있다면 화면도 갱신해줌
+                            print("friends 데이터 갱신~~")
+                            self.moreButtonTapped.removeAll()
+
+                            for _ in 0...queueOnData.fromQueueDB.count {
+                                self.moreButtonTapped.append(true)
                             }
+                            self.nearData = queueOnData
+                            self.mainView.friendsTableView.reloadData()
+//
+//                            }
                         
                         }
                     }
@@ -139,16 +133,55 @@ final class NearSeSacViewController: UIViewController {
     private func moreButtonClicked(section: Int, row: Int) {
         self.moreButtonTapped[section] = !self.moreButtonTapped[section]
         self.mainView.friendsTableView.reloadRows(at: [[section, row]], with: .fade)
+        
+        //카드 뷰가 접히면, 데이터 갱신
+        if self.moreButtonTapped[section] {
+            self.findFriends()
+        }
+                
         self.viewDidLayoutSubviews()
     }
     
     private func matchingButtonClicked(section: Int, row: Int) {
         print(#function)
     }
+
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print("테이블뷰 스크롤중!!")
-        self.findFriends()
+    @objc private func updateMyState() {
+        print(#function)
+        
+        viewModel.queueMyState { apiResult, queueState, myQueueState in
+            if let queueState = queueState {
+                switch queueState {
+                case .succeed:
+                    if let myQueueState = myQueueState {
+                        print(myQueueState)
+                        
+                        if myQueueState.matched == 1 {
+                            //매칭된 상태이므로 토스트 메세지를 띄우고, 채팅방으로 이동
+                            self.view.makeToast("000님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다." ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                        }
+                        
+                    }
+                case .stopped:
+                    self.view.makeToast("오랜 시간 동안 매칭되지 않아 새싹 친구 찾기를 그만둡니다." ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                case .tokenError:
+                    self.updateMyState()
+                    return
+                case .notUser:
+                    DispatchQueue.main.async {
+                        //온보딩 화면으로 이동
+                        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                        windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: OnBoardingViewController())
+                        windowScene.windows.first?.makeKeyAndVisible()
+                    }
+                case .serverError:
+                    self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                case .clientError:
+                    self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                }
+            }
+        }
     }
 }
 

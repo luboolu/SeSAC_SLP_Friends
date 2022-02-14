@@ -171,11 +171,7 @@ final class HomeViewController: UIViewController {
     private func searchFriends() {
         print(#function)
         let region = getRegion(location: self.nowLocation)
-//
-        viewModel.queueStart(type: 2, region: region, lat: self.nowLocation[0], long: self.nowLocation[1], hobby: "anything") { apiResult, queueStart in
-            print(queueStart)
-        }
- 
+
         viewModel.queueOn(region: region, lat: self.nowLocation[0], long: self.nowLocation[1]) { apiResult, queueOn, queueOnData in
             print(queueOn)
             if let queueOn = queueOn {
