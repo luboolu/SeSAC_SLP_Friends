@@ -176,6 +176,7 @@ final class QueueViewModel {
         }.resume()
     }
     
+    //사용자의 매칭 상태 확인
     func queueMyState(completion: @escaping (APIResult?, QueueState?, MyQueueState?) -> Void) {
         
         let url = URL(string: "\(URL.queueState)")!
@@ -230,6 +231,106 @@ final class QueueViewModel {
             } else {
                 completion(.failed, nil, nil)
             }
+        }.resume()
+    }
+    
+    //취미 함께하기 요청
+    func queueRequest(otherUID: String, completion: @escaping (APIResult?, QueueHobbyRequest?) -> Void) {
+        let url = URL(string: "\(URL.queueRequest)")!
+        let idtoken = UserDefaults.standard.string(forKey: UserdefaultKey.idToken.rawValue) ?? ""
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "POST"
+        request.httpBody = "otheruid=\(otherUID)".data(using: .utf8, allowLossyConversion: false)
+        request.setValue(APIHeaderValue.ContentType.string, forHTTPHeaderField: APIHeader.ContentType.string)
+        request.setValue("\(idtoken)", forHTTPHeaderField: APIHeader.idtoken.string)
+        
+        let session = URLSession.shared
+        session.dataTask(with: request) { data, response, error in
+
+            if error != nil {
+                completion(.failed, nil)
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse else {
+                completion(.invalidResponse, nil)
+                return
+            }
+            
+            guard let data = data else {
+                completion(.noData, nil)
+                return
+            }
+            
+            if response.statusCode == 200 {
+                completion(.succeed, .succeed)
+            } else if response.statusCode == 201 {
+                completion(.succeed, .requested)
+            } else if response.statusCode == 202 {
+                completion(.succeed, .stopped)
+            } else if response.statusCode == 401 {
+                self.userViewModel.idTokenRequest { error in
+                    completion(.succeed, .tokenError)
+                }
+            } else if response.statusCode == 500 {
+                completion(.succeed, .serverError)
+            } else if response.statusCode == 501 {
+                completion(.succeed, .clientError)
+            } else {
+                completion(.failed, nil)
+            }
+            
+        }.resume()
+    }
+    
+    //취미 함께하기 수락
+    func queueAccept(otherUID: String, completion: @escaping (APIResult?, QueueHobbyAccept?) -> Void) {
+        let url = URL(string: "\(URL.queueAcceept)")!
+        let idtoken = UserDefaults.standard.string(forKey: UserdefaultKey.idToken.rawValue) ?? ""
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "POST"
+        request.httpBody = "otheruid=\(otherUID)".data(using: .utf8, allowLossyConversion: false)
+        request.setValue(APIHeaderValue.ContentType.string, forHTTPHeaderField: APIHeader.ContentType.string)
+        request.setValue("\(idtoken)", forHTTPHeaderField: APIHeader.idtoken.string)
+        
+        let session = URLSession.shared
+        session.dataTask(with: request) { data, response, error in
+
+            if error != nil {
+                completion(.failed, nil)
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse else {
+                completion(.invalidResponse, nil)
+                return
+            }
+            
+            guard let data = data else {
+                completion(.noData, nil)
+                return
+            }
+            
+            if response.statusCode == 200 {
+                completion(.succeed, .succeed)
+            } else if response.statusCode == 201 {
+                completion(.succeed, .otherMatched)
+            } else if response.statusCode == 202 {
+                completion(.succeed, .stopped)
+            } else if response.statusCode == 401 {
+                self.userViewModel.idTokenRequest { error in
+                    completion(.succeed, .tokenError)
+                }
+            } else if response.statusCode == 500 {
+                completion(.succeed, .serverError)
+            } else if response.statusCode == 501 {
+                completion(.succeed, .clientError)
+            } else {
+                completion(.failed, nil)
+            }
+            
         }.resume()
     }
 

@@ -19,6 +19,8 @@ enum TableViewCell {
     case CharactorTableViewCell
     case TextViewTableViewCell
     case EmptySeSacTableViewCell
+    case MyChattingTableViewCell
+    case FriendsChattingTableViewCell
     
     var id: String {
         switch self {
@@ -44,6 +46,11 @@ enum TableViewCell {
             return "TextViewTableViewCell"
         case .EmptySeSacTableViewCell:
             return "EmptySeSacTableViewCell"
+        case .MyChattingTableViewCell:
+            return "MyChattingTableViewCell"
+        case .FriendsChattingTableViewCell:
+            return "FriendsChattingTableViewCell"
+            
         }
     }
 }

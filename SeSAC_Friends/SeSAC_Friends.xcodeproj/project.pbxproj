@@ -45,6 +45,10 @@
 		DCA592D827BA36FE0088940B /* ReviewDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA592D727BA36FE0088940B /* ReviewDetailView.swift */; };
 		DCA592DA27BA38A20088940B /* TextViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA592D927BA38A20088940B /* TextViewTableViewCell.swift */; };
 		DCA592DC27BAB47B0088940B /* EmptySeSacTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA592DB27BAB47A0088940B /* EmptySeSacTableViewCell.swift */; };
+		DCA592DE27BB5A740088940B /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA592DD27BB5A740088940B /* ChattingViewController.swift */; };
+		DCA592E027BB5A7F0088940B /* ChattingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA592DF27BB5A7F0088940B /* ChattingView.swift */; };
+		DCA592E227BB7F2E0088940B /* MyChattingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA592E127BB7F2E0088940B /* MyChattingTableViewCell.swift */; };
+		DCA592E427BB7F3D0088940B /* FriendsChattingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA592E327BB7F3C0088940B /* FriendsChattingTableViewCell.swift */; };
 		DCC419EC27A44845006B2904 /* ButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC419EB27A44845006B2904 /* ButtonCollectionViewCell.swift */; };
 		DCC419EE27A44850006B2904 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC419ED27A44850006B2904 /* CollectionViewCell.swift */; };
 		DCC419F027A78D44006B2904 /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC419EF27A78D44006B2904 /* MyInfoView.swift */; };
@@ -133,6 +137,10 @@
 		DCA592D727BA36FE0088940B /* ReviewDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailView.swift; sourceTree = "<group>"; };
 		DCA592D927BA38A20088940B /* TextViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewTableViewCell.swift; sourceTree = "<group>"; };
 		DCA592DB27BAB47A0088940B /* EmptySeSacTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySeSacTableViewCell.swift; sourceTree = "<group>"; };
+		DCA592DD27BB5A740088940B /* ChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
+		DCA592DF27BB5A7F0088940B /* ChattingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingView.swift; sourceTree = "<group>"; };
+		DCA592E127BB7F2E0088940B /* MyChattingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChattingTableViewCell.swift; sourceTree = "<group>"; };
+		DCA592E327BB7F3C0088940B /* FriendsChattingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsChattingTableViewCell.swift; sourceTree = "<group>"; };
 		DCC419EB27A44845006B2904 /* ButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		DCC419ED27A44850006B2904 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		DCC419EF27A78D44006B2904 /* MyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoView.swift; sourceTree = "<group>"; };
@@ -225,6 +233,8 @@
 				DCE678E427A2EA4D00ACB1A7 /* CardTableViewCell.swift */,
 				DCA592D927BA38A20088940B /* TextViewTableViewCell.swift */,
 				DCA592DB27BAB47A0088940B /* EmptySeSacTableViewCell.swift */,
+				DCA592E127BB7F2E0088940B /* MyChattingTableViewCell.swift */,
+				DCA592E327BB7F3C0088940B /* FriendsChattingTableViewCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -244,6 +254,8 @@
 				DCF8943D27B22BDF001BE5DF /* RecivedView.swift */,
 				DCA592D527BA36F70088940B /* ReviewDetailViewController.swift */,
 				DCA592D727BA36FE0088940B /* ReviewDetailView.swift */,
+				DCA592DD27BB5A740088940B /* ChattingViewController.swift */,
+				DCA592DF27BB5A7F0088940B /* ChattingView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -543,6 +555,7 @@
 				DC1873FB27A2603000DE4FBD /* LoginView.swift in Sources */,
 				DCF8943A27B22B8F001BE5DF /* RecivedViewController.swift in Sources */,
 				DCA592D427BA2E610088940B /* MatchingStateEnum.swift in Sources */,
+				DCA592E027BB5A7F0088940B /* ChattingView.swift in Sources */,
 				DCE2D1DE2796C9D50018895F /* MainButtonStatus.swift in Sources */,
 				DCE2D1EB2796DB8C0018895F /* UIColor+Extension.swift in Sources */,
 				DC1873EE27A151E200DE4FBD /* ProfileTableViewCell.swift in Sources */,
@@ -558,6 +571,7 @@
 				DCC419F027A78D44006B2904 /* MyInfoView.swift in Sources */,
 				DCDE36672799B1440077847C /* LoginConfirmViewController.swift in Sources */,
 				DC18740127A2653B00DE4FBD /* BirthView.swift in Sources */,
+				DCA592E227BB7F2E0088940B /* MyChattingTableViewCell.swift in Sources */,
 				DCC419EC27A44845006B2904 /* ButtonCollectionViewCell.swift in Sources */,
 				DCE2D1BC279694720018895F /* AppDelegate.swift in Sources */,
 				DCE2D1F72797F3320018895F /* MainTextFieldTestViewController.swift in Sources */,
@@ -579,6 +593,8 @@
 				DCE2D1E12796CCD30018895F /* MainTextFieldStatus.swift in Sources */,
 				DC6E55DC27A98A7800998FF9 /* Alert.swift in Sources */,
 				DC18740527A267EF00DE4FBD /* GenderView.swift in Sources */,
+				DCA592DE27BB5A740088940B /* ChattingViewController.swift in Sources */,
+				DCA592E427BB7F3D0088940B /* FriendsChattingTableViewCell.swift in Sources */,
 				DCE2D1ED2796FF950018895F /* UIFont+Extension.swift in Sources */,
 				DC18740F27A2D7B000DE4FBD /* DoubleSliderTableViewCell.swift in Sources */,
 				DC1873F927A25EF000DE4FBD /* ViewRepresentable.swift in Sources */,

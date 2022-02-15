@@ -131,7 +131,7 @@ final class HobbySearchView: UIView, ViewRepresentable {
             make.bottom.equalTo(self.safeAreaLayoutGuide).offset(-16)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
-            make.bottom.equalTo(self.safeAreaLayoutGuide).offset(-30)
+            make.bottom.equalTo(self.safeAreaLayoutGuide).offset(-16)
             make.height.equalTo(48)
         }
     }

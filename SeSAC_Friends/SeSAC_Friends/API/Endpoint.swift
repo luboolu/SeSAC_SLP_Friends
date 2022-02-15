@@ -45,7 +45,7 @@ extension URL {
         return URL(string: "\(URL.queue)/hobbyrequest")!
     }
     
-    static var queueAcceepr: URL {
+    static var queueAcceept: URL {
         return URL(string: "\(URL.queue)/hobbyaccept")!
     }
     
