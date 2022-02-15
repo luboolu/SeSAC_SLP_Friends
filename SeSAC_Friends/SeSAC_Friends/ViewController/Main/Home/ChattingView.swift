@@ -10,20 +10,23 @@ final class ChattingView: UIView, ViewRepresentable {
     
     let messageView = UIView()
     
-    let messageTextField: UITextField = {
-        let textField = UITextField()
+    let messageTextView: UITextView = {
+        let textView = UITextView()
         
-        textField.placeholder = "메세지를 입력하세요"
-        textField.font = UIFont().Body3_R14
-        textField.textColor = UIColor().black
+        textView.text = "메세지를 입력하세요"
+        textView.isScrollEnabled = false
+        textView.font = UIFont().Body3_R14
+        textView.textColor = UIColor().gray7
+        textView.backgroundColor = UIColor().gray1
         
-        return textField
+        return textView
     }()
     
     let messageButton: UIButton = {
         let button = UIButton()
         
         button.setImage(UIImage(named: "message_send"), for: .normal)
+        button.isEnabled = false
         
         return button
     }()
@@ -57,7 +60,7 @@ final class ChattingView: UIView, ViewRepresentable {
         messageView.clipsToBounds = true
         messageView.layer.cornerRadius = 8
         
-        messageView.addSubview(messageTextField)
+        messageView.addSubview(messageTextView)
         messageView.addSubview(messageButton)
         self.addSubview(messageView)
     }
@@ -77,17 +80,19 @@ final class ChattingView: UIView, ViewRepresentable {
             make.bottom.equalTo(self.safeAreaLayoutGuide).offset(-16)
         }
         
-        messageTextField.snp.makeConstraints { make in
+        messageTextView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(14)
             make.leading.equalToSuperview().offset(12)
             make.trailing.equalTo(messageButton.snp.leading).offset(-10)
             make.bottom.equalToSuperview().offset(-14)
+            make.height.lessThanOrEqualTo(100)
         }
         
         messageButton.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(14)
             make.trailing.equalToSuperview().offset(-12)
             make.bottom.equalToSuperview().offset(-14)
+            make.width.equalTo(20)
         }
     }
     

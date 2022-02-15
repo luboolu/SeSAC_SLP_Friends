@@ -13,6 +13,7 @@ import RxSwift
 final class ChattingViewController: UIViewController {
     
     let mainView = ChattingView()
+    let disposeBag = DisposeBag()
     
     override func loadView() {
         super.loadView()
@@ -23,6 +24,7 @@ final class ChattingViewController: UIViewController {
         super.viewDidLoad()
         
         setTableView()
+        setTextView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,6 +49,36 @@ final class ChattingViewController: UIViewController {
         
         mainView.chattingTableView.register(MyChattingTableViewCell.self, forCellReuseIdentifier: TableViewCell.MyChattingTableViewCell.id)
         mainView.chattingTableView.register(FriendsChattingTableViewCell.self, forCellReuseIdentifier: TableViewCell.FriendsChattingTableViewCell.id)
+    }
+    
+    private func setTextView() {
+        mainView.messageTextView.rx.text.changed
+            .subscribe(onNext: { newValue in
+                
+                let num = newValue?.count ?? 0
+                
+                if num > 0 {
+                    self.mainView.messageButton.setImage(UIImage(named: "message_send_color"), for: .normal)
+                    self.mainView.messageButton.isEnabled = true
+                } else {
+                    self.mainView.messageButton.setImage(UIImage(named: "message_send"), for: .normal)
+                    self.mainView.messageButton.isEnabled = false
+                }
+                
+                print(newValue?.count ?? 0)
+                if newValue?.count ?? 0 > 90 {
+                    self.mainView.messageTextView.isScrollEnabled = true
+                } else {
+                    self.mainView.messageTextView.isScrollEnabled = false
+                }
+            }).disposed(by: disposeBag)
+        
+        mainView.messageTextView.rx.didBeginEditing
+            .subscribe( onNext: { newValue in
+                print("편집 시작")
+                self.mainView.messageTextView.text = ""
+                self.mainView.messageTextView.textColor = UIColor().black
+            }).disposed(by: disposeBag)
     }
     
     @objc private func menuButtonClicked() {
