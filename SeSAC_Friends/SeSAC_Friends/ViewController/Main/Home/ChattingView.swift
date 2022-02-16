@@ -40,6 +40,44 @@ final class ChattingView: UIView, ViewRepresentable {
         return tableView
     }()
     
+    let menuStackView: UIStackView = {
+        let stackView = UIStackView()
+        
+        stackView.axis = .horizontal
+        stackView.spacing = 0
+        stackView.distribution = .fillEqually
+        stackView.backgroundColor = UIColor().white
+        
+        return stackView
+    }()
+    
+    let reportButton: UIButton = {
+        let button = UIButton()
+        
+        button.setImage(UIImage(named: "siren"), for: .normal)
+        button.isHidden = true
+        
+        return button
+    }()
+    
+    let cancelButton: UIButton = {
+        let button = UIButton()
+        
+        button.setImage(UIImage(named: "siren"), for: .normal)
+        button.isHidden = true
+        
+        return button
+    }()
+    
+    let reviewButton: UIButton = {
+        let button = UIButton()
+        
+        button.setImage(UIImage(named: "write"), for: .normal)
+        button.isHidden = true
+        
+        return button
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -63,12 +101,35 @@ final class ChattingView: UIView, ViewRepresentable {
         messageView.addSubview(messageTextView)
         messageView.addSubview(messageButton)
         self.addSubview(messageView)
+        
+        menuStackView.addArrangedSubview(reportButton)
+        menuStackView.addArrangedSubview(cancelButton)
+        menuStackView.addArrangedSubview(reviewButton)
+        self.addSubview(menuStackView)
     }
      
     func setupConstraints() {
         
-        chattingTableView.snp.makeConstraints { make in
+        menuStackView.snp.makeConstraints { make in
             make.top.equalTo(self.safeAreaLayoutGuide)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+        }
+        
+        reportButton.snp.makeConstraints { make in
+            make.height.equalTo(72)
+        }
+        
+        cancelButton.snp.makeConstraints { make in
+            make.height.equalTo(72)
+        }
+        
+        reviewButton.snp.makeConstraints { make in
+            make.height.equalTo(72)
+        }
+        
+        chattingTableView.snp.makeConstraints { make in
+            make.top.equalTo(menuStackView.snp.bottom)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
             make.bottom.equalTo(messageView.snp.top)

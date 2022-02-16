@@ -10,20 +10,96 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    private let userViewModel = UserViewModel()
+    
+    private func getUserInfo(_ scene: UIScene) {
+        userViewModel.getUser { apiResult, getUserResult, userInfo in
+            if let getUserResult = getUserResult {
+                
+                DispatchQueue.main.async {
+                    guard let windowScene = (scene as? UIWindowScene) else { return }
+                    self.window = UIWindow(windowScene: windowScene)
+                    
+                    switch getUserResult {
+                    case .existingUser:
+                        let vc = MainViewController()
+                        let nav = UINavigationController(rootViewController: vc)
+                        
+                        self.window?.rootViewController = nav
+                        self.window?.makeKeyAndVisible()
+                    case .newUser:
+                        let vc = OnBoardingViewController()
+                        let nav = UINavigationController(rootViewController: vc)
+                        
+                        self.window?.rootViewController = nav
+                        self.window?.makeKeyAndVisible()
+                    case .tokenError:
+                        self.getUserInfo(scene)
+                        return
+                    case .serverError:
+                        print("에러")
+                        let vc = OnBoardingViewController()
+                        let nav = UINavigationController(rootViewController: vc)
+                        
+                        self.window?.rootViewController = nav
+                        self.window?.makeKeyAndVisible()
+                    case .clientError:
+                        print("에러")
+                        let vc = OnBoardingViewController()
+                        let nav = UINavigationController(rootViewController: vc)
+                        
+                        self.window?.rootViewController = nav
+                        self.window?.makeKeyAndVisible()
+                    }
+                }
+
+            }
+        }
+    }
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        
+        //온보딩 화면 진입 시 분기 처리
+        //0. 앱 최초 실행인지 확인 - userdefault를 통해서!
+        //1. 최초 실행이 아니라면, UserViewModel.getUser()를 통해서 회원인지 확인
+        //2. 회원이라면 main화면으로 바로 진입
+        //3. 회원이 아니라면 onboarding 화면으로 진입
         guard let windowScene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: windowScene)
         
-        let vc = ChattingViewController()
-        let nav = UINavigationController(rootViewController: vc)
+        //var vc = OnBoardingViewController()
         
-        window?.rootViewController = nav
-        window?.makeKeyAndVisible()
+        //1. 앱 최초 실행인지 확인
+        // -> UserDefault에 전화번호 저장되어 있는지 확인
+        if UserDefaults.standard.string(forKey: UserdefaultKey.phoneNumber.rawValue) == nil {
+            let vc = OnBoardingViewController()
+            let nav = UINavigationController(rootViewController: vc)
+            
+            window?.rootViewController = nav
+            window?.makeKeyAndVisible()
+        } else {
+            
+            getUserInfo(scene)
+
+//            userViewModel.getUser { apiResult, getUserResult, userInfo in
+//                if getUserResult == .existingUser {
+//
+//                } else if getUserResult == .tokenError {
+//
+//                } else {
+//                    let vc = OnBoardingViewController()
+//                    let nav = UINavigationController(rootViewController: vc)
+//
+//                    self.window?.rootViewController = nav
+//                    self.window?.makeKeyAndVisible()
+//                }
+//            }
+        }
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

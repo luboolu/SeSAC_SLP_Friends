@@ -12,8 +12,10 @@ import RxSwift
 
 final class ChattingViewController: UIViewController {
     
-    let mainView = ChattingView()
-    let disposeBag = DisposeBag()
+    private let mainView = ChattingView()
+    private let disposeBag = DisposeBag()
+    
+    private var menuButtonIsClicked = true
     
     override func loadView() {
         super.loadView()
@@ -83,6 +85,16 @@ final class ChattingViewController: UIViewController {
     
     @objc private func menuButtonClicked() {
         print(#function)
+        self.menuButtonIsClicked = !self.menuButtonIsClicked
+        mainView.reportButton.isHidden = self.menuButtonIsClicked
+        mainView.cancelButton.isHidden = self.menuButtonIsClicked
+        mainView.reviewButton.isHidden = self.menuButtonIsClicked
+//        let vc = ChattingMenuViewController()
+//
+//        vc.modalPresentationStyle = .overCurrentContext
+//        vc.modalTransitionStyle = .crossDissolve
+//
+//        self.present(vc, animated: true, completion: nil)
     }
 }
 
