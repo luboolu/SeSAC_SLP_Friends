@@ -95,10 +95,6 @@ final class RecivedViewController: UIViewController {
                     if let queueOnData = queueOnData {
                         DispatchQueue.main.async {
                             //기존의 moreButtonTapped의 값을 그대로 유지해야함
-//                            let origin = self.nearData?.fromQueueDB.count ?? 0
-//                            let new = queueOnData.fromQueueDB.count
-//                            if origin != new {
-                            //데이터에 갱신된 부분이 있다면 화면도 갱신해줌
                             print("friends 데이터 갱신~~")
                             self.moreButtonTapped.removeAll()
 
@@ -107,9 +103,6 @@ final class RecivedViewController: UIViewController {
                             }
                             self.recivedData = queueOnData
                             self.mainView.friendsTableView.reloadData()
-//
-//                            }
-                        
                         }
                     }
                 case .tokenError:
@@ -123,13 +116,72 @@ final class RecivedViewController: UIViewController {
                         windowScene.windows.first?.makeKeyAndVisible()
                     }
                 case .serverError:
-                    self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    DispatchQueue.main.async {
+                        self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    }
                 case .clientError:
-                    self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    DispatchQueue.main.async {
+                        self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    }
                 }
             }
             
         }
+    }
+    
+    private func acceptBeFriend(section: Int) {
+        if let recivedData = recivedData {
+            viewModel.queueAccept(otherUID: recivedData.fromQueueDBRequested[section].uid) { apiResult, queueHobbyAccept in
+                if let queueHobbyAccept = queueHobbyAccept {
+                    switch queueHobbyAccept {
+                    case .succeed:
+                        DispatchQueue.main.async {
+                            //매칭 상태 변경
+                            UserDefaults.standard.set(matchingState.matched.rawValue, forKey: UserdefaultKey.matchingState.rawValue)
+                            //팝업 화면 dismiss
+                            //채팅 화면으로 전환
+                            let vc = ChattingViewController()
+                            vc.friendUid = recivedData.fromQueueDBRequested[section].uid
+                            vc.friendNick = recivedData.fromQueueDBRequested[section].nick
+                            
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        }
+                    case .otherMatched:
+                        DispatchQueue.main.async {
+                            self.view.makeToast("상대방이 이미 다른 사람과 취미를 함께하는 중입니다" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                        }
+                    case .stopped:
+                        DispatchQueue.main.async {
+                            self.view.makeToast("상대방이 취미 함께하기를 그만두었습니다" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                        }
+                    case .otherAccepted:
+                        DispatchQueue.main.async {
+                            self.view.makeToast("앗! 누군가가 나의 취미 함께하기를 수락하였어요!" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                            self.updateMyState()
+                        }
+                    case .tokenError:
+                        self.acceptBeFriend(section: section)
+                        return
+                    case .notUser:
+                        DispatchQueue.main.async {
+                            //온보딩 화면으로 이동
+                            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                            windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: OnBoardingViewController())
+                            windowScene.windows.first?.makeKeyAndVisible()
+                        }
+                    case .serverError:
+                        DispatchQueue.main.async {
+                            self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                        }
+                    case .clientError:
+                        DispatchQueue.main.async {
+                            self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                        }
+                    }
+                }
+            }
+        }
+
     }
     
     private func moreButtonClicked(section: Int, row: Int) {
@@ -146,9 +198,10 @@ final class RecivedViewController: UIViewController {
     
     private func matchingButtonClicked(section: Int, row: Int) {
         print(#function)
+        acceptBeFriend(section: section)
     }
     
-    @objc private func updateMyState() {
+    private func updateMyState() {
         print(#function)
         
         viewModel.queueMyState { apiResult, queueState, myQueueState in
@@ -157,15 +210,23 @@ final class RecivedViewController: UIViewController {
                 case .succeed:
                     if let myQueueState = myQueueState {
                         print(myQueueState)
-                        
-                        if myQueueState.matched == 1 {
-                            //매칭된 상태이므로 토스트 메세지를 띄우고, 채팅방으로 이동
-                            self.view.makeToast("000님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다." ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                        DispatchQueue.main.async {
+                            if myQueueState.matched == 1 {
+                                //매칭된 상태이므로 토스트 메세지를 띄우고, 채팅방으로 이동
+                                self.view.makeToast("000님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다." ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                                
+                                let vc = ChattingViewController()
+                                vc.friendUid = myQueueState.matchedUid
+                                vc.friendNick = myQueueState.matchedNick
+                                
+                                self.navigationController?.pushViewController(vc, animated: true)
+                            }
                         }
-                        
                     }
                 case .stopped:
-                    self.view.makeToast("오랜 시간 동안 매칭되지 않아 새싹 친구 찾기를 그만둡니다." ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    DispatchQueue.main.async {
+                        self.view.makeToast("오랜 시간 동안 매칭되지 않아 새싹 친구 찾기를 그만둡니다." ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    }
                 case .tokenError:
                     self.updateMyState()
                     return
@@ -177,9 +238,13 @@ final class RecivedViewController: UIViewController {
                         windowScene.windows.first?.makeKeyAndVisible()
                     }
                 case .serverError:
-                    self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    DispatchQueue.main.async {
+                        self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    }
                 case .clientError:
-                    self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    DispatchQueue.main.async {
+                        self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    }
                 }
             }
         }

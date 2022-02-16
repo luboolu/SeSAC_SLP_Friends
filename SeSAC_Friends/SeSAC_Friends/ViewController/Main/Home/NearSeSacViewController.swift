@@ -82,10 +82,6 @@ final class NearSeSacViewController: UIViewController {
                     if let queueOnData = queueOnData {
                         DispatchQueue.main.async {
                             //기존의 moreButtonTapped의 값을 그대로 유지해야함
-//                            let origin = self.nearData?.fromQueueDB.count ?? 0
-//                            let new = queueOnData.fromQueueDB.count
-//                            if origin != new {
-                            //데이터에 갱신된 부분이 있다면 화면도 갱신해줌
                             print("friends 데이터 갱신~~")
                             self.moreButtonTapped.removeAll()
 
@@ -94,9 +90,6 @@ final class NearSeSacViewController: UIViewController {
                             }
                             self.nearData = queueOnData
                             self.mainView.friendsTableView.reloadData()
-//
-//                            }
-                        
                         }
                     }
                 case .tokenError:
@@ -110,12 +103,62 @@ final class NearSeSacViewController: UIViewController {
                         windowScene.windows.first?.makeKeyAndVisible()
                     }
                 case .serverError:
-                    self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    DispatchQueue.main.async {
+                        self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    }
                 case .clientError:
-                    self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    DispatchQueue.main.async {
+                        self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    }
                 }
             }
             
+        }
+    }
+    
+    private func requestBeFriend(section: Int) {
+        if let nearData = nearData {
+            viewModel.queueRequest(otherUID: nearData.fromQueueDB[section].uid) { apiResult, queueHobbyRequest in
+
+                if let queueHobbyRequest = queueHobbyRequest {
+                    switch queueHobbyRequest {
+                    case .succeed:
+                        DispatchQueue.main.async {
+                            self.view.makeToast("취미 함께하기 요청을 보냈습니다" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                        }
+                    case .requested:
+                        //임시
+                        //상대방도 이미 나에게 취미 함께하기 요청을 보낸 상태
+                        //hobbyAccept 호출하고, 응답이 200이라면
+                        //userdefault에 matching 상태 변경하고, 채팅화면으로 전환
+                        DispatchQueue.main.async {
+                            self.view.makeToast("상대방도 취미 함께하기를 요청했습니다. 채팅방으로 이동합니다" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                        }
+                    case .stopped:
+                        DispatchQueue.main.async {
+                            self.view.makeToast("상대방이 취미 함께하기를 그만두었습니다" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                        }
+                    case .tokenError:
+                        self.requestBeFriend(section: section)
+                        return
+                    case .notUser:
+                        DispatchQueue.main.async {
+                            //온보딩 화면으로 이동
+                            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                            windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: OnBoardingViewController())
+                            windowScene.windows.first?.makeKeyAndVisible()
+                        }
+                    case .serverError:
+                        DispatchQueue.main.async {
+                            self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                        }
+                    case .clientError:
+                        DispatchQueue.main.async {
+                            self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                        }
+                    }
+                }
+            }
         }
     }
     
@@ -133,14 +176,8 @@ final class NearSeSacViewController: UIViewController {
     
     private func matchingButtonClicked(section: Int, row: Int) {
         print(#function)
-        if let nearData = nearData {
-            viewModel.queueRequest(otherUID: nearData.fromQueueDB[section].uid) { apiResult, queueHobbyRequest in
 
-                print(queueHobbyRequest)
-
-            }
-        }
-
+        requestBeFriend(section: section)
         
         //요청하기 api 부분 생략하고, 바로 채팅 화면으로 전환(임시)
         let vc = ChattingViewController()

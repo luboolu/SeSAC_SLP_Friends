@@ -319,6 +319,8 @@ final class QueueViewModel {
                 completion(.succeed, .otherMatched)
             } else if response.statusCode == 202 {
                 completion(.succeed, .stopped)
+            } else if response.statusCode == 203 {
+                completion(.succeed, .otherAccepted)
             } else if response.statusCode == 401 {
                 self.userViewModel.idTokenRequest { error in
                     completion(.succeed, .tokenError)

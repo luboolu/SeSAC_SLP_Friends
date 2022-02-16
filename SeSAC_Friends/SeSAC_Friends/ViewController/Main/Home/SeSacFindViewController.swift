@@ -208,11 +208,12 @@ final class SeSacFindViewController: UIViewController {
                         windowScene.windows.first?.makeKeyAndVisible()
                     }
                 case .matched:
-                    //토스트 메세지
-                    self.view.makeToast("앗! 누군가가 나의 취미 함께 하기를 수락하였어요!", duration: 2.0, position: .bottom, style: self.toastStyle)
-                    
-                    //myQueueState api 호출
-                    
+                    DispatchQueue.main.async {
+                        //토스트 메세지
+                        self.view.makeToast("앗! 누군가가 나의 취미 함께 하기를 수락하였어요!", duration: 2.0, position: .bottom, style: self.toastStyle)
+                        
+                        //myQueueState api 호출
+                    }
                 case .tokenError:
                     self.findStopButtonClicked()
                     return
@@ -225,9 +226,13 @@ final class SeSacFindViewController: UIViewController {
                         windowScene.windows.first?.makeKeyAndVisible()
                     }
                 case .serverError:
-                    self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    DispatchQueue.main.async {
+                        self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    }
                 case .clientError:
-                    self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    DispatchQueue.main.async {
+                        self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    }
                 }
             }
         }
@@ -242,15 +247,17 @@ final class SeSacFindViewController: UIViewController {
                 case .succeed:
                     if let myQueueState = myQueueState {
                         print(myQueueState)
-                        
-                        if myQueueState.matched == 1 {
-                            //매칭된 상태이므로 토스트 메세지를 띄우고, 채팅방으로 이동
-                            self.view.makeToast("000님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다." ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                        DispatchQueue.main.async {
+                            if myQueueState.matched == 1 {
+                                //매칭된 상태이므로 토스트 메세지를 띄우고, 채팅방으로 이동
+                                self.view.makeToast("000님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다." ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                            }
                         }
-                        
                     }
                 case .stopped:
-                    self.view.makeToast("오랜 시간 동안 매칭되지 않아 새싹 친구 찾기를 그만둡니다." ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    DispatchQueue.main.async {
+                        self.view.makeToast("오랜 시간 동안 매칭되지 않아 새싹 친구 찾기를 그만둡니다." ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    }
                 case .tokenError:
                     self.updateMyState()
                     return
@@ -262,9 +269,13 @@ final class SeSacFindViewController: UIViewController {
                         windowScene.windows.first?.makeKeyAndVisible()
                     }
                 case .serverError:
-                    self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    DispatchQueue.main.async {
+                        self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    }
                 case .clientError:
-                    self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    DispatchQueue.main.async {
+                        self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    }
                 }
             }
         }

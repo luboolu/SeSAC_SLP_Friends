@@ -96,6 +96,7 @@ enum QueueHobbyAccept {
     case succeed      //200
     case otherMatched //201
     case stopped      //202
+    case otherAccepted//203
     case tokenError   //401
     case notUser      //406
     case serverError  //500
