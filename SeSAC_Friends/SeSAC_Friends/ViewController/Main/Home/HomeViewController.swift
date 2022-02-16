@@ -66,12 +66,28 @@ final class HomeViewController: UIViewController {
     }
     
     private func setupButton() {
-        //searchButton
+        //floatingButton
         mainView.floatingButton.rx.tap
             .bind {
                 print("tapped!")
                 self.floatingButtonClicked()
             }.disposed(by: disposeBag)
+        
+        //매칭 상태에 따라 floatingButton의 이미지를 바꿔줌
+        UserDefaults.standard.rx
+            .observe(String.self, UserdefaultKey.matchingState.rawValue)
+            .subscribe(onNext: { newValue in
+                DispatchQueue.main.async {
+                    if newValue == matchingState.waiting.rawValue {
+                        self.mainView.floatingButton.setImage(UIImage(named: "matching_button"), for: .normal)
+                    } else if newValue == matchingState.matched.rawValue {
+                        self.mainView.floatingButton.setImage(UIImage(named: "matched_button"), for: .normal)
+                    } else {
+                        self.mainView.floatingButton.setImage(UIImage(named: "default_button"), for: .normal)
+                    }
+                }
+            })
+            .disposed(by: disposeBag)
         
         //gender filter button
         mainView.genderButton1.rx.tap
@@ -241,6 +257,8 @@ final class HomeViewController: UIViewController {
         //1. 위치 권한 설정 확인 -> 허용 안되어 있으면 설정 화면으로 이동
         //2. 사용자의 성별이 설정되어있어야 함(남1 or 여0) -> 안되어 있다면 "새싹찾기 기능을 사용하기 위해서는 성별이 필요해요!" 토스트 메시지 이후, 정보관리화면으로 전환
         //3. 1,2를 만족하면 취미 입력 화면으로 전환
+        //+
+        //사용자의 현재 상태에 따라서 취미 입력 화면으로 전환 또는 채팅 화면으로 전환
         
         let userGender = UserDefaults.standard.integer(forKey: UserdefaultKey.gender.rawValue)
         
@@ -248,15 +266,74 @@ final class HomeViewController: UIViewController {
             self.view.makeToast("새싹 찾기 기능을 사용하기 위해서는 성별이 필요해요!", duration: 2.0, position: .bottom, style: self.toastStyle)
             return
         } else {
-            let vc = HobbySearchViewController()
+            //현재 유저의 매칭 상태 확인
+            viewModel.queueMyState { apiResult, queueState, myQueueState in
+                if let queueState = queueState {
+                    switch queueState {
+                    case .succeed:
+                        if let myQueueState = myQueueState {
+                            print(myQueueState)
+                            if myQueueState.matched == 1 {
+                                DispatchQueue.main.async {
+                                    UserDefaults.standard.set(matchingState.matched.rawValue, forKey: UserdefaultKey.matchingState.rawValue)
+                                    //매칭된 상태이므로 토스트 메세지를 띄우고, 채팅방으로 이동
+                                    self.view.makeToast("000님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다." ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                                    
+                                    let vc = ChattingViewController()
+                                    vc.friendNick = myQueueState.matchedNick
+                                    vc.friendUid = myQueueState.matchedUid
+                                    
+                                    self.navigationController?.pushViewController(vc, animated: true)
+                                }
+                            } else {
+                                DispatchQueue.main.async {
+                                    let vc = HobbySearchViewController()
+                                    let region = self.getRegion(location: self.nowLocation)
+                                    
+                                    vc.region = region
+                                    vc.userLocation = self.nowLocation
+                                    
+                                    self.navigationController?.pushViewController(vc, animated: true)
+                                }
+                            }
+                        }
+                    case .stopped:
+                        DispatchQueue.main.async {
+                            let vc = HobbySearchViewController()
+                            let region = self.getRegion(location: self.nowLocation)
+                            
+                            vc.region = region
+                            vc.userLocation = self.nowLocation
+                            
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        }
+                    case .tokenError:
+                        self.updateMyState()
+                        return
+                    case .notUser:
+                        DispatchQueue.main.async {
+                            //온보딩 화면으로 이동
+                            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                            windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: OnBoardingViewController())
+                            windowScene.windows.first?.makeKeyAndVisible()
+                        }
+                    case .serverError:
+                        self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    case .clientError:
+                        self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    }
+                }
+            }
             
-            let region = getRegion(location: self.nowLocation)
-            vc.region = region
-            vc.userLocation = self.nowLocation
-            
-            self.navigationController?.pushViewController(vc, animated: true)
         }
         
+        
+    }
+    
+    private func updateMyState() {
+        print(#function)
+        
+
     }
     
 
@@ -401,7 +478,8 @@ extension HomeViewController: MKMapViewDelegate {
         return annotationView
     }
     
-    func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
+    
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         //현재 보고 있는 지도의 중심을 찾음
         let center = mapView.centerCoordinate
         //print(center)

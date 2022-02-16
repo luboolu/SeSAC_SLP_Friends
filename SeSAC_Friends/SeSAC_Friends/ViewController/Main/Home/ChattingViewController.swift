@@ -17,6 +17,9 @@ final class ChattingViewController: UIViewController {
     
     private var menuButtonIsClicked = true
     
+    var friendNick: String?
+    var friendUid: String?
+    
     override func loadView() {
         super.loadView()
         self.view = mainView
@@ -27,6 +30,7 @@ final class ChattingViewController: UIViewController {
         
         setTableView()
         setTextView()
+        setChatMenu()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -81,6 +85,23 @@ final class ChattingViewController: UIViewController {
                 self.mainView.messageTextView.text = ""
                 self.mainView.messageTextView.textColor = UIColor().black
             }).disposed(by: disposeBag)
+    }
+    
+    private func setChatMenu() {
+        mainView.reportButton.rx.tap
+            .bind {
+                print("reportButton tapped")
+            }.disposed(by: disposeBag)
+        
+        mainView.cancelButton.rx.tap
+            .bind {
+                print("cancelButton tapped")
+            }.disposed(by: disposeBag)
+        
+        mainView.reviewButton.rx.tap
+            .bind {
+                print("reviewButton tapped")
+            }.disposed(by: disposeBag)
     }
     
     @objc private func menuButtonClicked() {

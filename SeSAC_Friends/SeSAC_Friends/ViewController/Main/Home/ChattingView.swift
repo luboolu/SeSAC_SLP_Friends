@@ -52,10 +52,14 @@ final class ChattingView: UIView, ViewRepresentable {
     }()
     
     let reportButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .custom)
         
+        button.setTitle("새싹 신고", for: .normal)
+        button.titleLabel?.font = UIFont().Title3_M14
+        button.setTitleColor(UIColor().black, for: .normal)
         button.setImage(UIImage(named: "siren"), for: .normal)
         button.isHidden = true
+        button.contentVerticalAlignment = .center
         
         return button
     }()
@@ -64,6 +68,9 @@ final class ChattingView: UIView, ViewRepresentable {
         let button = UIButton()
         
         button.setImage(UIImage(named: "siren"), for: .normal)
+        button.setTitle("약속 취소", for: .normal)
+        button.titleLabel?.font = UIFont().Title3_M14
+        button.setTitleColor(UIColor().black, for: .normal)
         button.isHidden = true
         
         return button
@@ -73,6 +80,9 @@ final class ChattingView: UIView, ViewRepresentable {
         let button = UIButton()
         
         button.setImage(UIImage(named: "write"), for: .normal)
+        button.setTitle("리뷰 등록", for: .normal)
+        button.titleLabel?.font = UIFont().Title3_M14
+        button.setTitleColor(UIColor().black, for: .normal)
         button.isHidden = true
         
         return button

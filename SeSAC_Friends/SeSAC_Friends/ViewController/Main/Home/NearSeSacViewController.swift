@@ -133,6 +133,10 @@ final class NearSeSacViewController: UIViewController {
     
     private func matchingButtonClicked(section: Int, row: Int) {
         print(#function)
+        if let nearData = nearData {
+            viewModel.queueRequest(otherUID: nearData.fromRecommend[section]., completion: <#T##(APIResult?, QueueHobbyRequest?) -> Void#>)
+        }
+
         
         //요청하기 api 부분 생략하고, 바로 채팅 화면으로 전환(임시)
         let vc = ChattingViewController()
