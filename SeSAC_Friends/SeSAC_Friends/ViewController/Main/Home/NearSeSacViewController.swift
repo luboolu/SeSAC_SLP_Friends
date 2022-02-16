@@ -134,7 +134,11 @@ final class NearSeSacViewController: UIViewController {
     private func matchingButtonClicked(section: Int, row: Int) {
         print(#function)
         if let nearData = nearData {
-            viewModel.queueRequest(otherUID: nearData.fromRecommend[section]., completion: <#T##(APIResult?, QueueHobbyRequest?) -> Void#>)
+            viewModel.queueRequest(otherUID: nearData.fromQueueDB[section].uid) { apiResult, queueHobbyRequest in
+
+                print(queueHobbyRequest)
+
+            }
         }
 
         
