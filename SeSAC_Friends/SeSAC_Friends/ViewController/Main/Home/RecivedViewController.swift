@@ -59,13 +59,13 @@ final class RecivedViewController: UIViewController {
         print(#function)
         print(recivedData)
         
-        if let recivedData = recivedData {
-            self.moreButtonTapped.removeAll()
-            
-            for i in 0...recivedData.fromQueueDBRequested.count {
-                self.moreButtonTapped.append(true)
-            }
-        }
+//        if let recivedData = recivedData {
+//            self.moreButtonTapped.removeAll()
+//
+//            for i in 0...recivedData.fromQueueDBRequested.count {
+//                self.moreButtonTapped.append(true)
+//            }
+//        }
         
 //        if timer != nil && timer!.isValid {
 //            timer!.invalidate()
@@ -279,7 +279,13 @@ extension RecivedViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        let dataNum = self.recivedData?.fromQueueDBRequested.count ?? 0
+        
+        if dataNum == 0 {
+            return tableView.frame.height
+        } else {
+            return UITableView.automaticDimension
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -293,8 +299,6 @@ extension RecivedViewController: UITableViewDelegate, UITableViewDataSource {
         
         if dataNum == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.EmptySeSacTableViewCell.id) as? EmptySeSacTableViewCell else { return UITableViewCell()}
-            
-            cell.backgroundColor = UIColor().error
             
             return cell
         }

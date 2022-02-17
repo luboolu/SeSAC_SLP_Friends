@@ -13,7 +13,7 @@ final class NearSeSacView: UIView, ViewRepresentable {
         
         tableView.separatorStyle = .none
         tableView.rowHeight = UITableView.automaticDimension
-        
+         
         return tableView
     }()
     

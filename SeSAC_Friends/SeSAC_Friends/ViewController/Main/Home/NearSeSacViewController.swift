@@ -39,6 +39,7 @@ final class NearSeSacViewController: UIViewController {
         //custom tableview cell register
         mainView.friendsTableView.register(CardTableViewCell.self, forCellReuseIdentifier: TableViewCell.CardTableViewCell.id)
         mainView.friendsTableView.register(CharactorTableViewCell.self, forCellReuseIdentifier: TableViewCell.CharactorTableViewCell.id)
+        mainView.friendsTableView.register(EmptySeSacTableViewCell.self, forCellReuseIdentifier: TableViewCell.EmptySeSacTableViewCell.id)
         
         if let nearData = nearData {
             self.moreButtonTapped.removeAll()
@@ -132,6 +133,8 @@ final class NearSeSacViewController: UIViewController {
                         //hobbyAccept 호출하고, 응답이 200이라면
                         //userdefault에 matching 상태 변경하고, 채팅화면으로 전환
                         DispatchQueue.main.async {
+                            UserDefaults.standard.set(matchingState.matched.rawValue, forKey: UserdefaultKey.matchingState.rawValue)
+                            
                             self.view.makeToast("상대방도 취미 함께하기를 요청했습니다. 채팅방으로 이동합니다" ,duration: 2.0, position: .bottom, style: self.toastStyle)
                         }
                     case .stopped:
@@ -226,22 +229,52 @@ final class NearSeSacViewController: UIViewController {
 extension NearSeSacViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        print("테이블뷰: \(self.nearData?.fromQueueDB.count ?? 0)")
-        return self.nearData?.fromQueueDB.count ?? 0
+        let dataNum = self.nearData?.fromQueueDB.count ?? 0
+        
+        if dataNum == 0 {
+            print("section 1개")
+            return 1
+        } else {
+            return dataNum
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        let dataNum = self.nearData?.fromQueueDB.count ?? 0
+        
+        if dataNum == 0 {
+            print("row 1개")
+            return 1
+        } else {
+            return 2
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        let dataNum = self.nearData?.fromQueueDB.count ?? 0
+        
+        if dataNum == 0 {
+            return tableView.frame.height
+        } else {
+            return UITableView.automaticDimension
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //셀 데이터 입력
         guard let nearData = self.nearData else { return UITableViewCell() }
+        
+        let dataNum = self.nearData?.fromQueueDB.count ?? 0
+        //데이터가 없으면 새싹이 없다는 뷰 보여주기
+        if dataNum == 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.EmptySeSacTableViewCell.id) as? EmptySeSacTableViewCell else { return UITableViewCell()}
+            
+            return cell
+        }
+        
+        
+        
         let row = nearData.fromQueueDB[indexPath.section]
         
         if indexPath.row == 0 {

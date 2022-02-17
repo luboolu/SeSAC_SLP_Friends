@@ -161,7 +161,7 @@ final class HobbySearchViewController: UIViewController {
             hf.append("\(hobby), ")
         }
 
-        viewModel.queueStart(type: 2, region: region, lat: userLocation[0], long: userLocation[1], hobby: "커피") { apiResult, queueStart in
+        viewModel.queueStart(type: 2, region: region, lat: userLocation[0], long: userLocation[1], hobby: "anything") { apiResult, queueStart in
             print(queueStart)
             if let queueStart = queueStart {
                 switch queueStart {

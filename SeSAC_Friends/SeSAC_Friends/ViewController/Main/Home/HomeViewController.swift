@@ -266,74 +266,90 @@ final class HomeViewController: UIViewController {
             self.view.makeToast("새싹 찾기 기능을 사용하기 위해서는 성별이 필요해요!", duration: 2.0, position: .bottom, style: self.toastStyle)
             return
         } else {
-            //현재 유저의 매칭 상태 확인
-            viewModel.queueMyState { apiResult, queueState, myQueueState in
-                if let queueState = queueState {
-                    switch queueState {
-                    case .succeed:
-                        if let myQueueState = myQueueState {
-                            print(myQueueState)
-                            if myQueueState.matched == 1 {
-                                DispatchQueue.main.async {
-                                    UserDefaults.standard.set(matchingState.matched.rawValue, forKey: UserdefaultKey.matchingState.rawValue)
-                                    //매칭된 상태이므로 토스트 메세지를 띄우고, 채팅방으로 이동
-                                    self.view.makeToast("000님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다." ,duration: 2.0, position: .bottom, style: self.toastStyle)
-                                    
-                                    let vc = ChattingViewController()
-                                    vc.friendNick = myQueueState.matchedNick
-                                    vc.friendUid = myQueueState.matchedUid
-                                    
-                                    self.navigationController?.pushViewController(vc, animated: true)
-                                }
-                            } else {
-                                DispatchQueue.main.async {
-                                    let vc = HobbySearchViewController()
-                                    let region = self.getRegion(location: self.nowLocation)
-                                    
-                                    vc.region = region
-                                    vc.userLocation = self.nowLocation
-                                    
-                                    self.navigationController?.pushViewController(vc, animated: true)
-                                }
-                            }
-                        }
-                    case .stopped:
-                        DispatchQueue.main.async {
-                            let vc = HobbySearchViewController()
-                            let region = self.getRegion(location: self.nowLocation)
-                            
-                            vc.region = region
-                            vc.userLocation = self.nowLocation
-                            
-                            self.navigationController?.pushViewController(vc, animated: true)
-                        }
-                    case .tokenError:
-                        self.updateMyState()
-                        return
-                    case .notUser:
-                        DispatchQueue.main.async {
-                            //온보딩 화면으로 이동
-                            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
-                            windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: OnBoardingViewController())
-                            windowScene.windows.first?.makeKeyAndVisible()
-                        }
-                    case .serverError:
-                        self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
-                    case .clientError:
-                        self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
-                    }
+            let state = UserDefaults.standard.string(forKey: UserdefaultKey.matchingState.rawValue)
+            
+            if state == matchingState.matched.rawValue {
+                //매칭된 상태이면 채팅 화면으로 이동
+                DispatchQueue.main.async {
+                    let vc = ChattingViewController()
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            } else {
+                //일반상태 또는 매칭 대기중이면 취미 입력 화면으로 이동
+                DispatchQueue.main.async {
+                    let vc = HobbySearchViewController()
+                    let region = self.getRegion(location: self.nowLocation)
+                    
+                    vc.region = region
+                    vc.userLocation = self.nowLocation
+                    
+                    self.navigationController?.pushViewController(vc, animated: true)
                 }
             }
-            
         }
-        
         
     }
     
     private func updateMyState() {
         print(#function)
-        
-
+        //현재 유저의 매칭 상태 확인
+        viewModel.queueMyState { apiResult, queueState, myQueueState in
+            if let queueState = queueState {
+                switch queueState {
+                case .succeed:
+                    if let myQueueState = myQueueState {
+                        print(myQueueState)
+                        if myQueueState.matched == 1 && myQueueState.reviewed == 0 {
+                            DispatchQueue.main.async {
+                                UserDefaults.standard.set(matchingState.matched.rawValue, forKey: UserdefaultKey.matchingState.rawValue)
+                                //매칭된 상태이므로 토스트 메세지를 띄우고, 채팅방으로 이동
+                                self.view.makeToast("000님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다." ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                                
+                                let vc = ChattingViewController()
+                                vc.friendNick = myQueueState.matchedNick
+                                vc.friendUid = myQueueState.matchedUid
+                                
+                                self.navigationController?.pushViewController(vc, animated: true)
+                            }
+                        }  else {
+                            DispatchQueue.main.async {
+                                let vc = HobbySearchViewController()
+                                let region = self.getRegion(location: self.nowLocation)
+                                
+                                vc.region = region
+                                vc.userLocation = self.nowLocation
+                                
+                                self.navigationController?.pushViewController(vc, animated: true)
+                            }
+                        }
+                    }
+                case .stopped:
+                    DispatchQueue.main.async {
+                        let vc = HobbySearchViewController()
+                        let region = self.getRegion(location: self.nowLocation)
+                        
+                        vc.region = region
+                        vc.userLocation = self.nowLocation
+                        
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                case .tokenError:
+                    self.updateMyState()
+                    return
+                case .notUser:
+                    DispatchQueue.main.async {
+                        //온보딩 화면으로 이동
+                        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                        windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: OnBoardingViewController())
+                        windowScene.windows.first?.makeKeyAndVisible()
+                    }
+                case .serverError:
+                    self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                case .clientError:
+                    self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                }
+            }
+        }
     }
     
 
