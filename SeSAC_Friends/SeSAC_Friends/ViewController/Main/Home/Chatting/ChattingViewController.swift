@@ -100,7 +100,13 @@ final class ChattingViewController: UIViewController {
         
         mainView.reviewButton.rx.tap
             .bind {
-                print("reviewButton tapped")
+                DispatchQueue.main.async {
+                    print("reviewButton tapped")
+                    let popUp = FriendsReviewViewController()
+                    popUp.modalPresentationStyle = .overCurrentContext
+                    popUp.modalTransitionStyle = .crossDissolve
+                    self.present(popUp, animated: true, completion: nil)
+                }
             }.disposed(by: disposeBag)
     }
     

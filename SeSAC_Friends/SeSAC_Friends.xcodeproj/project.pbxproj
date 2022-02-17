@@ -49,6 +49,8 @@
 		DCA592E027BB5A7F0088940B /* ChattingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA592DF27BB5A7F0088940B /* ChattingView.swift */; };
 		DCA592E227BB7F2E0088940B /* MyChattingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA592E127BB7F2E0088940B /* MyChattingTableViewCell.swift */; };
 		DCA592E427BB7F3D0088940B /* FriendsChattingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA592E327BB7F3C0088940B /* FriendsChattingTableViewCell.swift */; };
+		DCA592EB27BE99A40088940B /* FriendsReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA592EA27BE99A40088940B /* FriendsReviewViewController.swift */; };
+		DCA592ED27BE99AC0088940B /* FriendsReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA592EC27BE99AC0088940B /* FriendsReviewView.swift */; };
 		DCC419EC27A44845006B2904 /* ButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC419EB27A44845006B2904 /* ButtonCollectionViewCell.swift */; };
 		DCC419EE27A44850006B2904 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC419ED27A44850006B2904 /* CollectionViewCell.swift */; };
 		DCC419F027A78D44006B2904 /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC419EF27A78D44006B2904 /* MyInfoView.swift */; };
@@ -141,6 +143,8 @@
 		DCA592DF27BB5A7F0088940B /* ChattingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingView.swift; sourceTree = "<group>"; };
 		DCA592E127BB7F2E0088940B /* MyChattingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChattingTableViewCell.swift; sourceTree = "<group>"; };
 		DCA592E327BB7F3C0088940B /* FriendsChattingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsChattingTableViewCell.swift; sourceTree = "<group>"; };
+		DCA592EA27BE99A40088940B /* FriendsReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsReviewViewController.swift; sourceTree = "<group>"; };
+		DCA592EC27BE99AC0088940B /* FriendsReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsReviewView.swift; sourceTree = "<group>"; };
 		DCC419EB27A44845006B2904 /* ButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		DCC419ED27A44850006B2904 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		DCC419EF27A78D44006B2904 /* MyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoView.swift; sourceTree = "<group>"; };
@@ -242,6 +246,7 @@
 		DC6E55DF27AABFCD00998FF9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				DCA592E927BE99790088940B /* Chatting */,
 				DCDE3671279C3A940077847C /* HomeViewController.swift */,
 				DC6E55E427AAD83900998FF9 /* HomeView.swift */,
 				DC6E55E027AAD6B300998FF9 /* HobbySearchViewController.swift */,
@@ -254,8 +259,6 @@
 				DCF8943D27B22BDF001BE5DF /* RecivedView.swift */,
 				DCA592D527BA36F70088940B /* ReviewDetailViewController.swift */,
 				DCA592D727BA36FE0088940B /* ReviewDetailView.swift */,
-				DCA592DD27BB5A740088940B /* ChattingViewController.swift */,
-				DCA592DF27BB5A7F0088940B /* ChattingView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -270,6 +273,17 @@
 				DCC419F627A7DE86006B2904 /* OutputDataStructswift.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		DCA592E927BE99790088940B /* Chatting */ = {
+			isa = PBXGroup;
+			children = (
+				DCA592DF27BB5A7F0088940B /* ChattingView.swift */,
+				DCA592DD27BB5A740088940B /* ChattingViewController.swift */,
+				DCA592EA27BE99A40088940B /* FriendsReviewViewController.swift */,
+				DCA592EC27BE99AC0088940B /* FriendsReviewView.swift */,
+			);
+			path = Chatting;
 			sourceTree = "<group>";
 		};
 		DCC419EA27A44832006B2904 /* CollectionViewCell */ = {
@@ -567,6 +581,7 @@
 				DC6E55E727ABCC3A00998FF9 /* CollectionViewLeftAlignFlowLayout.swift in Sources */,
 				DCE2D1FA279809D40018895F /* MainButtonTestViewController.swift in Sources */,
 				DCF8943127B21D12001BE5DF /* SeSecFindView.swift in Sources */,
+				DCA592ED27BE99AC0088940B /* FriendsReviewView.swift in Sources */,
 				DCA592D627BA36F70088940B /* ReviewDetailViewController.swift in Sources */,
 				DCC419F027A78D44006B2904 /* MyInfoView.swift in Sources */,
 				DCDE36672799B1440077847C /* LoginConfirmViewController.swift in Sources */,
@@ -598,6 +613,7 @@
 				DCE2D1ED2796FF950018895F /* UIFont+Extension.swift in Sources */,
 				DC18740F27A2D7B000DE4FBD /* DoubleSliderTableViewCell.swift in Sources */,
 				DC1873F927A25EF000DE4FBD /* ViewRepresentable.swift in Sources */,
+				DCA592EB27BE99A40088940B /* FriendsReviewViewController.swift in Sources */,
 				DCA592DC27BAB47B0088940B /* EmptySeSacTableViewCell.swift in Sources */,
 				DCC419F227A7CABD006B2904 /* InputDataStruct.swift in Sources */,
 				DC18740B27A2D53500DE4FBD /* SwitchTableViewCell.swift in Sources */,
