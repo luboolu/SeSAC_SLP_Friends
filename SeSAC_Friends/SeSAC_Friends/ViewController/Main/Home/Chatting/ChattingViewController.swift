@@ -9,13 +9,17 @@ import UIKit
 
 import RxCocoa
 import RxSwift
+import Toast
 
 final class ChattingViewController: UIViewController {
     
     private let mainView = ChattingView()
+    private let viewModel = QueueViewModel()
     private let disposeBag = DisposeBag()
+    private let toastStyle = ToastStyle()
     
     private var menuButtonIsClicked = true
+    private var matchingInfo: MyQueueState?
     
     var friendNick: String?
     var friendUid: String?
@@ -103,6 +107,8 @@ final class ChattingViewController: UIViewController {
                 DispatchQueue.main.async {
                     print("reviewButton tapped")
                     let popUp = FriendsReviewViewController()
+                    popUp.friendUid = self.matchingInfo?.matchedUid
+                    popUp.friendNick = self.matchingInfo?.matchedNick
                     popUp.modalPresentationStyle = .overCurrentContext
                     popUp.modalTransitionStyle = .crossDissolve
                     self.present(popUp, animated: true, completion: nil)
@@ -116,12 +122,44 @@ final class ChattingViewController: UIViewController {
         mainView.reportButton.isHidden = self.menuButtonIsClicked
         mainView.cancelButton.isHidden = self.menuButtonIsClicked
         mainView.reviewButton.isHidden = self.menuButtonIsClicked
-//        let vc = ChattingMenuViewController()
-//
-//        vc.modalPresentationStyle = .overCurrentContext
-//        vc.modalTransitionStyle = .crossDissolve
-//
-//        self.present(vc, animated: true, completion: nil)
+    }
+    
+    private func updateMyState() {
+        print(#function)
+        
+        viewModel.queueMyState { apiResult, queueState, myQueueState in
+            if let queueState = queueState {
+                switch queueState {
+                case .succeed:
+                    if let myQueueState = myQueueState {
+                        print(myQueueState)
+                        self.matchingInfo = myQueueState
+                    }
+                case .stopped:
+                    DispatchQueue.main.async {
+                        self.view.makeToast("오랜 시간 동안 매칭되지 않아 새싹 친구 찾기를 그만둡니다." ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    }
+                case .tokenError:
+                    self.updateMyState()
+                    return
+                case .notUser:
+                    DispatchQueue.main.async {
+                        //온보딩 화면으로 이동
+                        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                        windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: OnBoardingViewController())
+                        windowScene.windows.first?.makeKeyAndVisible()
+                    }
+                case .serverError:
+                    DispatchQueue.main.async {
+                        self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    }
+                case .clientError:
+                    DispatchQueue.main.async {
+                        self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    }
+                }
+            }
+        }
     }
 }
 

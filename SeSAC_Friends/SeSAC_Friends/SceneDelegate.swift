@@ -22,6 +22,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     
                     switch getUserResult {
                     case .existingUser:
+                        
+                        //
+                        if let userInfo = userInfo {
+                            UserDefaults.standard.set(userInfo.id, forKey: UserdefaultKey.uid.rawValue)
+                        }
+                        
                         let vc = MainViewController()
                         let nav = UINavigationController(rootViewController: vc)
                         

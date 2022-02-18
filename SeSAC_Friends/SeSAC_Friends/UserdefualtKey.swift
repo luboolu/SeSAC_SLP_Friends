@@ -18,5 +18,6 @@ enum UserdefaultKey: String {
     case birthDay
     case email
     case matchingState
+    case uid
     
 }
