@@ -1,23 +1,24 @@
 //
-//  FriendsReviewView.swift
+//  FriendsReportView.swift
 //  SeSAC_Friends
 //
-//  Created by 김진영 on 2022/02/17.
+//  Created by 김진영 on 2022/02/19.
 //
+
 import UIKit
 
 import SnapKit
 
-final class FriendsReviewView: UIView, ViewRepresentable {
+final class FriendsReportView: UIView, ViewRepresentable {
     
-    let reviewView = UIView()
+    let reportView = UIView()
     
     let titleView = UIView()
     
     let viewTitleLabel: UILabel = {
         let label = UILabel()
         
-        label.text = "리뷰 등록"
+        label.text = "새싹 신고"
         label.textColor = UIColor().black
         label.font = UIFont().Title3_M14
         label.textAlignment = .center
@@ -28,7 +29,7 @@ final class FriendsReviewView: UIView, ViewRepresentable {
     let viewSubTitleLabel: UILabel = {
         let label = UILabel()
         
-        label.text = "000님과의 취미 활동은 어떠셨나요?"
+        label.text = "다시는 해당 새싹과 매칭되지 않습니다"
         label.textColor = UIColor().green
         label.font = UIFont().Title4_R14
         label.textAlignment = .center
@@ -45,87 +46,87 @@ final class FriendsReviewView: UIView, ViewRepresentable {
     }()
     
     //reputation button
-    let reputationButtonView = UIView()
+    let reportButtonView = UIView()
     
-    let reputationButton1: MainButton = {
+    let reportButton1: MainButton = {
         let button = MainButton()
         
         button.isBorder = true
         button.isRounded = true
         button.status = .inactive
-        button.setTitle("좋은 매너", for: .normal)
+        button.setTitle("불법/사기", for: .normal)
         button.titleLabel?.font = UIFont().Title4_R14
         
         return button
     }()
     
-    let reputationButton2: MainButton = {
+    let reportButton2: MainButton = {
         let button = MainButton()
         
         button.isBorder = true
         button.isRounded = true
         button.status = .inactive
-        button.setTitle("정확한 시간 약속", for: .normal)
+        button.setTitle("불편한언행", for: .normal)
         button.titleLabel?.font = UIFont().Title4_R14
         
         return button
     }()
     
-    let reputationButton3: MainButton = {
+    let reportButton3: MainButton = {
         let button = MainButton()
         
         button.isBorder = true
         button.isRounded = true
         button.status = .inactive
-        button.setTitle("빠른 응답", for: .normal)
+        button.setTitle("노쇼", for: .normal)
         button.titleLabel?.font = UIFont().Title4_R14
         
         return button
     }()
     
-    let reputationButton4: MainButton = {
+    let reportButton4: MainButton = {
         let button = MainButton()
         
         button.isBorder = true
         button.isRounded = true
         button.status = .inactive
-        button.setTitle("친절한 성격", for: .normal)
+        button.setTitle("선정성", for: .normal)
         button.titleLabel?.font = UIFont().Title4_R14
         
         return button
     }()
     
-    let reputationButton5: MainButton = {
+    let reportButton5: MainButton = {
         let button = MainButton()
         
         button.isBorder = true
         button.isRounded = true
         button.status = .inactive
-        button.setTitle("능숙한 취미 실력", for: .normal)
+        button.setTitle("인신공격", for: .normal)
         button.titleLabel?.font = UIFont().Title4_R14
         
         return button
     }()
     
-    let reputationButton6: MainButton = {
+    let reportButton6: MainButton = {
         let button = MainButton()
         
         button.isBorder = true
         button.isRounded = true
         button.status = .inactive
-        button.setTitle("유익한 시간", for: .normal)
+        button.setTitle("기타", for: .normal)
         button.titleLabel?.font = UIFont().Title4_R14
         
         return button
     }()
     
-    let reviewTextView: UITextView = {
+    let reportTextView: UITextView = {
         let textView = UITextView()
         
         textView.clipsToBounds = true
         textView.layer.cornerRadius = 8
         textView.backgroundColor = UIColor().gray1
-        textView.text = "자세한 피드백은 다른 새싹들에게 도움이 됩니다(500자 이내 작성)"
+        textView.text = "신고 사유를 적어주세요 \n허위 신고 시 제재를 받을 수 있습니다"
         textView.textColor = UIColor().gray7
         textView.font = UIFont().Body3_R14
         textView.isScrollEnabled = true
@@ -133,17 +134,18 @@ final class FriendsReviewView: UIView, ViewRepresentable {
         return textView
     }()
     
-    let registerButton: MainButton = {
+    let reportButton: MainButton = {
         let button = MainButton()
         
         button.isBorder = true
         button.isRounded = true
         button.status = .disable
-        button.setTitle("리뷰 등록하기", for: .normal)
+        button.setTitle("신고하기", for: .normal)
         button.titleLabel?.font = UIFont().Body3_R14
         
         return button
     }()
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -157,36 +159,34 @@ final class FriendsReviewView: UIView, ViewRepresentable {
     }
     
     func setupView() {
-        //배경 투명도 설정
         self.backgroundColor = UIColor(cgColor: CGColor(gray: 0, alpha: 0.5))
         
-        reviewView.clipsToBounds = true
-        reviewView.layer.cornerRadius = 20
-        reviewView.backgroundColor = UIColor().white
-        
+        reportView.clipsToBounds = true
+        reportView.layer.cornerRadius = 20
+        reportView.backgroundColor = UIColor().white
+
         titleView.addSubview(viewTitleLabel)
         titleView.addSubview(viewSubTitleLabel)
         titleView.addSubview(dismissButton)
-        reviewView.addSubview(titleView)
+        reportView.addSubview(titleView)
         
-        //reputation button
-        reputationButtonView.addSubview(reputationButton1)
-        reputationButtonView.addSubview(reputationButton2)
-        reputationButtonView.addSubview(reputationButton3)
-        reputationButtonView.addSubview(reputationButton4)
-        reputationButtonView.addSubview(reputationButton5)
-        reputationButtonView.addSubview(reputationButton6)
-        reviewView.addSubview(reputationButtonView)
+        //report button
+        reportButtonView.addSubview(reportButton1)
+        reportButtonView.addSubview(reportButton2)
+        reportButtonView.addSubview(reportButton3)
+        reportButtonView.addSubview(reportButton4)
+        reportButtonView.addSubview(reportButton5)
+        reportButtonView.addSubview(reportButton6)
+        reportView.addSubview(reportButtonView)
         
-        reviewView.addSubview(reviewTextView)
-        reviewView.addSubview(registerButton)
+        reportView.addSubview(reportTextView)
+        reportView.addSubview(reportButton)
         
-        self.addSubview(reviewView)
-        
+        self.addSubview(reportView)
     }
-     
+    
     func setupConstraints() {
-        reviewView.snp.makeConstraints { make in
+        reportView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
             make.leading.equalToSuperview().offset(16)
@@ -221,73 +221,72 @@ final class FriendsReviewView: UIView, ViewRepresentable {
             make.height.equalTo(24)
         }
         
-        //reputation button view 레이아웃
-        reputationButtonView.snp.makeConstraints { make in
+        //report button view 레이아웃
+        reportButtonView.snp.makeConstraints { make in
             make.top.equalTo(titleView.snp.bottom).offset(24)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
         }
         
-        reputationButton1.snp.makeConstraints { make in
+        reportButton1.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.leading.equalToSuperview()
             make.height.equalTo(32)
         }
         
-        reputationButton2.snp.makeConstraints { make in
+        reportButton2.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.leading.equalTo(reputationButton1.snp.trailing).offset(8)
+            make.leading.equalTo(reportButton1.snp.trailing).offset(8)
+            make.height.equalTo(32)
+            make.width.equalTo(reportButton1.snp.width)
+        }
+        
+        reportButton3.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.leading.equalTo(reportButton2.snp.trailing).offset(8)
             make.trailing.equalToSuperview()
             make.height.equalTo(32)
-            make.width.equalTo(reputationButton1.snp.width)
+            make.width.equalTo(reportButton1.snp.width)
         }
         
-        reputationButton3.snp.makeConstraints { make in
-            make.top.equalTo(reputationButton1.snp.bottom).offset(8)
-            make.leading.equalToSuperview()
-            make.height.equalTo(32)
-        }
-        
-        reputationButton4.snp.makeConstraints { make in
-            make.top.equalTo(reputationButton2.snp.bottom).offset(8)
-            make.leading.equalTo(reputationButton3.snp.trailing).offset(8)
-            make.trailing.equalToSuperview()
-            make.height.equalTo(32)
-            make.width.equalTo(reputationButton3.snp.width)
-        }
-        
-        reputationButton5.snp.makeConstraints { make in
-            make.top.equalTo(reputationButton3.snp.bottom).offset(8)
+        reportButton4.snp.makeConstraints { make in
+            make.top.equalTo(reportButton1.snp.bottom).offset(8)
             make.leading.equalToSuperview()
             make.bottom.equalToSuperview()
             make.height.equalTo(32)
         }
         
-        reputationButton6.snp.makeConstraints { make in
-            make.top.equalTo(reputationButton4.snp.bottom).offset(8)
-            make.leading.equalTo(reputationButton5.snp.trailing).offset(8)
+        reportButton5.snp.makeConstraints { make in
+            make.top.equalTo(reportButton2.snp.bottom).offset(8)
+            make.leading.equalTo(reportButton4.snp.trailing).offset(8)
+            make.bottom.equalToSuperview()
+            make.height.equalTo(32)
+            make.width.equalTo(reportButton4.snp.width)
+        }
+        
+        reportButton6.snp.makeConstraints { make in
+            make.top.equalTo(reportButton3.snp.bottom).offset(8)
+            make.leading.equalTo(reportButton5.snp.trailing).offset(8)
             make.trailing.equalToSuperview()
             make.bottom.equalToSuperview()
             make.height.equalTo(32)
-            make.width.equalTo(reputationButton5.snp.width)
+            make.width.equalTo(reportButton4.snp.width)
         }
         
-        //리뷰 텍스트 뷰
-        reviewTextView.snp.makeConstraints { make in
-            make.top.equalTo(reputationButtonView.snp.bottom).offset(24)
+        //텍스트 뷰
+        reportTextView.snp.makeConstraints { make in
+            make.top.equalTo(reportButtonView.snp.bottom).offset(24)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.height.equalTo(124)
         }
         
-        registerButton.snp.makeConstraints { make in
-            make.top.equalTo(reviewTextView.snp.bottom).offset(24)
+        reportButton.snp.makeConstraints { make in
+            make.top.equalTo(reportTextView.snp.bottom).offset(24)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.bottom.equalToSuperview().offset(-16)
             make.height.equalTo(48)
         }
     }
-    
-    
 }

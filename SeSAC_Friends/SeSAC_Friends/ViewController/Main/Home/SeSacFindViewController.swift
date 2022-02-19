@@ -251,6 +251,15 @@ final class SeSacFindViewController: UIViewController {
                             if myQueueState.matched == 1 {
                                 //매칭된 상태이므로 토스트 메세지를 띄우고, 채팅방으로 이동
                                 self.view.makeToast("000님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다." ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                                
+                                //매칭 상태 변경
+                                UserDefaults.standard.set(matchingState.matched.rawValue, forKey: UserdefaultKey.matchingState.rawValue)
+                                //채팅 화면으로 전환
+                                let vc = ChattingViewController()
+                                vc.friendUid = myQueueState.matchedUid
+                                vc.friendNick = myQueueState.matchedNick
+                                
+                                self.navigationController?.pushViewController(vc, animated: true)
                             }
                         }
                     }

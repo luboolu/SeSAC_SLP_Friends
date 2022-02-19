@@ -259,7 +259,6 @@ final class HomeViewController: UIViewController {
         //3. 1,2를 만족하면 취미 입력 화면으로 전환
         //+
         //사용자의 현재 상태에 따라서 취미 입력 화면으로 전환 또는 채팅 화면으로 전환
-        
         let userGender = UserDefaults.standard.integer(forKey: UserdefaultKey.gender.rawValue)
         
         if userGender == 2 {

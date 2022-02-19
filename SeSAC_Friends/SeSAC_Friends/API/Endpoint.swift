@@ -53,6 +53,10 @@ extension URL {
         return URL(string: "\(URL.queue)/myQueueState")!
     }
     
+    static var queueRate: URL {
+        return URL(string: "\(URL.queue)/rate")!
+    }
+    
     
     
 }

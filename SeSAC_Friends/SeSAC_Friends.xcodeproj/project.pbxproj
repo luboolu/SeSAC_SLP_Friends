@@ -51,6 +51,8 @@
 		DCA592E427BB7F3D0088940B /* FriendsChattingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA592E327BB7F3C0088940B /* FriendsChattingTableViewCell.swift */; };
 		DCA592EB27BE99A40088940B /* FriendsReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA592EA27BE99A40088940B /* FriendsReviewViewController.swift */; };
 		DCA592ED27BE99AC0088940B /* FriendsReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA592EC27BE99AC0088940B /* FriendsReviewView.swift */; };
+		DCA592EF27C0F1C70088940B /* FriendsReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA592EE27C0F1C60088940B /* FriendsReportView.swift */; };
+		DCA592F127C0F1D50088940B /* FriendsReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA592F027C0F1D50088940B /* FriendsReportViewController.swift */; };
 		DCC419EC27A44845006B2904 /* ButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC419EB27A44845006B2904 /* ButtonCollectionViewCell.swift */; };
 		DCC419EE27A44850006B2904 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC419ED27A44850006B2904 /* CollectionViewCell.swift */; };
 		DCC419F027A78D44006B2904 /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC419EF27A78D44006B2904 /* MyInfoView.swift */; };
@@ -145,6 +147,8 @@
 		DCA592E327BB7F3C0088940B /* FriendsChattingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsChattingTableViewCell.swift; sourceTree = "<group>"; };
 		DCA592EA27BE99A40088940B /* FriendsReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsReviewViewController.swift; sourceTree = "<group>"; };
 		DCA592EC27BE99AC0088940B /* FriendsReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsReviewView.swift; sourceTree = "<group>"; };
+		DCA592EE27C0F1C60088940B /* FriendsReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsReportView.swift; sourceTree = "<group>"; };
+		DCA592F027C0F1D50088940B /* FriendsReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsReportViewController.swift; sourceTree = "<group>"; };
 		DCC419EB27A44845006B2904 /* ButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		DCC419ED27A44850006B2904 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		DCC419EF27A78D44006B2904 /* MyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoView.swift; sourceTree = "<group>"; };
@@ -282,6 +286,8 @@
 				DCA592DD27BB5A740088940B /* ChattingViewController.swift */,
 				DCA592EA27BE99A40088940B /* FriendsReviewViewController.swift */,
 				DCA592EC27BE99AC0088940B /* FriendsReviewView.swift */,
+				DCA592F027C0F1D50088940B /* FriendsReportViewController.swift */,
+				DCA592EE27C0F1C60088940B /* FriendsReportView.swift */,
 			);
 			path = Chatting;
 			sourceTree = "<group>";
@@ -581,6 +587,7 @@
 				DC6E55E727ABCC3A00998FF9 /* CollectionViewLeftAlignFlowLayout.swift in Sources */,
 				DCE2D1FA279809D40018895F /* MainButtonTestViewController.swift in Sources */,
 				DCF8943127B21D12001BE5DF /* SeSecFindView.swift in Sources */,
+				DCA592EF27C0F1C70088940B /* FriendsReportView.swift in Sources */,
 				DCA592ED27BE99AC0088940B /* FriendsReviewView.swift in Sources */,
 				DCA592D627BA36F70088940B /* ReviewDetailViewController.swift in Sources */,
 				DCC419F027A78D44006B2904 /* MyInfoView.swift in Sources */,
@@ -616,6 +623,7 @@
 				DCA592EB27BE99A40088940B /* FriendsReviewViewController.swift in Sources */,
 				DCA592DC27BAB47B0088940B /* EmptySeSacTableViewCell.swift in Sources */,
 				DCC419F227A7CABD006B2904 /* InputDataStruct.swift in Sources */,
+				DCA592F127C0F1D50088940B /* FriendsReportViewController.swift in Sources */,
 				DC18740B27A2D53500DE4FBD /* SwitchTableViewCell.swift in Sources */,
 				DCA1AABE279DA7CA002194B4 /* Endpoint.swift in Sources */,
 				DCE2D1E32796D5310018895F /* ChatTextFieldStatus.swift in Sources */,

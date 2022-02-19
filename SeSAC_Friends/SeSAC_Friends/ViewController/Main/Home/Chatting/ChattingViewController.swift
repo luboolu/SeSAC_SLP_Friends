@@ -35,14 +35,16 @@ final class ChattingViewController: UIViewController {
         setTableView()
         setTextView()
         setChatMenu()
+        
+        updateMyState()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.tintColor = UIColor().black
-        self.navigationItem.title = "상대방 닉네임"
+        self.navigationItem.title = "\(friendNick ?? "")"
          
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "more"), style: .plain, target: self, action: #selector(menuButtonClicked))
         
@@ -94,7 +96,14 @@ final class ChattingViewController: UIViewController {
     private func setChatMenu() {
         mainView.reportButton.rx.tap
             .bind {
-                print("reportButton tapped")
+                DispatchQueue.main.async {
+                    print("reportButton tapped")
+                    let popUp = FriendsReportViewController()
+                    popUp.friendUid = self.matchingInfo?.matchedUid
+                    popUp.modalPresentationStyle = .overCurrentContext
+                    popUp.modalTransitionStyle = .crossDissolve
+                    self.present(popUp, animated: true, completion: nil)
+                }
             }.disposed(by: disposeBag)
         
         mainView.cancelButton.rx.tap
@@ -131,9 +140,15 @@ final class ChattingViewController: UIViewController {
             if let queueState = queueState {
                 switch queueState {
                 case .succeed:
-                    if let myQueueState = myQueueState {
-                        print(myQueueState)
-                        self.matchingInfo = myQueueState
+                    DispatchQueue.main.async {
+                        if let myQueueState = myQueueState {
+                            print(myQueueState)
+                            self.matchingInfo = myQueueState
+                            self.friendUid = myQueueState.matchedUid
+                            self.friendNick = myQueueState.matchedNick
+                            self.navigationItem.title = "\(self.friendNick ?? "")"
+                            self.reloadInputViews()
+                        }
                     }
                 case .stopped:
                     DispatchQueue.main.async {

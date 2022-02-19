@@ -19,7 +19,7 @@ final class FriendsReviewViewController: UIViewController {
     private let toastStyle = ToastStyle()
     
     private var showPlaceHolder = true
-    private var reputation = [0, 0, 0, 0, 0, 0, 0, 0]
+    private var reputation = [0, 0, 0, 0, 0, 0, 0, 0, 0]
     var friendUid : String?
     var friendNick: String?
     
@@ -38,7 +38,7 @@ final class FriendsReviewViewController: UIViewController {
     }
     
     private func setTitle() {
-        mainView.viewSubTitleLabel.text = "\(friendNick)님과의 취미 활동은 어떠셨나요?"
+        mainView.viewSubTitleLabel.text = "\(friendNick ?? "" )님과의 취미 활동은 어떠셨나요?"
     }
     
     private func setButton() {
@@ -52,7 +52,7 @@ final class FriendsReviewViewController: UIViewController {
                     return .fill
                 } else {
                     self.reputation[0] = 0
-                    return .disable
+                    return .inactive
                 }
             }
             .map { $0 }
@@ -66,7 +66,7 @@ final class FriendsReviewViewController: UIViewController {
                     return .fill
                 } else {
                     self.reputation[1] = 0
-                    return .disable
+                    return .inactive
                 }
             }
             .map { $0 }
@@ -80,7 +80,7 @@ final class FriendsReviewViewController: UIViewController {
                     return .fill
                 } else {
                     self.reputation[2] = 0
-                    return .disable
+                    return .inactive
                 }
             }
             .map { $0 }
@@ -94,7 +94,7 @@ final class FriendsReviewViewController: UIViewController {
                     return .fill
                 } else {
                     self.reputation[3] = 0
-                    return .disable
+                    return .inactive
                 }
             }
             .map { $0 }
@@ -108,7 +108,7 @@ final class FriendsReviewViewController: UIViewController {
                     return .fill
                 } else {
                     self.reputation[4] = 0
-                    return .disable
+                    return .inactive
                 }
             }
             .map { $0 }
@@ -122,7 +122,7 @@ final class FriendsReviewViewController: UIViewController {
                     return .fill
                 } else {
                     self.reputation[5] = 0
-                    return .disable
+                    return .inactive
                 }
             }
             .map { $0 }
@@ -141,7 +141,6 @@ final class FriendsReviewViewController: UIViewController {
                         self.view.makeToast("하나 이상의 타이틀을 선택해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
                     }
                 } else {
-                    print("성공")
                     self.sendReview()
                 }
             }.disposed(by: disposeBag)
@@ -168,19 +167,50 @@ final class FriendsReviewViewController: UIViewController {
                 }
             }).disposed(by: disposeBag)
     }
-    
+     
     @objc private func dismissButtonClicked() {
         print(#function)
         self.dismiss(animated: true, completion: nil)
     }
     
     private func sendReview() {
-        guard let friendUid = friendUid, let myUid = UserDefaults.standard.string(forKey: UserdefaultKey.uid.rawValue) else {
+        print(#function)
+        guard let friendUid = friendUid, let comment = self.mainView.reviewTextView.text else {
             return
         }
         
         print(friendUid)
-        print(myUid)
+        
+        viewModel.queueRate(otherUID: friendUid, reputation: self.reputation, comment: comment) { apiResult, queueRate in
+            if let queueRate = queueRate {
+                switch queueRate {
+                case .succeed:
+                    //홈화면으로 이동
+                    print("리뷰 작성 완료!")
+                    DispatchQueue.main.async {
+                        //매칭 상태 - 일반 상태로 변경
+                        UserDefaults.standard.set(matchingState.noState.rawValue, forKey: UserdefaultKey.matchingState.rawValue)
+                        //홈 화면으로 이동
+                        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                        windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: MainViewController())
+                        windowScene.windows.first?.makeKeyAndVisible()
+                    }
+                case .tokenError:
+                    self.sendReview()
+                case .notUser:
+                    DispatchQueue.main.async {
+                        //온보딩 화면으로 이동
+                        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                        windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: OnBoardingViewController())
+                        windowScene.windows.first?.makeKeyAndVisible()
+                    }
+                case .serverError:
+                    self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                case .clientError:
+                    self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                }
+            }
+        }
         
     }
     
