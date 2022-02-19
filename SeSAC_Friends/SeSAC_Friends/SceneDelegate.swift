@@ -27,6 +27,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                             UserDefaults.standard.set(userInfo.phoneNumber ,forKey: UserdefaultKey.phoneNumber.rawValue)
                             UserDefaults.standard.set(userInfo.gender ,forKey: UserdefaultKey.gender.rawValue)
                             UserDefaults.standard.set(userInfo.email ,forKey: UserdefaultKey.email.rawValue)
+                            UserDefaults.standard.set(userInfo.nick, forKey: UserdefaultKey.nickname.rawValue)
                         }
                         
                         let vc = MainViewController()

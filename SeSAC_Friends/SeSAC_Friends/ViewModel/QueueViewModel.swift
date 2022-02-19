@@ -383,6 +383,55 @@ final class QueueViewModel {
             
         }.resume()
     }
+    
+    //취미 함께하기 약속 취소
+    func queueDodge(otherUID: String, completion: @escaping (APIResult?, QueueDodge?) -> Void) {
+        
+        let idtoken = UserDefaults.standard.string(forKey: UserdefaultKey.idToken.rawValue) ?? ""
+        let url = URL(string: "\(URL.queueDodge)")!
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "POST"
+        request.httpBody = "otheruid=\(otherUID)".data(using: .utf8, allowLossyConversion: false)
+        request.setValue(APIHeaderValue.ContentType.string, forHTTPHeaderField: APIHeader.ContentType.string)
+        request.setValue("\(idtoken)", forHTTPHeaderField: APIHeader.idtoken.string)
+        
+        let session = URLSession.shared
+        session.dataTask(with: request) { data, response, error in
+
+            if error != nil {
+                completion(.failed, nil)
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse else {
+                completion(.invalidResponse, nil)
+                return
+            }
+            
+            guard let data = data else {
+                completion(.noData, nil)
+                return
+            }
+            
+            if response.statusCode == 200 {
+                completion(.succeed, .succeed)
+            } else if response.statusCode == 201 {
+                completion(.succeed, .wrongUID)
+            }  else if response.statusCode == 401 {
+                self.userViewModel.idTokenRequest { error in
+                    completion(.succeed, .tokenError)
+                }
+            } else if response.statusCode == 500 {
+                completion(.succeed, .serverError)
+            } else if response.statusCode == 501 {
+                completion(.succeed, .clientError)
+            } else {
+                completion(.failed, nil)
+            }
+            
+        }.resume()
+    }
 
 
 }

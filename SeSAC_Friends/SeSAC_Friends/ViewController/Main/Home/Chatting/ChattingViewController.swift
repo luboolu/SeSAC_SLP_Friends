@@ -108,7 +108,14 @@ final class ChattingViewController: UIViewController {
         
         mainView.cancelButton.rx.tap
             .bind {
-                print("cancelButton tapped")
+                DispatchQueue.main.async {
+                    print("cancelButton tapped")
+                    let popUp = FriendsDodgeViewController()
+                    popUp.friendUid = self.matchingInfo?.matchedUid
+                    popUp.modalPresentationStyle = .overCurrentContext
+                    popUp.modalTransitionStyle = .crossDissolve
+                    self.present(popUp, animated: true, completion: nil)
+                }
             }.disposed(by: disposeBag)
         
         mainView.reviewButton.rx.tap

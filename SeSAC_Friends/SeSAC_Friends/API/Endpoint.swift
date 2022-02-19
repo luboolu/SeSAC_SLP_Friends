@@ -36,6 +36,10 @@ extension URL {
         return URL(string: "\(URL.user)/update_fcm_token")!
     }
     
+    static var userReport: URL {
+        return URL(string: "\(URL.user)/report")!
+    }
+    
     //MARK: Queue
     static var queueOn: URL {
         return URL(string: "\(URL.queue)/onqueue")!
@@ -55,6 +59,10 @@ extension URL {
     
     static var queueRate: URL {
         return URL(string: "\(URL.queue)/rate")!
+    }
+    
+    static var queueDodge: URL {
+        return URL(string: "\(URL.queue)/dodge")!
     }
     
     

@@ -46,6 +46,14 @@ enum UserInfoUpdateResult {
     case clientError  //501
 }
 
+enum UserReportResult {
+    case succeed      //200
+    case tokenError   //401
+    case notUser      //406
+    case serverError  //500
+    case clientError  //501
+}
+
 //MARK: QueueViewModel
 //친구 찾기 요청 시작
 enum QueueStart {
@@ -116,6 +124,15 @@ enum QueueState {
 //새싹친구 리뷰 남기기
 enum QueueRate {
     case succeed      //200
+    case tokenError   //401
+    case notUser      //406
+    case serverError  //500
+    case clientError  //501
+}
+
+enum QueueDodge {
+    case succeed      //200
+    case wrongUID     //201
     case tokenError   //401
     case notUser      //406
     case serverError  //500

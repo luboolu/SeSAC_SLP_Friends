@@ -35,6 +35,9 @@
 		DC6E55E327AAD71A00998FF9 /* HobbySearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55E227AAD71A00998FF9 /* HobbySearchView.swift */; };
 		DC6E55E527AAD83900998FF9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55E427AAD83900998FF9 /* HomeView.swift */; };
 		DC6E55E727ABCC3A00998FF9 /* CollectionViewLeftAlignFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55E627ABCC3A00998FF9 /* CollectionViewLeftAlignFlowLayout.swift */; };
+		DC6E9F4C27C13E54009D2DAD /* FriendsDodgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E9F4B27C13E54009D2DAD /* FriendsDodgeViewController.swift */; };
+		DC6E9F4E27C13E5C009D2DAD /* FriendsDodgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E9F4D27C13E5C009D2DAD /* FriendsDodgeView.swift */; };
+		DC6E9F5127C15046009D2DAD /* ShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E9F5027C15046009D2DAD /* ShopView.swift */; };
 		DCA1AAB9279D7B4F002194B4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = DCA1AAB8279D7B4F002194B4 /* FirebaseAuth */; };
 		DCA1AABB279D7B4F002194B4 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = DCA1AABA279D7B4F002194B4 /* FirebaseMessaging */; };
 		DCA1AABE279DA7CA002194B4 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA1AABD279DA7CA002194B4 /* Endpoint.swift */; };
@@ -133,6 +136,9 @@
 		DC6E55E227AAD71A00998FF9 /* HobbySearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbySearchView.swift; sourceTree = "<group>"; };
 		DC6E55E427AAD83900998FF9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		DC6E55E627ABCC3A00998FF9 /* CollectionViewLeftAlignFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewLeftAlignFlowLayout.swift; sourceTree = "<group>"; };
+		DC6E9F4B27C13E54009D2DAD /* FriendsDodgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsDodgeViewController.swift; sourceTree = "<group>"; };
+		DC6E9F4D27C13E5C009D2DAD /* FriendsDodgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsDodgeView.swift; sourceTree = "<group>"; };
+		DC6E9F5027C15046009D2DAD /* ShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopView.swift; sourceTree = "<group>"; };
 		DCA1AABD279DA7CA002194B4 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		DCA1AABF279E4531002194B4 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		DCA1AAC2279E94D1002194B4 /* UserdefualtKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserdefualtKey.swift; sourceTree = "<group>"; };
@@ -267,6 +273,15 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		DC6E9F4F27C14FC0009D2DAD /* Shop */ = {
+			isa = PBXGroup;
+			children = (
+				DC1873E427A1113200DE4FBD /* ShopViewController.swift */,
+				DC6E9F5027C15046009D2DAD /* ShopView.swift */,
+			);
+			path = Shop;
+			sourceTree = "<group>";
+		};
 		DCA1AABC279DA7BA002194B4 /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -288,6 +303,8 @@
 				DCA592EC27BE99AC0088940B /* FriendsReviewView.swift */,
 				DCA592F027C0F1D50088940B /* FriendsReportViewController.swift */,
 				DCA592EE27C0F1C60088940B /* FriendsReportView.swift */,
+				DC6E9F4B27C13E54009D2DAD /* FriendsDodgeViewController.swift */,
+				DC6E9F4D27C13E5C009D2DAD /* FriendsDodgeView.swift */,
 			);
 			path = Chatting;
 			sourceTree = "<group>";
@@ -334,10 +351,10 @@
 		DCDE3670279C3A790077847C /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				DC6E9F4F27C14FC0009D2DAD /* Shop */,
 				DC6E55DF27AABFCD00998FF9 /* Home */,
 				DC1873EC27A151CB00DE4FBD /* MyPage */,
 				DC1873EA27A1140E00DE4FBD /* MainViewController.swift */,
-				DC1873E427A1113200DE4FBD /* ShopViewController.swift */,
 				DC1873E627A1115C00DE4FBD /* FriendsViewController.swift */,
 			);
 			path = Main;
@@ -568,6 +585,7 @@
 				DC1873E527A1113200DE4FBD /* ShopViewController.swift in Sources */,
 				DCDCC2E327A0332B00FB142B /* OnboardingView.swift in Sources */,
 				DCDE36692799BE190077847C /* NicknameViewController.swift in Sources */,
+				DC6E9F5127C15046009D2DAD /* ShopView.swift in Sources */,
 				DCE678E327A2E61800ACB1A7 /* TableViewCell.swift in Sources */,
 				DC18740327A266CF00DE4FBD /* EmailView.swift in Sources */,
 				DC6E55E327AAD71A00998FF9 /* HobbySearchView.swift in Sources */,
@@ -595,6 +613,7 @@
 				DC18740127A2653B00DE4FBD /* BirthView.swift in Sources */,
 				DCA592E227BB7F2E0088940B /* MyChattingTableViewCell.swift in Sources */,
 				DCC419EC27A44845006B2904 /* ButtonCollectionViewCell.swift in Sources */,
+				DC6E9F4E27C13E5C009D2DAD /* FriendsDodgeView.swift in Sources */,
 				DCE2D1BC279694720018895F /* AppDelegate.swift in Sources */,
 				DCE2D1F72797F3320018895F /* MainTextFieldTestViewController.swift in Sources */,
 				DCC419EE27A44850006B2904 /* CollectionViewCell.swift in Sources */,
@@ -614,6 +633,7 @@
 				DC6E55DE27AA519200998FF9 /* APIStatusResult.swift in Sources */,
 				DCE2D1E12796CCD30018895F /* MainTextFieldStatus.swift in Sources */,
 				DC6E55DC27A98A7800998FF9 /* Alert.swift in Sources */,
+				DC6E9F4C27C13E54009D2DAD /* FriendsDodgeViewController.swift in Sources */,
 				DC18740527A267EF00DE4FBD /* GenderView.swift in Sources */,
 				DCA592DE27BB5A740088940B /* ChattingViewController.swift in Sources */,
 				DCA592E427BB7F3D0088940B /* FriendsChattingTableViewCell.swift in Sources */,
