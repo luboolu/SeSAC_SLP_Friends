@@ -44,7 +44,7 @@ final class SeSacFindViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.tintColor = UIColor().black
         self.navigationItem.title = "새싹 찾기"
-         
+        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "찾기중단", style: .plain, target: self, action: #selector(findStopButtonClicked))
         
         let backButton = UIBarButtonItem()

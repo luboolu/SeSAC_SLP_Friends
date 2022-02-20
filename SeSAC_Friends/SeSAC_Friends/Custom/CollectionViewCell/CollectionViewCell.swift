@@ -11,7 +11,6 @@ enum CollectionViewCell {
     
     case ButtonCollectionViewCell
     case SeSacCharacterCollectionViewCell
-    case SeSacBackgroundCollectionViewCell
     
     var id: String {
         switch self {
@@ -19,8 +18,6 @@ enum CollectionViewCell {
             return "ButtonCollectionViewCell"
         case .SeSacCharacterCollectionViewCell:
             return "SeSacCharacterCollectionViewCell"
-        case .SeSacBackgroundCollectionViewCell:
-            return "SeSacBackgroundCollectionViewCell"
         }
     }
     

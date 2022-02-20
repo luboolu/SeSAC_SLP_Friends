@@ -29,6 +29,7 @@ final class CharacterShopView: UIView, ViewRepresentable {
         collectionView.collectionViewLayout = layout
         collectionView.isPagingEnabled = false
         collectionView.isScrollEnabled = true
+        
         return collectionView
     }()
     
@@ -50,10 +51,10 @@ final class CharacterShopView: UIView, ViewRepresentable {
     
     func setupConstraints() {
         characterCollectionView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(12)
-            make.leading.equalToSuperview().offset(12)
-            make.trailing.equalToSuperview().offset(-12)
-            make.bottom.equalTo(self.safeAreaLayoutGuide).offset(-12)
+            make.top.equalToSuperview().offset(12).priority(999)
+            make.leading.equalToSuperview().offset(0)
+            make.trailing.equalToSuperview().offset(0)
+            make.bottom.equalToSuperview().offset(0).priority(999)
         }
     }
 }

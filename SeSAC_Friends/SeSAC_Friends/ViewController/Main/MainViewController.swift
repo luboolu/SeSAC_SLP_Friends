@@ -32,18 +32,20 @@ final class MainViewController: UITabBarController {
         homeTab.tabBarItem = homeTabBarItem
         
         let shopTab = ShopViewController()
+        let shopNav = UINavigationController(rootViewController: shopTab)
         let shopTabBarItem = UITabBarItem(title: "새싹샵", image: UIImage(named: "shop"), selectedImage: UIImage(named: "shop_color"))
-        shopTab.tabBarItem = shopTabBarItem
+        shopNav.tabBarItem = shopTabBarItem
         
 //        let friendsTab = FriendsViewController()
 //        let friendsTabBarItem = UITabBarItem(title: "새싹친구", image: UIImage(named: "sac"), selectedImage: UIImage(named: "sac_color"))
 //        friendsTab.tabBarItem = friendsTabBarItem
         
         let myPageTab = MyPageViewController()
+        let myPageNav = UINavigationController(rootViewController: myPageTab)
         let myPageTabBarItem = UITabBarItem(title: "내정보", image: UIImage(named: "person"), selectedImage: UIImage(named: "person_color"))
-        myPageTab.tabBarItem = myPageTabBarItem
+        myPageNav.tabBarItem = myPageTabBarItem
 
-        self.viewControllers = [homeTab, shopTab, myPageTab]
+        self.viewControllers = [homeTab, shopNav, myPageNav]
         
     }
 

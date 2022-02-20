@@ -122,7 +122,7 @@ final class ShopView: UIView, ViewRepresentable {
     
     func setupView() {
         self.backgroundColor = UIColor().white
-        
+
         charactorView.addSubview(backgroundImage)
         charactorView.addSubview(charactorImage)
         charactorView.addSubview(saveButton)
@@ -144,7 +144,7 @@ final class ShopView: UIView, ViewRepresentable {
     
     func setupConstraints() {
         charactorView.snp.makeConstraints { make in
-            make.top.equalTo(self.safeAreaLayoutGuide).offset(50)
+            make.top.equalTo(self.safeAreaLayoutGuide)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
             make.height.equalTo(174)

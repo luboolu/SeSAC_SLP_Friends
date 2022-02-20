@@ -32,7 +32,6 @@ final class HobbySearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.navigationItem.titleView = mainView.searchBar
         
         setCollectionView()

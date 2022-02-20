@@ -26,9 +26,11 @@ final class CharacterShopViewController: UIViewController {
         mainView.characterCollectionView.dataSource = self
         mainView.characterCollectionView.register(SeSacCharacterCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.SeSacCharacterCollectionViewCell.id)
     }
+
 }
 
 extension CharacterShopViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 5
     }

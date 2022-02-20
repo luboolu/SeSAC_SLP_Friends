@@ -11,6 +11,15 @@ import SnapKit
 
 final class BackgroundShopView: UIView, ViewRepresentable {
     
+    let backgroundTableView: UITableView = {
+        let tableView = UITableView()
+        
+        tableView.separatorStyle = .none
+        tableView.rowHeight = UITableView.automaticDimension
+         
+        return tableView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -23,10 +32,16 @@ final class BackgroundShopView: UIView, ViewRepresentable {
     
     
     func setupView() {
-        self.backgroundColor = UIColor().whitegreen
+        self.backgroundColor = UIColor().white
+        self.addSubview(backgroundTableView)
     }
     
     func setupConstraints() {
-        
+        backgroundTableView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview().offset(16).priority(999)
+            make.trailing.equalToSuperview().offset(-16).priority(999)
+            make.bottom.equalTo(self.safeAreaLayoutGuide)
+        }
     }
 }

@@ -27,13 +27,17 @@ final class ShopViewController: UIViewController {
         super.viewDidLoad()
         
         setPagingButton()
+        setButton()
+        DispatchQueue.main.async {
+            self.characterViewButtonClicked()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.tintColor = UIColor().black
-        self.navigationController?.navigationBar.topItem?.title = "새싹샵"
+        self.navigationItem.title = "새싹샵"
         
         DispatchQueue.main.async {
             self.characterViewButtonClicked()
@@ -118,5 +122,13 @@ final class ShopViewController: UIViewController {
         backgroundVC.didMove(toParent: self)
         
         self.reloadInputViews()
+    }
+    
+    private func setButton() {
+        mainView.saveButton.addTarget(self, action: #selector(saveButtonClicked), for: .touchUpInside)
+    }
+    
+    @objc private func saveButtonClicked() {
+        print(#function)
     }
 }

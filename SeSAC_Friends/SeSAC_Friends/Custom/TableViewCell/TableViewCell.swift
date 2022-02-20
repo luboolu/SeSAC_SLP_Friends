@@ -21,6 +21,7 @@ enum TableViewCell {
     case EmptySeSacTableViewCell
     case MyChattingTableViewCell
     case FriendsChattingTableViewCell
+    case SeSacBackgroundTableViewCell
     
     var id: String {
         switch self {
@@ -50,6 +51,8 @@ enum TableViewCell {
             return "MyChattingTableViewCell"
         case .FriendsChattingTableViewCell:
             return "FriendsChattingTableViewCell"
+        case .SeSacBackgroundTableViewCell:
+            return "SeSacBackgroundTableViewCell"
             
         }
     }
