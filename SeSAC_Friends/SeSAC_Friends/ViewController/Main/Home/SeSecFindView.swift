@@ -11,8 +11,6 @@ import SnapKit
 
 final class SeSacFindView: UIView, ViewRepresentable {
     
-    let buttonView = UIView()
-    
     let buttonStackView: UIStackView = {
         let stackView = UIStackView()
         

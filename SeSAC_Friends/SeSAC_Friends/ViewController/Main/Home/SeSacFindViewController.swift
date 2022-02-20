@@ -120,7 +120,6 @@ final class SeSacFindViewController: UIViewController {
         //데이터 전달
         nearVC.region = self.region
         nearVC.location = self.location
-        
 
         if mainView.contentView.subviews.count > 0 {
             print(mainView.contentView.subviews)

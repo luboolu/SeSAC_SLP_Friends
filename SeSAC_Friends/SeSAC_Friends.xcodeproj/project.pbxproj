@@ -38,6 +38,12 @@
 		DC6E9F4C27C13E54009D2DAD /* FriendsDodgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E9F4B27C13E54009D2DAD /* FriendsDodgeViewController.swift */; };
 		DC6E9F4E27C13E5C009D2DAD /* FriendsDodgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E9F4D27C13E5C009D2DAD /* FriendsDodgeView.swift */; };
 		DC6E9F5127C15046009D2DAD /* ShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E9F5027C15046009D2DAD /* ShopView.swift */; };
+		DC6E9F5327C1DA25009D2DAD /* CharacterShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E9F5227C1DA25009D2DAD /* CharacterShopView.swift */; };
+		DC6E9F5527C1DA45009D2DAD /* CharacterShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E9F5427C1DA45009D2DAD /* CharacterShopViewController.swift */; };
+		DC6E9F5727C1DA58009D2DAD /* BackgroundShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E9F5627C1DA58009D2DAD /* BackgroundShopView.swift */; };
+		DC6E9F5927C1DA64009D2DAD /* BackgroundShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E9F5827C1DA64009D2DAD /* BackgroundShopViewController.swift */; };
+		DC6E9F5B27C20105009D2DAD /* SeSacCharacterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E9F5A27C20105009D2DAD /* SeSacCharacterCollectionViewCell.swift */; };
+		DC6E9F5D27C2011B009D2DAD /* SeSacBackgroundCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E9F5C27C2011B009D2DAD /* SeSacBackgroundCollectionViewCell.swift */; };
 		DCA1AAB9279D7B4F002194B4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = DCA1AAB8279D7B4F002194B4 /* FirebaseAuth */; };
 		DCA1AABB279D7B4F002194B4 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = DCA1AABA279D7B4F002194B4 /* FirebaseMessaging */; };
 		DCA1AABE279DA7CA002194B4 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA1AABD279DA7CA002194B4 /* Endpoint.swift */; };
@@ -139,6 +145,12 @@
 		DC6E9F4B27C13E54009D2DAD /* FriendsDodgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsDodgeViewController.swift; sourceTree = "<group>"; };
 		DC6E9F4D27C13E5C009D2DAD /* FriendsDodgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsDodgeView.swift; sourceTree = "<group>"; };
 		DC6E9F5027C15046009D2DAD /* ShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopView.swift; sourceTree = "<group>"; };
+		DC6E9F5227C1DA25009D2DAD /* CharacterShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterShopView.swift; sourceTree = "<group>"; };
+		DC6E9F5427C1DA45009D2DAD /* CharacterShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterShopViewController.swift; sourceTree = "<group>"; };
+		DC6E9F5627C1DA58009D2DAD /* BackgroundShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundShopView.swift; sourceTree = "<group>"; };
+		DC6E9F5827C1DA64009D2DAD /* BackgroundShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundShopViewController.swift; sourceTree = "<group>"; };
+		DC6E9F5A27C20105009D2DAD /* SeSacCharacterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSacCharacterCollectionViewCell.swift; sourceTree = "<group>"; };
+		DC6E9F5C27C2011B009D2DAD /* SeSacBackgroundCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSacBackgroundCollectionViewCell.swift; sourceTree = "<group>"; };
 		DCA1AABD279DA7CA002194B4 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		DCA1AABF279E4531002194B4 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		DCA1AAC2279E94D1002194B4 /* UserdefualtKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserdefualtKey.swift; sourceTree = "<group>"; };
@@ -278,6 +290,10 @@
 			children = (
 				DC1873E427A1113200DE4FBD /* ShopViewController.swift */,
 				DC6E9F5027C15046009D2DAD /* ShopView.swift */,
+				DC6E9F5227C1DA25009D2DAD /* CharacterShopView.swift */,
+				DC6E9F5427C1DA45009D2DAD /* CharacterShopViewController.swift */,
+				DC6E9F5627C1DA58009D2DAD /* BackgroundShopView.swift */,
+				DC6E9F5827C1DA64009D2DAD /* BackgroundShopViewController.swift */,
 			);
 			path = Shop;
 			sourceTree = "<group>";
@@ -315,6 +331,8 @@
 				DCC419EB27A44845006B2904 /* ButtonCollectionViewCell.swift */,
 				DC6E55E627ABCC3A00998FF9 /* CollectionViewLeftAlignFlowLayout.swift */,
 				DCC419ED27A44850006B2904 /* CollectionViewCell.swift */,
+				DC6E9F5A27C20105009D2DAD /* SeSacCharacterCollectionViewCell.swift */,
+				DC6E9F5C27C2011B009D2DAD /* SeSacBackgroundCollectionViewCell.swift */,
 			);
 			path = CollectionViewCell;
 			sourceTree = "<group>";
@@ -593,7 +611,9 @@
 				DC1873FB27A2603000DE4FBD /* LoginView.swift in Sources */,
 				DCF8943A27B22B8F001BE5DF /* RecivedViewController.swift in Sources */,
 				DCA592D427BA2E610088940B /* MatchingStateEnum.swift in Sources */,
+				DC6E9F5D27C2011B009D2DAD /* SeSacBackgroundCollectionViewCell.swift in Sources */,
 				DCA592E027BB5A7F0088940B /* ChattingView.swift in Sources */,
+				DC6E9F5327C1DA25009D2DAD /* CharacterShopView.swift in Sources */,
 				DCE2D1DE2796C9D50018895F /* MainButtonStatus.swift in Sources */,
 				DCE2D1EB2796DB8C0018895F /* UIColor+Extension.swift in Sources */,
 				DC1873EE27A151E200DE4FBD /* ProfileTableViewCell.swift in Sources */,
@@ -607,6 +627,7 @@
 				DCF8943127B21D12001BE5DF /* SeSecFindView.swift in Sources */,
 				DCA592EF27C0F1C70088940B /* FriendsReportView.swift in Sources */,
 				DCA592ED27BE99AC0088940B /* FriendsReviewView.swift in Sources */,
+				DC6E9F5927C1DA64009D2DAD /* BackgroundShopViewController.swift in Sources */,
 				DCA592D627BA36F70088940B /* ReviewDetailViewController.swift in Sources */,
 				DCC419F027A78D44006B2904 /* MyInfoView.swift in Sources */,
 				DCDE36672799B1440077847C /* LoginConfirmViewController.swift in Sources */,
@@ -626,12 +647,14 @@
 				DCC419F727A7DE86006B2904 /* OutputDataStructswift.swift in Sources */,
 				DC18740727A2729700DE4FBD /* TwoButtonTableViewCell.swift in Sources */,
 				DC1873F127A1930D00DE4FBD /* IconTableViewCell.swift in Sources */,
+				DC6E9F5B27C20105009D2DAD /* SeSacCharacterCollectionViewCell.swift in Sources */,
 				DCE2D1BE279694720018895F /* SceneDelegate.swift in Sources */,
 				DC1873E927A1117A00DE4FBD /* MyPageViewController.swift in Sources */,
 				DC18740D27A2D66200DE4FBD /* LabelTableViewCell.swift in Sources */,
 				DC6E55E127AAD6B300998FF9 /* HobbySearchViewController.swift in Sources */,
 				DC6E55DE27AA519200998FF9 /* APIStatusResult.swift in Sources */,
 				DCE2D1E12796CCD30018895F /* MainTextFieldStatus.swift in Sources */,
+				DC6E9F5527C1DA45009D2DAD /* CharacterShopViewController.swift in Sources */,
 				DC6E55DC27A98A7800998FF9 /* Alert.swift in Sources */,
 				DC6E9F4C27C13E54009D2DAD /* FriendsDodgeViewController.swift in Sources */,
 				DC18740527A267EF00DE4FBD /* GenderView.swift in Sources */,
@@ -640,6 +663,7 @@
 				DCE2D1ED2796FF950018895F /* UIFont+Extension.swift in Sources */,
 				DC18740F27A2D7B000DE4FBD /* DoubleSliderTableViewCell.swift in Sources */,
 				DC1873F927A25EF000DE4FBD /* ViewRepresentable.swift in Sources */,
+				DC6E9F5727C1DA58009D2DAD /* BackgroundShopView.swift in Sources */,
 				DCA592EB27BE99A40088940B /* FriendsReviewViewController.swift in Sources */,
 				DCA592DC27BAB47B0088940B /* EmptySeSacTableViewCell.swift in Sources */,
 				DCC419F227A7CABD006B2904 /* InputDataStruct.swift in Sources */,

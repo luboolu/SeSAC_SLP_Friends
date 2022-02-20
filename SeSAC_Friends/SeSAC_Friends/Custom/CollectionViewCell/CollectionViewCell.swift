@@ -10,11 +10,17 @@ import Foundation
 enum CollectionViewCell {
     
     case ButtonCollectionViewCell
+    case SeSacCharacterCollectionViewCell
+    case SeSacBackgroundCollectionViewCell
     
     var id: String {
         switch self {
         case .ButtonCollectionViewCell:
             return "ButtonCollectionViewCell"
+        case .SeSacCharacterCollectionViewCell:
+            return "SeSacCharacterCollectionViewCell"
+        case .SeSacBackgroundCollectionViewCell:
+            return "SeSacBackgroundCollectionViewCell"
         }
     }
     
