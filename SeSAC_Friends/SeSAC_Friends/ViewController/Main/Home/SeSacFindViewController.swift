@@ -249,7 +249,7 @@ final class SeSacFindViewController: UIViewController {
                         DispatchQueue.main.async {
                             if myQueueState.matched == 1 {
                                 //매칭된 상태이므로 토스트 메세지를 띄우고, 채팅방으로 이동
-                                self.view.makeToast("000님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다." ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                                self.view.makeToast("\(String(describing: myQueueState.matchedNick ?? ""))님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다." ,duration: 2.0, position: .bottom, style: self.toastStyle)
                                 
                                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(2)) {
                                     //매칭 상태 변경

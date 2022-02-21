@@ -139,3 +139,19 @@ enum QueueDodge {
     case clientError  //501
 }
 
+enum GetChat {
+    case succeed      //200
+    case tokenError   //401
+    case notUser      //406
+    case serverError  //500
+    case clientError  //501
+}
+
+enum PostChat {
+    case succeed      //200
+    case notMatched   //201
+    case tokenError   //401
+    case notUser      //406
+    case serverError  //500
+    case clientError  //501
+}

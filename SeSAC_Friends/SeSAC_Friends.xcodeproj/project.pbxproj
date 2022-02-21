@@ -48,6 +48,9 @@
 		DC6E9F6327C321BF009D2DAD /* RequestPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E9F6227C321BF009D2DAD /* RequestPopUpViewController.swift */; };
 		DC6E9F6527C34872009D2DAD /* AcceptPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E9F6427C34872009D2DAD /* AcceptPopUpViewController.swift */; };
 		DC6E9F6727C34890009D2DAD /* AcceptPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E9F6627C34890009D2DAD /* AcceptPopUpView.swift */; };
+		DC6E9F6A27C364A4009D2DAD /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = DC6E9F6927C364A4009D2DAD /* SocketIO */; };
+		DC6E9F7027C36505009D2DAD /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = DC6E9F6F27C36505009D2DAD /* Alamofire */; };
+		DC6E9F7227C39F2B009D2DAD /* ChattingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E9F7127C39F2A009D2DAD /* ChattingViewModel.swift */; };
 		DCA1AAB9279D7B4F002194B4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = DCA1AAB8279D7B4F002194B4 /* FirebaseAuth */; };
 		DCA1AABB279D7B4F002194B4 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = DCA1AABA279D7B4F002194B4 /* FirebaseMessaging */; };
 		DCA1AABE279DA7CA002194B4 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA1AABD279DA7CA002194B4 /* Endpoint.swift */; };
@@ -159,6 +162,7 @@
 		DC6E9F6227C321BF009D2DAD /* RequestPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestPopUpViewController.swift; sourceTree = "<group>"; };
 		DC6E9F6427C34872009D2DAD /* AcceptPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptPopUpViewController.swift; sourceTree = "<group>"; };
 		DC6E9F6627C34890009D2DAD /* AcceptPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptPopUpView.swift; sourceTree = "<group>"; };
+		DC6E9F7127C39F2A009D2DAD /* ChattingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewModel.swift; sourceTree = "<group>"; };
 		DCA1AABD279DA7CA002194B4 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		DCA1AABF279E4531002194B4 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		DCA1AAC2279E94D1002194B4 /* UserdefualtKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserdefualtKey.swift; sourceTree = "<group>"; };
@@ -232,9 +236,11 @@
 				DCA1AAB9279D7B4F002194B4 /* FirebaseAuth in Frameworks */,
 				DCA1AABB279D7B4F002194B4 /* FirebaseMessaging in Frameworks */,
 				DCE2D20227985D5F0018895F /* RxSwift in Frameworks */,
+				DC6E9F7027C36505009D2DAD /* Alamofire in Frameworks */,
 				DCDE36632799A0010077847C /* Toast in Frameworks */,
 				DCE2D1D827969AE10018895F /* SnapKit in Frameworks */,
 				DCDE3675279C44860077847C /* IQKeyboardManagerSwift in Frameworks */,
+				DC6E9F6A27C364A4009D2DAD /* SocketIO in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,6 +370,7 @@
 			children = (
 				DCA1AABF279E4531002194B4 /* UserViewModel.swift */,
 				DCF8942E27B0B9E3001BE5DF /* QueueViewModel.swift */,
+				DC6E9F7127C39F2A009D2DAD /* ChattingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -526,6 +533,8 @@
 				DCA1AAB8279D7B4F002194B4 /* FirebaseAuth */,
 				DCA1AABA279D7B4F002194B4 /* FirebaseMessaging */,
 				DCE678E027A2DC0D00ACB1A7 /* MultiSlider */,
+				DC6E9F6927C364A4009D2DAD /* SocketIO */,
+				DC6E9F6F27C36505009D2DAD /* Alamofire */,
 			);
 			productName = SeSAC_Friends;
 			productReference = DCE2D1B8279694720018895F /* SeSAC_Friends.app */;
@@ -562,6 +571,8 @@
 				DCDE3673279C44860077847C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				DCA1AAB7279D7B4F002194B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				DCE678DF27A2DC0D00ACB1A7 /* XCRemoteSwiftPackageReference "MultiSlider" */,
+				DC6E9F6827C364A3009D2DAD /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
+				DC6E9F6E27C36505009D2DAD /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = DCE2D1B9279694720018895F /* Products */;
 			projectDirPath = "";
@@ -640,6 +651,7 @@
 				DC6E9F6527C34872009D2DAD /* AcceptPopUpViewController.swift in Sources */,
 				DCA592EF27C0F1C70088940B /* FriendsReportView.swift in Sources */,
 				DCA592ED27BE99AC0088940B /* FriendsReviewView.swift in Sources */,
+				DC6E9F7227C39F2B009D2DAD /* ChattingViewModel.swift in Sources */,
 				DC6E9F5927C1DA64009D2DAD /* BackgroundShopViewController.swift in Sources */,
 				DCA592D627BA36F70088940B /* ReviewDetailViewController.swift in Sources */,
 				DCC419F027A78D44006B2904 /* MyInfoView.swift in Sources */,
@@ -898,6 +910,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		DC6E9F6827C364A3009D2DAD /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/socketio/socket.io-client-swift.git";
+			requirement = {
+				kind = exactVersion;
+				version = 16.0.1;
+			};
+		};
+		DC6E9F6E27C36505009D2DAD /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		DCA1AAB7279D7B4F002194B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -949,6 +977,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		DC6E9F6927C364A4009D2DAD /* SocketIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC6E9F6827C364A3009D2DAD /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
+			productName = SocketIO;
+		};
+		DC6E9F6F27C36505009D2DAD /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC6E9F6E27C36505009D2DAD /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
 		DCA1AAB8279D7B4F002194B4 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DCA1AAB7279D7B4F002194B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

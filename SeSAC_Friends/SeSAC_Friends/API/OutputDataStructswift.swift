@@ -56,3 +56,22 @@ struct MyQueueState: Codable {
     let dodged, matched, reviewed: Int
     let matchedNick, matchedUid: String? //matched가 1인 경우에만 반환되는 값이라 optional 달아주기
 }
+
+// MARK: - GetChatData
+struct GetChatData: Codable {
+    let payload: [Payload]
+}
+
+// MARK: - Payload
+struct Payload: Codable {
+    let id: String
+    let v: Int
+    let to, from, chat, createdAt: String
+
+    enum CodingKeys: String, CodingKey {
+        case id = "_id"
+        case v = "__v"
+        case to, from, chat, createdAt
+    }
+}
+

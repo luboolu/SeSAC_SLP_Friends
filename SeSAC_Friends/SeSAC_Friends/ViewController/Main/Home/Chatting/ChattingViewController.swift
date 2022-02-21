@@ -15,11 +15,13 @@ final class ChattingViewController: UIViewController {
     
     private let mainView = ChattingView()
     private let viewModel = QueueViewModel()
+    private let chatViewModel = ChattingViewModel()
     private let disposeBag = DisposeBag()
     private let toastStyle = ToastStyle()
     
     private var menuButtonIsClicked = true
     private var matchingInfo: MyQueueState?
+    private var chattingData: GetChatData?
     
     var friendNick: String?
     var friendUid: String?
@@ -36,7 +38,7 @@ final class ChattingViewController: UIViewController {
         setTextView()
         setChatMenu()
         
-        updateMyState()
+        mainView.messageButton.addTarget(self, action: #selector(messageButtonClicked), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,6 +55,10 @@ final class ChattingViewController: UIViewController {
         backButton.tintColor = UIColor().black
         
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+        
+        DispatchQueue.main.async {
+            self.updateMyState()
+        }
     }
     
     private func setTableView() {
@@ -61,6 +67,7 @@ final class ChattingViewController: UIViewController {
         
         mainView.chattingTableView.register(MyChattingTableViewCell.self, forCellReuseIdentifier: TableViewCell.MyChattingTableViewCell.id)
         mainView.chattingTableView.register(FriendsChattingTableViewCell.self, forCellReuseIdentifier: TableViewCell.FriendsChattingTableViewCell.id)
+        
     }
     
     private func setTextView() {
@@ -140,6 +147,16 @@ final class ChattingViewController: UIViewController {
         mainView.reviewButton.isHidden = self.menuButtonIsClicked
     }
     
+    @objc private func messageButtonClicked() {
+        let text = mainView.messageTextView.text ?? ""
+        print(text)
+        
+        //채팅 보내고 난 후에 textView 초기화
+        mainView.messageTextView.text = ""
+        
+        //mainView.chattingTableView.scrollToRow(at: [0, 9], at: .bottom, animated: true)
+    }
+    
     private func updateMyState() {
         print(#function)
         
@@ -149,10 +166,12 @@ final class ChattingViewController: UIViewController {
                 case .succeed:
                     DispatchQueue.main.async {
                         if let myQueueState = myQueueState {
-                            print(myQueueState)
+                            //print(myQueueState)
                             self.matchingInfo = myQueueState
                             self.friendUid = myQueueState.matchedUid
                             self.friendNick = myQueueState.matchedNick
+                            self.isMatched(info: myQueueState)
+                            self.getChat()
                             self.navigationItem.title = "\(self.friendNick ?? "")"
                             self.reloadInputViews()
                         }
@@ -183,32 +202,104 @@ final class ChattingViewController: UIViewController {
             }
         }
     }
+    
+    private func isMatched(info: MyQueueState) -> Bool {
+        print(info)
+        if info.matched == 0 {
+            DispatchQueue.main.async {
+                self.view.makeToast("약속이 종료되어 메세지를 보낼 수 없습니다" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+            }
+            return false
+        } else if info.dodged == 1 {
+            DispatchQueue.main.async {
+                self.view.makeToast("상대방이 약속을 취소했습니다" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+            }
+            return false
+        } else if info.reviewed == 1 {
+            DispatchQueue.main.async {
+                self.view.makeToast("약속이 종료되어 메세지를 보낼 수 없습니다. 리뷰를 남겨주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+            }
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    private func getChat() {
+        print(#function)
+        guard let friendUid = matchingInfo?.matchedUid else {
+            return
+        }
+
+        chatViewModel.getChattingData(uid: friendUid, lastChatDate: "2000-01-01T00:00:00.000Z") { apiResult, getChat, getChatData in
+            print(apiResult)
+            print(getChat)
+            print(getChatData)
+            if let getChat = getChat {
+                switch getChat {
+                case .succeed:
+                    DispatchQueue.main.async {
+                        if let getChatData = getChatData {
+                            print(getChatData)
+                            self.chattingData = getChatData
+                            self.mainView.chattingTableView.reloadData()
+                        }
+                    }
+                case .tokenError:
+                    self.getChat()
+                case .notUser:
+                    DispatchQueue.main.async {
+                        //온보딩 화면으로 이동
+                        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                        windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: OnBoardingViewController())
+                        windowScene.windows.first?.makeKeyAndVisible()
+                    }
+                case .serverError:
+                    DispatchQueue.main.async {
+                        self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    }
+                case .clientError:
+                    DispatchQueue.main.async {
+                        self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    }
+                }
+            }
+        }
+    }
 }
 
 extension ChattingViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return self.chattingData?.payload.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row % 2 == 0 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.MyChattingTableViewCell.id) as? MyChattingTableViewCell else { return UITableViewCell() }
-            
-            cell.selectionStyle = .none
-            cell.timeLabel.text = "12:09"
-            cell.chatTextView.text = "내가 보낸 채팅"
-            
-            return cell
-        } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.FriendsChattingTableViewCell.id) as? FriendsChattingTableViewCell else { return UITableViewCell() }
-            
-            cell.selectionStyle = .none
-            cell.chatTextView.text = "친구가 보낸 채팅"
-            cell.timeLabel.text = "12:09"
-            
-            return cell
-        }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.FriendsChattingTableViewCell.id) as? FriendsChattingTableViewCell else { return UITableViewCell() }
+        
+        cell.selectionStyle = .none
+        cell.chatTextView.text = "\(self.chattingData?.payload[indexPath.row].chat ?? "")"
+        cell.timeLabel.text = "12:09"
+        
+        return cell
+        
+//        if indexPath.row % 2 == 0 {
+//            guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.MyChattingTableViewCell.id) as? MyChattingTableViewCell else { return UITableViewCell() }
+//
+//            cell.selectionStyle = .none
+//            cell.timeLabel.text = "12:09"
+//            cell.chatTextView.text = "내가 보낸 채팅"
+//
+//            return cell
+//        } else {
+//            guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.FriendsChattingTableViewCell.id) as? FriendsChattingTableViewCell else { return UITableViewCell() }
+//
+//            cell.selectionStyle = .none
+//            cell.chatTextView.text = "친구가 보낸 채팅"
+//            cell.timeLabel.text = "12:09"
+//
+//            return cell
+//        }
 
     }
 

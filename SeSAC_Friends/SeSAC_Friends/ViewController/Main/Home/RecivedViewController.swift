@@ -127,7 +127,6 @@ final class RecivedViewController: UIViewController {
                         let vc = ChattingViewController()
                         vc.friendUid = uid
                         //vc.friendNick = recivedData.fromQueueDBRequested[section].nick
-                        
                         self.navigationController?.pushViewController(vc, animated: true)
                     }
                 case .otherMatched:

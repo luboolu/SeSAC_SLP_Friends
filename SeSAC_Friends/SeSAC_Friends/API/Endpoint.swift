@@ -23,6 +23,10 @@ extension URL {
         return makeEndPoint("/queue")
     }
     
+    static var chat: URL {
+        return makeEndPoint("/chat")
+    }
+    
     //MARK: User
     static var userWithdraw: URL {
         return URL(string: "\(URL.user)/withdraw")!

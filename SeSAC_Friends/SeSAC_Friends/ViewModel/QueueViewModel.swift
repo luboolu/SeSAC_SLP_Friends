@@ -8,6 +8,7 @@
 import Foundation
 
 final class QueueViewModel {
+    
     private let userViewModel = UserViewModel()
     
     //새싹 친구 찾기 시작
