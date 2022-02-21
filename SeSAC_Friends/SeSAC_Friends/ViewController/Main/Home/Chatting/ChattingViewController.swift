@@ -197,18 +197,21 @@ extension ChattingViewController: UITableViewDelegate, UITableViewDataSource {
             
             cell.selectionStyle = .none
             cell.timeLabel.text = "12:09"
+            cell.chatTextView.text = "내가 보낸 채팅"
             
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.FriendsChattingTableViewCell.id) as? FriendsChattingTableViewCell else { return UITableViewCell() }
             
             cell.selectionStyle = .none
+            cell.chatTextView.text = "친구가 보낸 채팅"
             cell.timeLabel.text = "12:09"
             
             return cell
         }
 
     }
+
     
     
 }

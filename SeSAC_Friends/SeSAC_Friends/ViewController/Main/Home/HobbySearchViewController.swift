@@ -176,16 +176,23 @@ final class HobbySearchViewController: UIViewController {
                     }
                 case .blocked:
                      print("blocked")
+                    self.view.makeToast("신고가 누적되어 이용하실 수 없습니다", duration: 2.0, position: .bottom, style: self.toastStyle)
                 case .penaltyLv1:
                     print("penaltyLv1")
+                    self.view.makeToast("약속 취소 패널티로, 1분 동안 이용하실 수 없습니다", duration: 2.0, position: .bottom, style: self.toastStyle)
                 case .penaltyLv2:
                     print("penaltyLv2")
+                    self.view.makeToast("약속 취소 패널티로, 2분 동안 이용하실 수 없습니다", duration: 2.0, position: .bottom, style: self.toastStyle)
                 case .penaltyLv3:
                     print("penaltyLv3")
+                    self.view.makeToast("약속 취소 패널티로, 3분 동안 이용하실 수 없습니다", duration: 2.0, position: .bottom, style: self.toastStyle)
                 case .invalidGender:
                     print("invalidGender")
+                    self.view.makeToast("새싹 찾기 기능을 이용하기 위해서는 성별이 필요해요!", duration: 2.0, position: .bottom, style: self.toastStyle)
                 case .tokenError:
+                    self.findButtonClicked()
                     print("tokenError")
+                    return
                 case .notUser:
                     print("notUser")
                 case .serverError:

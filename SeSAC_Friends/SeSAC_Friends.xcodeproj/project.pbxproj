@@ -44,6 +44,10 @@
 		DC6E9F5927C1DA64009D2DAD /* BackgroundShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E9F5827C1DA64009D2DAD /* BackgroundShopViewController.swift */; };
 		DC6E9F5B27C20105009D2DAD /* SeSacCharacterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E9F5A27C20105009D2DAD /* SeSacCharacterCollectionViewCell.swift */; };
 		DC6E9F5F27C26306009D2DAD /* SeSacBackgroundTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E9F5E27C26306009D2DAD /* SeSacBackgroundTableViewCell.swift */; };
+		DC6E9F6127C321B2009D2DAD /* RequestPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E9F6027C321B2009D2DAD /* RequestPopUpView.swift */; };
+		DC6E9F6327C321BF009D2DAD /* RequestPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E9F6227C321BF009D2DAD /* RequestPopUpViewController.swift */; };
+		DC6E9F6527C34872009D2DAD /* AcceptPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E9F6427C34872009D2DAD /* AcceptPopUpViewController.swift */; };
+		DC6E9F6727C34890009D2DAD /* AcceptPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E9F6627C34890009D2DAD /* AcceptPopUpView.swift */; };
 		DCA1AAB9279D7B4F002194B4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = DCA1AAB8279D7B4F002194B4 /* FirebaseAuth */; };
 		DCA1AABB279D7B4F002194B4 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = DCA1AABA279D7B4F002194B4 /* FirebaseMessaging */; };
 		DCA1AABE279DA7CA002194B4 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA1AABD279DA7CA002194B4 /* Endpoint.swift */; };
@@ -151,6 +155,10 @@
 		DC6E9F5827C1DA64009D2DAD /* BackgroundShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundShopViewController.swift; sourceTree = "<group>"; };
 		DC6E9F5A27C20105009D2DAD /* SeSacCharacterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSacCharacterCollectionViewCell.swift; sourceTree = "<group>"; };
 		DC6E9F5E27C26306009D2DAD /* SeSacBackgroundTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSacBackgroundTableViewCell.swift; sourceTree = "<group>"; };
+		DC6E9F6027C321B2009D2DAD /* RequestPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestPopUpView.swift; sourceTree = "<group>"; };
+		DC6E9F6227C321BF009D2DAD /* RequestPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestPopUpViewController.swift; sourceTree = "<group>"; };
+		DC6E9F6427C34872009D2DAD /* AcceptPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptPopUpViewController.swift; sourceTree = "<group>"; };
+		DC6E9F6627C34890009D2DAD /* AcceptPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptPopUpView.swift; sourceTree = "<group>"; };
 		DCA1AABD279DA7CA002194B4 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		DCA1AABF279E4531002194B4 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		DCA1AAC2279E94D1002194B4 /* UserdefualtKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserdefualtKey.swift; sourceTree = "<group>"; };
@@ -282,6 +290,10 @@
 				DCF8943D27B22BDF001BE5DF /* RecivedView.swift */,
 				DCA592D527BA36F70088940B /* ReviewDetailViewController.swift */,
 				DCA592D727BA36FE0088940B /* ReviewDetailView.swift */,
+				DC6E9F6027C321B2009D2DAD /* RequestPopUpView.swift */,
+				DC6E9F6227C321BF009D2DAD /* RequestPopUpViewController.swift */,
+				DC6E9F6427C34872009D2DAD /* AcceptPopUpViewController.swift */,
+				DC6E9F6627C34890009D2DAD /* AcceptPopUpView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -597,6 +609,7 @@
 				DCDE366D279A9A4D0077847C /* EmailViewController.swift in Sources */,
 				DCF8943827B22B7F001BE5DF /* NearSeSacViewController.swift in Sources */,
 				DCA592DA27BA38A20088940B /* TextViewTableViewCell.swift in Sources */,
+				DC6E9F6127C321B2009D2DAD /* RequestPopUpView.swift in Sources */,
 				DCDE36652799A0300077847C /* Toast+Extension.swift in Sources */,
 				DC1873FD27A262B900DE4FBD /* LoginConfirmView.swift in Sources */,
 				DCA1AAC0279E4531002194B4 /* UserViewModel.swift in Sources */,
@@ -624,12 +637,14 @@
 				DC6E55E727ABCC3A00998FF9 /* CollectionViewLeftAlignFlowLayout.swift in Sources */,
 				DCE2D1FA279809D40018895F /* MainButtonTestViewController.swift in Sources */,
 				DCF8943127B21D12001BE5DF /* SeSecFindView.swift in Sources */,
+				DC6E9F6527C34872009D2DAD /* AcceptPopUpViewController.swift in Sources */,
 				DCA592EF27C0F1C70088940B /* FriendsReportView.swift in Sources */,
 				DCA592ED27BE99AC0088940B /* FriendsReviewView.swift in Sources */,
 				DC6E9F5927C1DA64009D2DAD /* BackgroundShopViewController.swift in Sources */,
 				DCA592D627BA36F70088940B /* ReviewDetailViewController.swift in Sources */,
 				DCC419F027A78D44006B2904 /* MyInfoView.swift in Sources */,
 				DCDE36672799B1440077847C /* LoginConfirmViewController.swift in Sources */,
+				DC6E9F6327C321BF009D2DAD /* RequestPopUpViewController.swift in Sources */,
 				DC18740127A2653B00DE4FBD /* BirthView.swift in Sources */,
 				DCA592E227BB7F2E0088940B /* MyChattingTableViewCell.swift in Sources */,
 				DCC419EC27A44845006B2904 /* ButtonCollectionViewCell.swift in Sources */,
@@ -639,6 +654,7 @@
 				DCC419EE27A44850006B2904 /* CollectionViewCell.swift in Sources */,
 				DCC8DEB727B4D222003E6080 /* SubButton.swift in Sources */,
 				DCE2D1F027970E000018895F /* LoginViewController.swift in Sources */,
+				DC6E9F6727C34890009D2DAD /* AcceptPopUpView.swift in Sources */,
 				DC1873F527A19D2600DE4FBD /* CharactorTableViewCell.swift in Sources */,
 				DC1873FF27A2648700DE4FBD /* NicknameView.swift in Sources */,
 				DCF8942F27B0B9E3001BE5DF /* QueueViewModel.swift in Sources */,

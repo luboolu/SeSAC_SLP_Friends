@@ -12,6 +12,17 @@ final class MyChattingTableViewCell: UITableViewCell, ViewRepresentable {
     
     let chatView = UIView()
     
+    let chatTextView: UITextView = {
+        let textView = UITextView()
+        
+        textView.font = UIFont().Body3_R14
+        textView.textColor = UIColor().black
+        textView.backgroundColor = UIColor().whitegreen
+        textView.isScrollEnabled = false
+        
+        return textView
+    }()
+    
     let timeLabel: UILabel = {
         let label = UILabel()
         
@@ -35,9 +46,8 @@ final class MyChattingTableViewCell: UITableViewCell, ViewRepresentable {
     func setupView() {
         chatView.clipsToBounds = true
         chatView.layer.cornerRadius = 8
-        chatView.layer.borderWidth = 1
-        chatView.layer.borderColor = UIColor().gray4.cgColor
-        
+        chatView.backgroundColor = UIColor().whitegreen
+        chatView.addSubview(chatTextView)
         self.addSubview(chatView)
         self.addSubview(timeLabel)
     }
@@ -45,14 +55,20 @@ final class MyChattingTableViewCell: UITableViewCell, ViewRepresentable {
     func setupConstraints() {
         chatView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(16)
-            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
             make.bottom.equalToSuperview().offset(-16)
-            make.width.equalToSuperview().multipliedBy(0.7)
-            make.height.equalTo(100)
+            make.width.lessThanOrEqualToSuperview().multipliedBy(0.7)
+        }
+        
+        chatTextView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(10)
+            make.leading.equalToSuperview().offset(10)
+            make.trailing.equalToSuperview().offset(-10)
+            make.bottom.equalToSuperview().offset(-10)
         }
         
         timeLabel.snp.makeConstraints { make in
-            make.leading.equalTo(chatView.snp.trailing).offset(8)
+            make.trailing.equalTo(chatView.snp.leading).offset(-8)
             make.bottom.equalToSuperview().offset(-16)
             make.width.equalTo(40)
             make.height.equalTo(18)

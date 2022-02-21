@@ -117,52 +117,52 @@ final class NearSeSacViewController: UIViewController {
         }
     }
     
-    private func requestBeFriend(section: Int) {
-        if let nearData = nearData {
-            viewModel.queueRequest(otherUID: nearData.fromQueueDB[section].uid) { apiResult, queueHobbyRequest in
+    func requestBeFriend(uid: String) {
+        print(#function)
+        viewModel.queueRequest(otherUID: uid) { apiResult, queueHobbyRequest in
+            
+            if let queueHobbyRequest = queueHobbyRequest {
+                switch queueHobbyRequest {
+                case .succeed:
+                    DispatchQueue.main.async {
+                        self.view.makeToast("취미 함께하기 요청을 보냈습니다" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    }
+                case .requested:
+                    //임시
+                    //상대방도 이미 나에게 취미 함께하기 요청을 보낸 상태
+                    //hobbyAccept 호출하고, 응답이 200이라면
+                    //userdefault에 matching 상태 변경하고, 채팅화면으로 전환
+                    DispatchQueue.main.async {
+                        UserDefaults.standard.set(matchingState.matched.rawValue, forKey: UserdefaultKey.matchingState.rawValue)
 
-                if let queueHobbyRequest = queueHobbyRequest {
-                    switch queueHobbyRequest {
-                    case .succeed:
-                        DispatchQueue.main.async {
-                            self.view.makeToast("취미 함께하기 요청을 보냈습니다" ,duration: 2.0, position: .bottom, style: self.toastStyle)
-                        }
-                    case .requested:
-                        //임시
-                        //상대방도 이미 나에게 취미 함께하기 요청을 보낸 상태
-                        //hobbyAccept 호출하고, 응답이 200이라면
-                        //userdefault에 matching 상태 변경하고, 채팅화면으로 전환
-                        DispatchQueue.main.async {
-                            UserDefaults.standard.set(matchingState.matched.rawValue, forKey: UserdefaultKey.matchingState.rawValue)
-                            
-                            self.view.makeToast("상대방도 취미 함께하기를 요청했습니다. 채팅방으로 이동합니다" ,duration: 2.0, position: .bottom, style: self.toastStyle)
-                        }
-                    case .stopped:
-                        DispatchQueue.main.async {
-                            self.view.makeToast("상대방이 취미 함께하기를 그만두었습니다" ,duration: 2.0, position: .bottom, style: self.toastStyle)
-                        }
-                    case .tokenError:
-                        self.requestBeFriend(section: section)
-                        return
-                    case .notUser:
-                        DispatchQueue.main.async {
-                            //온보딩 화면으로 이동
-                            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
-                            windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: OnBoardingViewController())
-                            windowScene.windows.first?.makeKeyAndVisible()
-                        }
-                    case .serverError:
-                        DispatchQueue.main.async {
-                            self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
-                        }
-                    case .clientError:
-                        DispatchQueue.main.async {
-                            self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
-                        }
+                        self.view.makeToast("상대방도 취미 함께하기를 요청했습니다. 채팅방으로 이동합니다" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    }
+                case .stopped:
+                    DispatchQueue.main.async {
+                        self.view.makeToast("상대방이 취미 함께하기를 그만두었습니다" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    }
+                case .tokenError:
+                    self.requestBeFriend(uid: uid)
+                    return
+                case .notUser:
+                    DispatchQueue.main.async {
+                        //온보딩 화면으로 이동
+                        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                        windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: OnBoardingViewController())
+                        windowScene.windows.first?.makeKeyAndVisible()
+                    }
+                case .serverError:
+                    DispatchQueue.main.async {
+                        self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    }
+                case .clientError:
+                    DispatchQueue.main.async {
+                        self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
                     }
                 }
             }
         }
+        
     }
     
     private func moreButtonClicked(section: Int, row: Int) {
@@ -179,12 +179,14 @@ final class NearSeSacViewController: UIViewController {
     
     private func matchingButtonClicked(section: Int, row: Int) {
         print(#function)
-
-        requestBeFriend(section: section)
         
-//        //요청하기 api 부분 생략하고, 바로 채팅 화면으로 전환(임시)
-//        let vc = ChattingViewController()
-//        self.navigationController?.pushViewController(vc, animated: true)
+        let popUp = RequestPopUpViewController()
+        popUp.mainTitle = "취미 같이 하기를 요청할게요!"
+        popUp.subTitle = "요청이 수락되면 30분 후에 리뷰를 남길 수 있어요"
+        popUp.friendUid = nearData?.fromQueueDB[section].uid
+        popUp.modalPresentationStyle = .overCurrentContext
+        popUp.modalTransitionStyle = .crossDissolve
+        self.present(popUp, animated: true, completion: nil)
     }
 
     
@@ -269,6 +271,8 @@ extension NearSeSacViewController: UITableViewDelegate, UITableViewDataSource {
         //데이터가 없으면 새싹이 없다는 뷰 보여주기
         if dataNum == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.EmptySeSacTableViewCell.id) as? EmptySeSacTableViewCell else { return UITableViewCell()}
+            
+            cell.selectionStyle = .none
             
             return cell
         }
