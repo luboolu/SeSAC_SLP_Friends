@@ -109,7 +109,7 @@ final class CardTableViewCell: UITableViewCell, ViewRepresentable {
         collectionView.collectionViewLayout = layout
         collectionView.isPagingEnabled = false
         //collectionView.backgroundColor = UIColor().whitegreen
-        
+        collectionView.isScrollEnabled = false
         return collectionView
     }()
     

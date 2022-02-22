@@ -107,7 +107,7 @@ final class ChattingViewModel {
                 }
             } else if response.statusCode == 201 {
                 completion(.succeed, .notMatched, nil)
-            }  else if response.statusCode == 401 {                                                                
+            }  else if response.statusCode == 401 {
                 self.userViewModel.idTokenRequest { error in
                     completion(.succeed, .tokenError, nil)
                 }

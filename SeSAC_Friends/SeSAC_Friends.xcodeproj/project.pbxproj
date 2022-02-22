@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DC184DCA27C3E33500B12AEC /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = DC184DC927C3E33500B12AEC /* Realm */; };
+		DC184DCC27C3E33500B12AEC /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DC184DCB27C3E33500B12AEC /* RealmSwift */; };
+		DC184DCE27C3E35200B12AEC /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC184DCD27C3E35200B12AEC /* RealmModel.swift */; };
+		DC184DD027C4D42A00B12AEC /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC184DCF27C4D42A00B12AEC /* Date+Extension.swift */; };
 		DC1873E527A1113200DE4FBD /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1873E427A1113200DE4FBD /* ShopViewController.swift */; };
 		DC1873E727A1115C00DE4FBD /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1873E627A1115C00DE4FBD /* FriendsViewController.swift */; };
 		DC1873E927A1117A00DE4FBD /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1873E827A1117A00DE4FBD /* MyPageViewController.swift */; };
@@ -121,6 +125,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DC184DCD27C3E35200B12AEC /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
+		DC184DCF27C4D42A00B12AEC /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		DC1873E427A1113200DE4FBD /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		DC1873E627A1115C00DE4FBD /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		DC1873E827A1117A00DE4FBD /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
@@ -231,6 +237,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC184DCC27C3E33500B12AEC /* RealmSwift in Frameworks */,
+				DC184DCA27C3E33500B12AEC /* Realm in Frameworks */,
 				DCE2D20027985D5F0018895F /* RxCocoa in Frameworks */,
 				DCE678E127A2DC0D00ACB1A7 /* MultiSlider in Frameworks */,
 				DCA1AAB9279D7B4F002194B4 /* FirebaseAuth in Frameworks */,
@@ -428,6 +436,7 @@
 				DC1873F827A25EF000DE4FBD /* ViewRepresentable.swift */,
 				DCA1AAC2279E94D1002194B4 /* UserdefualtKey.swift */,
 				DCA592D327BA2E610088940B /* MatchingStateEnum.swift */,
+				DC184DCD27C3E35200B12AEC /* RealmModel.swift */,
 				DCE2D1C4279694750018895F /* Assets.xcassets */,
 				DCE2D1C6279694750018895F /* LaunchScreen.storyboard */,
 				DCE2D1CF279694BE0018895F /* GoogleService-Info.plist */,
@@ -474,6 +483,7 @@
 				DCE2D1EA2796DB8C0018895F /* UIColor+Extension.swift */,
 				DCE2D1EC2796FF950018895F /* UIFont+Extension.swift */,
 				DCDE36642799A0300077847C /* Toast+Extension.swift */,
+				DC184DCF27C4D42A00B12AEC /* Date+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -535,6 +545,8 @@
 				DCE678E027A2DC0D00ACB1A7 /* MultiSlider */,
 				DC6E9F6927C364A4009D2DAD /* SocketIO */,
 				DC6E9F6F27C36505009D2DAD /* Alamofire */,
+				DC184DC927C3E33500B12AEC /* Realm */,
+				DC184DCB27C3E33500B12AEC /* RealmSwift */,
 			);
 			productName = SeSAC_Friends;
 			productReference = DCE2D1B8279694720018895F /* SeSAC_Friends.app */;
@@ -573,6 +585,7 @@
 				DCE678DF27A2DC0D00ACB1A7 /* XCRemoteSwiftPackageReference "MultiSlider" */,
 				DC6E9F6827C364A3009D2DAD /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
 				DC6E9F6E27C36505009D2DAD /* XCRemoteSwiftPackageReference "Alamofire" */,
+				DC184DC827C3E33500B12AEC /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 			);
 			productRefGroup = DCE2D1B9279694720018895F /* Products */;
 			projectDirPath = "";
@@ -613,6 +626,7 @@
 				DCE678E527A2EA4D00ACB1A7 /* CardTableViewCell.swift in Sources */,
 				DC6E55DA27A97CE500998FF9 /* APIenum.swift in Sources */,
 				DC1873F727A2466400DE4FBD /* MyPageView.swift in Sources */,
+				DC184DD027C4D42A00B12AEC /* Date+Extension.swift in Sources */,
 				DCF8943327B21D1D001BE5DF /* SeSacFindViewController.swift in Sources */,
 				DCDCC2DF279FD29500FB142B /* OnBoardingViewController.swift in Sources */,
 				DCA1AAC3279E94D2002194B4 /* UserdefualtKey.swift in Sources */,
@@ -649,6 +663,7 @@
 				DCE2D1FA279809D40018895F /* MainButtonTestViewController.swift in Sources */,
 				DCF8943127B21D12001BE5DF /* SeSecFindView.swift in Sources */,
 				DC6E9F6527C34872009D2DAD /* AcceptPopUpViewController.swift in Sources */,
+				DC184DCE27C3E35200B12AEC /* RealmModel.swift in Sources */,
 				DCA592EF27C0F1C70088940B /* FriendsReportView.swift in Sources */,
 				DCA592ED27BE99AC0088940B /* FriendsReviewView.swift in Sources */,
 				DC6E9F7227C39F2B009D2DAD /* ChattingViewModel.swift in Sources */,
@@ -910,6 +925,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		DC184DC827C3E33500B12AEC /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-cocoa.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		DC6E9F6827C364A3009D2DAD /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/socketio/socket.io-client-swift.git";
@@ -977,6 +1000,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		DC184DC927C3E33500B12AEC /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC184DC827C3E33500B12AEC /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = Realm;
+		};
+		DC184DCB27C3E33500B12AEC /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC184DC827C3E33500B12AEC /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = RealmSwift;
+		};
 		DC6E9F6927C364A4009D2DAD /* SocketIO */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DC6E9F6827C364A3009D2DAD /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;

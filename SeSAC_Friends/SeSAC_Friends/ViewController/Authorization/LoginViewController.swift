@@ -119,7 +119,7 @@ final class LoginViewController: UIViewController {
         //숫자로 입력
         isNumberValid = mainView.textfieldView.textfield.rx.text
             .map { text -> Bool in
-                return (text?.count == 13)
+                return (text?.count == 11)
             }.distinctUntilChanged()
             
         
@@ -156,14 +156,14 @@ final class LoginViewController: UIViewController {
          }
         
         
-        //전화번호에 하이픈 넣기
-        if number.count == 3 || number.count == 8 {
-            self.mainView.textfieldView.textfield.text = number.appending("-")
-        }
+//        //전화번호에 하이픈 넣기
+//        if number.count == 3 || number.count == 8 {
+//            self.mainView.textfieldView.textfield.text = number.appending("-")
+//        }
         
         //13자리 넘게 입력되지 않도록 함
-        if number.count > 13 {
-            let index = number.index(number.startIndex, offsetBy: 13)
+        if number.count > 11 {
+            let index = number.index(number.startIndex, offsetBy: 11)
             self.mainView.textfieldView.textfield.text = String(number[..<index])
         }
     }
