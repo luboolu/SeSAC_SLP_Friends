@@ -33,7 +33,7 @@ final class ChattingViewController: UIViewController {
             if tasks.count != 0 {
                 self.mainView.chattingTableView.scrollToRow(at: [0, tasks.count - 1], at: .bottom, animated: true)
             }
-            print(tasks)
+            //print(tasks)
         }
     }
     
@@ -59,7 +59,8 @@ final class ChattingViewController: UIViewController {
         setTableView()
         setTextView()
         setChatMenu()
-        chattingSocket()
+        //chattingSocket()
+        NotificationCenter.default.addObserver(self, selector: #selector(getMessage(notification:)), name: NSNotification.Name("getMessage"), object: nil)
         
         mainView.messageButton.addTarget(self, action: #selector(messageButtonClicked), for: .touchUpInside)
     }
@@ -335,7 +336,7 @@ final class ChattingViewController: UIViewController {
                                         self.localRealm.add(data)
                                     }
                                 }
-                                
+                                SocketIOManager.shared.establishConnection()
                                 self.mainView.chattingTableView.reloadData()
                             }
                         }
@@ -402,36 +403,28 @@ final class ChattingViewController: UIViewController {
             }
         }
     }
-    
-    private func chattingSocket() {
-        let url = "http://test.monocoding.com:35484"
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(getMessage(notification:)), name: NSNotification.Name("getMessage"), object: nil)
-        
-        let idtoken = UserDefaults.standard.string(forKey: UserdefaultKey.idToken.rawValue) ?? ""
-        let header: HTTPHeaders = [
-            "\(APIHeader.idtoken.string)": "\(idtoken)",
-            "\(APIHeader.ContentType.string)": "\(APIHeaderValue.ContentType.string)"
-        ]
-        
-        AF.request(url, method: .get, headers: header).responseDecodable(of: [Payload].self) { response in
-            switch response.result {
-            case .success(let value):
-                print(value)
-                SocketIOManager.shared.establishConnection()
-            case .failure(let error):
-                print("Error", error)
-            }
-        }
-        
-        
 
-    }
     
     @objc func getMessage(notification: NSNotification) {
+        print(#function)
+        //print(notification)
         
-        print(notification)
+        let id = notification.userInfo?["_id"] as! String
+        let chat = notification.userInfo?["chat"] as! String
+        let createdAt = notification.userInfo?["createdAt"] as! String
+        let from = notification.userInfo?["from"] as! String
+        let to = notification.userInfo?["to"] as! String
         
+        let data = UserChatting(to: to, from: from, chat: chat, createdAt: createdAt)
+        print(data)
+        //DispatchQueue.main.async {
+            //Realm 데이터 추가
+        try! self.localRealm.write {
+            self.localRealm.add(data)
+        }
+        self.mainView.chattingTableView.reloadData()
+        self.mainView.chattingTableView.scrollToRow(at: [0, self.tasks.count - 1], at: .bottom, animated: true)
+        //}
 
     }
 }

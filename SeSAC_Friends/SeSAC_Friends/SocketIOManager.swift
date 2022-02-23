@@ -23,7 +23,7 @@ class SocketIOManager: NSObject {
     override init() {
         super.init()
         
-        let url = URL(string: "http://test.monocoding.com:35484")!
+        let url = URL(string: "http://test.monocoding.com:35484/chat")!
         
         manager = SocketManager(socketURL: url, config: [
             .log(true),
@@ -36,6 +36,7 @@ class SocketIOManager: NSObject {
         //소켓 연결 메서드
         socket.on(clientEvent: .connect) { data, ack in
             print("Socket is connected", data, ack)
+            print(self.myUID)
             self.socket.emit("changesocketid", self.myUID)
         }
         
@@ -47,16 +48,16 @@ class SocketIOManager: NSObject {
         
         //소켓 채팅 듣는 메서드, sesac 이벤트로 날아온 데이터를 수신
         //데이터 수신 -> 디코딩 -> 모델에 추가 -> 갱신
-        socket.on("sesac") { data, ack in
-            print("SESAC RECIEVE", data, ack)
+        socket.on("chat") { data, ack in
+            //print("SESAC RECIEVE", data, ack)
             let data = data[0] as! NSDictionary
             let id = data["_id"] as! String
             let chat = data["chat"] as! String
             let createdAt = data["createdAt"] as! String
             let from = data["from"] as! String
             let to = data["to"] as! String
-            print("CHECK: ", data, id, chat, createdAt, from, to)
-            
+            //print("CHECK: ", data, id, chat, createdAt, from, to)
+             
             NotificationCenter.default.post(name: NSNotification.Name("getMessage"), object: self, userInfo: ["_id": id, "chat": chat, "createdAt": createdAt, "from": from, "to": to])
 
         }

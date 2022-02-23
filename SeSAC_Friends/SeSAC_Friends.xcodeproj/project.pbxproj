@@ -33,6 +33,7 @@
 		DC18740D27A2D66200DE4FBD /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18740C27A2D66200DE4FBD /* LabelTableViewCell.swift */; };
 		DC18740F27A2D7B000DE4FBD /* DoubleSliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18740E27A2D7AF00DE4FBD /* DoubleSliderTableViewCell.swift */; };
 		DC68264A27C63EFF00B7F49E /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC68264927C63EFF00B7F49E /* SocketIOManager.swift */; };
+		DC68264D27C6700800B7F49E /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = DC68264C27C6700800B7F49E /* SocketIO */; };
 		DC6E55DA27A97CE500998FF9 /* APIenum.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55D927A97CE500998FF9 /* APIenum.swift */; };
 		DC6E55DC27A98A7800998FF9 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55DB27A98A7800998FF9 /* Alert.swift */; };
 		DC6E55DE27AA519200998FF9 /* APIStatusResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55DD27AA519200998FF9 /* APIStatusResult.swift */; };
@@ -53,7 +54,6 @@
 		DC6E9F6327C321BF009D2DAD /* RequestPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E9F6227C321BF009D2DAD /* RequestPopUpViewController.swift */; };
 		DC6E9F6527C34872009D2DAD /* AcceptPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E9F6427C34872009D2DAD /* AcceptPopUpViewController.swift */; };
 		DC6E9F6727C34890009D2DAD /* AcceptPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E9F6627C34890009D2DAD /* AcceptPopUpView.swift */; };
-		DC6E9F6A27C364A4009D2DAD /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = DC6E9F6927C364A4009D2DAD /* SocketIO */; };
 		DC6E9F7027C36505009D2DAD /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = DC6E9F6F27C36505009D2DAD /* Alamofire */; };
 		DC6E9F7227C39F2B009D2DAD /* ChattingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E9F7127C39F2A009D2DAD /* ChattingViewModel.swift */; };
 		DCA1AAB9279D7B4F002194B4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = DCA1AAB8279D7B4F002194B4 /* FirebaseAuth */; };
@@ -244,13 +244,13 @@
 				DCE2D20027985D5F0018895F /* RxCocoa in Frameworks */,
 				DCE678E127A2DC0D00ACB1A7 /* MultiSlider in Frameworks */,
 				DCA1AAB9279D7B4F002194B4 /* FirebaseAuth in Frameworks */,
+				DC68264D27C6700800B7F49E /* SocketIO in Frameworks */,
 				DCA1AABB279D7B4F002194B4 /* FirebaseMessaging in Frameworks */,
 				DCE2D20227985D5F0018895F /* RxSwift in Frameworks */,
 				DC6E9F7027C36505009D2DAD /* Alamofire in Frameworks */,
 				DCDE36632799A0010077847C /* Toast in Frameworks */,
 				DCE2D1D827969AE10018895F /* SnapKit in Frameworks */,
 				DCDE3675279C44860077847C /* IQKeyboardManagerSwift in Frameworks */,
-				DC6E9F6A27C364A4009D2DAD /* SocketIO in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,10 +546,10 @@
 				DCA1AAB8279D7B4F002194B4 /* FirebaseAuth */,
 				DCA1AABA279D7B4F002194B4 /* FirebaseMessaging */,
 				DCE678E027A2DC0D00ACB1A7 /* MultiSlider */,
-				DC6E9F6927C364A4009D2DAD /* SocketIO */,
 				DC6E9F6F27C36505009D2DAD /* Alamofire */,
 				DC184DC927C3E33500B12AEC /* Realm */,
 				DC184DCB27C3E33500B12AEC /* RealmSwift */,
+				DC68264C27C6700800B7F49E /* SocketIO */,
 			);
 			productName = SeSAC_Friends;
 			productReference = DCE2D1B8279694720018895F /* SeSAC_Friends.app */;
@@ -586,9 +586,9 @@
 				DCDE3673279C44860077847C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				DCA1AAB7279D7B4F002194B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				DCE678DF27A2DC0D00ACB1A7 /* XCRemoteSwiftPackageReference "MultiSlider" */,
-				DC6E9F6827C364A3009D2DAD /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
 				DC6E9F6E27C36505009D2DAD /* XCRemoteSwiftPackageReference "Alamofire" */,
 				DC184DC827C3E33500B12AEC /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+				DC68264B27C6700800B7F49E /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
 			);
 			productRefGroup = DCE2D1B9279694720018895F /* Products */;
 			projectDirPath = "";
@@ -937,12 +937,12 @@
 				kind = branch;
 			};
 		};
-		DC6E9F6827C364A3009D2DAD /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
+		DC68264B27C6700800B7F49E /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/socketio/socket.io-client-swift.git";
 			requirement = {
 				kind = exactVersion;
-				version = 16.0.1;
+				version = 15.2.0;
 			};
 		};
 		DC6E9F6E27C36505009D2DAD /* XCRemoteSwiftPackageReference "Alamofire" */ = {
@@ -1014,9 +1014,9 @@
 			package = DC184DC827C3E33500B12AEC /* XCRemoteSwiftPackageReference "realm-cocoa" */;
 			productName = RealmSwift;
 		};
-		DC6E9F6927C364A4009D2DAD /* SocketIO */ = {
+		DC68264C27C6700800B7F49E /* SocketIO */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DC6E9F6827C364A3009D2DAD /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
+			package = DC68264B27C6700800B7F49E /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
 			productName = SocketIO;
 		};
 		DC6E9F6F27C36505009D2DAD /* Alamofire */ = {

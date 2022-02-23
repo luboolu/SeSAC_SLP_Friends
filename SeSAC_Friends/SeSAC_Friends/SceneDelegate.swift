@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     switch getUserResult {
                     case .existingUser:
                         if let userInfo = userInfo {
-                            UserDefaults.standard.set(userInfo.id, forKey: UserdefaultKey.uid.rawValue)
+                            UserDefaults.standard.set(userInfo.uid, forKey: UserdefaultKey.uid.rawValue)
                             UserDefaults.standard.set(userInfo.phoneNumber ,forKey: UserdefaultKey.phoneNumber.rawValue)
                             UserDefaults.standard.set(userInfo.gender ,forKey: UserdefaultKey.gender.rawValue)
                             UserDefaults.standard.set(userInfo.email ,forKey: UserdefaultKey.email.rawValue)
