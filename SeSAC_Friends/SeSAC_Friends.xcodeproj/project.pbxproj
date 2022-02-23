@@ -32,6 +32,7 @@
 		DC18740B27A2D53500DE4FBD /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18740A27A2D53500DE4FBD /* SwitchTableViewCell.swift */; };
 		DC18740D27A2D66200DE4FBD /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18740C27A2D66200DE4FBD /* LabelTableViewCell.swift */; };
 		DC18740F27A2D7B000DE4FBD /* DoubleSliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18740E27A2D7AF00DE4FBD /* DoubleSliderTableViewCell.swift */; };
+		DC68264A27C63EFF00B7F49E /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC68264927C63EFF00B7F49E /* SocketIOManager.swift */; };
 		DC6E55DA27A97CE500998FF9 /* APIenum.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55D927A97CE500998FF9 /* APIenum.swift */; };
 		DC6E55DC27A98A7800998FF9 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55DB27A98A7800998FF9 /* Alert.swift */; };
 		DC6E55DE27AA519200998FF9 /* APIStatusResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55DD27AA519200998FF9 /* APIStatusResult.swift */; };
@@ -148,6 +149,7 @@
 		DC18740A27A2D53500DE4FBD /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
 		DC18740C27A2D66200DE4FBD /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
 		DC18740E27A2D7AF00DE4FBD /* DoubleSliderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleSliderTableViewCell.swift; sourceTree = "<group>"; };
+		DC68264927C63EFF00B7F49E /* SocketIOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
 		DC6E55D927A97CE500998FF9 /* APIenum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIenum.swift; sourceTree = "<group>"; };
 		DC6E55DB27A98A7800998FF9 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		DC6E55DD27AA519200998FF9 /* APIStatusResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIStatusResult.swift; sourceTree = "<group>"; };
@@ -437,6 +439,7 @@
 				DCA1AAC2279E94D1002194B4 /* UserdefualtKey.swift */,
 				DCA592D327BA2E610088940B /* MatchingStateEnum.swift */,
 				DC184DCD27C3E35200B12AEC /* RealmModel.swift */,
+				DC68264927C63EFF00B7F49E /* SocketIOManager.swift */,
 				DCE2D1C4279694750018895F /* Assets.xcassets */,
 				DCE2D1C6279694750018895F /* LaunchScreen.storyboard */,
 				DCE2D1CF279694BE0018895F /* GoogleService-Info.plist */,
@@ -692,6 +695,7 @@
 				DC6E9F5B27C20105009D2DAD /* SeSacCharacterCollectionViewCell.swift in Sources */,
 				DCE2D1BE279694720018895F /* SceneDelegate.swift in Sources */,
 				DC1873E927A1117A00DE4FBD /* MyPageViewController.swift in Sources */,
+				DC68264A27C63EFF00B7F49E /* SocketIOManager.swift in Sources */,
 				DC18740D27A2D66200DE4FBD /* LabelTableViewCell.swift in Sources */,
 				DC6E9F5F27C26306009D2DAD /* SeSacBackgroundTableViewCell.swift in Sources */,
 				DC6E55E127AAD6B300998FF9 /* HobbySearchViewController.swift in Sources */,

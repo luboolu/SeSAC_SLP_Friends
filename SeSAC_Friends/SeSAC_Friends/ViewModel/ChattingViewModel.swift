@@ -13,16 +13,28 @@ final class ChattingViewModel {
     
     func getChattingData(uid: String, lastChatDate: String, completion: @escaping (APIResult?, GetChat? ,GetChatData?) -> Void) {
         
+
+        //http://test.monocoding.com:35484/chat/8t1DThnuClZdN8CPoRDBB9agYSM2?lastChatDate=2022-02-22%2014:53:55%20+0000
+        //http://test.monocoding.com:35484/chat/8t1DThnuClZdN8CPoRDBB9agYSM2?lastchatDate=2022-02-22%2014:53:55%20+0000
+        //http://test.monocoding.com:35484/chat/8t1DThnuClZdN8CPoRDBB9agYSM2?lastchatDate=2022-02-22%2014:53:55%20+0000
+        //http://test.monocoding.com:35484/chat/8t1DThnuClZdN8CPoRDBB9agYSM2?lastchatDate=2022-02-22%2014:53:55%20
+        print("lastchatDate: \(lastChatDate)")
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-ddTHH:mm:ssZ"
+        
+        let createdDate = dateFormatter.date(from: "2022-02-22 14:53:55 +0000")
+        print(createdDate)
+        
         let url = URL(string: "\(URL.chat)/\(uid)?lastchatDate=\(lastChatDate)")!
         let idtoken = UserDefaults.standard.string(forKey: UserdefaultKey.idToken.rawValue) ?? ""
-        //let hfBody = try? JSONSerialization.data(withJSONObject: hobby)
         var request = URLRequest(url: url)
-        //print(hfBody)
+        
         request.httpMethod = "GET"
-        //request.httpBody = "uid=\(uid)&lastChatDate=\(lastChatDate)".data(using: .utf8, allowLossyConversion: false)
+        //request.httpBody = "uid=\(uid)?lastchatDate=2000-01-01T00:00:00.000Z".data(using: .utf8, allowLossyConversion: false)
         request.addValue(APIHeaderValue.ContentType.string, forHTTPHeaderField: APIHeader.ContentType.string)
         request.addValue("\(idtoken)", forHTTPHeaderField: APIHeader.idtoken.string)
-        
+        print(request)
         let session = URLSession.shared
         session.dataTask(with: request) { data, response, error in
 
@@ -44,6 +56,7 @@ final class ChattingViewModel {
             if response.statusCode == 200 {
                 do {
                     let decoder = JSONDecoder()
+                    decoder.dateDecodingStrategy = .iso8601
                     let chatData = try decoder.decode(GetChatData.self, from: data)
                     
                     completion(.succeed, .succeed, chatData)

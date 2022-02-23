@@ -7,10 +7,12 @@
 
 import UIKit
 
+import Alamofire
 import RxCocoa
 import RxSwift
 import RealmSwift
 import Toast
+import SocketIO
 
 final class ChattingViewController: UIViewController {
     
@@ -28,7 +30,9 @@ final class ChattingViewController: UIViewController {
     private var tasks: Results<UserChatting>! {
         didSet {
             self.mainView.chattingTableView.reloadData()
-            //self.mainView.chattingTableView.scrollToRow(at: [0, tasks.count - 1], at: .bottom, animated: true)
+            if tasks.count != 0 {
+                self.mainView.chattingTableView.scrollToRow(at: [0, tasks.count - 1], at: .bottom, animated: true)
+            }
             print(tasks)
         }
     }
@@ -36,10 +40,6 @@ final class ChattingViewController: UIViewController {
     var friendNick: String?
     var friendUid: String? {
         didSet {
-//            print("uid didset!!!")
-//            print("old: \(oldValue)")
-//            print("new: \(friendUid)")
-
             self.tasks = localRealm.objects(UserChatting.self).filter("from == '\(friendUid ?? "")' or to == '\(friendUid ?? "")'").sorted(byKeyPath: "createdAt", ascending: true)
             self.getChat()
         }
@@ -59,6 +59,7 @@ final class ChattingViewController: UIViewController {
         setTableView()
         setTextView()
         setChatMenu()
+        chattingSocket()
         
         mainView.messageButton.addTarget(self, action: #selector(messageButtonClicked), for: .touchUpInside)
     }
@@ -81,6 +82,12 @@ final class ChattingViewController: UIViewController {
         DispatchQueue.main.async {
             self.updateMyState()
         }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        //화면이 사라지면, 소켓 연결을 끊는다
+        SocketIOManager.shared.closeConnection()
     }
     
     private func setTableView() {
@@ -173,6 +180,54 @@ final class ChattingViewController: UIViewController {
         let text = mainView.messageTextView.text ?? ""
         print(text)
         
+        guard let friendUid = friendUid else {
+            return
+        }
+
+        chatViewModel.postChat(uid: friendUid, message: text) { apiResult, postChat, postChatResult in
+            if let postChat = postChat {
+                switch postChat {
+                case .succeed:
+                    if let postChatResult = postChatResult {
+
+                        let data = UserChatting(to: postChatResult.to, from: postChatResult.from, chat: postChatResult.chat, createdAt: postChatResult.createdAt)
+
+                        DispatchQueue.main.async {
+                            //Realm 데이터 추가
+                            try! self.localRealm.write {
+                                self.localRealm.add(data)
+                            }
+                            self.mainView.chattingTableView.reloadData()
+                            self.mainView.chattingTableView.scrollToRow(at: [0, self.tasks.count - 1], at: .bottom, animated: true)
+                            
+                        }
+                        
+                    }
+                case .notMatched:
+                    DispatchQueue.main.async {
+                        self.view.makeToast("매칭 상태가 아니라 채팅을 전송할 수 없습니다" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    }
+                case .tokenError:
+                    self.messageButtonClicked()
+                case .notUser:
+                    DispatchQueue.main.async {
+                        //온보딩 화면으로 이동
+                        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                        windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: OnBoardingViewController())
+                        windowScene.windows.first?.makeKeyAndVisible()
+                    }
+                case .serverError:
+                    DispatchQueue.main.async {
+                        self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    }
+                case .clientError:
+                    DispatchQueue.main.async {
+                        self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    }
+                }
+            }
+        }
+        
         //채팅 보내고 난 후에 textView 초기화
         mainView.messageTextView.text = ""
         
@@ -250,7 +305,7 @@ final class ChattingViewController: UIViewController {
     
     private func getChat() {
         print(#function)
-        guard let friendUid = matchingInfo?.matchedUid else {
+        guard let friendUid = self.friendUid else {
             return
         }
         
@@ -263,25 +318,22 @@ final class ChattingViewController: UIViewController {
 //            print(createdDate)
 
             chatViewModel.getChattingData(uid: friendUid, lastChatDate: lastDate) { apiResult, getChat, getChatData in
-                
+                print(getChat)
                 if let getChat = getChat {
                     switch getChat {
                     case .succeed:
                         DispatchQueue.main.async {
                             if let getChatData = getChatData {
-                                print(getChatData)
+                                //print(getChatData)
                                 
                                 for chat in getChatData.payload {
-                                    let dateFormatter = DateFormatter()
-                                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-                                    
-                                    let createdDate = dateFormatter.date(from: chat.createdAt)!
-                                    let data = UserChatting(to: chat.to, from: chat.from, chat: chat.chat, createdAt: "\(createdDate)")
+
+                                    let data = UserChatting(to: chat.to, from: chat.from, chat: chat.chat, createdAt: chat.createdAt)
                                     print(data)
                                     //Realm 데이터 추가
-//                                    try! self.localRealm.write {
-//                                        self.localRealm.add(data)
-//                                    }
+                                    try! self.localRealm.write {
+                                        self.localRealm.add(data)
+                                    }
                                 }
                                 
                                 self.mainView.chattingTableView.reloadData()
@@ -316,7 +368,14 @@ final class ChattingViewController: UIViewController {
                     case .succeed:
                         DispatchQueue.main.async {
                             if let getChatData = getChatData {
-                                print(getChatData)
+                                for chat in getChatData.payload {
+                                    let data = UserChatting(to: chat.to, from: chat.from, chat: chat.chat, createdAt: chat.createdAt)
+                                    print(data)
+                                    //Realm 데이터 추가
+                                    try! self.localRealm.write {
+                                        self.localRealm.add(data)
+                                    }
+                                }
                                 
                                 self.mainView.chattingTableView.reloadData()
                             }
@@ -342,8 +401,37 @@ final class ChattingViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    private func chattingSocket() {
+        let url = "http://test.monocoding.com:35484"
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(getMessage(notification:)), name: NSNotification.Name("getMessage"), object: nil)
+        
+        let idtoken = UserDefaults.standard.string(forKey: UserdefaultKey.idToken.rawValue) ?? ""
+        let header: HTTPHeaders = [
+            "\(APIHeader.idtoken.string)": "\(idtoken)",
+            "\(APIHeader.ContentType.string)": "\(APIHeaderValue.ContentType.string)"
+        ]
+        
+        AF.request(url, method: .get, headers: header).responseDecodable(of: [Payload].self) { response in
+            switch response.result {
+            case .success(let value):
+                print(value)
+                SocketIOManager.shared.establishConnection()
+            case .failure(let error):
+                print("Error", error)
+            }
+        }
+        
         
 
+    }
+    
+    @objc func getMessage(notification: NSNotification) {
+        
+        print(notification)
+        
 
     }
 }
