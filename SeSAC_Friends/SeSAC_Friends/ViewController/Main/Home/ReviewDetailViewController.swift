@@ -51,6 +51,7 @@ extension ReviewDetailViewController: UITableViewDelegate, UITableViewDataSource
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.TextViewTableViewCell.id) as? TextViewTableViewCell else { return UITableViewCell() }
         print("리뷰셀")
         //cell.backgroundColor = UIColor().focus
+        cell.selectionStyle = .none
         cell.textView.text = "\(reviews?[indexPath.row] ?? "")"
         
         return cell

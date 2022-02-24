@@ -329,12 +329,10 @@ final class HomeViewController: UIViewController {
                                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(2)) {
                                     //매칭 상태 변경
                                     UserDefaults.standard.set(matchingState.matched.rawValue, forKey: UserdefaultKey.matchingState.rawValue)
-//                                    //채팅 화면으로 전환
-//                                    let vc = ChattingViewController()
-//                                    vc.friendUid = myQueueState.matchedUid
-//                                    vc.friendNick = myQueueState.matchedNick
-//
-//                                    self.navigationController?.pushViewController(vc, animated: true)
+                                    
+                                    if self.timer != nil && self.timer!.isValid {
+                                        self.timer!.invalidate()
+                                    }
                                 }
                             }
                         }
