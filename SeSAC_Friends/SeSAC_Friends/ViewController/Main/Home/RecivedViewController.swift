@@ -120,14 +120,15 @@ final class RecivedViewController: UIViewController {
                 switch queueHobbyAccept {
                 case .succeed:
                     DispatchQueue.main.async {
-                        //매칭 상태 변경
-                        UserDefaults.standard.set(matchingState.matched.rawValue, forKey: UserdefaultKey.matchingState.rawValue)
-                        //팝업 화면 dismiss
-                        //채팅 화면으로 전환
-                        let vc = ChattingViewController()
-                        vc.friendUid = uid
-                        //vc.friendNick = recivedData.fromQueueDBRequested[section].nick
-                        self.navigationController?.pushViewController(vc, animated: true)
+                        self.updateMyState()
+//                        //매칭 상태 변경
+//                        UserDefaults.standard.set(matchingState.matched.rawValue, forKey: UserdefaultKey.matchingState.rawValue)
+//                        //팝업 화면 dismiss
+//                        //채팅 화면으로 전환
+//                        let vc = ChattingViewController()
+//                        vc.friendUid = uid
+//                        //vc.friendNick = recivedData.fromQueueDBRequested[section].nick
+//                        self.navigationController?.pushViewController(vc, animated: true)
                     }
                 case .otherMatched:
                     DispatchQueue.main.async {
@@ -203,13 +204,18 @@ final class RecivedViewController: UIViewController {
                         DispatchQueue.main.async {
                             if myQueueState.matched == 1 {
                                 //매칭된 상태이므로 토스트 메세지를 띄우고, 채팅방으로 이동
-                                self.view.makeToast("000님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다." ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                                self.view.makeToast("\(String(describing: myQueueState.matchedNick ?? ""))님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다." ,duration: 2.0, position: .bottom, style: self.toastStyle)
                                 
-                                let vc = ChattingViewController()
-                                vc.friendUid = myQueueState.matchedUid
-                                vc.friendNick = myQueueState.matchedNick
-                                
-                                self.navigationController?.pushViewController(vc, animated: true)
+                                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(2)) {
+                                    //매칭 상태 변경
+                                    UserDefaults.standard.set(matchingState.matched.rawValue, forKey: UserdefaultKey.matchingState.rawValue)
+                                    //채팅 화면으로 전환
+                                    let vc = ChattingViewController()
+                                    vc.friendUid = myQueueState.matchedUid
+                                    vc.friendNick = myQueueState.matchedNick
+                                    
+                                    self.navigationController?.pushViewController(vc, animated: true)
+                                }
                             }
                         }
                     }

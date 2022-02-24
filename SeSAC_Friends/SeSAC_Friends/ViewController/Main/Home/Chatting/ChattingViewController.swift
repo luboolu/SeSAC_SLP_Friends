@@ -30,9 +30,6 @@ final class ChattingViewController: UIViewController {
     private var tasks: Results<UserChatting>! {
         didSet {
             self.mainView.chattingTableView.reloadData()
-            if tasks.count != 0 {
-                self.mainView.chattingTableView.scrollToRow(at: [0, tasks.count - 1], at: .bottom, animated: true)
-            }
             //print(tasks)
         }
     }
@@ -199,7 +196,9 @@ final class ChattingViewController: UIViewController {
                                 self.localRealm.add(data)
                             }
                             self.mainView.chattingTableView.reloadData()
-                            self.mainView.chattingTableView.scrollToRow(at: [0, self.tasks.count - 1], at: .bottom, animated: true)
+                            if self.tasks.count > 0 {
+                                //self.mainView.chattingTableView.scrollToRow(at: [0, self.tasks.count - 1], at: .bottom, animated: true)
+                            }
                             
                         }
                         
@@ -338,6 +337,10 @@ final class ChattingViewController: UIViewController {
                                 }
                                 SocketIOManager.shared.establishConnection()
                                 self.mainView.chattingTableView.reloadData()
+                                
+                                if self.tasks.count > 0 {
+                                    //self.mainView.chattingTableView.scrollToRow(at: [0, self.tasks.count - 1], at: .bottom, animated: true)
+                                }
                             }
                         }
                     case .tokenError:
@@ -423,7 +426,9 @@ final class ChattingViewController: UIViewController {
             self.localRealm.add(data)
         }
         self.mainView.chattingTableView.reloadData()
-        self.mainView.chattingTableView.scrollToRow(at: [0, self.tasks.count - 1], at: .bottom, animated: true)
+        if self.tasks.count > 0 {
+            self.mainView.chattingTableView.scrollToRow(at: [0, self.tasks.count - 1], at: .bottom, animated: true)
+        }
         //}
 
     }
