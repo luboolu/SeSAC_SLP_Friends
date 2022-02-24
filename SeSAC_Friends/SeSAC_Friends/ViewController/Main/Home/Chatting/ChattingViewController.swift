@@ -56,8 +56,6 @@ final class ChattingViewController: UIViewController {
         setTableView()
         setTextView()
         setChatMenu()
-        //chattingSocket()
-        NotificationCenter.default.addObserver(self, selector: #selector(getMessage(notification:)), name: NSNotification.Name("getMessage"), object: nil)
         
         mainView.messageButton.addTarget(self, action: #selector(messageButtonClicked), for: .touchUpInside)
     }
@@ -84,8 +82,7 @@ final class ChattingViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        //화면이 사라지면, 소켓 연결을 끊는다
-        SocketIOManager.shared.closeConnection()
+        socketDisConnect()
     }
     
     private func setTableView() {
@@ -94,7 +91,6 @@ final class ChattingViewController: UIViewController {
         
         mainView.chattingTableView.register(MyChattingTableViewCell.self, forCellReuseIdentifier: TableViewCell.MyChattingTableViewCell.id)
         mainView.chattingTableView.register(FriendsChattingTableViewCell.self, forCellReuseIdentifier: TableViewCell.FriendsChattingTableViewCell.id)
-        
     }
     
     private func setTextView() {
@@ -335,7 +331,7 @@ final class ChattingViewController: UIViewController {
                                         self.localRealm.add(data)
                                     }
                                 }
-                                SocketIOManager.shared.establishConnection()
+                                self.socketConnect()
                                 self.mainView.chattingTableView.reloadData()
                                 
                                 if self.tasks.count > 0 {
@@ -420,17 +416,29 @@ final class ChattingViewController: UIViewController {
         
         let data = UserChatting(to: to, from: from, chat: chat, createdAt: createdAt)
         print(data)
-        //DispatchQueue.main.async {
-            //Realm 데이터 추가
-        try! self.localRealm.write {
-            self.localRealm.add(data)
+        DispatchQueue.main.async {
+                //Realm 데이터 추가
+            try! self.localRealm.write {
+                self.localRealm.add(data)
+            }
+            self.mainView.chattingTableView.reloadData()
+            if self.tasks.count > 0 {
+                self.mainView.chattingTableView.scrollToRow(at: [0, self.tasks.count - 1], at: .bottom, animated: true)
+            }
         }
-        self.mainView.chattingTableView.reloadData()
-        if self.tasks.count > 0 {
-            self.mainView.chattingTableView.scrollToRow(at: [0, self.tasks.count - 1], at: .bottom, animated: true)
-        }
-        //}
 
+    }
+    
+    private func socketConnect() {
+        NotificationCenter.default.addObserver(self, selector: #selector(getMessage(notification:)), name: NSNotification.Name("getMessage"), object: nil)
+        SocketIOManager.shared.establishConnection()
+    }
+    
+    private func socketDisConnect() {
+        //화면이 사라지면, 소켓 연결을 끊는다
+        SocketIOManager.shared.closeConnection()
+        //노티피게이션 remove -> 해주지 않으면 notification이 중복으로 오게 된다
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("getMessage"), object: nil)
     }
 }
 
@@ -449,21 +457,20 @@ extension ChattingViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.FriendsChattingTableViewCell.id) as? FriendsChattingTableViewCell else { return UITableViewCell() }
             
             cell.selectionStyle = .none
-            //cell.chatTextView.text = "\(self.chattingData?.payload[indexPath.row].chat ?? "")"
             cell.chatTextView.text = "\(row.chat)"
             
-//            let chatTime = DateFormatter.chattingTime.string(from: row.createdAt)
-//            cell.timeLabel.text = "\(chatTime)"
+            let chatTime = DateFormatter.chattingTime.date(from: row.createdAt)
+            cell.timeLabel.text = "\(chatTime)"
             
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.MyChattingTableViewCell.id) as? MyChattingTableViewCell else { return UITableViewCell() }
             
             cell.selectionStyle = .none
-            //cell.chatTextView.text = "\(self.chattingData?.payload[indexPath.row].chat ?? "")"
             cell.chatTextView.text = "\(row.chat)"
-//            let chatTime = DateFormatter.chattingTime.string(from: row.createdAt)
-//            cell.timeLabel.text = "\(chatTime)"
+            
+            let chatTime = DateFormatter.chattingTime.date(from: row.createdAt)
+            cell.timeLabel.text = "\(chatTime)"
             
             return cell
         }
