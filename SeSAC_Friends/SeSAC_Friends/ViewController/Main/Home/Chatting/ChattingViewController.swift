@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import RxCocoa
 import RxSwift
+import RxKeyboard
 import RealmSwift
 import Toast
 import SocketIO
@@ -52,12 +53,28 @@ final class ChattingViewController: UIViewController {
 
         //Realm 파일 위치
         print("Realm is loacaed at: ", localRealm.configuration.fileURL!)
-        
+        initializeKeyboard()
         setTableView()
         setTextView()
         setChatMenu()
         
         mainView.messageButton.addTarget(self, action: #selector(messageButtonClicked), for: .touchUpInside)
+        
+        
+        RxKeyboard.instance.visibleHeight
+            .skip(1)
+            .drive(onNext: { keyboardVisibleHeight in
+                UIView.animate(withDuration: 0.5) {
+                    self.mainView.messageView.snp.updateConstraints { make in
+                        if keyboardVisibleHeight == 0 {
+                            make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-16)
+                        } else {
+                            make.bottom.equalTo(self.view.safeAreaLayoutGuide).inset( keyboardVisibleHeight - 30)
+                        }
+                    }
+                }
+                self.view.layoutIfNeeded()
+            }).disposed(by: disposeBag)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -459,8 +476,11 @@ extension ChattingViewController: UITableViewDelegate, UITableViewDataSource {
             cell.selectionStyle = .none
             cell.chatTextView.text = "\(row.chat)"
             
-            let chatTime = DateFormatter.chattingTime.date(from: row.createdAt)
-            cell.timeLabel.text = "\(chatTime)"
+            if let isoTime = DateFormatter.isoFormat.date(from: row.createdAt) {
+                let chatTime = DateFormatter.chattingTime.string(from: isoTime)
+                cell.timeLabel.text = "\(chatTime)"
+            }
+            
             
             return cell
         } else {
@@ -469,8 +489,10 @@ extension ChattingViewController: UITableViewDelegate, UITableViewDataSource {
             cell.selectionStyle = .none
             cell.chatTextView.text = "\(row.chat)"
             
-            let chatTime = DateFormatter.chattingTime.date(from: row.createdAt)
-            cell.timeLabel.text = "\(chatTime)"
+            if let isoTime = DateFormatter.isoFormat.date(from: row.createdAt) {
+                let chatTime = DateFormatter.chattingTime.string(from: isoTime)
+                cell.timeLabel.text = "\(chatTime)"
+            }
             
             return cell
         }

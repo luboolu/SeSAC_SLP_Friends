@@ -9,7 +9,7 @@ import UIKit
 import UserNotifications
 import Firebase
 import FirebaseMessaging
-import IQKeyboardManagerSwift
+//import IQKeyboardManagerSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,16 +21,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UNUserNotificationCenter.current().requestAuthorization(options: [.badge, .sound, .alert]) { (granted, error) in }
         application.registerForRemoteNotifications()
         
-        IQKeyboardManager.shared.enable = true
-        IQKeyboardManager.shared.enableAutoToolbar = false
-        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+//        IQKeyboardManager.shared.enable = true
+//        IQKeyboardManager.shared.enableAutoToolbar = false
+//        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         
         //네비게이션&탭바 폰트 설정
         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont().Title3_M14], for: .normal)
         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont().Title3_M14], for: .highlighted)
         UINavigationBar.appearance().titleTextAttributes = [ NSAttributedString.Key.font: UIFont().Title3_M14]
+        UINavigationBar.appearance().backgroundColor = UIColor().white
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont().Body4_R12], for: .normal)
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont().Body4_R12], for: .highlighted)
+        
+        
 
         //파이어베이스 메시지 대리자 설정
         Messaging.messaging().delegate = self

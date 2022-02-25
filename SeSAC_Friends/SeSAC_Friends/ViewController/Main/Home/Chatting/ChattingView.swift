@@ -92,7 +92,7 @@ final class ChattingView: UIView, ViewRepresentable {
         super.init(frame: frame)
         setupView()
         setupConstraints()
-
+        setAccView()
     }
     
     required init?(coder: NSCoder) {
@@ -116,6 +116,20 @@ final class ChattingView: UIView, ViewRepresentable {
         menuStackView.addArrangedSubview(cancelButton)
         menuStackView.addArrangedSubview(reviewButton)
         self.addSubview(menuStackView)
+    }
+    
+    private func setAccView() {
+        //키보드가 올라왔을때 보여지는 악세서리 뷰를 정의
+//        let ViewForButtonOnKeyboard = UIToolbar()
+//        ViewForButtonOnKeyboard.sizeToFit()
+//
+//        let flexSpace: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+//
+//        messageView.frame = CGRect.init(x: 0, y: 0, width:UIScreen.main.bounds.width, height: 48)
+//        let barButton = UIBarButtonItem.init(customView: messageView)
+//        ViewForButtonOnKeyboard.items = [flexSpace, barButton, flexSpace]
+        
+        //searchBar.inputAccessoryView = ViewForDoneButtonOnKeyboard
     }
      
     func setupConstraints() {

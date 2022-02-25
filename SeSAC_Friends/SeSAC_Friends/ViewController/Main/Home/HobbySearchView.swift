@@ -138,16 +138,16 @@ final class HobbySearchView: UIView, ViewRepresentable {
     
     private func setAccView() {
         //키보드가 올라왔을때 보여지는 악세서리 뷰를 정의
-        let ViewForDoneButtonOnKeyboard = UIToolbar()
-        ViewForDoneButtonOnKeyboard.sizeToFit()
+        let ViewForButtonOnKeyboard = UIToolbar()
+        ViewForButtonOnKeyboard.sizeToFit()
         
         let flexSpace: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
 
         accFindButton.frame = CGRect.init(x: 0, y: 0, width:UIScreen.main.bounds.width, height: 48)
         let barButton = UIBarButtonItem.init(customView: accFindButton)
-        ViewForDoneButtonOnKeyboard.items = [flexSpace, barButton, flexSpace]
+        ViewForButtonOnKeyboard.items = [flexSpace, barButton, flexSpace]
         
-        searchBar.inputAccessoryView = ViewForDoneButtonOnKeyboard
+        searchBar.inputAccessoryView = ViewForButtonOnKeyboard
     }
     
     

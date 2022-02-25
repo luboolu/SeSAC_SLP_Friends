@@ -34,6 +34,8 @@
 		DC18740F27A2D7B000DE4FBD /* DoubleSliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18740E27A2D7AF00DE4FBD /* DoubleSliderTableViewCell.swift */; };
 		DC68264A27C63EFF00B7F49E /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC68264927C63EFF00B7F49E /* SocketIOManager.swift */; };
 		DC68264D27C6700800B7F49E /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = DC68264C27C6700800B7F49E /* SocketIO */; };
+		DC68265127C908C700B7F49E /* ViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC68265027C908C700B7F49E /* ViewController+Extension.swift */; };
+		DC68265427C9125C00B7F49E /* RxKeyboard in Frameworks */ = {isa = PBXBuildFile; productRef = DC68265327C9125C00B7F49E /* RxKeyboard */; };
 		DC6E55DA27A97CE500998FF9 /* APIenum.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55D927A97CE500998FF9 /* APIenum.swift */; };
 		DC6E55DC27A98A7800998FF9 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55DB27A98A7800998FF9 /* Alert.swift */; };
 		DC6E55DE27AA519200998FF9 /* APIStatusResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55DD27AA519200998FF9 /* APIStatusResult.swift */; };
@@ -150,6 +152,7 @@
 		DC18740C27A2D66200DE4FBD /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
 		DC18740E27A2D7AF00DE4FBD /* DoubleSliderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleSliderTableViewCell.swift; sourceTree = "<group>"; };
 		DC68264927C63EFF00B7F49E /* SocketIOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
+		DC68265027C908C700B7F49E /* ViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Extension.swift"; sourceTree = "<group>"; };
 		DC6E55D927A97CE500998FF9 /* APIenum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIenum.swift; sourceTree = "<group>"; };
 		DC6E55DB27A98A7800998FF9 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		DC6E55DD27AA519200998FF9 /* APIStatusResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIStatusResult.swift; sourceTree = "<group>"; };
@@ -242,6 +245,7 @@
 				DC184DCC27C3E33500B12AEC /* RealmSwift in Frameworks */,
 				DC184DCA27C3E33500B12AEC /* Realm in Frameworks */,
 				DCE2D20027985D5F0018895F /* RxCocoa in Frameworks */,
+				DC68265427C9125C00B7F49E /* RxKeyboard in Frameworks */,
 				DCE678E127A2DC0D00ACB1A7 /* MultiSlider in Frameworks */,
 				DCA1AAB9279D7B4F002194B4 /* FirebaseAuth in Frameworks */,
 				DC68264D27C6700800B7F49E /* SocketIO in Frameworks */,
@@ -487,6 +491,7 @@
 				DCE2D1EC2796FF950018895F /* UIFont+Extension.swift */,
 				DCDE36642799A0300077847C /* Toast+Extension.swift */,
 				DC184DCF27C4D42A00B12AEC /* Date+Extension.swift */,
+				DC68265027C908C700B7F49E /* ViewController+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -550,6 +555,7 @@
 				DC184DC927C3E33500B12AEC /* Realm */,
 				DC184DCB27C3E33500B12AEC /* RealmSwift */,
 				DC68264C27C6700800B7F49E /* SocketIO */,
+				DC68265327C9125C00B7F49E /* RxKeyboard */,
 			);
 			productName = SeSAC_Friends;
 			productReference = DCE2D1B8279694720018895F /* SeSAC_Friends.app */;
@@ -589,6 +595,7 @@
 				DC6E9F6E27C36505009D2DAD /* XCRemoteSwiftPackageReference "Alamofire" */,
 				DC184DC827C3E33500B12AEC /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 				DC68264B27C6700800B7F49E /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
+				DC68265227C9125B00B7F49E /* XCRemoteSwiftPackageReference "RxKeyboard" */,
 			);
 			productRefGroup = DCE2D1B9279694720018895F /* Products */;
 			projectDirPath = "";
@@ -687,6 +694,7 @@
 				DC6E9F6727C34890009D2DAD /* AcceptPopUpView.swift in Sources */,
 				DC1873F527A19D2600DE4FBD /* CharactorTableViewCell.swift in Sources */,
 				DC1873FF27A2648700DE4FBD /* NicknameView.swift in Sources */,
+				DC68265127C908C700B7F49E /* ViewController+Extension.swift in Sources */,
 				DCF8942F27B0B9E3001BE5DF /* QueueViewModel.swift in Sources */,
 				DCE2D1DC2796A9080018895F /* MainButton.swift in Sources */,
 				DCC419F727A7DE86006B2904 /* OutputDataStructswift.swift in Sources */,
@@ -945,6 +953,14 @@
 				version = 15.2.0;
 			};
 		};
+		DC68265227C9125B00B7F49E /* XCRemoteSwiftPackageReference "RxKeyboard" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxKeyboard.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		DC6E9F6E27C36505009D2DAD /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -1018,6 +1034,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DC68264B27C6700800B7F49E /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
 			productName = SocketIO;
+		};
+		DC68265327C9125C00B7F49E /* RxKeyboard */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC68265227C9125B00B7F49E /* XCRemoteSwiftPackageReference "RxKeyboard" */;
+			productName = RxKeyboard;
 		};
 		DC6E9F6F27C36505009D2DAD /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
