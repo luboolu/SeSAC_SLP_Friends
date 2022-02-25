@@ -9,6 +9,7 @@ import UIKit
 
 import RxCocoa
 import RxSwift
+import RxKeyboard
 import Toast
 
 final class FriendsReviewViewController: UIViewController {
@@ -35,6 +36,7 @@ final class FriendsReviewViewController: UIViewController {
         setTitle()
         setButton()
         setTextView()
+        setKeyBoard()
     }
     
     private func setTitle() {
@@ -168,6 +170,25 @@ final class FriendsReviewViewController: UIViewController {
             }).disposed(by: disposeBag)
     }
      
+    private func setKeyBoard() {
+        initializeKeyboard()
+        
+        RxKeyboard.instance.visibleHeight
+            .skip(1)
+            .drive(onNext: { keyboardVisibleHeight in
+                UIView.animate(withDuration: 0.5) {
+                    self.mainView.registerButton.snp.updateConstraints { make in
+                        if keyboardVisibleHeight == 0 {
+                            make.bottom.equalToSuperview().offset(-16)
+                        } else {
+                            make.bottom.equalToSuperview().inset( keyboardVisibleHeight - 30)
+                        }
+                    }
+                }
+                self.view.layoutIfNeeded()
+            }).disposed(by: disposeBag)
+    }
+    
     @objc private func dismissButtonClicked() {
         print(#function)
         self.dismiss(animated: true, completion: nil)

@@ -9,6 +9,7 @@ import UIKit
 
 import RxCocoa
 import RxSwift
+import RxKeyboard
 import Toast
 
 final class FriendsReportViewController: UIViewController {
@@ -31,6 +32,7 @@ final class FriendsReportViewController: UIViewController {
         super.viewDidLoad()
         setButton()
         setTextView()
+        setKeyBoard()
     }
     
     private func setButton() {
@@ -150,6 +152,25 @@ final class FriendsReportViewController: UIViewController {
                     self.mainView.reportTextView.textColor = UIColor().black
                     self.showPlaceHolder = false
                 }
+            }).disposed(by: disposeBag)
+    }
+    
+    private func setKeyBoard() {
+        initializeKeyboard()
+        
+        RxKeyboard.instance.visibleHeight
+            .skip(1)
+            .drive(onNext: { keyboardVisibleHeight in
+                UIView.animate(withDuration: 0.5) {
+                    self.mainView.reportButton.snp.updateConstraints { make in
+                        if keyboardVisibleHeight == 0 {
+                            make.bottom.equalToSuperview().offset(-16)
+                        } else {
+                            make.bottom.equalToSuperview().inset( keyboardVisibleHeight - 30)
+                        }
+                    }
+                }
+                self.view.layoutIfNeeded()
             }).disposed(by: disposeBag)
     }
     
