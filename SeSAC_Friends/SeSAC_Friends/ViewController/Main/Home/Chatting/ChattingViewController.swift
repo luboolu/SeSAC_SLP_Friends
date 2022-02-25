@@ -70,6 +70,9 @@ final class ChattingViewController: UIViewController {
                             make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-16)
                         } else {
                             make.bottom.equalTo(self.view.safeAreaLayoutGuide).inset( keyboardVisibleHeight - 30)
+                            if self.tasks.count > 0 {
+                                self.mainView.chattingTableView.scrollToRow(at: [0, self.tasks.count - 1], at: .bottom, animated: true)
+                            }
                         }
                     }
                 }
@@ -210,7 +213,7 @@ final class ChattingViewController: UIViewController {
                             }
                             self.mainView.chattingTableView.reloadData()
                             if self.tasks.count > 0 {
-                                //self.mainView.chattingTableView.scrollToRow(at: [0, self.tasks.count - 1], at: .bottom, animated: true)
+                                self.mainView.chattingTableView.scrollToRow(at: [0, self.tasks.count - 1], at: .bottom, animated: true)
                             }
                             
                         }
