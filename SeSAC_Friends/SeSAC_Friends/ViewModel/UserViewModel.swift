@@ -97,7 +97,6 @@ final class UserViewModel {
                 do {
                     let decoder = JSONDecoder()
                     let userData = try decoder.decode(UserInfo.self, from: data)
-                    print(userData)
                     completion(.succeed, .existingUser, userData)
                 } catch {
                     completion(.invalidData, nil, nil)
@@ -331,7 +330,55 @@ final class UserViewModel {
         }.resume()
     }
     
-    
+    func userUpdateShop(character: Int, background: Int, completion: @escaping (APIResult?, UserUpdateShop?) -> Void) {
+        
+        let url = URL(string: "\(URL.userUpdateShop)")!
+        let idtoken = UserDefaults.standard.string(forKey: UserdefaultKey.idToken.rawValue) ?? ""
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "POST"
+        request.httpBody = "sesac=\(character)&background=\(background)".data(using: .utf8, allowLossyConversion: false)
+        request.setValue(APIHeaderValue.ContentType.string, forHTTPHeaderField: APIHeader.ContentType.string)
+        request.setValue("\(idtoken)", forHTTPHeaderField: APIHeader.idtoken.string)
+        
+        let session = URLSession.shared
+        
+        session.dataTask(with: request) { data, response, error in
+            if error != nil {
+                completion(.failed, nil)
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse else {
+                completion(.invalidResponse, nil)
+                return
+            }
+
+            guard let data = data else {
+                completion(.noData, nil)
+                return
+            }
+            
+            if response.statusCode == 200 {
+                completion(.succeed, .succeed)
+            } else if response.statusCode == 201 {
+                completion(.failed, .notPurchsed)
+            } else if response.statusCode == 401 {
+                self.idTokenRequest { error in
+                    completion(.failed, .tokenError)
+                }
+            } else if response.statusCode == 500 {
+                completion(.failed, .serverError)
+            } else if response.statusCode == 501 {
+                completion(.failed, .clientError)
+            } else {
+                completion(.failed, nil)
+            }
+            
+            
+        }.resume()
+    }
+
     
     
     

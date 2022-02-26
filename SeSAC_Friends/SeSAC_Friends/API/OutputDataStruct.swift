@@ -1,5 +1,5 @@
 //
-//  OutputDataStructswift.swift
+//  OutputDataStruct.swift
 //  SeSAC_Friends
 //
 //  Created by 김진영 on 2022/01/31.

@@ -63,6 +63,8 @@ final class LaunchViewController: UIViewController {
                             UserDefaults.standard.set(userInfo.gender ,forKey: UserdefaultKey.gender.rawValue)
                             UserDefaults.standard.set(userInfo.email ,forKey: UserdefaultKey.email.rawValue)
                             UserDefaults.standard.set(userInfo.nick, forKey: UserdefaultKey.nickname.rawValue)
+                            UserDefaults.standard.set(userInfo.sesac, forKey: UserdefaultKey.shopCharacter.rawValue)
+                            UserDefaults.standard.set(userInfo.background, forKey: UserdefaultKey.shopBackground.rawValue)
                         }
                         
                         let vc = MainViewController()

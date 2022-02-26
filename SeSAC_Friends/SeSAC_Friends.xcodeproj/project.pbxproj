@@ -12,7 +12,6 @@
 		DC184DCE27C3E35200B12AEC /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC184DCD27C3E35200B12AEC /* RealmModel.swift */; };
 		DC184DD027C4D42A00B12AEC /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC184DCF27C4D42A00B12AEC /* Date+Extension.swift */; };
 		DC1873E527A1113200DE4FBD /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1873E427A1113200DE4FBD /* ShopViewController.swift */; };
-		DC1873E727A1115C00DE4FBD /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1873E627A1115C00DE4FBD /* FriendsViewController.swift */; };
 		DC1873E927A1117A00DE4FBD /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1873E827A1117A00DE4FBD /* MyPageViewController.swift */; };
 		DC1873EB27A1140E00DE4FBD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1873EA27A1140E00DE4FBD /* MainViewController.swift */; };
 		DC1873EE27A151E200DE4FBD /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1873ED27A151E200DE4FBD /* ProfileTableViewCell.swift */; };
@@ -83,7 +82,7 @@
 		DCC419EE27A44850006B2904 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC419ED27A44850006B2904 /* CollectionViewCell.swift */; };
 		DCC419F027A78D44006B2904 /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC419EF27A78D44006B2904 /* MyInfoView.swift */; };
 		DCC419F227A7CABD006B2904 /* InputDataStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC419F127A7CABD006B2904 /* InputDataStruct.swift */; };
-		DCC419F727A7DE86006B2904 /* OutputDataStructswift.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC419F627A7DE86006B2904 /* OutputDataStructswift.swift */; };
+		DCC419F727A7DE86006B2904 /* OutputDataStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC419F627A7DE86006B2904 /* OutputDataStruct.swift */; };
 		DCC8DEB727B4D222003E6080 /* SubButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8DEB627B4D222003E6080 /* SubButton.swift */; };
 		DCC8DEB927B4D22C003E6080 /* SubButtonStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8DEB827B4D22C003E6080 /* SubButtonStatus.swift */; };
 		DCDCC2DF279FD29500FB142B /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCC2DE279FD29500FB142B /* OnBoardingViewController.swift */; };
@@ -133,7 +132,6 @@
 		DC184DCD27C3E35200B12AEC /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
 		DC184DCF27C4D42A00B12AEC /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		DC1873E427A1113200DE4FBD /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
-		DC1873E627A1115C00DE4FBD /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		DC1873E827A1117A00DE4FBD /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		DC1873EA27A1140E00DE4FBD /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		DC1873ED27A151E200DE4FBD /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
@@ -198,7 +196,7 @@
 		DCC419ED27A44850006B2904 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		DCC419EF27A78D44006B2904 /* MyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoView.swift; sourceTree = "<group>"; };
 		DCC419F127A7CABD006B2904 /* InputDataStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputDataStruct.swift; sourceTree = "<group>"; };
-		DCC419F627A7DE86006B2904 /* OutputDataStructswift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputDataStructswift.swift; sourceTree = "<group>"; };
+		DCC419F627A7DE86006B2904 /* OutputDataStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputDataStruct.swift; sourceTree = "<group>"; };
 		DCC8DEB627B4D222003E6080 /* SubButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubButton.swift; sourceTree = "<group>"; };
 		DCC8DEB827B4D22C003E6080 /* SubButtonStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubButtonStatus.swift; sourceTree = "<group>"; };
 		DCDCC2DE279FD29500FB142B /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
@@ -342,7 +340,7 @@
 				DC6E55D927A97CE500998FF9 /* APIenum.swift */,
 				DC6E55DD27AA519200998FF9 /* APIStatusResult.swift */,
 				DCC419F127A7CABD006B2904 /* InputDataStruct.swift */,
-				DCC419F627A7DE86006B2904 /* OutputDataStructswift.swift */,
+				DCC419F627A7DE86006B2904 /* OutputDataStruct.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -411,7 +409,6 @@
 				DC6E55DF27AABFCD00998FF9 /* Home */,
 				DC1873EC27A151CB00DE4FBD /* MyPage */,
 				DC1873EA27A1140E00DE4FBD /* MainViewController.swift */,
-				DC1873E627A1115C00DE4FBD /* FriendsViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -675,7 +672,6 @@
 				DC6E55E527AAD83900998FF9 /* HomeView.swift in Sources */,
 				DC1873EB27A1140E00DE4FBD /* MainViewController.swift in Sources */,
 				DC18740927A2CE9400DE4FBD /* TextfieldTableViewCell.swift in Sources */,
-				DC1873E727A1115C00DE4FBD /* FriendsViewController.swift in Sources */,
 				DC1873F327A1971900DE4FBD /* MyInfoViewController.swift in Sources */,
 				DC6E55E727ABCC3A00998FF9 /* CollectionViewLeftAlignFlowLayout.swift in Sources */,
 				DCE2D1FA279809D40018895F /* MainButtonTestViewController.swift in Sources */,
@@ -705,7 +701,7 @@
 				DC68265127C908C700B7F49E /* ViewController+Extension.swift in Sources */,
 				DCF8942F27B0B9E3001BE5DF /* QueueViewModel.swift in Sources */,
 				DCE2D1DC2796A9080018895F /* MainButton.swift in Sources */,
-				DCC419F727A7DE86006B2904 /* OutputDataStructswift.swift in Sources */,
+				DCC419F727A7DE86006B2904 /* OutputDataStruct.swift in Sources */,
 				DC18740727A2729700DE4FBD /* TwoButtonTableViewCell.swift in Sources */,
 				DC1873F127A1930D00DE4FBD /* IconTableViewCell.swift in Sources */,
 				DC6E9F5B27C20105009D2DAD /* SeSacCharacterCollectionViewCell.swift in Sources */,

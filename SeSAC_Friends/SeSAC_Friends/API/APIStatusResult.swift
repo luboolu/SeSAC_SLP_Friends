@@ -54,6 +54,24 @@ enum UserReportResult {
     case clientError  //501
 }
 
+enum UserUpdateShop {
+    case succeed      //200
+    case notPurchsed  //201
+    case tokenError   //401
+    case notUser      //406
+    case serverError  //500
+    case clientError  //501
+}
+
+enum UserShopPurchase {
+    case succeed      //200
+    case purchased    //201
+    case tokenError   //401
+    case notUser      //406
+    case serverError  //500
+    case clientError  //501
+}
+
 //MARK: QueueViewModel
 //친구 찾기 요청 시작
 enum QueueStart {

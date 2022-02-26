@@ -36,8 +36,16 @@ extension URL {
         return URL(string: "\(URL.user)/update/mypage")!
     }
     
+    static var userUpdateShop: URL {
+        return URL(string: "\(URL.user)/update/shop")!
+    }
+    
     static var userUpdateFCM: URL {
         return URL(string: "\(URL.user)/update_fcm_token")!
+    }
+    
+    static var userShopPurchase: URL {
+        return URL(string: "\(URL.user)/shop/purchaseItem")!
     }
     
     static var userReport: URL {

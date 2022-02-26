@@ -50,7 +50,7 @@ extension BackgroundShopViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        UserDefaults.standard.set(indexPath.row, forKey: UserdefaultKey.shopBackground.rawValue)
     }
-    
-    
+
 }

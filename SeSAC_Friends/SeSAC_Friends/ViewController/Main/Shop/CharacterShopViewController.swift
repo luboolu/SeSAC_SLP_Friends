@@ -51,5 +51,11 @@ extension CharacterShopViewController: UICollectionViewDelegate, UICollectionVie
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath.row)
+        UserDefaults.standard.set(indexPath.row, forKey: UserdefaultKey.shopCharacter.rawValue)
+        
+    }
+    
     
 }
