@@ -17,6 +17,7 @@ final class GenderViewController: UIViewController {
     private let viewModel = UserViewModel()
     private let mainView = GenderView()
     private let toastStyle = ToastStyle()
+    private let disposeBag = DisposeBag()
     
     private var isMan = false
     private var isWoman = false
@@ -54,7 +55,7 @@ final class GenderViewController: UIViewController {
                 }
                 
                 print("man: \(self.isMan) woman: \(self.isWoman)")
-            }
+            }.disposed(by: disposeBag)
         
         mainView.womanButton.rx.tap
             .bind {
@@ -78,7 +79,7 @@ final class GenderViewController: UIViewController {
                 }
                 
                 print("man: \(self.isMan) woman: \(self.isWoman)")
-            }
+            }.disposed(by: disposeBag)
         
         mainView.nextButton.rx.tap
             .bind {
@@ -94,7 +95,7 @@ final class GenderViewController: UIViewController {
                     UserDefaults.standard.set(-1, forKey: UserdefaultKey.gender.rawValue)
                 }
                 self.signInRequest() //회원가입 요청
-            }
+            }.disposed(by: disposeBag)
         
     }
     

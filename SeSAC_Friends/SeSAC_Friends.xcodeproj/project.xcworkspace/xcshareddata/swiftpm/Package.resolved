@@ -92,12 +92,12 @@
         }
       },
       {
-        "package": "IQKeyboardManagerSwift",
-        "repositoryURL": "https://github.com/hackiftekhar/IQKeyboardManager.git",
+        "package": "JGProgressHUD",
+        "repositoryURL": "https://github.com/JonasGessner/JGProgressHUD.git",
         "state": {
-          "branch": "master",
-          "revision": "474f849accae40fe61b5302d9b057dd48ee073ba",
-          "version": null
+          "branch": null,
+          "revision": "78d7cd35f1d90ff74fd82e486f2cbe4b24be8cf9",
+          "version": "2.2.0"
         }
       },
       {

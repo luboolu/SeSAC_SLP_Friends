@@ -36,6 +36,9 @@
 		DC68264D27C6700800B7F49E /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = DC68264C27C6700800B7F49E /* SocketIO */; };
 		DC68265127C908C700B7F49E /* ViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC68265027C908C700B7F49E /* ViewController+Extension.swift */; };
 		DC68265427C9125C00B7F49E /* RxKeyboard in Frameworks */ = {isa = PBXBuildFile; productRef = DC68265327C9125C00B7F49E /* RxKeyboard */; };
+		DC68265627C9E2D600B7F49E /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC68265527C9E2D600B7F49E /* LaunchViewController.swift */; };
+		DC68265C27C9E7CE00B7F49E /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = DC68265B27C9E7CE00B7F49E /* JGProgressHUD */; };
+		DC68265E27C9E88400B7F49E /* JGProgressHUD+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC68265D27C9E88300B7F49E /* JGProgressHUD+Extension.swift */; };
 		DC6E55DA27A97CE500998FF9 /* APIenum.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55D927A97CE500998FF9 /* APIenum.swift */; };
 		DC6E55DC27A98A7800998FF9 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55DB27A98A7800998FF9 /* Alert.swift */; };
 		DC6E55DE27AA519200998FF9 /* APIStatusResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55DD27AA519200998FF9 /* APIStatusResult.swift */; };
@@ -94,7 +97,6 @@
 		DCDE366D279A9A4D0077847C /* EmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE366C279A9A4C0077847C /* EmailViewController.swift */; };
 		DCDE366F279AB8920077847C /* GenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE366E279AB8920077847C /* GenderViewController.swift */; };
 		DCDE3672279C3A950077847C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE3671279C3A940077847C /* HomeViewController.swift */; };
-		DCDE3675279C44860077847C /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DCDE3674279C44860077847C /* IQKeyboardManagerSwift */; };
 		DCE2D1BC279694720018895F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1BB279694720018895F /* AppDelegate.swift */; };
 		DCE2D1BE279694720018895F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE2D1BD279694720018895F /* SceneDelegate.swift */; };
 		DCE2D1C5279694750018895F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCE2D1C4279694750018895F /* Assets.xcassets */; };
@@ -153,6 +155,8 @@
 		DC18740E27A2D7AF00DE4FBD /* DoubleSliderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleSliderTableViewCell.swift; sourceTree = "<group>"; };
 		DC68264927C63EFF00B7F49E /* SocketIOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
 		DC68265027C908C700B7F49E /* ViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Extension.swift"; sourceTree = "<group>"; };
+		DC68265527C9E2D600B7F49E /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		DC68265D27C9E88300B7F49E /* JGProgressHUD+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JGProgressHUD+Extension.swift"; sourceTree = "<group>"; };
 		DC6E55D927A97CE500998FF9 /* APIenum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIenum.swift; sourceTree = "<group>"; };
 		DC6E55DB27A98A7800998FF9 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		DC6E55DD27AA519200998FF9 /* APIStatusResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIStatusResult.swift; sourceTree = "<group>"; };
@@ -243,6 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC184DCC27C3E33500B12AEC /* RealmSwift in Frameworks */,
+				DC68265C27C9E7CE00B7F49E /* JGProgressHUD in Frameworks */,
 				DC184DCA27C3E33500B12AEC /* Realm in Frameworks */,
 				DCE2D20027985D5F0018895F /* RxCocoa in Frameworks */,
 				DC68265427C9125C00B7F49E /* RxKeyboard in Frameworks */,
@@ -254,7 +259,6 @@
 				DC6E9F7027C36505009D2DAD /* Alamofire in Frameworks */,
 				DCDE36632799A0010077847C /* Toast in Frameworks */,
 				DCE2D1D827969AE10018895F /* SnapKit in Frameworks */,
-				DCDE3675279C44860077847C /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,6 +379,7 @@
 				DCDCC2DD279FD27B00FB142B /* OnBoarding */,
 				DCE2D1EE27970DEC0018895F /* Authorization */,
 				DCDE3670279C3A790077847C /* Main */,
+				DC68265527C9E2D600B7F49E /* LaunchViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -490,6 +495,7 @@
 				DCE2D1EA2796DB8C0018895F /* UIColor+Extension.swift */,
 				DCE2D1EC2796FF950018895F /* UIFont+Extension.swift */,
 				DCDE36642799A0300077847C /* Toast+Extension.swift */,
+				DC68265D27C9E88300B7F49E /* JGProgressHUD+Extension.swift */,
 				DC184DCF27C4D42A00B12AEC /* Date+Extension.swift */,
 				DC68265027C908C700B7F49E /* ViewController+Extension.swift */,
 			);
@@ -547,7 +553,6 @@
 				DCE2D1FF27985D5F0018895F /* RxCocoa */,
 				DCE2D20127985D5F0018895F /* RxSwift */,
 				DCDE36622799A0010077847C /* Toast */,
-				DCDE3674279C44860077847C /* IQKeyboardManagerSwift */,
 				DCA1AAB8279D7B4F002194B4 /* FirebaseAuth */,
 				DCA1AABA279D7B4F002194B4 /* FirebaseMessaging */,
 				DCE678E027A2DC0D00ACB1A7 /* MultiSlider */,
@@ -556,6 +561,7 @@
 				DC184DCB27C3E33500B12AEC /* RealmSwift */,
 				DC68264C27C6700800B7F49E /* SocketIO */,
 				DC68265327C9125C00B7F49E /* RxKeyboard */,
+				DC68265B27C9E7CE00B7F49E /* JGProgressHUD */,
 			);
 			productName = SeSAC_Friends;
 			productReference = DCE2D1B8279694720018895F /* SeSAC_Friends.app */;
@@ -589,13 +595,13 @@
 				DCE2D1D627969AE00018895F /* XCRemoteSwiftPackageReference "SnapKit" */,
 				DCE2D1FE27985D5F0018895F /* XCRemoteSwiftPackageReference "RxSwift" */,
 				DCDE36612799A0010077847C /* XCRemoteSwiftPackageReference "Toast-Swift" */,
-				DCDE3673279C44860077847C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				DCA1AAB7279D7B4F002194B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				DCE678DF27A2DC0D00ACB1A7 /* XCRemoteSwiftPackageReference "MultiSlider" */,
 				DC6E9F6E27C36505009D2DAD /* XCRemoteSwiftPackageReference "Alamofire" */,
 				DC184DC827C3E33500B12AEC /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 				DC68264B27C6700800B7F49E /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
 				DC68265227C9125B00B7F49E /* XCRemoteSwiftPackageReference "RxKeyboard" */,
+				DC68265A27C9E7CE00B7F49E /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
 			);
 			productRefGroup = DCE2D1B9279694720018895F /* Products */;
 			projectDirPath = "";
@@ -639,6 +645,7 @@
 				DC184DD027C4D42A00B12AEC /* Date+Extension.swift in Sources */,
 				DCF8943327B21D1D001BE5DF /* SeSacFindViewController.swift in Sources */,
 				DCDCC2DF279FD29500FB142B /* OnBoardingViewController.swift in Sources */,
+				DC68265E27C9E88400B7F49E /* JGProgressHUD+Extension.swift in Sources */,
 				DCA1AAC3279E94D2002194B4 /* UserdefualtKey.swift in Sources */,
 				DCDE366B2799C0BD0077847C /* BirthViewController.swift in Sources */,
 				DCDE366D279A9A4D0077847C /* EmailViewController.swift in Sources */,
@@ -659,6 +666,7 @@
 				DC1873FB27A2603000DE4FBD /* LoginView.swift in Sources */,
 				DCF8943A27B22B8F001BE5DF /* RecivedViewController.swift in Sources */,
 				DCA592D427BA2E610088940B /* MatchingStateEnum.swift in Sources */,
+				DC68265627C9E2D600B7F49E /* LaunchViewController.swift in Sources */,
 				DCA592E027BB5A7F0088940B /* ChattingView.swift in Sources */,
 				DC6E9F5327C1DA25009D2DAD /* CharacterShopView.swift in Sources */,
 				DCE2D1DE2796C9D50018895F /* MainButtonStatus.swift in Sources */,
@@ -961,6 +969,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		DC68265A27C9E7CE00B7F49E /* XCRemoteSwiftPackageReference "JGProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		DC6E9F6E27C36505009D2DAD /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -980,14 +996,6 @@
 		DCDE36612799A0010077847C /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/scalessec/Toast-Swift.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-		DCDE3673279C44860077847C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
 			requirement = {
 				branch = master;
 				kind = branch;
@@ -1040,6 +1048,11 @@
 			package = DC68265227C9125B00B7F49E /* XCRemoteSwiftPackageReference "RxKeyboard" */;
 			productName = RxKeyboard;
 		};
+		DC68265B27C9E7CE00B7F49E /* JGProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC68265A27C9E7CE00B7F49E /* XCRemoteSwiftPackageReference "JGProgressHUD" */;
+			productName = JGProgressHUD;
+		};
 		DC6E9F6F27C36505009D2DAD /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DC6E9F6E27C36505009D2DAD /* XCRemoteSwiftPackageReference "Alamofire" */;
@@ -1059,11 +1072,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DCDE36612799A0010077847C /* XCRemoteSwiftPackageReference "Toast-Swift" */;
 			productName = Toast;
-		};
-		DCDE3674279C44860077847C /* IQKeyboardManagerSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DCDE3673279C44860077847C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
-			productName = IQKeyboardManagerSwift;
 		};
 		DCE2D1D727969AE10018895F /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
