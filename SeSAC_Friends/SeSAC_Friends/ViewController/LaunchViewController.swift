@@ -21,7 +21,6 @@ final class LaunchViewController: UIViewController {
         findBranch()
         
         view.backgroundColor = UIColor().white
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {

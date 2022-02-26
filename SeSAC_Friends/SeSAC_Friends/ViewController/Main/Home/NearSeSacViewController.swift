@@ -304,7 +304,7 @@ extension NearSeSacViewController: UITableViewDelegate, UITableViewDataSource {
             cell.selectionStyle = .none
             cell.titleCollectionView.tag = 101
             cell.hobbyCollectionView.tag = 102
-            
+            print(row.hf)
             cell.updateCell(reputation: row.reputation, review: row.reviews, hobby: row.hf)
             print("\(row.nick): \(row.reviews)")
             

@@ -38,8 +38,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("FCM registration token: \(token)")
             }
         }
-        
-        sleep(1)
 
         return true
     }

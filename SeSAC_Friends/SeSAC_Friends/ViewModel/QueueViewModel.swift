@@ -7,6 +7,13 @@
 
 import Foundation
 
+// MARK: - QueueStartBody
+struct QueueStartBody: Codable {
+    let type, region: Int
+    let long, lat: Double
+    let hf: [String]
+}
+
 final class QueueViewModel {
     
     private let userViewModel = UserViewModel()
@@ -16,7 +23,31 @@ final class QueueViewModel {
         
         let url = URL(string: "\(URL.queue)")!
         let idtoken = UserDefaults.standard.string(forKey: UserdefaultKey.idToken.rawValue) ?? ""
-        //let hfBody = try? JSONSerialization.data(withJSONObject: hobby)
+        
+        let httpBody = NSMutableData()
+        httpBody.append("type=\(type)&region=\(region)&lat=\(lat)&long=\(long)".data(using: .utf8, allowLossyConversion: false)!)
+        httpBody.append(try! JSONSerialization.data(withJSONObject: ["산책", "운동"]))
+        
+        let bodyString = "type=\(type)&region=\(region)&lat=\(lat)&long=\(long)".data(using: .utf8, allowLossyConversion: false)
+        let bodyArray = ["anything", "walk"]
+        
+        
+        let formData: [String : Any] = [
+            "type": type,
+            "region": region,
+            "lat": lat,
+            "long": long,
+            "hf": bodyArray
+        ]
+        
+
+        // key/value 형태의 데이터를 string 형태로 변환하는 부분
+        let formDataString = (formData.compactMap({ (key, value) -> String in
+            return "\(key)=\(value)"
+        }) as Array).joined(separator: "&")
+        print(formDataString)
+        let formEncodedData = formDataString.data(using: .utf8)
+
         var request = URLRequest(url: url)
         //print(hfBody)
         request.httpMethod = "POST"
@@ -25,6 +56,7 @@ final class QueueViewModel {
         request.addValue("\(idtoken)", forHTTPHeaderField: APIHeader.idtoken.string)
 
         let session = URLSession.shared
+        
         session.dataTask(with: request) { data, response, error in
 
             if error != nil {

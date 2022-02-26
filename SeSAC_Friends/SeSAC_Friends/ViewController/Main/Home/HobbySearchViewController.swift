@@ -37,6 +37,8 @@ final class HobbySearchViewController: UIViewController {
         setCollectionView()
         setSearchBar()
         setButton()
+        print(userLocation)
+        print(region)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -158,11 +160,13 @@ final class HobbySearchViewController: UIViewController {
         }
         
         var hf = ""
-        for hobby in myHobby {
-            hf.append("\(hobby), ")
+        if self.myHobby.count == 0 {
+            hf = "Anything"
+        } else {
+            hf = self.myHobby[0]
         }
 
-        viewModel.queueStart(type: 2, region: region, lat: userLocation[0], long: userLocation[1], hobby: "anything") { apiResult, queueStart in
+        viewModel.queueStart(type: 2, region: region, lat: userLocation[0], long: userLocation[1], hobby: hf) { apiResult, queueStart in
             print(queueStart)
             if let queueStart = queueStart {
                 switch queueStart {
@@ -227,10 +231,13 @@ final class HobbySearchViewController: UIViewController {
                         if let queueOnData = queueOnData {
                             self.recommandHobby = queueOnData.fromRecommend
                             var near: [String] = []
+                            let anything = ["anything", "Anything"]
                             
                             for data in queueOnData.fromQueueDB {
                                 for hf in data.hf {
-                                    near.append(hf)
+                                    if self.recommandHobby.contains(hf) == false && anything.contains(hf) == false {
+                                        near.append(hf)
+                                    }
                                 }
                             }
                             
