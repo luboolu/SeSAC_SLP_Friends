@@ -116,6 +116,7 @@ final class HomeViewController: UIViewController {
                 self.mainView.mapView.removeAnnotations(ants)
                 
                 self.genderFilter = 2
+                UserDefaults.standard.set(self.genderFilter, forKey: UserdefaultKey.genderFilter.rawValue)
                 self.searchFriends()
                 return .fill
             }
@@ -132,6 +133,7 @@ final class HomeViewController: UIViewController {
                 self.mainView.mapView.removeAnnotations(ants)
                 
                 self.genderFilter = 1
+                UserDefaults.standard.set(self.genderFilter, forKey: UserdefaultKey.genderFilter.rawValue)
                 self.searchFriends()
                 return .fill
             }
@@ -148,6 +150,7 @@ final class HomeViewController: UIViewController {
                 self.mainView.mapView.removeAnnotations(ants)
                 
                 self.genderFilter = 0
+                UserDefaults.standard.set(self.genderFilter, forKey: UserdefaultKey.genderFilter.rawValue)
                 self.searchFriends()
                 return .fill
             }

@@ -19,5 +19,6 @@ enum UserdefaultKey: String {
     case email
     case matchingState
     case uid
-    
+    case genderFilter
+
 }

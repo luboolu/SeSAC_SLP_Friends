@@ -22,7 +22,7 @@ final class NearSeSacViewController: UIViewController {
     
     private var wantedHobby = [["코딩1", "iOS1","보드게임1"],["코딩2", "iOS2","보드게임2"],["코딩3", "iOS3","보드게임3"]]
     
-    var nearData: QueueOnData?
+    var nearData: [FromQueueDB]?
     var region: Int?
     var location: [Double]?
     
@@ -41,13 +41,13 @@ final class NearSeSacViewController: UIViewController {
         mainView.friendsTableView.register(CharactorTableViewCell.self, forCellReuseIdentifier: TableViewCell.CharactorTableViewCell.id)
         mainView.friendsTableView.register(EmptySeSacTableViewCell.self, forCellReuseIdentifier: TableViewCell.EmptySeSacTableViewCell.id)
         
-        if let nearData = nearData {
-            self.moreButtonTapped.removeAll()
-            
-            for _ in 0...nearData.fromQueueDB.count {
-                self.moreButtonTapped.append(true)
-            }
-        }
+//        if let nearData = nearData {
+//            self.moreButtonTapped.removeAll()
+//
+//            for _ in 0...nearData.fromQueueDB.count {
+//                self.moreButtonTapped.append(true)
+//            }
+//        }
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(100)) {
             self.findFriends()
         }
@@ -85,11 +85,23 @@ final class NearSeSacViewController: UIViewController {
                             //기존의 moreButtonTapped의 값을 그대로 유지해야함
                             print("friends 데이터 갱신~~")
                             self.moreButtonTapped.removeAll()
-
-                            for _ in 0...queueOnData.fromQueueDB.count {
-                                self.moreButtonTapped.append(true)
+                            self.nearData = []
+                            
+                            let genderFilter = UserDefaults.standard.integer(forKey: UserdefaultKey.genderFilter.rawValue)
+                            for data in queueOnData.fromQueueDB {
+                                if genderFilter == 2 {
+                                    self.nearData?.append(data)
+                                } else if genderFilter == data.gender {
+                                    self.nearData?.append(data)
+                                }
                             }
-                            self.nearData = queueOnData
+                            
+                            if let nearData = self.nearData {
+                                for _ in 0...nearData.count {
+                                    self.moreButtonTapped.append(true)
+                                }
+                            }
+                            
                             self.mainView.friendsTableView.reloadData()
                         }
                     }
@@ -183,7 +195,7 @@ final class NearSeSacViewController: UIViewController {
         let popUp = RequestPopUpViewController()
         popUp.mainTitle = "취미 같이 하기를 요청할게요!"
         popUp.subTitle = "요청이 수락되면 30분 후에 리뷰를 남길 수 있어요"
-        popUp.friendUid = nearData?.fromQueueDB[section].uid
+        popUp.friendUid = nearData?[section].uid
         popUp.modalPresentationStyle = .overCurrentContext
         popUp.modalTransitionStyle = .crossDissolve
         self.present(popUp, animated: true, completion: nil)
@@ -231,7 +243,7 @@ final class NearSeSacViewController: UIViewController {
 extension NearSeSacViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        let dataNum = self.nearData?.fromQueueDB.count ?? 0
+        let dataNum = self.nearData?.count ?? 0
         
         if dataNum == 0 {
             print("section 1개")
@@ -242,7 +254,7 @@ extension NearSeSacViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let dataNum = self.nearData?.fromQueueDB.count ?? 0
+        let dataNum = self.nearData?.count ?? 0
         
         if dataNum == 0 {
             print("row 1개")
@@ -253,7 +265,7 @@ extension NearSeSacViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let dataNum = self.nearData?.fromQueueDB.count ?? 0
+        let dataNum = self.nearData?.count ?? 0
         
         if dataNum == 0 {
             return tableView.frame.height
@@ -267,7 +279,7 @@ extension NearSeSacViewController: UITableViewDelegate, UITableViewDataSource {
         //셀 데이터 입력
         guard let nearData = self.nearData else { return UITableViewCell() }
         
-        let dataNum = self.nearData?.fromQueueDB.count ?? 0
+        let dataNum = self.nearData?.count ?? 0
         //데이터가 없으면 새싹이 없다는 뷰 보여주기
         if dataNum == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.EmptySeSacTableViewCell.id) as? EmptySeSacTableViewCell else { return UITableViewCell()}
@@ -279,7 +291,7 @@ extension NearSeSacViewController: UITableViewDelegate, UITableViewDataSource {
         
         
         
-        let row = nearData.fromQueueDB[indexPath.section]
+        let row = nearData[indexPath.section]
         
         if indexPath.row == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.CharactorTableViewCell.id) as? CharactorTableViewCell else { return UITableViewCell()}
