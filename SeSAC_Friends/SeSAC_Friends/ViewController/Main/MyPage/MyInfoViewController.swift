@@ -27,6 +27,8 @@ final class MyInfoViewController: UIViewController {
     private var myHobby = ""
     private var myNumberSearch = 0
     private var myPreferredAge = [18, 35]
+    private var myCharacter = 0
+    private var myBackground = 0
     
     override func loadView() {
         self.view = mainView
@@ -53,31 +55,47 @@ final class MyInfoViewController: UIViewController {
     private func getUserInfo() {
         print(#function)
         
-        self.viewModel.getUser() { apiResult, getUserResult, data in
-            DispatchQueue.main.async {
-                print("statusCode: \(apiResult)")
-                
-                //유저정보 가져오는데 성공한 경우
-                if getUserResult == .existingUser {
-                    if let data = data {
-                        print(data)
-                        self.myInfo = data
-                        
-                        self.myGender = data.gender
-                        self.myHobby = data.hobby
-                        self.myNumberSearch = data.searchable
-                        self.myPreferredAge = [data.ageMin, data.ageMax]
-                        
+        self.viewModel.getUser() { apiResult, getUserResult, userInfo in
+            if let getUserResult = getUserResult {
+                switch getUserResult {
+                case .existingUser:
+                    DispatchQueue.main.async {
+                        if let userInfo = userInfo {
+                            print(userInfo)
+                            UserDefaults.standard.set(userInfo.background, forKey: UserdefaultKey.shopBackground.rawValue)
+                            UserDefaults.standard.set(userInfo.sesac, forKey: UserdefaultKey.shopCharacter.rawValue)
+                            UserDefaults.standard.set(userInfo.sesacCollection, forKey: UserdefaultKey.sesacCollection.rawValue)
+                            UserDefaults.standard.set(userInfo.backgroundCollection, forKey: UserdefaultKey.backgroundCollection.rawValue)
+                            
+                            self.myInfo = userInfo
+                            self.myGender = userInfo.gender
+                            self.myHobby = userInfo.hobby
+                            self.myNumberSearch = userInfo.searchable
+                            self.myPreferredAge = [userInfo.ageMin, userInfo.ageMax]
+                            self.myCharacter = userInfo.sesac
+                            self.myBackground = userInfo.background
+                        }
                         self.mainView.tableView.reloadData()
+
                     }
-                    
-                } else if getUserResult == .tokenError {
-                    //firebase token 만료
-                    //토큰 갱신해야함
-                    print("idtoken 갱신 필요")
+                case .tokenError:
                     self.getUserInfo()
-                } else {
-                    self.view.makeToast("에러가 발생했습니다! 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: self.toastStyle)
+                    return
+                case .newUser:
+                    DispatchQueue.main.async {
+                        //온보딩 화면으로 이동
+                        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                        windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: OnBoardingViewController())
+                        windowScene.windows.first?.makeKeyAndVisible()
+                    }
+                case .serverError:
+                    DispatchQueue.main.async {
+                        self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: .defaultStyle)
+                    }
+                case .clientError:
+                    DispatchQueue.main.async {
+                        self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: .defaultStyle)
+                    }
                 }
             }
         }
@@ -147,6 +165,8 @@ final class MyInfoViewController: UIViewController {
         print("moreButton tapped")
         self.moreButtonTabbed = !self.moreButtonTabbed
         self.mainView.tableView.reloadRows(at: [[0, 1]], with: .fade)
+        
+        self.viewDidLayoutSubviews()
     }
 }
 
@@ -165,8 +185,8 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.CharactorTableViewCell.id) as? CharactorTableViewCell else { return UITableViewCell()}
             
-            cell.backgroundImage.image = UIImage(named: "sesac_background_1")
-            cell.charactorImage.image = UIImage(named: "sesac_face_1")
+            cell.backgroundImage.image = UIImage(named: "sesac_background_\(self.myBackground + 1)")
+            cell.charactorImage.image = UIImage(named: "sesac_face_\(self.myCharacter + 1)")
             cell.matchingButton.isHidden = true
             
             return cell
@@ -179,12 +199,16 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
             cell.titleCollectionView.dataSource = self
             cell.titleCollectionView.register(ButtonCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.ButtonCollectionViewCell.id)
             
-            if let data = self.myInfo {
-                cell.nicknameLabel.text = data.nick
+            cell.titleCollectionView.tag = 101
+            cell.hobbyCollectionView.tag = 102
+            if let myInfo = self.myInfo {
+                cell.nicknameLabel.text = myInfo.nick
+                cell.updateCell(reputation: myInfo.reputation, review: myInfo.comment, hobby: [myInfo.hobby])
             }
+
             
             cell.titleView.isHidden = self.moreButtonTabbed
-            cell.hobbyView.isHidden = true
+            cell.hobbyView.isHidden = self.moreButtonTabbed
             cell.reviewView.isHidden = self.moreButtonTabbed
 
             cell.moreButton.addTarget(self, action: #selector(moreButtonClicked), for: .touchUpInside)

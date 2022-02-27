@@ -171,7 +171,6 @@ final class CardTableViewCell: UITableViewCell, ViewRepresentable {
         titleCollectionView.dataSource = self
         titleCollectionView.register(ButtonCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.ButtonCollectionViewCell.id)
         
-        
         hobbyCollectionView.delegate = self
         hobbyCollectionView.dataSource = self
         hobbyCollectionView.register(ButtonCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.ButtonCollectionViewCell.id)
@@ -208,9 +207,6 @@ final class CardTableViewCell: UITableViewCell, ViewRepresentable {
         cardStackView.addArrangedSubview(reviewView)
         
         contentView.addSubview(cardStackView)
-        
-        //처음엔 cardview가 접혀있어야함
-        
     }
     
     func setupConstraints() {
@@ -266,7 +262,7 @@ final class CardTableViewCell: UITableViewCell, ViewRepresentable {
             make.top.equalToSuperview().offset(14)
             make.leading.equalToSuperview().offset(8)
             make.trailing.equalToSuperview().offset(-8)
-            make.bottom.equalTo(hobbyCollectionView.snp.top).offset(0)
+            make.bottom.equalTo(hobbyCollectionView.snp.top).offset(-14)
         }
         
         hobbyCollectionView.snp.makeConstraints { make in
@@ -284,8 +280,8 @@ final class CardTableViewCell: UITableViewCell, ViewRepresentable {
         reviewLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(14)
             make.leading.equalToSuperview().offset(8)
-            //make.trailing.equalToSuperview().offset(-8)
-            //make.bottom.equalTo(reviewTextView.snp.top).offset(-14)
+            make.trailing.equalToSuperview().offset(-8)
+            make.bottom.equalTo(reviewTextView.snp.top).offset(-14)
         }
         
         reviewMoreButton.snp.makeConstraints { make in
@@ -311,9 +307,9 @@ final class CardTableViewCell: UITableViewCell, ViewRepresentable {
           }
 
         let height = hobbyCollectionView.collectionViewLayout.collectionViewContentSize.height
-        
-        hobbyCollectionView.snp.removeConstraints()
-        hobbyCollectionView.snp.remakeConstraints { make in
+        print("문제 \(height)")
+        //hobbyCollectionView.snp.removeConstraints()
+        hobbyCollectionView.snp.updateConstraints { make in
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
             make.height.equalTo(height + 32)
@@ -337,6 +333,7 @@ extension CardTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
         
         self.titleCollectionView.reloadData()
         self.hobbyCollectionView.reloadData()
+        self.setHobbyCollectionViewLayout()
         self.reviewView.reloadInputViews()
     }
     
@@ -376,8 +373,8 @@ extension CardTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
             
             let height = collectionView.collectionViewLayout.collectionViewContentSize.height
             
-            collectionView.snp.removeConstraints()
-            collectionView.snp.remakeConstraints { make in
+            //collectionView.snp.removeConstraints()
+            collectionView.snp.updateConstraints { make in
                 make.leading.equalToSuperview()
                 make.trailing.equalToSuperview()
                 make.bottom.equalToSuperview()

@@ -41,18 +41,11 @@ final class NearSeSacViewController: UIViewController {
         mainView.friendsTableView.register(CharactorTableViewCell.self, forCellReuseIdentifier: TableViewCell.CharactorTableViewCell.id)
         mainView.friendsTableView.register(EmptySeSacTableViewCell.self, forCellReuseIdentifier: TableViewCell.EmptySeSacTableViewCell.id)
         
-//        if let nearData = nearData {
-//            self.moreButtonTapped.removeAll()
-//
-//            for _ in 0...nearData.fromQueueDB.count {
-//                self.moreButtonTapped.append(true)
-//            }
-//        }
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(100)) {
             self.findFriends()
+            self.view.layoutIfNeeded()
         }
-        
-        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -288,9 +281,7 @@ extension NearSeSacViewController: UITableViewDelegate, UITableViewDataSource {
             
             return cell
         }
-        
-        
-        
+
         let row = nearData[indexPath.section]
         
         if indexPath.row == 0 {
