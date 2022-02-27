@@ -45,8 +45,6 @@ final class MyPageViewController: UIViewController {
 
     }
 
-
-
     @objc func profileDetailButtonClicked() {
         print(#function)
     }

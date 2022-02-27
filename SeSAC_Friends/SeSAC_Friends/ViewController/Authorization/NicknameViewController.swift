@@ -26,9 +26,19 @@ final class NicknameViewController: UIViewController {
         
         setTextField()
         setButton()
-        
+        initializeKeyboard()
         //화면 진입 시 키보드가 활성화되도록 textfield를 firstresponder로 설정
         mainView.nicknameTextField.textfield.becomeFirstResponder()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let backButton = UIBarButtonItem()
+        backButton.title = ""
+        backButton.tintColor = UIColor().black
+        
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
     }
     
     

@@ -47,7 +47,7 @@ final class LoginViewController: UIViewController {
 
         setButton()
         setTextFieldRx()
-        
+        initializeKeyboard()
     }
 
     
@@ -121,7 +121,6 @@ final class LoginViewController: UIViewController {
             .map { text -> Bool in
                 return (text?.count == 11)
             }.distinctUntilChanged()
-            
         
         isNumberValid.skip(1).subscribe(onNext: { value in
             if value == true {

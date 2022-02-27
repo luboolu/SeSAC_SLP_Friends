@@ -27,9 +27,19 @@ final class EmailViewController: UIViewController {
         
         setTextField()
         setButton()
-        
+        initializeKeyboard()
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let backButton = UIBarButtonItem()
+        backButton.title = ""
+        backButton.tintColor = UIColor().black
+        
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+    }
+    
     private func setTextField() {
         mainView.emailTextField.textfield.rx.text
             .subscribe(onNext: { newValue in

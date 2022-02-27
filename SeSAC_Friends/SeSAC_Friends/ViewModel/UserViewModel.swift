@@ -97,6 +97,29 @@ final class UserViewModel {
                 do {
                     let decoder = JSONDecoder()
                     let userData = try decoder.decode(UserInfo.self, from: data)
+//                    case idToken
+//                    case phoneNumber
+                    UserDefaults.standard.set(userData.phoneNumber ,forKey: UserdefaultKey.phoneNumber.rawValue)
+//                    case nickname
+                    UserDefaults.standard.set(userData.nick, forKey: UserdefaultKey.nickname.rawValue)
+//                    case gender
+                    UserDefaults.standard.set(userData.gender ,forKey: UserdefaultKey.gender.rawValue)
+//                    case birthDay
+//                    case email
+                    UserDefaults.standard.set(userData.email ,forKey: UserdefaultKey.email.rawValue)
+//                    case matchingState
+//                    case uid
+                    UserDefaults.standard.set(userData.uid, forKey: UserdefaultKey.uid.rawValue)
+//                    case genderFilter
+//                    case shopCharacter
+                    UserDefaults.standard.set(userData.sesac, forKey: UserdefaultKey.shopCharacter.rawValue)
+//                    case shopBackground
+                    UserDefaults.standard.set(userData.background, forKey: UserdefaultKey.shopBackground.rawValue)
+//                    case sesacCollection
+                    UserDefaults.standard.set(userData.sesacCollection, forKey: UserdefaultKey.sesacCollection.rawValue)
+//                    case backgroundCollection
+                    UserDefaults.standard.set(userData.backgroundCollection, forKey: UserdefaultKey.backgroundCollection.rawValue)
+
                     completion(.succeed, .existingUser, userData)
                 } catch {
                     completion(.invalidData, nil, nil)

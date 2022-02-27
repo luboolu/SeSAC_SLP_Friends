@@ -109,6 +109,10 @@ final class MyInfoViewController: UIViewController {
             print(userWithdrawResult)
             if userWithdrawResult == .succeed || userWithdrawResult == .alreadyProcessed {
                 DispatchQueue.main.async {
+                    //userdefault 초기화
+                    for key in UserDefaults.standard.dictionaryRepresentation().keys {
+                        UserDefaults.standard.removeObject(forKey: key.description)
+                    }
                     //온보딩 화면으로 이동
                     guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
                     windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: OnBoardingViewController())
@@ -213,7 +217,6 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
 
             cell.moreButton.addTarget(self, action: #selector(moreButtonClicked), for: .touchUpInside)
 
-            
             return cell
         } else if indexPath.row == 2 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.TwoButtonTableViewCell.id) as? TwoButtonTableViewCell else { return UITableViewCell()}

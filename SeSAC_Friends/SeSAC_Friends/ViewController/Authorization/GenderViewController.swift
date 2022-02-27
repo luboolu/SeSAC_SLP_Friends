@@ -31,7 +31,17 @@ final class GenderViewController: UIViewController {
     
         setButton()
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let backButton = UIBarButtonItem()
+        backButton.title = ""
+        backButton.tintColor = UIColor().black
+        
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+    }
+    
     private func setButton() {
         mainView.manButton.rx.tap
             .bind {

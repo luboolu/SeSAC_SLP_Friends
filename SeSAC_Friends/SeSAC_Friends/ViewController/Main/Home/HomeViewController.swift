@@ -314,7 +314,7 @@ final class HomeViewController: UIViewController {
         
         let state = UserDefaults.standard.string(forKey: UserdefaultKey.matchingState.rawValue)
         
-        if state == matchingState.noState.rawValue {
+        if state == matchingState.noState.rawValue || state == nil {
             return
         }
         

@@ -37,6 +37,7 @@ final class LoginConfirmViewController: UIViewController {
         startTimer()
         setTextFieldRx()
         setButton()
+        initializeKeyboard()
         
         print("authVerificationID")
         print(UserDefaults.standard.string(forKey: UserdefaultKey.authVerificationID.rawValue) ?? "")
@@ -56,6 +57,16 @@ final class LoginConfirmViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let backButton = UIBarButtonItem()
+        backButton.title = ""
+        backButton.tintColor = UIColor().black
+        
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+    }
+    
     private func startTimer() {
         //기존에 타이머 동작중이면 중지 처리
         if timer != nil && timer!.isValid {
@@ -66,11 +77,9 @@ final class LoginConfirmViewController: UIViewController {
         timerNum = 60
         //1초 간격 타이머 시작
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerCallback), userInfo: nil, repeats: true)
-
     }
     
     private func setTextFieldRx() {
-        
         //textfield의 입력값이 바뀔때 마다 감지 -> 유효성 검사
         mainView.authCodeTextField.textfield.rx.text
             .subscribe(onNext: { newValue in
