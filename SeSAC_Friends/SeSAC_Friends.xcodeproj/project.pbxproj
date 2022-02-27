@@ -31,6 +31,8 @@
 		DC18740B27A2D53500DE4FBD /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18740A27A2D53500DE4FBD /* SwitchTableViewCell.swift */; };
 		DC18740D27A2D66200DE4FBD /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18740C27A2D66200DE4FBD /* LabelTableViewCell.swift */; };
 		DC18740F27A2D7B000DE4FBD /* DoubleSliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18740E27A2D7AF00DE4FBD /* DoubleSliderTableViewCell.swift */; };
+		DC22859F27CB48F400089960 /* PurchasePopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC22859E27CB48F400089960 /* PurchasePopUpViewController.swift */; };
+		DC2285A127CB491D00089960 /* PurchasePopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2285A027CB491D00089960 /* PurchasePopUpView.swift */; };
 		DC68264A27C63EFF00B7F49E /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC68264927C63EFF00B7F49E /* SocketIOManager.swift */; };
 		DC68264D27C6700800B7F49E /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = DC68264C27C6700800B7F49E /* SocketIO */; };
 		DC68265127C908C700B7F49E /* ViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC68265027C908C700B7F49E /* ViewController+Extension.swift */; };
@@ -151,6 +153,8 @@
 		DC18740A27A2D53500DE4FBD /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
 		DC18740C27A2D66200DE4FBD /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
 		DC18740E27A2D7AF00DE4FBD /* DoubleSliderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleSliderTableViewCell.swift; sourceTree = "<group>"; };
+		DC22859E27CB48F400089960 /* PurchasePopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasePopUpViewController.swift; sourceTree = "<group>"; };
+		DC2285A027CB491D00089960 /* PurchasePopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasePopUpView.swift; sourceTree = "<group>"; };
 		DC68264927C63EFF00B7F49E /* SocketIOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
 		DC68265027C908C700B7F49E /* ViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Extension.swift"; sourceTree = "<group>"; };
 		DC68265527C9E2D600B7F49E /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
@@ -329,6 +333,8 @@
 				DC6E9F5427C1DA45009D2DAD /* CharacterShopViewController.swift */,
 				DC6E9F5627C1DA58009D2DAD /* BackgroundShopView.swift */,
 				DC6E9F5827C1DA64009D2DAD /* BackgroundShopViewController.swift */,
+				DC22859E27CB48F400089960 /* PurchasePopUpViewController.swift */,
+				DC2285A027CB491D00089960 /* PurchasePopUpView.swift */,
 			);
 			path = Shop;
 			sourceTree = "<group>";
@@ -647,6 +653,7 @@
 				DCDE366B2799C0BD0077847C /* BirthViewController.swift in Sources */,
 				DCDE366D279A9A4D0077847C /* EmailViewController.swift in Sources */,
 				DCF8943827B22B7F001BE5DF /* NearSeSacViewController.swift in Sources */,
+				DC22859F27CB48F400089960 /* PurchasePopUpViewController.swift in Sources */,
 				DCA592DA27BA38A20088940B /* TextViewTableViewCell.swift in Sources */,
 				DC6E9F6127C321B2009D2DAD /* RequestPopUpView.swift in Sources */,
 				DCDE36652799A0300077847C /* Toast+Extension.swift in Sources */,
@@ -682,6 +689,7 @@
 				DCA592ED27BE99AC0088940B /* FriendsReviewView.swift in Sources */,
 				DC6E9F7227C39F2B009D2DAD /* ChattingViewModel.swift in Sources */,
 				DC6E9F5927C1DA64009D2DAD /* BackgroundShopViewController.swift in Sources */,
+				DC2285A127CB491D00089960 /* PurchasePopUpView.swift in Sources */,
 				DCA592D627BA36F70088940B /* ReviewDetailViewController.swift in Sources */,
 				DCC419F027A78D44006B2904 /* MyInfoView.swift in Sources */,
 				DCDE36672799B1440077847C /* LoginConfirmViewController.swift in Sources */,

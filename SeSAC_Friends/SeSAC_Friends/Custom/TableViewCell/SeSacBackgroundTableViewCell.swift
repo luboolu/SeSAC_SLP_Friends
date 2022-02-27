@@ -7,6 +7,8 @@
 import UIKit
 
 import SnapKit
+import RxCocoa
+import RxSwift
 
 final class SeSacBackgroundTableViewCell: UITableViewCell, ViewRepresentable {
     
@@ -34,18 +36,15 @@ final class SeSacBackgroundTableViewCell: UITableViewCell, ViewRepresentable {
         return label
     }()
     
-    let priceLabel: UILabel = {
-        let label = UILabel()
+    let priceButton: MainButton = {
+        let button = MainButton()
         
-        label.text = "1,200"
-        label.textColor = UIColor().white
-        label.backgroundColor = UIColor().green
-        label.font = UIFont().Title5_M12
-        label.textAlignment = .center
-        label.clipsToBounds = true
-        label.layer.cornerRadius = 10
+        button.isBorder = false
+        button.isRounded = true
+        button.status = .fill
+        button.titleLabel?.font = UIFont().Title5_M12
         
-        return label
+        return button
     }()
     
     let descriptionLabel: UILabel = {
@@ -59,6 +58,12 @@ final class SeSacBackgroundTableViewCell: UITableViewCell, ViewRepresentable {
         return label
     }()
     
+    var bag = DisposeBag()
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        bag = DisposeBag()
+    }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -71,12 +76,12 @@ final class SeSacBackgroundTableViewCell: UITableViewCell, ViewRepresentable {
     }
     
     func setupView() {
-        self.addSubview(backgroundImage)
+        contentView.addSubview(backgroundImage)
         
         descriptionView.addSubview(backgroundName)
-        descriptionView.addSubview(priceLabel)
+        descriptionView.addSubview(priceButton)
         descriptionView.addSubview(descriptionLabel)
-        self.addSubview(descriptionView)
+        contentView.addSubview(descriptionView)
     }
     
     func setupConstraints() {
@@ -99,12 +104,12 @@ final class SeSacBackgroundTableViewCell: UITableViewCell, ViewRepresentable {
             make.leading.equalToSuperview()
         }
         
-        priceLabel.snp.makeConstraints { make in
+        priceButton.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.trailing.equalToSuperview().offset(-8)
             make.width.equalTo(52)
             make.centerY.equalTo(backgroundName)
-            //make.height.equalTo(20)
+            make.height.equalTo(20)
         }
         
         descriptionLabel.snp.makeConstraints { make in

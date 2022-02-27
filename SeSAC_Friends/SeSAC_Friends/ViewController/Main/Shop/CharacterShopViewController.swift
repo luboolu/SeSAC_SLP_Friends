@@ -13,6 +13,7 @@ import RxSwift
 final class CharacterShopViewController: UIViewController {
     
     private let mainView = CharacterShopView()
+    private let viewModel = UserViewModel()
     
     private let characterImage = ["sesac_face_1", "sesac_face_2", "sesac_face_3", "sesac_face_4", "sesac_face_5"]
     private let characterName = ["기본 새싹", "튼튼 새싹", "민트 새싹", "퍼플 새싹", "골드 새싹"]
@@ -31,6 +32,44 @@ final class CharacterShopViewController: UIViewController {
         mainView.characterCollectionView.dataSource = self
         mainView.characterCollectionView.register(SeSacCharacterCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.SeSacCharacterCollectionViewCell.id)
     }
+    
+    func purchaseItem(item: Int) {
+        print(#function)
+        
+        viewModel.userShopPurchase(character: item, background: nil) { apiResult, userShopPurchase in
+            print(userShopPurchase)
+            if let userShopPurchase = userShopPurchase {
+                switch userShopPurchase {
+                case .succeed:
+                    DispatchQueue.main.async {
+                        self.view.makeToast("상품 구매에 성공했습니다" ,duration: 2.0, position: .bottom, style: .defaultStyle)
+                    }
+                case .purchased:
+                    DispatchQueue.main.async {
+                        print("이미 구매한 상품입니다")
+                        self.view.makeToast("이미 구매한 상품입니다" ,duration: 2.0, position: .center, style: .defaultStyle)
+                    }
+                case .tokenError:
+                    self.purchaseItem(item: item)
+                case .notUser:
+                    DispatchQueue.main.async {
+                        //온보딩 화면으로 이동
+                        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                        windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: OnBoardingViewController())
+                        windowScene.windows.first?.makeKeyAndVisible()
+                    }
+                case .serverError:
+                    DispatchQueue.main.async {
+                        self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: .defaultStyle)
+                    }
+                case .clientError:
+                    DispatchQueue.main.async {
+                        self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: .defaultStyle)
+                    }
+                }
+            }
+        }
+    }
 
 }
 
@@ -46,7 +85,18 @@ extension CharacterShopViewController: UICollectionViewDelegate, UICollectionVie
         cell.characterImage.image = UIImage(named: characterImage[indexPath.row])
         cell.characterName.text = characterName[indexPath.row]
         cell.descriptionLabel.text = characterDescription[indexPath.row]
-        cell.priceLabel.text = characterPrice[indexPath.row]
+        cell.priceButton.setTitle(characterPrice[indexPath.row], for: .normal)
+        
+        cell.priceButton.rx.tap
+            .bind {
+                let popUp = PurchasePopUpViewController()
+                popUp.mainTitle = "해당 아이템을 구매하시겠습니까?"
+                popUp.subTitle = "아이템으로 나만의 새싹을 꾸밀 수 있어요"
+                popUp.characterItem = indexPath.row
+                popUp.modalPresentationStyle = .overCurrentContext
+                popUp.modalTransitionStyle = .crossDissolve
+                self.present(popUp, animated: true, completion: nil)
+            }.disposed(by: cell.bag)
         
         return cell
     }

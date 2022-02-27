@@ -36,18 +36,15 @@ final class SeSacCharacterCollectionViewCell: UICollectionViewCell, ViewRepresen
         return label
     }()
     
-    let priceLabel: UILabel = {
-        let label = UILabel()
+    let priceButton: MainButton = {
+        let button = MainButton()
         
-        label.text = "1,200"
-        label.textColor = UIColor().white
-        label.backgroundColor = UIColor().green
-        label.font = UIFont().Title5_M12
-        label.textAlignment = .center
-        label.clipsToBounds = true
-        label.layer.cornerRadius = 10
+        button.isBorder = false
+        button.isRounded = true
+        button.status = .fill
+        button.titleLabel?.font = UIFont().Title5_M12
         
-        return label
+        return button
     }()
     
     let descriptionLabel: UILabel = {
@@ -80,10 +77,10 @@ final class SeSacCharacterCollectionViewCell: UICollectionViewCell, ViewRepresen
     }
     
     func setupView() {
-        self.addSubview(characterImage)
-        self.addSubview(characterName)
-        self.addSubview(priceLabel)
-        self.addSubview(descriptionLabel)
+        contentView.addSubview(characterImage)
+        contentView.addSubview(characterName)
+        contentView.addSubview(priceButton)
+        contentView.addSubview(descriptionLabel)
     }
     
     func setupConstraints() {
@@ -97,17 +94,17 @@ final class SeSacCharacterCollectionViewCell: UICollectionViewCell, ViewRepresen
         characterName.snp.makeConstraints { make in
             make.top.equalTo(characterImage.snp.bottom).offset(8)
             make.leading.equalToSuperview()
-            make.height.equalTo(24)
+            //make.height.equalTo(24)
             
         }
         
-        priceLabel.snp.makeConstraints { make in
+        priceButton.snp.makeConstraints { make in
             make.top.equalTo(characterImage.snp.bottom).offset(8)
             make.leading.equalTo(characterName.snp.trailing).offset(8)
             make.trailing.equalToSuperview()
             make.centerY.equalTo(characterName)
             make.width.equalTo(52)
-            //make.height.equalTo(20)
+            make.height.equalTo(20)
         }
         
         descriptionLabel.snp.makeConstraints { make in
