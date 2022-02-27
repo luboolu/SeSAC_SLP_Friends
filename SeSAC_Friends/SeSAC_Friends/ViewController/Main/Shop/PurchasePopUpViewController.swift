@@ -52,13 +52,13 @@ final class PurchasePopUpViewController: UIViewController {
         print(#function)
         self.dismiss(animated: true) {
             if let backgroundItem = self.backgroundItem {
-                let vc = BackgroundShopViewController()
-                vc.purchaseItem(item: backgroundItem)
+                let vc = ShopViewController()
+                vc.purchaseItem(character: nil, background: backgroundItem)
             }
             
             if let characterItem = self.characterItem {
-                let vc = CharacterShopViewController()
-                vc.purchaseItem(item: characterItem)
+                let vc = ShopViewController()
+                vc.purchaseItem(character: characterItem, background: nil)
             }
         }
     }

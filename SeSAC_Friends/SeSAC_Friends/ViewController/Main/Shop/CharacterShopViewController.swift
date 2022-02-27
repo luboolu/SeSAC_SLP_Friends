@@ -14,11 +14,14 @@ final class CharacterShopViewController: UIViewController {
     
     private let mainView = CharacterShopView()
     private let viewModel = UserViewModel()
+    private let disposeBag = DisposeBag()
     
     private let characterImage = ["sesac_face_1", "sesac_face_2", "sesac_face_3", "sesac_face_4", "sesac_face_5"]
     private let characterName = ["기본 새싹", "튼튼 새싹", "민트 새싹", "퍼플 새싹", "골드 새싹"]
     private let characterDescription = ["새싹을 대표하는 기본 식물입니다. 다른 새싹들과 함꼐 하는 것을 좋아합니다.", "잎이 하나 더 자라나고 튼튼해진 새나라의 새싹으로 같이 있으면 즐거워집니다.", "호불호의 대명사! 상쾌한 향이 나서 허브가 대중화된 지역에서 많이 자랍니다.", "감정을 편안하게 쉬도록 하며 슬프고 우울한 감정을 진정시켜주는 멋진 새싹입니다.", "화려하고 멋있는 삶을 살며 돈과 인생을 플렉스 하는 자유분방한 새싹입니다."]
     private let characterPrice = ["1,200", "1,200", "2,500", "2,500", "2,500"]
+    
+    var purchasedList = [0]
     
     override func loadView() {
         super.loadView()
@@ -31,44 +34,15 @@ final class CharacterShopViewController: UIViewController {
         mainView.characterCollectionView.delegate = self
         mainView.characterCollectionView.dataSource = self
         mainView.characterCollectionView.register(SeSacCharacterCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.SeSacCharacterCollectionViewCell.id)
-    }
-    
-    func purchaseItem(item: Int) {
-        print(#function)
         
-        viewModel.userShopPurchase(character: item, background: nil) { apiResult, userShopPurchase in
-            print(userShopPurchase)
-            if let userShopPurchase = userShopPurchase {
-                switch userShopPurchase {
-                case .succeed:
-                    DispatchQueue.main.async {
-                        self.view.makeToast("상품 구매에 성공했습니다" ,duration: 2.0, position: .bottom, style: .defaultStyle)
-                    }
-                case .purchased:
-                    DispatchQueue.main.async {
-                        print("이미 구매한 상품입니다")
-                        self.view.makeToast("이미 구매한 상품입니다" ,duration: 2.0, position: .center, style: .defaultStyle)
-                    }
-                case .tokenError:
-                    self.purchaseItem(item: item)
-                case .notUser:
-                    DispatchQueue.main.async {
-                        //온보딩 화면으로 이동
-                        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
-                        windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: OnBoardingViewController())
-                        windowScene.windows.first?.makeKeyAndVisible()
-                    }
-                case .serverError:
-                    DispatchQueue.main.async {
-                        self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: .defaultStyle)
-                    }
-                case .clientError:
-                    DispatchQueue.main.async {
-                        self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: .defaultStyle)
-                    }
+        UserDefaults.standard.rx
+            .observe(Int.self, UserdefaultKey.sesacCollection.rawValue)
+            .subscribe(onNext: { newValue in
+                DispatchQueue.main.async {
+                    self.mainView.characterCollectionView.reloadData()
                 }
-            }
-        }
+            })
+            .disposed(by: disposeBag)
     }
 
 }
@@ -85,7 +59,16 @@ extension CharacterShopViewController: UICollectionViewDelegate, UICollectionVie
         cell.characterImage.image = UIImage(named: characterImage[indexPath.row])
         cell.characterName.text = characterName[indexPath.row]
         cell.descriptionLabel.text = characterDescription[indexPath.row]
-        cell.priceButton.setTitle(characterPrice[indexPath.row], for: .normal)
+        
+        if let characterCollection = UserDefaults.standard.object(forKey: UserdefaultKey.sesacCollection.rawValue) as? [Int] {
+            if characterCollection.contains(indexPath.row) {
+                cell.priceButton.status = .disable
+                cell.priceButton.setTitle("보유중", for: .normal)
+            } else {
+                cell.priceButton.status = .fill
+                cell.priceButton.setTitle(characterPrice[indexPath.row], for: .normal)
+            }
+        }
         
         cell.priceButton.rx.tap
             .bind {

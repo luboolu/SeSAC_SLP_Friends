@@ -22,5 +22,7 @@ enum UserdefaultKey: String {
     case genderFilter
     case shopCharacter
     case shopBackground
+    case sesacCollection
+    case backgroundCollection
 
 }

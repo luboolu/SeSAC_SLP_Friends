@@ -80,8 +80,8 @@ extension ShopViewController {
     @objc private func saveButtonClicked() {
         print(#function)
         
-        let character = UserDefaults.standard.integer(forKey: UserdefaultKey.shopCharacter.rawValue) ?? 0
-        let background = UserDefaults.standard.integer(forKey: UserdefaultKey.shopBackground.rawValue) ?? 0
+        let character = UserDefaults.standard.integer(forKey: UserdefaultKey.shopCharacter.rawValue)
+        let background = UserDefaults.standard.integer(forKey: UserdefaultKey.shopBackground.rawValue)
         
         viewModel.userUpdateShop(character: character, background: background) { apiResult, userUpdateShop in
             if let userUpdateShop = userUpdateShop {
@@ -124,9 +124,15 @@ extension ShopViewController {
             if let getUserResult = getUserResult {
                 switch getUserResult {
                 case .existingUser:
-                    if let userInfo = userInfo {
-                        UserDefaults.standard.set(userInfo.background, forKey: UserdefaultKey.shopBackground.rawValue)
-                        UserDefaults.standard.set(userInfo.sesac, forKey: UserdefaultKey.shopCharacter.rawValue)
+                    DispatchQueue.main.async {
+                        if let userInfo = userInfo {
+                            print(userInfo)
+                            UserDefaults.standard.set(userInfo.background, forKey: UserdefaultKey.shopBackground.rawValue)
+                            UserDefaults.standard.set(userInfo.sesac, forKey: UserdefaultKey.shopCharacter.rawValue)
+                            UserDefaults.standard.set(userInfo.sesacCollection, forKey: UserdefaultKey.sesacCollection.rawValue)
+                            UserDefaults.standard.set(userInfo.backgroundCollection, forKey: UserdefaultKey.backgroundCollection.rawValue)
+                        }
+                        self.characterVC.reloadInputViews()
                     }
                 case .tokenError:
                     self.getUserInfo()
@@ -151,6 +157,44 @@ extension ShopViewController {
         }
     }
     
+    func purchaseItem(character: Int?, background: Int?) {
+        print(#function)
+        
+        viewModel.userShopPurchase(character: character, background: background) { apiResult, userShopPurchase in
+            print(userShopPurchase)
+            if let userShopPurchase = userShopPurchase {
+                switch userShopPurchase {
+                case .succeed:
+                    DispatchQueue.main.async {
+                        self.view.makeToast("상품 구매에 성공했습니다" ,duration: 2.0, position: .bottom, style: .defaultStyle)
+                        self.getUserInfo()
+                    }
+                case .purchased:
+                    DispatchQueue.main.async {
+                        print("이미 구매한 상품입니다")
+                        self.view.makeToast("이미 구매한 상품입니다" ,duration: 2.0, position: .center, style: .defaultStyle)
+                    }
+                case .tokenError:
+                    self.purchaseItem(character: character, background: background)
+                case .notUser:
+                    DispatchQueue.main.async {
+                        //온보딩 화면으로 이동
+                        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+                        windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: OnBoardingViewController())
+                        windowScene.windows.first?.makeKeyAndVisible()
+                    }
+                case .serverError:
+                    DispatchQueue.main.async {
+                        self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: .defaultStyle)
+                    }
+                case .clientError:
+                    DispatchQueue.main.async {
+                        self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요" ,duration: 2.0, position: .bottom, style: .defaultStyle)
+                    }
+                }
+            }
+        }
+    }
 }
 
 
