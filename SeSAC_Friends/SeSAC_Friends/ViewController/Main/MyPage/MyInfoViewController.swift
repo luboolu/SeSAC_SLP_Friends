@@ -212,7 +212,7 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
 
             
             cell.titleView.isHidden = self.moreButtonTabbed
-            cell.hobbyView.isHidden = self.moreButtonTabbed
+            cell.hobbyView.isHidden = true
             cell.reviewView.isHidden = self.moreButtonTabbed
 
             cell.moreButton.addTarget(self, action: #selector(moreButtonClicked), for: .touchUpInside)

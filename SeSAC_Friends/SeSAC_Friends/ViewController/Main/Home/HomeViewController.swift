@@ -39,6 +39,8 @@ final class HomeViewController: UIViewController {
         backButton.tintColor = UIColor().black
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
         
+        UserDefaults.standard.set(self.genderFilter, forKey: UserdefaultKey.genderFilter.rawValue)
+        
         locationManager.delegate = self
         mainView.mapView.delegate = self
         
@@ -117,6 +119,7 @@ final class HomeViewController: UIViewController {
                 
                 self.genderFilter = 2
                 UserDefaults.standard.set(self.genderFilter, forKey: UserdefaultKey.genderFilter.rawValue)
+                print(self.genderFilter)
                 self.searchFriends()
                 return .fill
             }
@@ -134,6 +137,7 @@ final class HomeViewController: UIViewController {
                 
                 self.genderFilter = 1
                 UserDefaults.standard.set(self.genderFilter, forKey: UserdefaultKey.genderFilter.rawValue)
+                print(self.genderFilter)
                 self.searchFriends()
                 return .fill
             }
@@ -151,6 +155,7 @@ final class HomeViewController: UIViewController {
                 
                 self.genderFilter = 0
                 UserDefaults.standard.set(self.genderFilter, forKey: UserdefaultKey.genderFilter.rawValue)
+                print(self.genderFilter)
                 self.searchFriends()
                 return .fill
             }

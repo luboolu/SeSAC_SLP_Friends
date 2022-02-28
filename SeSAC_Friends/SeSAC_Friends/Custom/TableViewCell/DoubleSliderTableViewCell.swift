@@ -73,6 +73,7 @@ final class DoubleSliderTableViewCell: UITableViewCell, ViewRepresentable {
             make.top.equalToSuperview().offset(14)
             make.leading.equalTo(label.snp.trailing).offset(14)
             make.trailing.equalToSuperview().offset(-14)
+            make.width.equalTo(50)
         }
         
         slider.snp.makeConstraints { make in

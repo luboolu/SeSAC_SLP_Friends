@@ -256,8 +256,8 @@ final class SeSacFindViewController: UIViewController {
                                     UserDefaults.standard.set(matchingState.matched.rawValue, forKey: UserdefaultKey.matchingState.rawValue)
                                     //채팅 화면으로 전환
                                     let vc = ChattingViewController()
-                                    vc.friendUid = myQueueState.matchedUid
-                                    vc.friendNick = myQueueState.matchedNick
+//                                    vc.friendUid = myQueueState.matchedUid
+//                                    vc.friendNick = myQueueState.matchedNick
                                     
                                     self.navigationController?.pushViewController(vc, animated: true)
                                 }

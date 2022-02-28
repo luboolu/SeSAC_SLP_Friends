@@ -81,14 +81,22 @@ final class NearSeSacViewController: UIViewController {
                             self.nearData = []
                             
                             let genderFilter = UserDefaults.standard.integer(forKey: UserdefaultKey.genderFilter.rawValue)
+                            print(queueOnData.fromQueueDB)
                             for data in queueOnData.fromQueueDB {
+                                print("userDefault:\(genderFilter), friend:\(data.gender)")
                                 if genderFilter == 2 {
                                     self.nearData?.append(data)
-                                } else if genderFilter == data.gender {
-                                    self.nearData?.append(data)
+                                } else if genderFilter == 1 {
+                                    if data.gender == 1 {
+                                        self.nearData?.append(data)
+                                    }
+                                } else {
+                                    if data.gender == 0 {
+                                        self.nearData?.append(data)
+                                    }
                                 }
                             }
-                            
+                            print(self.nearData)
                             if let nearData = self.nearData {
                                 for _ in 0...nearData.count {
                                     self.moreButtonTapped.append(true)
@@ -178,7 +186,7 @@ final class NearSeSacViewController: UIViewController {
         if self.moreButtonTapped[section] {
             self.findFriends()
         }
-                
+        
         self.viewDidLayoutSubviews()
     }
     
@@ -312,7 +320,7 @@ extension NearSeSacViewController: UITableViewDelegate, UITableViewDataSource {
             print("\(row.nick): \(row.reviews)")
             
             cell.titleView.isHidden = self.moreButtonTapped[indexPath.section]
-            cell.hobbyView.isHidden = self.moreButtonTapped[indexPath.section]
+            cell.hobbyView.isHidden = true
             cell.reviewView.isHidden = self.moreButtonTapped[indexPath.section]
 
             cell.moreButton.rx.tap
@@ -340,6 +348,16 @@ extension NearSeSacViewController: UITableViewDelegate, UITableViewDataSource {
             
             return cell
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.beginUpdates()
+        tableView.endUpdates()
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        tableView.beginUpdates()
+        tableView.endUpdates()
     }
     
 }

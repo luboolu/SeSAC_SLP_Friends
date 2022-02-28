@@ -164,6 +164,7 @@ final class CardTableViewCell: UITableViewCell, ViewRepresentable {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         //self.translatesAutoresizingMaskIntoConstraints = false
+        
         setupView()
         setupConstraints()
         
@@ -220,18 +221,23 @@ final class CardTableViewCell: UITableViewCell, ViewRepresentable {
         representView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(0)
             make.trailing.equalToSuperview().offset(0)
-            make.height.equalTo(58)
+            //make.height.equalTo(58)
         }
         
         nicknameLabel.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
+            make.top.equalToSuperview().offset(8)
             make.leading.equalToSuperview().offset(14)
+            make.bottom.equalToSuperview().offset(-8)
+            make.height.equalTo(30)
         }
         
         moreButton.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
+            make.top.equalToSuperview().offset(8)
             make.leading.equalTo(nicknameLabel.snp.trailing).offset(14)
             make.trailing.equalToSuperview().offset(-14)
+            make.bottom.equalToSuperview().offset(-8)
+            make.width.equalTo(30)
+            //make.height.equalTo(30)
         }
         
         titleView.snp.makeConstraints { make in
@@ -244,12 +250,14 @@ final class CardTableViewCell: UITableViewCell, ViewRepresentable {
             make.leading.equalToSuperview().offset(8)
             make.trailing.equalToSuperview().offset(-8)
             make.bottom.equalTo(titleCollectionView.snp.top).offset(-14)
+            make.height.equalTo(20)
         }
 
         titleCollectionView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(0)
             make.trailing.equalToSuperview().offset(0)
-            make.bottom.equalTo(hobbyView.snp.top)
+            //make.bottom.equalTo(hobbyView.snp.top)
+            make.bottom.equalToSuperview()
             make.height.equalTo(32 * 3 + 8 * 3)
         }
 
@@ -263,6 +271,7 @@ final class CardTableViewCell: UITableViewCell, ViewRepresentable {
             make.leading.equalToSuperview().offset(8)
             make.trailing.equalToSuperview().offset(-8)
             make.bottom.equalTo(hobbyCollectionView.snp.top).offset(-14)
+            make.height.equalTo(20)
         }
         
         hobbyCollectionView.snp.makeConstraints { make in
@@ -280,8 +289,8 @@ final class CardTableViewCell: UITableViewCell, ViewRepresentable {
         reviewLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(14)
             make.leading.equalToSuperview().offset(8)
-            make.trailing.equalToSuperview().offset(-8)
             make.bottom.equalTo(reviewTextView.snp.top).offset(-14)
+            make.height.equalTo(20)
         }
         
         reviewMoreButton.snp.makeConstraints { make in
@@ -289,6 +298,7 @@ final class CardTableViewCell: UITableViewCell, ViewRepresentable {
             make.leading.equalTo(reviewLabel.snp.trailing).offset(14)
             make.trailing.equalToSuperview().offset(-8)
             make.bottom.equalTo(reviewTextView.snp.top).offset(-14)
+//            make.height.equalTo(20)
             make.width.equalTo(22)
         }
         
@@ -314,8 +324,8 @@ final class CardTableViewCell: UITableViewCell, ViewRepresentable {
             make.trailing.equalToSuperview()
             make.height.equalTo(height + 32)
         }
-        
-        self.layoutIfNeeded()
+
+
     }
 
 }
@@ -389,14 +399,20 @@ extension CardTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
 
 extension CardTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView.tag == 101 {
-            return CGSize(width: Int((collectionView.frame.width - 40 ) / 2), height: 32)
-        } else {
+//        if collectionView.tag == 101 {
+//            return CGSize(width: Int((collectionView.frame.width - 40 ) / 2), height: 32)
+//        }
+        if collectionView.tag == 102 {
             let button = UIButton(frame: CGRect.zero)
             button.setTitle("\(self.userHobby?[indexPath.row] ?? "")", for: .normal)
             button.sizeToFit()
-            
+
             return CGSize(width: button.frame.width + 10, height: 32)
+        } else {
+            let width = (UIScreen.main.bounds.width - (8 * 3) - 28) / 2
+            let height: CGFloat = 32
+            
+            return CGSize(width: width, height: height)
         }
     }
 }

@@ -264,7 +264,6 @@ final class ChattingViewController: UIViewController {
                             self.friendUid = myQueueState.matchedUid
                             self.friendNick = myQueueState.matchedNick
                             self.isMatched(info: myQueueState)
-                            //self.getChat()
                             print("친구: ", self.friendUid)
                             self.navigationItem.title = "\(self.friendNick ?? "")"
                             self.reloadInputViews()
