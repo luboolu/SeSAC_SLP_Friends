@@ -49,6 +49,64 @@ final class LaunchViewController: UIViewController {
         }
     }
     
+    private func newUserGuide() {
+        //사용자가 회원가입 단계를 어디까지 진행했는지에 따라서 어느 지점으로 화면을 전환해줄지 정해야함!
+        var userSign = [0, 0, 0, 0, 0]
+        if UserDefaults.standard.string(forKey: UserdefaultKey.phoneNumber.rawValue) != nil {
+            userSign[0] = 1
+        }
+        
+        if UserDefaults.standard.string(forKey: UserdefaultKey.nickname.rawValue) != nil {
+            userSign[1] = 1
+        }
+        
+        if UserDefaults.standard.string(forKey: UserdefaultKey.birthDay.rawValue) != nil {
+            userSign[2] = 1
+        }
+        
+        if UserDefaults.standard.string(forKey: UserdefaultKey.email.rawValue) != nil {
+            userSign[3] = 1
+        }
+        
+        if UserDefaults.standard.string(forKey: UserdefaultKey.gender.rawValue) != nil {
+            userSign[4] = 1
+        }
+        //1. 휴대폰 인증
+        //2. 닉네임 입력
+        //3. 생년월일 입력
+        //4. 이메일 입력
+        //5. 성별 입력
+        
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+        
+        if userSign[0] == 1 && userSign[1] == 0 {
+            //온보딩
+            let vc = OnBoardingViewController()
+            windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: vc)
+            windowScene.windows.first?.makeKeyAndVisible()
+        } else if userSign[1] == 1 && userSign[2] == 0 {
+            //생년월일
+            let vc = BirthViewController()
+            windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: vc)
+            windowScene.windows.first?.makeKeyAndVisible()
+        } else if userSign[2] == 1 && userSign[3] == 0 {
+            //이메일
+            let vc = EmailViewController()
+            windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: vc)
+            windowScene.windows.first?.makeKeyAndVisible()
+        } else if userSign[3] == 1 && userSign[4] == 0 {
+            //성별
+            let vc = GenderViewController()
+            windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: vc)
+            windowScene.windows.first?.makeKeyAndVisible()
+        } else {
+            //온보딩
+            let vc = OnBoardingViewController()
+            windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: vc)
+            windowScene.windows.first?.makeKeyAndVisible()
+        }
+    }
+    
     private func getUserInfo() {
         userViewModel.getUser { apiResult, getUserResult, userInfo in
             if let getUserResult = getUserResult {
@@ -72,10 +130,7 @@ final class LaunchViewController: UIViewController {
                         windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: vc)
                         windowScene.windows.first?.makeKeyAndVisible()
                     case .newUser:
-                        let vc = OnBoardingViewController()
-                        
-                        windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: vc)
-                        windowScene.windows.first?.makeKeyAndVisible()
+                        self.newUserGuide()
                     case .tokenError:
                         self.getUserInfo()
                         return
