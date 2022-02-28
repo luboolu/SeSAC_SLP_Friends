@@ -33,6 +33,8 @@
 		DC18740F27A2D7B000DE4FBD /* DoubleSliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC18740E27A2D7AF00DE4FBD /* DoubleSliderTableViewCell.swift */; };
 		DC22859F27CB48F400089960 /* PurchasePopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC22859E27CB48F400089960 /* PurchasePopUpViewController.swift */; };
 		DC2285A127CB491D00089960 /* PurchasePopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2285A027CB491D00089960 /* PurchasePopUpView.swift */; };
+		DC22860127CCD54900089960 /* WithdrawPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC22860027CCD54900089960 /* WithdrawPopUpViewController.swift */; };
+		DC22860327CCD58000089960 /* WithdrawPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC22860227CCD58000089960 /* WithdrawPopUpView.swift */; };
 		DC68264A27C63EFF00B7F49E /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC68264927C63EFF00B7F49E /* SocketIOManager.swift */; };
 		DC68264D27C6700800B7F49E /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = DC68264C27C6700800B7F49E /* SocketIO */; };
 		DC68265127C908C700B7F49E /* ViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC68265027C908C700B7F49E /* ViewController+Extension.swift */; };
@@ -155,6 +157,8 @@
 		DC18740E27A2D7AF00DE4FBD /* DoubleSliderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleSliderTableViewCell.swift; sourceTree = "<group>"; };
 		DC22859E27CB48F400089960 /* PurchasePopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasePopUpViewController.swift; sourceTree = "<group>"; };
 		DC2285A027CB491D00089960 /* PurchasePopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasePopUpView.swift; sourceTree = "<group>"; };
+		DC22860027CCD54900089960 /* WithdrawPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawPopUpViewController.swift; sourceTree = "<group>"; };
+		DC22860227CCD58000089960 /* WithdrawPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawPopUpView.swift; sourceTree = "<group>"; };
 		DC68264927C63EFF00B7F49E /* SocketIOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
 		DC68265027C908C700B7F49E /* ViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Extension.swift"; sourceTree = "<group>"; };
 		DC68265527C9E2D600B7F49E /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
@@ -274,6 +278,8 @@
 				DC1873F627A2466300DE4FBD /* MyPageView.swift */,
 				DC1873F227A1971900DE4FBD /* MyInfoViewController.swift */,
 				DCC419EF27A78D44006B2904 /* MyInfoView.swift */,
+				DC22860027CCD54900089960 /* WithdrawPopUpViewController.swift */,
+				DC22860227CCD58000089960 /* WithdrawPopUpView.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -686,6 +692,7 @@
 				DC6E9F6527C34872009D2DAD /* AcceptPopUpViewController.swift in Sources */,
 				DC184DCE27C3E35200B12AEC /* RealmModel.swift in Sources */,
 				DCA592EF27C0F1C70088940B /* FriendsReportView.swift in Sources */,
+				DC22860127CCD54900089960 /* WithdrawPopUpViewController.swift in Sources */,
 				DCA592ED27BE99AC0088940B /* FriendsReviewView.swift in Sources */,
 				DC6E9F7227C39F2B009D2DAD /* ChattingViewModel.swift in Sources */,
 				DC6E9F5927C1DA64009D2DAD /* BackgroundShopViewController.swift in Sources */,
@@ -719,6 +726,7 @@
 				DC18740D27A2D66200DE4FBD /* LabelTableViewCell.swift in Sources */,
 				DC6E9F5F27C26306009D2DAD /* SeSacBackgroundTableViewCell.swift in Sources */,
 				DC6E55E127AAD6B300998FF9 /* HobbySearchViewController.swift in Sources */,
+				DC22860327CCD58000089960 /* WithdrawPopUpView.swift in Sources */,
 				DC6E55DE27AA519200998FF9 /* APIStatusResult.swift in Sources */,
 				DCE2D1E12796CCD30018895F /* MainTextFieldStatus.swift in Sources */,
 				DC6E9F5527C1DA45009D2DAD /* CharacterShopViewController.swift in Sources */,

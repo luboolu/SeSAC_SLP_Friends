@@ -102,7 +102,7 @@ final class MyInfoViewController: UIViewController {
     }
     
 
-    private func userWithdrawRequest() {
+    func userWithdrawRequest() {
         print("회원탈퇴 시작")
         //회원탈퇴 api 통신
         self.viewModel.userWithdraw { apiResult, userWithdrawResult in
@@ -338,24 +338,12 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == 6 {
             print("회원탈퇴 진행")
             
-            //1. UIAlertController 생성: 밑바탕 + 타이틀 + 본문
-            //let alert = UIAlertController(title: "타이틀 테스트", message: "메시지가 입력되었습니다.", preferredStyle: .alert)
-            let alert = UIAlertController(title: "회원 탈퇴", message: "정말 탈퇴하시겠습니까?", preferredStyle: .alert)
-            
-            //2. UIAlertAction 생성: 버튼들을...
-            let ok = UIAlertAction(title: "확인", style: .default) { _ in
-                self.userWithdrawRequest()
-            }
-            let cancel = UIAlertAction(title: "취소", style: .cancel)
-
-
-            //3. 1 + 2
-            alert.addAction(ok)
-            alert.addAction(cancel)
-
-            //4. present
-            self.present(alert, animated: true, completion: nil)
-
+            let popUp = WithdrawPopUpViewController()
+            popUp.mainTitle = "회원탈퇴"
+            popUp.subTitle = "정말 탈퇴하시겠습니까?"
+            popUp.modalPresentationStyle = .overCurrentContext
+            popUp.modalTransitionStyle = .crossDissolve
+            self.present(popUp, animated: true, completion: nil)
         }
     }
     

@@ -78,7 +78,7 @@ final class LaunchViewController: UIViewController {
         //5. 성별 입력
         
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
-        
+        print(userSign)
         if userSign[0] == 1 && userSign[1] == 0 {
             //온보딩
             let vc = OnBoardingViewController()
