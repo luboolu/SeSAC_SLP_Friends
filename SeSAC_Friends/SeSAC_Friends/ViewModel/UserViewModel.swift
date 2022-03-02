@@ -94,6 +94,7 @@ final class UserViewModel {
             //상태코드에 따른 분기처리
             //200: 기존회원, 406: 미가입회원
             if response.statusCode == 200 {
+                
                 do {
                     let decoder = JSONDecoder()
                     let userData = try decoder.decode(UserInfo.self, from: data)
@@ -119,6 +120,21 @@ final class UserViewModel {
                     UserDefaults.standard.set(userData.sesacCollection, forKey: UserdefaultKey.sesacCollection.rawValue)
 //                    case backgroundCollection
                     UserDefaults.standard.set(userData.backgroundCollection, forKey: UserdefaultKey.backgroundCollection.rawValue)
+                    
+                    //fcm token 갱신 필요 어부 판단
+                    if let fcm = UserDefaults.standard.string(forKey: UserdefaultKey.fcmToken.rawValue) {
+                        print("fcm 업데이트")
+                        print(fcm)
+                        print(userData.fcMtoken)
+                        if fcm != userData.fcMtoken {
+                            self.fcmTokenUpdate { apiResult, fcmUpdateResult in
+                                print("fcmTokenUpdate")
+                                print(fcmUpdateResult)
+                            }
+                        } else {
+                            print("업데이트 필요 없음")
+                        }
+                    }
 
                     completion(.succeed, .existingUser, userData)
                 } catch {
@@ -140,6 +156,61 @@ final class UserViewModel {
 
         }.resume()
         
+    }
+    
+    //fcm token 갱신
+    func fcmTokenUpdate(completion: @escaping (APIResult?, FCMUpdateResult?) -> Void) {
+
+        let url = URL(string: "\(URL.userUpdateFCM)")!
+        let idtoken = UserDefaults.standard.string(forKey: UserdefaultKey.idToken.rawValue) ?? ""
+        let fcmtoken = UserDefaults.standard.string(forKey: UserdefaultKey.fcmToken.rawValue) ?? ""
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
+        request.httpBody = "FCMtoken=\(fcmtoken)".data(using: .utf8, allowLossyConversion: false)
+        request.setValue(APIHeaderValue.ContentType.string, forHTTPHeaderField: APIHeader.ContentType.string)
+        request.setValue("\(idtoken)", forHTTPHeaderField: APIHeader.idtoken.string)
+
+        let session = URLSession.shared
+        session.dataTask(with: request) { data, response, error in
+
+            if error != nil {
+                completion(.failed, nil)
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse else {
+                completion(.invalidResponse, nil)
+                return
+            }
+            
+            guard let data = data else {
+                completion(.noData, nil)
+                return
+            }
+
+            if response.statusCode == 200 {
+                //fcm update 성공
+                completion(.succeed, .succeed)
+            } else if response.statusCode == 401 {
+                //firebase token error
+                self.idTokenRequest { error in
+                    completion(.failed, .tokenError)
+                }
+            } else if response.statusCode == 406 {
+                //not user
+                completion(.failed, .notUser)
+            } else if response.statusCode == 500 {
+                //server error
+                completion(.failed, .serverError)
+            } else if response.statusCode == 501 {
+                //client error
+                completion(.failed, .clientError)
+            } else {
+                //not defined error
+                completion(.failed, nil)
+            }
+        }.resume()
     }
     
     //회원가입

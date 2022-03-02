@@ -17,6 +17,15 @@ enum GetUserResult {
     case clientError  //501
 }
 
+//fcm 토큰 업데이트
+enum FCMUpdateResult {
+    case succeed      //200
+    case tokenError   //401
+    case notUser      //406
+    case serverError  //500
+    case clientError  //501
+}
+
 //회원가입
 enum SignInResult {
     case succeed          //200

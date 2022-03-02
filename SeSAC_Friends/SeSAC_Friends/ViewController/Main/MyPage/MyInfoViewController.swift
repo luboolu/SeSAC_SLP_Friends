@@ -41,6 +41,8 @@ final class MyInfoViewController: UIViewController {
         mainView.tableView.dataSource = self
         
         getUserInfo()
+        
+        print("fcmToken: \(UserDefaults.standard.string(forKey: UserdefaultKey.fcmToken.rawValue))")
     }
     
     override func viewWillAppear(_ animated: Bool) {

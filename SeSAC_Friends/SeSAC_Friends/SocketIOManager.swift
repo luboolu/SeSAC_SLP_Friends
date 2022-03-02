@@ -26,7 +26,7 @@ class SocketIOManager: NSObject {
         let url = URL(string: "http://test.monocoding.com:35484/chat")!
         
         manager = SocketManager(socketURL: url, config: [
-            .log(true),
+            .log(false),
             .compress,
             .extraHeaders(["idtoken": token])
             ])
