@@ -72,7 +72,7 @@ final class BirthView: UIView, ViewRepresentable {
     let nextButton: MainButton = {
         let button = MainButton()
         
-        button.status = .disable
+        button.status = .fill
         button.isBorder = true
         button.isRounded = true
         

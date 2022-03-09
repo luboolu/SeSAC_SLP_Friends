@@ -44,7 +44,7 @@ final class BirthViewController: UIViewController {
         mainView.nextButton.rx.tap
             .bind {
                 self.nextButtonTapped()
-            }
+            }.disposed(by: disposeBag)
     }
     
     private func createPickerView() {
@@ -79,31 +79,9 @@ final class BirthViewController: UIViewController {
             .disposed(by: disposeBag)
         
         mainView.yearTextField.textfield.becomeFirstResponder()
-    }
-    
-    private func trimTextField(_ number: String) -> String {
         
-        var result = ""
-
-        if number.count > 0 {
-            var trimNum = number
-            let lastInput = String(trimNum.removeLast())
-            //print("number: \(number) trimNum: \(trimNum) last: \(lastInput)")
-
-            if Int(lastInput) != nil {
-                result = number
-            } else {
-                result = trimNum
-            }
-         }
-
-        //6자리 넘게 입력되지 않도록 함
-        if number.count > 6 {
-            let index = number.index(number.startIndex, offsetBy: 6)
-            result = String(number[..<index])
-        }
-        
-        return result
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissPickerView))
+        view.addGestureRecognizer(tap)
     }
     
     private func nextButtonTapped() {
@@ -130,7 +108,13 @@ final class BirthViewController: UIViewController {
             self.navigationController?.pushViewController(vc, animated: true)
         }
         
-        
+    }
+    
+    @objc func dismissPickerView() {
+        print(#function)
+        mainView.yearTextField.textfield.resignFirstResponder()
+        mainView.monthTextField.textfield.resignFirstResponder()
+        mainView.dayTextField.textfield.resignFirstResponder()
     }
 
 }
