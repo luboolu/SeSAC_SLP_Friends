@@ -56,7 +56,7 @@ final class OnBoardingViewController: UIViewController {
         setButton()
     }
     
-    func setUp() {
+    private func setUp() {
         view.backgroundColor = UIColor().white
         
         collectionView.delegate = self
@@ -86,9 +86,7 @@ final class OnBoardingViewController: UIViewController {
         
     }
 
-    
-    
-    func setConstaints() {
+    private func setConstaints() {
         
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
@@ -113,7 +111,7 @@ final class OnBoardingViewController: UIViewController {
         
     }
     
-    func setButton() {
+    private func setButton() {
         
         startButton.rx.tap
             .bind {
@@ -122,7 +120,7 @@ final class OnBoardingViewController: UIViewController {
         
     }
     
-    func startButtonTapped() {
+    private func startButtonTapped() {
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
         
         windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: LoginViewController())

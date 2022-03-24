@@ -135,13 +135,11 @@ final class LaunchViewController: UIViewController {
                         self.getUserInfo()
                         return
                     case .serverError:
-                        print("에러")
                         let vc = OnBoardingViewController()
                         
                         windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: vc)
                         windowScene.windows.first?.makeKeyAndVisible()
                     case .clientError:
-                        print("에러")
                         let vc = OnBoardingViewController()
                         
                         windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: vc)

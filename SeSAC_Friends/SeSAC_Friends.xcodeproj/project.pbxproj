@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DC184DCA27C3E33500B12AEC /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = DC184DC927C3E33500B12AEC /* Realm */; };
-		DC184DCC27C3E33500B12AEC /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DC184DCB27C3E33500B12AEC /* RealmSwift */; };
 		DC184DCE27C3E35200B12AEC /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC184DCD27C3E35200B12AEC /* RealmModel.swift */; };
 		DC184DD027C4D42A00B12AEC /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC184DCF27C4D42A00B12AEC /* Date+Extension.swift */; };
 		DC1873E527A1113200DE4FBD /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1873E427A1113200DE4FBD /* ShopViewController.swift */; };
@@ -41,9 +39,7 @@
 		DC68265427C9125C00B7F49E /* RxKeyboard in Frameworks */ = {isa = PBXBuildFile; productRef = DC68265327C9125C00B7F49E /* RxKeyboard */; };
 		DC68265627C9E2D600B7F49E /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC68265527C9E2D600B7F49E /* LaunchViewController.swift */; };
 		DC68265C27C9E7CE00B7F49E /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = DC68265B27C9E7CE00B7F49E /* JGProgressHUD */; };
-		DC68265E27C9E88400B7F49E /* JGProgressHUD+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC68265D27C9E88300B7F49E /* JGProgressHUD+Extension.swift */; };
 		DC6E55DA27A97CE500998FF9 /* APIenum.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55D927A97CE500998FF9 /* APIenum.swift */; };
-		DC6E55DC27A98A7800998FF9 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55DB27A98A7800998FF9 /* Alert.swift */; };
 		DC6E55DE27AA519200998FF9 /* APIStatusResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55DD27AA519200998FF9 /* APIStatusResult.swift */; };
 		DC6E55E127AAD6B300998FF9 /* HobbySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55E027AAD6B300998FF9 /* HobbySearchViewController.swift */; };
 		DC6E55E327AAD71A00998FF9 /* HobbySearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6E55E227AAD71A00998FF9 /* HobbySearchView.swift */; };
@@ -85,10 +81,11 @@
 		DCC419EC27A44845006B2904 /* ButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC419EB27A44845006B2904 /* ButtonCollectionViewCell.swift */; };
 		DCC419EE27A44850006B2904 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC419ED27A44850006B2904 /* CollectionViewCell.swift */; };
 		DCC419F027A78D44006B2904 /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC419EF27A78D44006B2904 /* MyInfoView.swift */; };
-		DCC419F227A7CABD006B2904 /* InputDataStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC419F127A7CABD006B2904 /* InputDataStruct.swift */; };
 		DCC419F727A7DE86006B2904 /* OutputDataStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC419F627A7DE86006B2904 /* OutputDataStruct.swift */; };
 		DCC8DEB727B4D222003E6080 /* SubButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8DEB627B4D222003E6080 /* SubButton.swift */; };
 		DCC8DEB927B4D22C003E6080 /* SubButtonStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8DEB827B4D22C003E6080 /* SubButtonStatus.swift */; };
+		DCCF9AB627EC5EB500B07300 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = DCCF9AB527EC5EB500B07300 /* Realm */; };
+		DCCF9AB827EC5EB500B07300 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DCCF9AB727EC5EB500B07300 /* RealmSwift */; };
 		DCDCC2DF279FD29500FB142B /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCC2DE279FD29500FB142B /* OnBoardingViewController.swift */; };
 		DCDCC2E1279FF27500FB142B /* OnBoardingTitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCC2E0279FF27500FB142B /* OnBoardingTitleCollectionViewCell.swift */; };
 		DCDCC2E327A0332B00FB142B /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDCC2E227A0332B00FB142B /* OnboardingView.swift */; };
@@ -163,9 +160,7 @@
 		DC68264927C63EFF00B7F49E /* SocketIOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
 		DC68265027C908C700B7F49E /* ViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Extension.swift"; sourceTree = "<group>"; };
 		DC68265527C9E2D600B7F49E /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
-		DC68265D27C9E88300B7F49E /* JGProgressHUD+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JGProgressHUD+Extension.swift"; sourceTree = "<group>"; };
 		DC6E55D927A97CE500998FF9 /* APIenum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIenum.swift; sourceTree = "<group>"; };
-		DC6E55DB27A98A7800998FF9 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		DC6E55DD27AA519200998FF9 /* APIStatusResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIStatusResult.swift; sourceTree = "<group>"; };
 		DC6E55E027AAD6B300998FF9 /* HobbySearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbySearchViewController.swift; sourceTree = "<group>"; };
 		DC6E55E227AAD71A00998FF9 /* HobbySearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbySearchView.swift; sourceTree = "<group>"; };
@@ -204,7 +199,6 @@
 		DCC419EB27A44845006B2904 /* ButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		DCC419ED27A44850006B2904 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		DCC419EF27A78D44006B2904 /* MyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoView.swift; sourceTree = "<group>"; };
-		DCC419F127A7CABD006B2904 /* InputDataStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputDataStruct.swift; sourceTree = "<group>"; };
 		DCC419F627A7DE86006B2904 /* OutputDataStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputDataStruct.swift; sourceTree = "<group>"; };
 		DCC8DEB627B4D222003E6080 /* SubButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubButton.swift; sourceTree = "<group>"; };
 		DCC8DEB827B4D22C003E6080 /* SubButtonStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubButtonStatus.swift; sourceTree = "<group>"; };
@@ -253,14 +247,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC184DCC27C3E33500B12AEC /* RealmSwift in Frameworks */,
 				DC68265C27C9E7CE00B7F49E /* JGProgressHUD in Frameworks */,
-				DC184DCA27C3E33500B12AEC /* Realm in Frameworks */,
 				DCE2D20027985D5F0018895F /* RxCocoa in Frameworks */,
 				DC68265427C9125C00B7F49E /* RxKeyboard in Frameworks */,
+				DCCF9AB827EC5EB500B07300 /* RealmSwift in Frameworks */,
 				DCE678E127A2DC0D00ACB1A7 /* MultiSlider in Frameworks */,
 				DCA1AAB9279D7B4F002194B4 /* FirebaseAuth in Frameworks */,
 				DC68264D27C6700800B7F49E /* SocketIO in Frameworks */,
+				DCCF9AB627EC5EB500B07300 /* Realm in Frameworks */,
 				DCA1AABB279D7B4F002194B4 /* FirebaseMessaging in Frameworks */,
 				DCE2D20227985D5F0018895F /* RxSwift in Frameworks */,
 				DC6E9F7027C36505009D2DAD /* Alamofire in Frameworks */,
@@ -352,7 +346,6 @@
 				DCA1AABD279DA7CA002194B4 /* Endpoint.swift */,
 				DC6E55D927A97CE500998FF9 /* APIenum.swift */,
 				DC6E55DD27AA519200998FF9 /* APIStatusResult.swift */,
-				DCC419F127A7CABD006B2904 /* InputDataStruct.swift */,
 				DCC419F627A7DE86006B2904 /* OutputDataStruct.swift */,
 			);
 			path = API;
@@ -454,7 +447,6 @@
 				DCE2D1E42796D6D00018895F /* Font */,
 				DCE2D1BB279694720018895F /* AppDelegate.swift */,
 				DCE2D1BD279694720018895F /* SceneDelegate.swift */,
-				DC6E55DB27A98A7800998FF9 /* Alert.swift */,
 				DC1873F827A25EF000DE4FBD /* ViewRepresentable.swift */,
 				DCA1AAC2279E94D1002194B4 /* UserdefualtKey.swift */,
 				DCA592D327BA2E610088940B /* MatchingStateEnum.swift */,
@@ -506,7 +498,6 @@
 				DCE2D1EA2796DB8C0018895F /* UIColor+Extension.swift */,
 				DCE2D1EC2796FF950018895F /* UIFont+Extension.swift */,
 				DCDE36642799A0300077847C /* Toast+Extension.swift */,
-				DC68265D27C9E88300B7F49E /* JGProgressHUD+Extension.swift */,
 				DC184DCF27C4D42A00B12AEC /* Date+Extension.swift */,
 				DC68265027C908C700B7F49E /* ViewController+Extension.swift */,
 			);
@@ -568,11 +559,11 @@
 				DCA1AABA279D7B4F002194B4 /* FirebaseMessaging */,
 				DCE678E027A2DC0D00ACB1A7 /* MultiSlider */,
 				DC6E9F6F27C36505009D2DAD /* Alamofire */,
-				DC184DC927C3E33500B12AEC /* Realm */,
-				DC184DCB27C3E33500B12AEC /* RealmSwift */,
 				DC68264C27C6700800B7F49E /* SocketIO */,
 				DC68265327C9125C00B7F49E /* RxKeyboard */,
 				DC68265B27C9E7CE00B7F49E /* JGProgressHUD */,
+				DCCF9AB527EC5EB500B07300 /* Realm */,
+				DCCF9AB727EC5EB500B07300 /* RealmSwift */,
 			);
 			productName = SeSAC_Friends;
 			productReference = DCE2D1B8279694720018895F /* SeSAC_Friends.app */;
@@ -609,10 +600,10 @@
 				DCA1AAB7279D7B4F002194B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				DCE678DF27A2DC0D00ACB1A7 /* XCRemoteSwiftPackageReference "MultiSlider" */,
 				DC6E9F6E27C36505009D2DAD /* XCRemoteSwiftPackageReference "Alamofire" */,
-				DC184DC827C3E33500B12AEC /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 				DC68264B27C6700800B7F49E /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
 				DC68265227C9125B00B7F49E /* XCRemoteSwiftPackageReference "RxKeyboard" */,
 				DC68265A27C9E7CE00B7F49E /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
+				DCCF9AB427EC5EB400B07300 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 			);
 			productRefGroup = DCE2D1B9279694720018895F /* Products */;
 			projectDirPath = "";
@@ -656,7 +647,6 @@
 				DC184DD027C4D42A00B12AEC /* Date+Extension.swift in Sources */,
 				DCF8943327B21D1D001BE5DF /* SeSacFindViewController.swift in Sources */,
 				DCDCC2DF279FD29500FB142B /* OnBoardingViewController.swift in Sources */,
-				DC68265E27C9E88400B7F49E /* JGProgressHUD+Extension.swift in Sources */,
 				DCA1AAC3279E94D2002194B4 /* UserdefualtKey.swift in Sources */,
 				DCDE366B2799C0BD0077847C /* BirthViewController.swift in Sources */,
 				DCDE366D279A9A4D0077847C /* EmailViewController.swift in Sources */,
@@ -732,7 +722,6 @@
 				DC6E55DE27AA519200998FF9 /* APIStatusResult.swift in Sources */,
 				DCE2D1E12796CCD30018895F /* MainTextFieldStatus.swift in Sources */,
 				DC6E9F5527C1DA45009D2DAD /* CharacterShopViewController.swift in Sources */,
-				DC6E55DC27A98A7800998FF9 /* Alert.swift in Sources */,
 				DC6E9F4C27C13E54009D2DAD /* FriendsDodgeViewController.swift in Sources */,
 				DC18740527A267EF00DE4FBD /* GenderView.swift in Sources */,
 				DCA592DE27BB5A740088940B /* ChattingViewController.swift in Sources */,
@@ -743,7 +732,6 @@
 				DC6E9F5727C1DA58009D2DAD /* BackgroundShopView.swift in Sources */,
 				DCA592EB27BE99A40088940B /* FriendsReviewViewController.swift in Sources */,
 				DCA592DC27BAB47B0088940B /* EmptySeSacTableViewCell.swift in Sources */,
-				DCC419F227A7CABD006B2904 /* InputDataStruct.swift in Sources */,
 				DCA592F127C0F1D50088940B /* FriendsReportViewController.swift in Sources */,
 				DC18740B27A2D53500DE4FBD /* SwitchTableViewCell.swift in Sources */,
 				DCA1AABE279DA7CA002194B4 /* Endpoint.swift in Sources */,
@@ -963,14 +951,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		DC184DC827C3E33500B12AEC /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-cocoa.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		DC68264B27C6700800B7F49E /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/socketio/socket.io-client-swift.git";
@@ -1011,6 +991,14 @@
 				kind = branch;
 			};
 		};
+		DCCF9AB427EC5EB400B07300 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-cocoa.git";
+			requirement = {
+				kind = exactVersion;
+				version = 10.24.0;
+			};
+		};
 		DCDE36612799A0010077847C /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/scalessec/Toast-Swift.git";
@@ -1046,16 +1034,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		DC184DC927C3E33500B12AEC /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DC184DC827C3E33500B12AEC /* XCRemoteSwiftPackageReference "realm-cocoa" */;
-			productName = Realm;
-		};
-		DC184DCB27C3E33500B12AEC /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DC184DC827C3E33500B12AEC /* XCRemoteSwiftPackageReference "realm-cocoa" */;
-			productName = RealmSwift;
-		};
 		DC68264C27C6700800B7F49E /* SocketIO */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DC68264B27C6700800B7F49E /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
@@ -1085,6 +1063,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DCA1AAB7279D7B4F002194B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
+		};
+		DCCF9AB527EC5EB500B07300 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCCF9AB427EC5EB400B07300 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = Realm;
+		};
+		DCCF9AB727EC5EB500B07300 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCCF9AB427EC5EB400B07300 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = RealmSwift;
 		};
 		DCDE36622799A0010077847C /* Toast */ = {
 			isa = XCSwiftPackageProductDependency;

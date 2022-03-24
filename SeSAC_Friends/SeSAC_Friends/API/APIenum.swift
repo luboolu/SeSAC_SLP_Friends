@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 enum APIResult: Error {
     case invalidResponse
     case noData
@@ -15,7 +14,6 @@ enum APIResult: Error {
     case invalidData
     case succeed
 }
-
 
 enum APIHeader {
     case ContentType
